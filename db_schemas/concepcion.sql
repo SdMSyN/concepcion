@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-05-2015 a las 21:47:50
+-- Tiempo de generación: 13-05-2015 a las 22:05:47
 -- Versión del servidor: 5.6.14
 -- Versión de PHP: 5.5.6
 
@@ -125,6 +125,8 @@ CREATE TABLE IF NOT EXISTS `tiendas` (
   `cp` int(5) NOT NULL,
   `tel` varchar(15) NOT NULL,
   `num_sess` int(2) NOT NULL,
+  `latitud` varchar(20) NOT NULL,
+  `longitud` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
