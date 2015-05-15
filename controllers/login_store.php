@@ -1,5 +1,5 @@
 <?php
-
+    session_start();
     include ('../config/conexion.php');
     $storeId = $_POST['inputStoreName'];
     $storePass = $_POST['inputStorePass'];
@@ -8,8 +8,8 @@
     
     $tmpLat = explode(".", $storeLat);
     $tmpLon = explode(".", $storeLon);
-    $lat=$tmpLat[0].".".substr($tmpLat[1], 0, 4);
-    $lon=$tmpLon[0].".".substr($tmpLon[1], 0, 4);
+    $lat=$tmpLat[0].".".substr($tmpLat[1], 0, 3);
+    $lon=$tmpLon[0].".".substr($tmpLon[1], 0, 3);
     
     $sqlGetStore="SELECT * FROM $tStore WHERE id='$storeId' AND password='$storePass' AND latitud LIKE '$lat%' AND longitud LIKE '$lon%' ";
     $resGetStore=$con->query($sqlGetStore);
@@ -17,7 +17,7 @@
         $rowGetStore=$resGetStore->fetch_assoc();
        
         $_SESSION['sess'] = true;
-	$_SESSION['id'] = $rowGetStore['id'];
+	$_SESSION['storeId'] = $rowGetStore['id'];
 	$_SESSION['storeName'] = $rowGetStore['nombre'];
 	$_SESSION['storeDir'] = $rowGetStore['direccion'];
 	$_SESSION['storeRfc'] = $rowGetStore['rfc'];
@@ -29,7 +29,7 @@
     }
     else{
         $_SESSION['sess']=false;
-        echo "Error en la consulta<br>".$con->error;
+        echo "Error en la consulta<br>".$sqlGetStore."<br>".$con->error;
     }
       
 ?>
