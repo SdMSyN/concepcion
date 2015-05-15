@@ -1,8 +1,8 @@
-<?php
-include ('/config/variables.php');
-?>
 <html lang="en">
   <head>
+    <?php
+        include ('/config/variables.php');
+    ?>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,6 +13,13 @@ include ('/config/variables.php');
 
     <!-- Bootstrap -->
     <link href="assets/css/application.css" rel="stylesheet">
+    
+    <!-- jQuery -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.validate.min.js"></script>
+    <script src="assets/js/jquery-validate.bootstrap-tooltip.min.js"></script>
+    
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
