@@ -35,6 +35,7 @@ include ('menu.php');
     <div class="row">
         <div class="col-md-12">
             <form id="formLoginStore" name="formLoginStore" method="POST">
+                <div class="error"></div>
                 <label>Tienda: </label>
                 <label></label>
                 <select id="inputStoreName" name="inputStoreName">
