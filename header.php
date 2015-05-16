@@ -19,6 +19,7 @@
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/jquery.validate.min.js"></script>
     <script src="assets/js/jquery-validate.bootstrap-tooltip.min.js"></script>
+    <script src="assets/js/application.js"></script>
     
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

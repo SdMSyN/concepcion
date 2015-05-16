@@ -1,4 +1,14 @@
 @import url("bootstrap.min.css");
+@import url("font-awesome.min.css");
 body{
   background-image: url("../img/bg.jpg");
+}
+
+.numeric-form > .btn{
+  font-size: 4rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  min-width: 10rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
 }
