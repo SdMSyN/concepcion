@@ -2,8 +2,6 @@
     include ('../config/conexion.php');
     include ('../config/variables.php');
     
-    (isset($_POST['inputRefDom']))? $refDom=$_POST['inputRefDom'] : $refDom="";
-    
     $nombre=$_POST['inputNombre'];
     $ap=$_POST['inputAP'];
     $am=$_POST['inputAM'];
