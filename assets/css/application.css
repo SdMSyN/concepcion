@@ -20,10 +20,31 @@ body{
   font-family: 'Playball', cursive;
   padding-bottom: 1rem;
 }
+
+.titulo-crud{
+  padding-top: .5rem;
+  font-size: 4rem;
+  font-family: 'Playball';
+  padding-bottom: .5rem;
+}
+
 .navbar-nav > .no-a{
   padding-top: 15px;
   padding-bottom: 15px;
 }
+
+thead > tr > td {
+ background-color: #779ECB;
+}
+
+thead > tr > td:first-of-type {
+ border-top-left-radius: 1rem;
+}
+
+thead > tr > td:last-of-type{
+ border-top-right-radius: 1rem;
+}
+
 @media (max-width: 640px) {
   .numeric-form > .btn{
     font-size: 2.5rem;
