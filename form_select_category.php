@@ -106,7 +106,7 @@ else {
               if (msg == "true") {
                 $('.error').html("Se creo la categoría con éxito.").css({color: "#00FF00"});
                 setTimeout(function () {
-                  location.href = 'form_add_category.php';
+                  location.href = 'form_select_category.php';
                 }, 3000);
               } else {
                 $('.error').css({color: "#FF0000"});
