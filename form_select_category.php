@@ -8,7 +8,8 @@ if (!isset($_SESSION['sessA']))
 else if ($_SESSION['perfil'] != "1")
   echo '<div class="row><div class="col-sm-12 text-center"><h2>No tienes permiso para entrar a esta sección</h2></div></div>';
 else {
-  $storeId = $_SESSION['storeId'];
+  // al logear al admin no deberia haber necesidad de identificar una tienda
+  //$storeId = $_SESSION['storeId'];
   $userId = $_SESSION['userId'];
 
   $sqlGetCategory = "SELECT id, nombre, created, (SELECT CONCAT(nombre,' ',ap,' ',am) FROM $tUser WHERE id=$tCategory.created_by_user_id ) as created_by FROM $tCategory ";
@@ -120,6 +121,10 @@ else {
         }
 
       });
+      
+      $('#myModal').on('shown.bs.modal', function () {
+        $('#inputCategory').focus()
+      })
     });
   </script>
 

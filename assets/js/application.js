@@ -37,3 +37,7 @@ $('.erase').on('click', function () {
 });
 }); //termina document readey
 // ############ TERMINA TECLADO NUMERICO
+
+$('#myModal').on('shown.bs.modal', function () {
+  $('#myInput').focus();
+});
