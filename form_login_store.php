@@ -1,6 +1,5 @@
 <?php
 include ('header.php');
-include ('menu.php');
 ?>
 
 <?php
@@ -8,9 +7,9 @@ include ('config/conexion.php');
 $sqlGetStores = "SELECT id, nombre FROM $tStore ";
 $resGetStores = $con->query($sqlGetStores);
 $optStores = '<option></option>';
-    while($rowGetStores=$resGetStores->fetch_assoc()){
-        $optStores.='<option value="'.$rowGetStores['id'].'">'.$rowGetStores['nombre'].'</option>';
-    }
+while ($rowGetStores = $resGetStores->fetch_assoc()) {
+  $optStores.='<option value="' . $rowGetStores['id'] . '">' . $rowGetStores['nombre'] . '</option>';
+}
 ?>
 
 <script language="javascript">
@@ -34,9 +33,11 @@ $optStores = '<option></option>';
 <div class="container">
   <div class="row">
     <div class="col-sm-12 col-md-offset-2 col-md-8">
+      <div class="titulo text-center">
+	<?= $tit; ?>
+      </div>
       <form id="formLoginStore" name="formLoginStore" method="POST">
 	<div class="error"></div>
-
 	<div class="form-group">
 	  <label>Tienda: </label>
 	  <select id="inputStoreName" name="inputStoreName" class="form-control">
@@ -100,7 +101,7 @@ $optStores = '<option></option>';
       }
     });
   });
-// variable para indicar la pantalle para el teclado numerico
+// variable para indicar la pantalla para el teclado numerico
   var input = $('#inputStorePass');
 </script>
 
