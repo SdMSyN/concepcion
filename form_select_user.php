@@ -169,7 +169,7 @@ else {
 
       $('.delete').click(function () {
         var idUserDel = $(this).data('id');
-        alert("Eliminando..." + idUserDel);
+        alert("¿Está seguro que desea dar de baja a este usuario?");
       });
 
       $('#formAddUser').validate({

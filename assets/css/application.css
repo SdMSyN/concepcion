@@ -47,6 +47,7 @@ thead > tr > td:last-of-type{
  border-top-right-radius: 1rem;
 }
 .error{
+  font-size: 1.5rem;
   padding: .5rem;
   padding-left: 2rem;
   color: #4cae4c;
