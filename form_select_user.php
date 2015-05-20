@@ -168,9 +168,28 @@ else {
     $(document).ready(function () {
 
       $('.delete').click(function () {
-        var idUserDel = $(this).data('id');
-        alert("¿Está seguro que desea dar de baja a este usuario?");
-      });
+            var idUserDel = $(this).data('id');
+            alert("Eliminando..." + idUserDel);
+            if(confirm("Seguro que deseas eliminar?") == true){
+                $.ajax({
+                    type: 'POST',
+                    url: 'controllers/delete_user.php',
+                    data: {userDel: idUserDel},
+                    success: function(msg){
+                        alert(msg);
+                        if (msg == "true") {
+                            $('.error').html("Se elimino el usuario con éxito.");
+                                setTimeout(function () {
+                                  location.href = 'form_select_user.php';
+                                }, 3000);
+                        } else {
+                            $('.error').css({color: "#FF0000"});
+                            $('.error').html(msg);
+                        }
+                    }
+		});
+            }//end if confirm
+        });
 
       $('#formAddUser').validate({
         rules: {
