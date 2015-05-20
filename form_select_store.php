@@ -10,7 +10,7 @@ else if ($_SESSION['perfil'] != "1")
 else {
   $userId = $_SESSION['userId'];
 
-  $sqlGetStore = "SELECT * FROM $tStore ";
+  $sqlGetStore = "SELECT * FROM $tStore WHERE activa='1' ";
   $resGetStore = $con->query($sqlGetStore);
   $optStore = '';
   if ($resGetStore->num_rows > 0) {
@@ -26,7 +26,7 @@ else {
       $optStore .= '</tr>';
     }
   } else {
-    $optCategory.='<tr><td colspan="4">No existen categorías aún.</td></tr>';
+    $optStore.='<tr><td colspan="4">No existen tiendas aún.</td></tr>';
   }
   ?>
 

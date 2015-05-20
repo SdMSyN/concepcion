@@ -4,7 +4,8 @@
     
     $idUser=$_POST['userDel'];
     
-    $sqlDeleteUser="DELETE FROM $tUser WHERE id='$idUser' ";
+    //$sqlDeleteUser="DELETE FROM $tUser WHERE id='$idUser' ";
+    $sqlDeleteUser="UPDATE $tUser SET activo='0' WHERE id='$idUser' ";
     if ($con->query($sqlDeleteUser) === TRUE) {
         echo "true";
     } else {
