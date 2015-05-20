@@ -18,6 +18,7 @@
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/jquery.validate.min.js"></script>
+    <script src="assets/js/additional-methods.min.js"></script>
     <script src="assets/js/jquery-validate.bootstrap-tooltip.min.js"></script>
     <script src="assets/js/application.js"></script>
     
