@@ -71,7 +71,7 @@ else {
               </div>              
               <div class="form-group">
                 <label>Precio</label>
-                <input type="number" id="inputPrecio" name="inputPrecio" class="form-control">
+                <input type="number" step="any" id="inputPrecio" name="inputPrecio" class="form-control">
               </div>
               <div class="form-group">
                 <label>Imagen (Máximo 1Mb)</label>
