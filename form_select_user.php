@@ -169,14 +169,14 @@ else {
 
       $('.delete').click(function () {
             var idUserDel = $(this).data('id');
-            alert("Eliminando..." + idUserDel);
+            //alert("Eliminando..." + idUserDel);
             if(confirm("Seguro que deseas eliminar?") == true){
                 $.ajax({
                     type: 'POST',
                     url: 'controllers/delete_user.php',
                     data: {userDel: idUserDel},
                     success: function(msg){
-                        alert(msg);
+                        //alert(msg);
                         if (msg == "true") {
                             $('.error').html("Se elimino el usuario con éxito.");
                                 setTimeout(function () {
