@@ -35,11 +35,9 @@ else {
       <div class="titulo-crud text-center">
         CATEGORIAS
       </div>
-      <div class="col-md-12 error"></div>
-      <div class="col-md-12">
-        <div class="error"></div>	
+      <div class="col-md-12">	
         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  	Nueva Categoría
+          Nueva Categoría
         </button>
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -49,6 +47,7 @@ else {
   	      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   	      <h4 class="modal-title" id="myModalLabel">Nueva Categoría</h4>
   	    </div>
+            <div class="error"></div>
   	    <form id="formAddCategory" name="formAddCategory" method="POST">
   	      <div class="modal-body">
   		<div class="form-group">
@@ -105,7 +104,7 @@ else {
             success: function (msg) {
               //alert(msg);
               if (msg == "true") {
-                $('.error').html("Se creo la categoría con éxito.").css({color: "#00FF00"});
+                $('.error').html("Se creo la categoría con éxito.");
                 setTimeout(function () {
                   location.href = 'form_select_category.php';
                 }, 3000);

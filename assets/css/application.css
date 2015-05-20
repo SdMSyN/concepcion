@@ -46,11 +46,18 @@ thead > tr > td:first-of-type {
 thead > tr > td:last-of-type{
  border-top-right-radius: 1rem;
 }
-
+.error{
+  padding: .5rem;
+  padding-left: 2rem;
+  color: #4cae4c;
+}
+.container{
+  min-height: 83%;
+}
 .footer{
   background-color: #596cb6;
   color: whitesmoke;
-  position: absolute;
+  position: relative;
   right: 0;
   bottom: 0;
   left: 0;
