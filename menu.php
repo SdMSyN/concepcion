@@ -31,9 +31,9 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
 	<?php
-	if (isset($_SESSION['sessU'])) {
+	if (isset($_SESSION['sessA'])) {
 	  echo '<li class="no-a">Bienvenido ' . $_SESSION['userName'] . '</li>';
-	  echo '<li><a href="controllers/proc_destroy_login.php">Cerrar Sesión</a></li>';
+	  echo '<li><a href="controllers/proc_destroy_login_admin.php">Cerrar Sesión</a></li>';
 	}
 	?>
       </ul>
