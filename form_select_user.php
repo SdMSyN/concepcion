@@ -41,6 +41,9 @@ else {
   <!-- Cambio dinamico -->
   <div class="container">
     <div class="row">
+      <div class="titulo-crud text-center">
+        USUARIOS
+      </div>
       <div class="col-md-12">
         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalAdd">
           Nuevo Usuario
