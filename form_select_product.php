@@ -12,14 +12,14 @@ else {
   $userId = $_SESSION['userId'];
 
   /* Obtenemos los productos */
-  $sqlGetProducts = "SELECT id, nombre, (SELECT nombre FROM $tCategory WHERE id=$tProduct.categoria_id) as categoria, precio FROM $$tProduct ";
-  $sqlGetProducts = $con->query($sqlGetProducts);
+  $sqlGetProducts = "SELECT id, nombre, (SELECT nombre FROM $tCategory WHERE id=$tProduct.categoria_id) as categoria, precio, img FROM $tProduct ";
+  $resGetProducts = $con->query($sqlGetProducts);
   $optProducts = '';
-  if ($sqlGetProducts && $sqlGetProducts->num_rows > 0) {
-    while ($rowGetProducts = $sqlGetProducts->fetch_assoc()) {
+  if ($resGetProducts->num_rows > 0) {
+    while ($rowGetProducts = $resGetProducts->fetch_assoc()) {
       $optProducts .= '<tr>';
       $optProducts .= '<td>' . $rowGetProducts['id'] . '</td>';
-      $optProducts .= '<td>'.$rutaImgProd.$rowGetProducts['img'] . '</td>';
+      $optProducts .= '<td><img src="'.$rutaImgProd.$rowGetProducts['img'].'" width="50px"></td>';
       $optProducts .= '<td>' . $rowGetProducts['nombre'] . '</td>';
       $optProducts .= '<td>' . $rowGetProducts['categoria'] . '</td>';
       $optProducts .= '<td>' . $rowGetProducts['precio'] . '</td>';
@@ -28,7 +28,7 @@ else {
       $optProducts .= '</tr>';
     }
   } else {
-    $optProducts.='<tr><td colspan="6">No existen productos aún.</td></tr>';
+    $optProducts.='<tr><td colspan="7">No existen productos aún.</td></tr>';
   }
 
   /* Obtenemos las categorias */
@@ -62,8 +62,9 @@ else {
             <h4 class="modal-title" id="myModalLabel">Nuevo Usuario</h4>
           </div>
           <div class="error"></div>
-          <form id="formAddProduct" name="formAddProduct" method="POST" enctype="multipart/form-data">
+          <form id="formAddProduct" name="formAddProduct" method="POST" >
             <div class="modal-body">
+                <input type="hidden" name="userId" value="<?= $userId; ?>" >
               <div class="form-group">
                 <label>Nombre</label>
                 <input type="text" id="inputNombre" name="inputNombre" class="form-control">
@@ -73,7 +74,7 @@ else {
                 <input type="number" id="inputPrecio" name="inputPrecio" class="form-control">
               </div>
               <div class="form-group">
-                <label>Imagen</label>
+                <label>Imagen (Máximo 1Mb)</label>
                 <input type="file" id="inputImg" name="inputImg" class="form-control">
               </div>
               <div class="form-group">
@@ -149,51 +150,30 @@ else {
             }//end if confirm
         });
 
-      $('#formAddProduct').validate({
-        rules: {
-          inputNombre: {required: true},
-          inputPrecio: {required: true, number: true},
-          inputImg: {required: true, extension: "jpg"},
-          inputDesc: {required: true},
-          inputCategoria: {required: true}
-        },
-        messages: {
-          inputNombre: "Nombre obligatorio",
-          inputPrecio:{
-              required: "Precio obligatorio",
-              number: "Formato de precio no valido"
-          },
-          inputImg: {
-              required: "Imagen obligatoria",
-              extension: "Formato de archivo no valido"
-          },
-          inputDesc: "Descripción obligatoria",
-          inputCategoria: "Debes seleccionar una categoría del producto"
-        },
-        tooltip_options: {
-          inputNombre: {trigger: "focus", placement: 'bottom'},
-          inputPrecio: {trigger: "focus", placement: 'bottom'},
-          inputImg: {trigger: "focus", placement: 'bottom'},
-          inputDesc: {trigger: "focus", placement: 'bottom'},
-          inputCategoria: {trigger: "focus", placement: 'bottom'}
-        },
-        submitHandler: function (form) {
-            var formData=form[0];
-            var formData=new FormData(formData);
+      $('#formAddProduct').submit(function (e) {
+            var data = new FormData(this); //Creamos los datos a enviar con el formulario
             $.ajax({
-               url: "controllers/create_product.php",
-               type: "POST",
-               data: formData,
-               mimeType: "multipart/form-data",
-               contentType: false,
-               cache: false,
-               processData: false,
-               success: function(msg){
-                   alert(msg);
-               }
+                    url: 'controllers/create_product.php', //URL destino
+                    data: data,
+                    processData: false, //Evitamos que JQuery procese los datos, daría error
+                    contentType: false, //No especificamos ningún tipo de dato
+                    type: 'POST',
+                    beforeSend: function(){
+                            //$('#exampleModalLabel').append("Loading...");
+                    },
+                    success: function (resultado) {
+                            //alert(resultado);
+                            if(resultado=="true"){
+                                    $('#form-content').modal('hide');
+                                    location.reload();
+                            }else{
+                                    $('.error').html(resultado);
+                            }
+                    }
             });
-        }
-      });
+            e.preventDefault(); //Evitamos que se mande del formulario de forma convencional
+    });
+                
       $('#myModalAdd').on('shown.bs.modal', function () {
         $('#inputNombre').focus()
       });
