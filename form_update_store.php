@@ -13,8 +13,6 @@ else {
   $sqlGetStore = "SELECT * FROM $tStore WHERE id='$storeId' ";
   $resGetStore = $con->query($sqlGetStore);
   $rowGetStore = $resGetStore->fetch_assoc();
-  
-  
   ?>
 
   <!-- Cambio dinamico -->
@@ -23,29 +21,43 @@ else {
       <div class="titulo-crud text-center">
         TIENDAS
       </div>
-      <div class="col-md-12">	
-          <div class="error2"></div>
-	  <form id="formUpdStore" name="formUpdStore" method="POST">
-                    <input type="hidden" value="<?= $rowGetStore['id']; ?>" name="idStore">
-                  <label>Nombre</label>
-                  <input type="text" name="inputNombre" id="inputNombre" value="<?= $rowGetStore['nombre']; ?>">
-                  <label>Dirección</label>
-                  <input type="text" name="inputDir" id="inputDir" value="<?= $rowGetStore['direccion']; ?>" >
-                  <label>RFC</label>
-                  <input type="text" name="inputRfc" id="inputRfc" value="<?= $rowGetStore['rfc']; ?>" >
-                  <label>CP</label>
-                  <input type="text" name="inputCp" id="inputCp" value="<?= $rowGetStore['cp']; ?>" >
-                  <label>Teléfono</label>
-                  <input type="text" name="inputTel" id="inputTel" value="<?= $rowGetStore['tel']; ?>" >
-                  <label>Contraseña</label>
-                  <input type="text" name="inputPass" id="inputPass" value="<?= $rowGetStore['password']; ?>" >
-                  
-  		<button type="submit" class="btn btn-primary" >Crear categoría</button>
-  	    </form>
+      <div class="col-md-12">
+        <legend>Modificación de datos</legend>
+        <div class="error2"></div>
+        <form id="formUpdStore" name="formUpdStore" method="POST">
+          <input type="hidden" value="<?= $rowGetStore['id']; ?>" name="idStore">
+          <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" name="inputNombre" id="inputNombre" value="<?= $rowGetStore['nombre']; ?>" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Dirección</label>
+            <input type="text" name="inputDir" id="inputDir" value="<?= $rowGetStore['direccion']; ?>" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>RFC</label>
+            <input type="text" name="inputRfc" id="inputRfc" value="<?= $rowGetStore['rfc']; ?>" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>CP</label>
+            <input type="text" name="inputCp" id="inputCp" value="<?= $rowGetStore['cp']; ?>" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Teléfono</label>
+            <input type="text" name="inputTel" id="inputTel" value="<?= $rowGetStore['tel']; ?>" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Contraseña</label>
+            <input type="text" name="inputPass" id="inputPass" value="<?= $rowGetStore['password']; ?>" class="form-control">
+          </div>
+          <a href="form_select_store.php" class="btn btn-default"><i class="fa fa-mail-reply"></i> Atras</a>
+          <button type="submit" class="btn btn-primary" >Guardar cambios</button>
+        </form>
+      </div>
     </div>
 
     <br>
-    
+
   </div>
 
   <script type="text/javascript">
@@ -67,8 +79,8 @@ else {
           inputCp: "Código Postal de la tienda obligatorio",
           inputTel: "Teléfono de la tienda obligatorio",
           inputPass: {
-              required: "Contraseña para la tienda obligatoria", 
-              digits: "La contraseña solo admite números"
+            required: "Contraseña para la tienda obligatoria",
+            digits: "La contraseña solo admite números"
           }
         },
         tooltip_options: {
@@ -103,7 +115,7 @@ else {
         }
 
       });
-      
+
     });
   </script>
 

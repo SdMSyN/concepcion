@@ -32,8 +32,8 @@ else {
     <div class="row">
       <div class="col-md-12">
         <form id="formUpdUser" name="formUpdUser" method="POST">
-          <div class="error"></div>
           <legend>Modificación de datos de: <?= $rowGetUser['nombre'] . ' ' . $rowGetUser['ap'] . ' ' . $rowGetUser['am']; ?></legend>
+          <div class="error"></div>
           <input type="hidden" value="<?= $rowGetUser['id']; ?>" name="idUser">
           <div class="form-group">
             <label>Nombre</label>
