@@ -12,7 +12,7 @@ else {
   $userId = $_SESSION['userId'];
 
   /* Obtenemos los productos */
-  $sqlGetProducts = "SELECT id, nombre, (SELECT nombre FROM $tCategory WHERE id=$tProduct.categoria_id) as categoria, precio, img FROM $tProduct ";
+  $sqlGetProducts = "SELECT id, nombre, (SELECT nombre FROM $tCategory WHERE id=$tProduct.categoria_id) as categoria, precio, img FROM $tProduct WHERE activo='1' ";
   $resGetProducts = $con->query($sqlGetProducts);
   $optProducts = '';
   if ($resGetProducts->num_rows > 0) {
@@ -23,7 +23,7 @@ else {
       $optProducts .= '<td>' . $rowGetProducts['nombre'] . '</td>';
       $optProducts .= '<td>' . $rowGetProducts['categoria'] . '</td>';
       $optProducts .= '<td>' . $rowGetProducts['precio'] . '</td>';
-      $optProducts .= '<td><a href="form_update_user.php?id=' . $rowGetProducts['id'] . '" >Modificar</a></td>';
+      $optProducts .= '<td><a href="form_update_product.php?id=' . $rowGetProducts['id'] . '" >Modificar</a></td>';
       $optProducts .= '<td><a class="delete" data-id="' . $rowGetProducts['id'] . '" >Dar de baja</a></td>';
       $optProducts .= '</tr>';
     }
@@ -127,19 +127,19 @@ else {
     $(document).ready(function () {
 
       $('.delete').click(function () {
-            var idUserDel = $(this).data('id');
+            var idProductDel = $(this).data('id');
             //alert("Eliminando..." + idUserDel);
             if(confirm("Seguro que deseas eliminar?") == true){
                 $.ajax({
                     type: 'POST',
-                    url: 'controllers/delete_user.php',
-                    data: {userDel: idUserDel},
+                    url: 'controllers/delete_product.php',
+                    data: {productDel: idProductDel},
                     success: function(msg){
                         //alert(msg);
                         if (msg == "true") {
-                            $('.error').html("Se elimino el usuario con éxito.");
+                            $('.error').html("Se elimino el producto con éxito.");
                                 setTimeout(function () {
-                                  location.href = 'form_select_user.php';
+                                  location.href = 'form_select_product.php';
                                 }, 3000);
                         } else {
                             $('.error').css({color: "#FF0000"});
@@ -151,6 +151,48 @@ else {
         });
 
       $('#formAddProduct').submit(function (e) {
+            if($("#inputNombre").val() == ""){ 
+                //alert("No puede ser vacio");
+                $("#inputNombre").tooltip({title: "Nombre del producto obligatorio", trigger: "focus", placement: 'bottom'});
+                $("#inputNombre").tooltip('show');
+                return false;
+            }
+            if($("#inputPrecio").val() == ""){ 
+                //alert("No puede ser vacio");
+                $("#inputPrecio").tooltip({title: "Precio del producto obligatorio", trigger: "focus", placement: 'bottom'});
+                $("#inputPrecio").tooltip('show');
+                return false;
+            }
+            if (!$("#inputPrecio").val().match(/^-?[0-9]+([\.][0-9]*)?$/)) {
+                // inputted file path is not an image of one of the above types
+                $("#inputPrecio").tooltip({title: "Formato de precio incorrecto", trigger: "focus", placement: 'bottom'});
+                $("#inputPrecio").tooltip('show');
+                return false;
+            }
+            if($("#inputImg").val() == ""){ 
+                //alert("No puede ser vacio");
+                $("#inputImg").tooltip({title: "Imagen obligatoria", trigger: "focus", placement: 'bottom'});
+                $("#inputImg").tooltip('show');
+                return false;
+            }
+            if (!$("#inputImg").val().match(/(?:gif|jpg|png|bmp)$/)) {
+                // inputted file path is not an image of one of the above types
+                $("#inputImg").tooltip({title: "Formato de imagen no admitido", trigger: "focus", placement: 'bottom'});
+                $("#inputImg").tooltip('show');
+                return false;
+            }
+            if($("#inputDesc").val() == ""){ 
+                //alert("No puede ser vacio");
+                $("#inputDesc").tooltip({title: "Descripción obligatoria", trigger: "focus", placement: 'bottom'});
+                $("#inputDesc").tooltip('show');
+                return false;
+            }
+            if($("#inputCategoria").val() == ""){ 
+                //alert("No puede ser vacio");
+                $("#inputCategoria").tooltip({title: "Debes de seleccionar una categoría", trigger: "focus", placement: 'bottom'});
+                $("#inputCategoria").tooltip('show');
+                return false;
+            }
             var data = new FormData(this); //Creamos los datos a enviar con el formulario
             $.ajax({
                     url: 'controllers/create_product.php', //URL destino

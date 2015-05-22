@@ -12,7 +12,7 @@
     $lon=$_POST['inputLon'];
           
     
-    $sqlCreateStore="INSERT INTO $tStore (nombre, direccion, rfc, cp, tel, num_sess, latitud, longitud, password, created, updated) VALUES ('$nombre', '$dir', '$rfc', '$cp', '$tel', '2', '$lat', '$lon', '$pass', '$dateNow', '$dateNow') ";
+    $sqlCreateStore="INSERT INTO $tStore (nombre, direccion, rfc, cp, tel, num_sess, latitud, longitud, password, created, updated, activa) VALUES ('$nombre', '$dir', '$rfc', '$cp', '$tel', '2', '$lat', '$lon', '$pass', '$dateNow', '$dateNow', '1') ";
     if($con->query($sqlCreateStore) === TRUE ){
         echo 'true';
     }else{
