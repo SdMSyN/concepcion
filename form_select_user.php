@@ -130,23 +130,6 @@ else {
     </div>
   </div>
 
-  <!-- Modal Update -->
-  <div class="modal fade" id="myModalUpd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Nuevo Usuario</h4>
-        </div>
-        <div class="modal-body">
-          <form id="formAddUser" name="formAddUser" method="POST">
-            <input type="text" id="inputUserUpd" name="inputUserUpd">
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <br>
   <table class="table table-striped">
     <thead>
