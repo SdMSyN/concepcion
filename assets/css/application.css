@@ -65,6 +65,10 @@ thead > tr > td:last-of-type{
   padding: 1rem;
   text-align: center;
 }
+.user-name{
+  color: whitesmoke;
+  font-style: italic;
+}
 
 /*CUSTON NAV-BAR*/
 .navbar-default {

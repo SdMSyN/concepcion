@@ -19,7 +19,7 @@ else {
     while ($rowGetProducts = $resGetProducts->fetch_assoc()) {
       $optProducts .= '<tr>';
       $optProducts .= '<td>' . $rowGetProducts['id'] . '</td>';
-      $optProducts .= '<td><img src="'.$rutaImgProd.$rowGetProducts['img'].'" width="50px"></td>';
+      $optProducts .= '<td><img src="' . $rutaImgProd . $rowGetProducts['img'] . '" width="50px"></td>';
       $optProducts .= '<td>' . $rowGetProducts['nombre'] . '</td>';
       $optProducts .= '<td>' . $rowGetProducts['categoria'] . '</td>';
       $optProducts .= '<td>' . $rowGetProducts['precio'] . '</td>';
@@ -44,7 +44,7 @@ else {
   <div class="container">
     <div class="row">
       <div class="titulo-crud text-center">
-        Productos
+        PRODUCTOS 
       </div>
       <div class="col-md-12">
         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalAdd">
@@ -64,7 +64,7 @@ else {
           <div class="error"></div>
           <form id="formAddProduct" name="formAddProduct" method="POST" >
             <div class="modal-body">
-                <input type="hidden" name="userId" value="<?= $userId; ?>" >
+              <input type="hidden" name="userId" value="<?= $userId; ?>" >
               <div class="form-group">
                 <label>Nombre</label>
                 <input type="text" id="inputNombre" name="inputNombre" class="form-control">
@@ -73,17 +73,14 @@ else {
                 <label>Precio</label>
                 <input type="number" step="any" id="inputPrecio" name="inputPrecio" class="form-control">
               </div>
-              <div class="form-group">
-                <label>Imagen (Máximo 1Mb)</label>
-                <input type="file" id="inputImg" name="inputImg" class="form-control">
+              <div class="form-group">           
+                <label for="exampleInputFile">Imagen</label>
+                <input type="file" id="inputImg" name="inputImg" >
+                <p class="help-block">Tamaño Máximo 1Mb</p>
               </div>
               <div class="form-group">
                 <label>Descripción</label>
                 <input type="text" id="inputDesc" name="inputDesc" class="form-control">
-              </div>
-              <div class="form-group">
-                <label>Pan frío</label>
-                <input type="checkbox" id="inputPanFrio" name="inputPanFrio" class="form-control">
               </div>
               <div class="form-group">
                 <label>Categoría</label>
@@ -91,10 +88,15 @@ else {
                   <?= $optCategories; ?>
                 </select>
               </div>
-              
+              <div class="form-group">
+                <label>
+                  <input type="checkbox" id="inputPanFrio" name="inputPanFrio" >Pan frío
+                </label>
+              </div>
+
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary" >Crear usuario</button>
+                <button type="submit" class="btn btn-primary" >Crear producto</button>
               </div>
           </form>
         </div>
@@ -119,7 +121,6 @@ else {
       <?= $optProducts; ?>
     </tbody>    
   </table>
-  </table>
 
   </div><!-- fin container -->
 
@@ -127,95 +128,95 @@ else {
     $(document).ready(function () {
 
       $('.delete').click(function () {
-            var idProductDel = $(this).data('id');
-            //alert("Eliminando..." + idUserDel);
-            if(confirm("Seguro que deseas eliminar?") == true){
-                $.ajax({
-                    type: 'POST',
-                    url: 'controllers/delete_product.php',
-                    data: {productDel: idProductDel},
-                    success: function(msg){
-                        //alert(msg);
-                        if (msg == "true") {
-                            $('.error').html("Se elimino el producto con éxito.");
-                                setTimeout(function () {
-                                  location.href = 'form_select_product.php';
-                                }, 3000);
-                        } else {
-                            $('.error').css({color: "#FF0000"});
-                            $('.error').html(msg);
-                        }
-                    }
-		});
-            }//end if confirm
-        });
+        var idProductDel = $(this).data('id');
+        //alert("Eliminando..." + idUserDel);
+        if (confirm("Seguro que deseas eliminar?") == true) {
+          $.ajax({
+            type: 'POST',
+            url: 'controllers/delete_product.php',
+            data: {productDel: idProductDel},
+            success: function (msg) {
+              //alert(msg);
+              if (msg == "true") {
+                $('.error').html("Se elimino el producto con éxito.");
+                setTimeout(function () {
+                  location.href = 'form_select_product.php';
+                }, 3000);
+              } else {
+                $('.error').css({color: "#FF0000"});
+                $('.error').html(msg);
+              }
+            }
+          });
+        }//end if confirm
+      });
 
       $('#formAddProduct').submit(function (e) {
-            if($("#inputNombre").val() == ""){ 
-                //alert("No puede ser vacio");
-                $("#inputNombre").tooltip({title: "Nombre del producto obligatorio", trigger: "focus", placement: 'bottom'});
-                $("#inputNombre").tooltip('show');
-                return false;
+        if ($("#inputNombre").val() == "") {
+          //alert("No puede ser vacio");
+          $("#inputNombre").tooltip({title: "Nombre del producto obligatorio", trigger: "focus", placement: 'bottom'});
+          $("#inputNombre").tooltip('show');
+          return false;
+        }
+        if ($("#inputPrecio").val() == "") {
+          //alert("No puede ser vacio");
+          $("#inputPrecio").tooltip({title: "Precio del producto obligatorio", trigger: "focus", placement: 'bottom'});
+          $("#inputPrecio").tooltip('show');
+          return false;
+        }
+        if (!$("#inputPrecio").val().match(/^-?[0-9]+([\.][0-9]*)?$/)) {
+          // inputted file path is not an image of one of the above types
+          $("#inputPrecio").tooltip({title: "Formato de precio incorrecto", trigger: "focus", placement: 'bottom'});
+          $("#inputPrecio").tooltip('show');
+          return false;
+        }
+        if ($("#inputImg").val() == "") {
+          //alert("No puede ser vacio");
+          $("#inputImg").tooltip({title: "Imagen obligatoria", trigger: "focus", placement: 'bottom'});
+          $("#inputImg").tooltip('show');
+          return false;
+        }
+        if (!$("#inputImg").val().match(/(?:gif|jpg|png|bmp)$/)) {
+          // inputted file path is not an image of one of the above types
+          $("#inputImg").tooltip({title: "Formato de imagen no admitido", trigger: "focus", placement: 'bottom'});
+          $("#inputImg").tooltip('show');
+          return false;
+        }
+        if ($("#inputDesc").val() == "") {
+          //alert("No puede ser vacio");
+          $("#inputDesc").tooltip({title: "Descripción obligatoria", trigger: "focus", placement: 'bottom'});
+          $("#inputDesc").tooltip('show');
+          return false;
+        }
+        if ($("#inputCategoria").val() == "") {
+          //alert("No puede ser vacio");
+          $("#inputCategoria").tooltip({title: "Debes de seleccionar una categoría", trigger: "focus", placement: 'bottom'});
+          $("#inputCategoria").tooltip('show');
+          return false;
+        }
+        var data = new FormData(this); //Creamos los datos a enviar con el formulario
+        $.ajax({
+          url: 'controllers/create_product.php', //URL destino
+          data: data,
+          processData: false, //Evitamos que JQuery procese los datos, daría error
+          contentType: false, //No especificamos ningún tipo de dato
+          type: 'POST',
+          beforeSend: function () {
+            //$('#exampleModalLabel').append("Loading...");
+          },
+          success: function (resultado) {
+            //alert(resultado);
+            if (resultado == "true") {
+              $('#form-content').modal('hide');
+              location.reload();
+            } else {
+              $('.error').html(resultado);
             }
-            if($("#inputPrecio").val() == ""){ 
-                //alert("No puede ser vacio");
-                $("#inputPrecio").tooltip({title: "Precio del producto obligatorio", trigger: "focus", placement: 'bottom'});
-                $("#inputPrecio").tooltip('show');
-                return false;
-            }
-            if (!$("#inputPrecio").val().match(/^-?[0-9]+([\.][0-9]*)?$/)) {
-                // inputted file path is not an image of one of the above types
-                $("#inputPrecio").tooltip({title: "Formato de precio incorrecto", trigger: "focus", placement: 'bottom'});
-                $("#inputPrecio").tooltip('show');
-                return false;
-            }
-            if($("#inputImg").val() == ""){ 
-                //alert("No puede ser vacio");
-                $("#inputImg").tooltip({title: "Imagen obligatoria", trigger: "focus", placement: 'bottom'});
-                $("#inputImg").tooltip('show');
-                return false;
-            }
-            if (!$("#inputImg").val().match(/(?:gif|jpg|png|bmp)$/)) {
-                // inputted file path is not an image of one of the above types
-                $("#inputImg").tooltip({title: "Formato de imagen no admitido", trigger: "focus", placement: 'bottom'});
-                $("#inputImg").tooltip('show');
-                return false;
-            }
-            if($("#inputDesc").val() == ""){ 
-                //alert("No puede ser vacio");
-                $("#inputDesc").tooltip({title: "Descripción obligatoria", trigger: "focus", placement: 'bottom'});
-                $("#inputDesc").tooltip('show');
-                return false;
-            }
-            if($("#inputCategoria").val() == ""){ 
-                //alert("No puede ser vacio");
-                $("#inputCategoria").tooltip({title: "Debes de seleccionar una categoría", trigger: "focus", placement: 'bottom'});
-                $("#inputCategoria").tooltip('show');
-                return false;
-            }
-            var data = new FormData(this); //Creamos los datos a enviar con el formulario
-            $.ajax({
-                    url: 'controllers/create_product.php', //URL destino
-                    data: data,
-                    processData: false, //Evitamos que JQuery procese los datos, daría error
-                    contentType: false, //No especificamos ningún tipo de dato
-                    type: 'POST',
-                    beforeSend: function(){
-                            //$('#exampleModalLabel').append("Loading...");
-                    },
-                    success: function (resultado) {
-                            //alert(resultado);
-                            if(resultado=="true"){
-                                    $('#form-content').modal('hide');
-                                    location.reload();
-                            }else{
-                                    $('.error').html(resultado);
-                            }
-                    }
-            });
-            e.preventDefault(); //Evitamos que se mande del formulario de forma convencional
-    });
-                
+          }
+        });
+        e.preventDefault(); //Evitamos que se mande del formulario de forma convencional
+      });
+
       $('#myModalAdd').on('shown.bs.modal', function () {
         $('#inputNombre').focus()
       });

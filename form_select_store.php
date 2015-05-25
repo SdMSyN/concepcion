@@ -20,7 +20,7 @@ else {
       $optStore .= '<td>' . $rowGetStore['nombre'] . '</td>';
       $optStore .= '<td>' . $rowGetStore['direccion'] . '</td>';
       $optStore .= '<td>' . $rowGetStore['created'] . '</td>';
-      $optStore .= '<td><a href="https://www.google.com.mx/maps/@' . $rowGetStore['latitud'] . ',' . $rowGetStore['longitud'] . ',15z" target="_about">Ver</a></td>';
+      $optStore .= '<td><a href="https://www.google.com.mx/maps/@' . $rowGetStore['latitud'] . ',' . $rowGetStore['longitud'] . ',16z" target="_about">Ver</a></td>';
       $optStore .= '<td><a href="form_update_store.php?id=' . $rowGetStore['id'] . '" >Modificar</a></td>';
       $optStore .= '<td><a class="delete" data-id="' . $rowGetStore['id'] . '" >Dar de baja</a></td>';
       $optStore .= '</tr>';

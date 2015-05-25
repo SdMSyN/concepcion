@@ -4,7 +4,7 @@
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-	<span class="sr-only">Toggle navigation</span>
+	<span class="sr-only">Menu</span>
 	<span class="icon-bar"></span>
 	<span class="icon-bar"></span>
 	<span class="icon-bar"></span>
@@ -20,9 +20,9 @@
 	  ?>
 	  <li><a href="form_select_stock.php">Almacen</a></li>
 	  <li><a href="form_select_product.php">Productos</a></li>
-	  <li><a href="form_select_user.php">Usuario</a></li>
-	  <li><a href="form_select_store.php">Tienda</a></li>
-	  <li><a href="form_select_category.php">Categoría</a></li>
+	  <li><a href="form_select_user.php">Usuarios</a></li>
+	  <li><a href="form_select_store.php">Tiendas</a></li>
+	  <li><a href="form_select_category.php">Categorías</a></li>
 	  <?php
 	}//fin else sesión
 	?>
@@ -32,7 +32,7 @@
       <ul class="nav navbar-nav navbar-right">
 	<?php
 	if (isset($_SESSION['sessA'])) {
-	  echo '<li class="no-a">Bienvenido ' . $_SESSION['userName'] . '</li>';
+	  echo '<li class="no-a user-name">Bienvenido ' . $_SESSION['userName'] . '</li>';
 	  echo '<li><a href="controllers/proc_destroy_login_admin.php">Cerrar Sesión</a></li>';
 	}
 	?>
