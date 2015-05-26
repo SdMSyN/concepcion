@@ -12,7 +12,7 @@ else {
   //$storeId = $_SESSION['storeId'];
   $userId = $_SESSION['userId'];
 
-  $sqlGetCategory = "SELECT id, nombre, created, (SELECT CONCAT(nombre,' ',ap,' ',am) FROM $tUser WHERE id=$tCategory.created_by_user_id ) as created_by FROM $tCategory ";
+  $sqlGetCategory = "SELECT id, nombre, created, (SELECT CONCAT(nombre,' ',ap,' ',am) FROM $tUser WHERE id=$tCategory.created_by_user_id ) as created_by FROM $tCategory WHERE activo='1' ";
   $resGetCategory = $con->query($sqlGetCategory);
   $optCategory = '';
   if ($resGetCategory->num_rows > 0) {
@@ -22,10 +22,12 @@ else {
       $optCategory .= '<td>' . $rowGetCategory['nombre'] . '</td>';
       $optCategory .= '<td>' . $rowGetCategory['created'] . '</td>';
       $optCategory .= '<td>' . $rowGetCategory['created_by'] . '</td>';
+      $optCategory .= '<td><a href="form_update_category.php?id=' . $rowGetCategory['id'] . '" >Modificar</a></td>';
+      $optCategory .= '<td><a class="delete" data-id="' . $rowGetCategory['id'] . '" >Dar de baja</a></td>';
       $optCategory .= '</tr>';
     }
   } else {
-    $optCategory.='<tr><td colspan="4">No existen categorías aún.</td></tr>';
+    $optCategory.='<tr><td colspan="6">No existen categorías aún.</td></tr>';
   }
   ?>
 
@@ -68,13 +70,16 @@ else {
     </div>
 
     <br>
+     <div class="msg"></div>
     <table class="table table-striped">
       <thead>
         <tr>
-  	<td class="t-head-first">Id</td>
-  	<td class="t-head">Nombre</td>
-  	<td class="t-head">Fecha de creación</td>
-  	<td class="t-head-last">Creado por</td>
+            <td class="t-head-first">Id</td>
+            <td class="t-head">Nombre</td>
+            <td class="t-head">Fecha de creación</td>
+            <td class="t-head-last">Creado por</td>
+            <td class="t-head">Modificar</td>
+            <td class="t-head-last">Eliminar</td>
         </tr>
       </thead>
       <tbody>
@@ -86,6 +91,31 @@ else {
   <script type="text/javascript">
     $(document).ready(function () {
 
+        $('.delete').click(function () {
+            var idCatDel = $(this).data('id');
+            //alert("Eliminando..." + idUserDel);
+            if(confirm("Seguro que deseas eliminar?") == true){
+                $.ajax({
+                    type: 'POST',
+                    url: 'controllers/delete_category.php',
+                    data: {categoryDel: idCatDel},
+                    success: function(msg){
+                        //alert(msg);
+                        if (msg == "true") {
+                            $('.msg').css({color: "#00FFF0"});
+                            $('.msg').html("Se elimino la categoría con éxito.");
+                                setTimeout(function () {
+                                  location.href = 'form_select_category.php';
+                                }, 1500);
+                        } else {
+                            $('.msg').css({color: "#FF0000"});
+                            $('.msg').html(msg);
+                        }
+                    }
+		});
+            }//end if confirm
+        });
+        
       $('#formAddCategory').validate({
         rules: {
           inputCategory: {required: true}

@@ -4,7 +4,7 @@
     $category = $_POST['inputCategory'];
     $userId=$_POST['inputUser'];
     
-    $sqlCreateCategory="INSERT INTO $tCategory (nombre, created, created_by_user_id) VALUES ('$category', '$dateNow', '$userId') ";
+    $sqlCreateCategory="INSERT INTO $tCategory (nombre, created, created_by_user_id, activo) VALUES ('$category', '$dateNow', '$userId', '1') ";
     if($con->query($sqlCreateCategory) === TRUE ){
         echo 'true';
     }else{
