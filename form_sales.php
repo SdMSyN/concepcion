@@ -16,7 +16,7 @@ else{
         while($rowGetProd = $resGetProd->fetch_assoc()){
             $optProd .= ''.$rowGetProd['nombre'].'';
             $optProd .= ''.$rowGetProd['precio'].'';
-            $optProd .= ''.$rowGetProd['imagen'].'';
+            $optProd .= ''.$rowGetProd['img'].'';
             $optProd .= ''.$rowGetProd['descripcion'].'';
         }
 ?>

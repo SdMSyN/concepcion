@@ -87,6 +87,7 @@ else {
             <tbody id="tableStockStore">
             </tbody>
           </table>
+            <input type="hidden" name="inputUser" value="<?= $userId; ?>" > 
           <div id="saveButton"></div>
         </form>
       </div>
@@ -110,6 +111,7 @@ else {
               </select>
             </div>  
             <input type="text" name="inputCampo" id="inputCampo" class="hidden">
+            <input type="text" name="inputUser" id="inputUser" class="hidden" value="<?= $userId; ?>">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -256,6 +258,9 @@ else {
               $('.msg').css({color: "#009900"});
               $('.msg').html("Se añadio el producto con éxito.");
               pintarTabla2(selectStore);
+              setTimeout(function () {
+                  $('.msg').empty();
+                }, 1500);
             } else {
               $('.msg').css({color: "#FF0000"});
               $('.msg').html(msg);
