@@ -13,7 +13,7 @@
             $optStockStore.='<td><input type="hidden" value="'.$rowGetStockStore['id'].'" name="stockId[]" >'.$rowGetStockStore['id'].'</td>';
             $optStockStore.='<td>'.$rowGetStockStore['producto'].'</td>';
             $optStockStore.='<td>'.$rowGetStockStore['cantidad'].'</td>';
-            $optStockStore.='<td><input type="number" name="inputAlm[]" id="inputAlm[]" value="0"></td>';
+            $optStockStore.='<td class="col-sm-2"><input type="number" name="inputAlm[]" id="inputAlm[]" value="0" class="form-control"></td>';
             $optStockStore.='<input type="hidden" value="'.$rowGetStockStore['tienda_id'].'" name="tienda" id="tienda" ';
             $optStockStore.='</tr>';
         }

@@ -70,6 +70,19 @@ thead > tr > td:last-of-type{
   font-style: italic;
 }
 
+/*Stock*/
+.stock-title{
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-size: 2.5rem;
+}
+.msg{
+  padding-left: 3rem;
+  font-size: 2rem;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}
+
 /*CUSTON NAV-BAR*/
 .navbar-default {
   background-color: #596cb6;

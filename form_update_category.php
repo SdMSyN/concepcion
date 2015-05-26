@@ -15,37 +15,41 @@ else {
   $sqlGetCategory = "SELECT nombre FROM $tCategory WHERE id='$categoryId' ";
   $resGetCategory = $con->query($sqlGetCategory);
   $rowGetCategory = $resGetCategory->fetch_assoc();
-      
   ?>
 
   <!-- Cambio dinamico -->
   <div class="container">
     <div class="row">
-        <div class="titulo-crud text-center">
-            CATEGORIAS
-        </div>
-        <div class="msg"></div>
-        <div class="col-md-12">	
-            <form id="formUpdCategory" name="formUpdCategory" method="POST">
-  	      <div class="modal-body">
-  		<div class="form-group">
-  		  <label>Nombre de la Categoría</label>
-  		  <input type="text" id="inputCategory" name="inputCategory" class="form-control" value="<?= $rowGetCategory['nombre']; ?>">
-  		</div>  
-  		<input type="hidden" name="inputCategoryId" value="<?= $categoryId; ?>" >
-  	      </div>
-  	      <div class="modal-footer">
-                  <a href="form_select_category.php" class="btn btn-default">Cerrar</a>
-  		<button type="submit" class="btn btn-primary" >Modificar categoría</button>
-  	      </div>
-  	    </form>
-        </div>
+      <div class="titulo-crud text-center">
+        CATEGORIAS
+      </div>
+      <div class="msg"></div>
+      <div class="col-md-12">
+        <form id="formUpdProduct" name="formUpdProduct" method="POST" class="form-horizontal">
+          <legend>Modificación de datos de categoria</legend>       
+          <form id="formUpdCategory" name="formUpdCategory" method="POST" class="form-horizontal">
+            <div class="error"></div>
+            <input type="hidden" name="inputCategoryId" value="<?= $categoryId; ?>" >
+            <div class="form-group">
+              <label class="col-sm-2">Nombre de la Categoría</label>
+              <div class="col-sm-10">
+                <input type="text" id="inputCategory" name="inputCategory" class="form-control" value="<?= $rowGetCategory['nombre']; ?>">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-0 col-sm-12">
+                <a href="form_select_category.php" class="btn btn-default"><i class="fa fa-mail-reply"></i> Atras</a>
+                <button type="submit" class="btn btn-primary" >Guardar cambios</button>
+              </div>
+            </div>
+          </form>
+      </div>
     </div>
   </div>
 
   <script type="text/javascript">
     $(document).ready(function () {
-        
+
       $('#formUpdCategory').validate({
         rules: {
           inputCategory: {required: true}
@@ -64,7 +68,7 @@ else {
             success: function (msg) {
               //alert(msg);
               if (msg == "true") {
-                  $('.msg').css({color: "#009900"});
+                $('.msg').css({color: "#009900"});
                 $('.msg').html("Se modifico la categoría con éxito.");
                 setTimeout(function () {
                   location.href = 'form_select_category.php';
@@ -81,7 +85,7 @@ else {
         }
 
       });
-      
+
       $('#myModal').on('shown.bs.modal', function () {
         $('#inputCategory').focus()
       })
