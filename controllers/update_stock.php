@@ -2,17 +2,28 @@
     include ('../config/conexion.php');
     include ('../config/variables.php');
     
-    $idStock=$_POST['inputIdStock'];
-    $idProduct=$_POST['inputProducto'];
-    $cant=$_POST['inputCant'];
-    $idStore=$_POST['inputTienda'];
-    
-    $sqlUpdateStock="UPDATE $tStock SET producto_id='$idProduct', cantidad='$cant', tienda_id='$idStore' WHERE id='$idStock' ";
-            
-    if($con->query($sqlUpdateStock) === TRUE ){
-        echo 'true';
-    }else{
-        echo 'Error al modificar producto de almacén<br>'.$con->error;
+    $alm=$_POST['inputAlm'];
+    $i=0;
+    $ban=false;
+    foreach($_POST['stockId'] as $id){
+        //echo $id.'--'.$alm[$i].'--';
+        $sqlGetCantProductStock="SELECT cantidad FROM $tStock WHERE id='$id' ";
+        $resGetCantProductStock=$con->query($sqlGetCantProductStock);
+        $rowGetCantProductStock=$resGetCantProductStock->fetch_assoc();
+        $cant=$rowGetCantProductStock['cantidad'] + $alm[$i];
+        
+        $sqlUpdStock="UPDATE $tStock SET cantidad='$cant' WHERE id='$id' ";
+        if($con->query($sqlUpdStock) === TRUE) $ban=true;
+        else{
+            $ban=false;
+            break;
+        }
+        
+        $i++;
     }
+    if($ban)
+        echo "true";
+    else
+        echo "Error al insertar nuevas cantidades";
       
 ?>
