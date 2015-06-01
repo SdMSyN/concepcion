@@ -12,6 +12,7 @@
 	//echo 'Hola';
 	$tStock="almacenes";
 	$tCategory="categorias";
+	$tSubCategory="subcategorias";
         $tDecrease="costales";
         $tPerfil="perfiles";
         $tProduct="productos";
@@ -20,4 +21,5 @@
         $tUser="usuarios";
         $tSaleInfo="venta_info";
         $tSaleProd="ventas_prod";
+        $tEst="estatus";
 ?>
