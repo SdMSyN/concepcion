@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-05-2015 a las 00:45:35
+-- Tiempo de generación: 01-06-2015 a las 19:47:38
 -- Versión del servidor: 5.6.14
 -- Versión de PHP: 5.5.6
 
@@ -28,13 +28,19 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `almacenes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `created` date NOT NULL,
+  `user_create` int(11) NOT NULL,
+  `updated` date NOT NULL,
+  `user_update` int(11) NOT NULL,
   `producto_id` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `tienda_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `producto_id` (`producto_id`),
-  KEY `tienda_id` (`tienda_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  KEY `tienda_id` (`tienda_id`),
+  KEY `user_update` (`user_update`),
+  KEY `user_create` (`user_create`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 -- --------------------------------------------------------
 
@@ -47,7 +53,10 @@ CREATE TABLE IF NOT EXISTS `categorias` (
   `nombre` varchar(20) NOT NULL,
   `created` date NOT NULL,
   `created_by_user_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `activo` tinyint(4) NOT NULL,
+  `img` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `created_by_user_id` (`created_by_user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
@@ -86,20 +95,21 @@ CREATE TABLE IF NOT EXISTS `perfiles` (
 CREATE TABLE IF NOT EXISTS `productos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL,
-  `precio` decimal(10,0) NOT NULL,
+  `precio` float(8,2) NOT NULL,
   `img` varchar(20) NOT NULL,
   `descripcion` varchar(100) NOT NULL,
   `activo` tinyint(1) NOT NULL,
   `codigo_barras` varchar(20) NOT NULL,
   `pan_frio` tinyint(1) NOT NULL,
   `categoria_id` int(11) NOT NULL,
+  `subcategoria_id` int(11) NOT NULL,
   `created` date NOT NULL,
   `updated` date NOT NULL,
   `created_by_user_id` int(11) NOT NULL,
   `updated_by_user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `categoria_id` (`categoria_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -120,6 +130,28 @@ CREATE TABLE IF NOT EXISTS `sobrantes` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `subcategorias`
+--
+
+CREATE TABLE IF NOT EXISTS `subcategorias` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(30) NOT NULL,
+  `activo` tinyint(4) NOT NULL,
+  `categoria_id` int(11) NOT NULL,
+  `created` date NOT NULL,
+  `create_by` int(11) NOT NULL,
+  `updated` date NOT NULL,
+  `update_by` int(11) NOT NULL,
+  `img` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `categoria_id` (`categoria_id`),
+  KEY `create_by` (`create_by`),
+  KEY `update_by` (`update_by`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tiendas`
 --
 
@@ -136,8 +168,9 @@ CREATE TABLE IF NOT EXISTS `tiendas` (
   `password` varchar(15) NOT NULL,
   `created` date NOT NULL,
   `updated` date NOT NULL,
+  `activa` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -150,6 +183,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `nombre` varchar(50) NOT NULL,
   `ap` varchar(30) NOT NULL,
   `am` varchar(30) NOT NULL,
+  `user` varchar(20) DEFAULT NULL,
   `password` int(11) NOT NULL,
   `perfil_id` int(11) NOT NULL,
   `direccion` varchar(100) DEFAULT NULL,
@@ -162,6 +196,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `created` date NOT NULL,
   `updated` date NOT NULL,
   `fec_nac` date DEFAULT NULL,
+  `activo` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `perfil_id` (`perfil_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
@@ -213,6 +248,12 @@ ALTER TABLE `almacenes`
   ADD CONSTRAINT `almacenes_ibfk_2` FOREIGN KEY (`tienda_id`) REFERENCES `tiendas` (`id`);
 
 --
+-- Filtros para la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  ADD CONSTRAINT `categorias_ibfk_1` FOREIGN KEY (`created_by_user_id`) REFERENCES `usuarios` (`id`);
+
+--
 -- Filtros para la tabla `costales`
 --
 ALTER TABLE `costales`
@@ -229,6 +270,14 @@ ALTER TABLE `productos`
 --
 ALTER TABLE `sobrantes`
   ADD CONSTRAINT `sobrantes_ibfk_1` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`);
+
+--
+-- Filtros para la tabla `subcategorias`
+--
+ALTER TABLE `subcategorias`
+  ADD CONSTRAINT `subcategorias_ibfk_1` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`),
+  ADD CONSTRAINT `subcategorias_ibfk_2` FOREIGN KEY (`create_by`) REFERENCES `usuarios` (`id`),
+  ADD CONSTRAINT `subcategorias_ibfk_3` FOREIGN KEY (`update_by`) REFERENCES `usuarios` (`id`);
 
 --
 -- Filtros para la tabla `usuarios`
