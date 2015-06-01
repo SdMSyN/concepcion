@@ -34,18 +34,6 @@ body{
   padding-bottom: 15px;
 }
 
-thead > tr > td {
- background-color: #779ECB;
- color: whitesmoke;
-}
-
-thead > tr > td:first-of-type {
- border-top-left-radius: 1rem;
-}
-
-thead > tr > td:last-of-type{
- border-top-right-radius: 1rem;
-}
 .error{
   font-size: 1.5rem;
   padding: .5rem;
@@ -145,6 +133,45 @@ thead > tr > td:last-of-type{
   color: #ecdbff;
 }
 
+/*TABLA CON ORDENAMIENTO*/
+#data th{
+background-color: #779ECB;
+color: whitesmoke;
+}
+
+#data th:first-of-type {
+ border-top-left-radius: 1rem;
+}
+
+#data th:last-of-type{
+ border-top-right-radius: 1rem;
+}
+
+#data th span{
+    cursor:pointer;
+    padding-right:12px
+}
+#data th span.asc{
+    background:url(../img/sortaB.gif) no-repeat right center;
+}
+#data th span.desc{
+    background:url(../img/sortdB.gif) no-repeat right center;
+}
+
+thead > tr > td {
+ background-color: #779ECB;
+ color: whitesmoke;
+}
+
+thead > tr > td:first-of-type {
+ border-top-left-radius: 1rem;
+}
+
+thead > tr > td:last-of-type{
+ border-top-right-radius: 1rem;
+}
+
+/*RESPONSIVO*/
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
     color: #ecf0f1;
@@ -175,23 +202,3 @@ thead > tr > td:last-of-type{
   }
 }
 
-/* Flechas de ordenamiento */
-#data{
-    border-collapse:collapse;
-    width:940px;
-}
-#data th{
-    border:1px solid #999;
-    padding:8px;
-    background:#F8F8F8
-}
-#data th span{
-    cursor:pointer;
-    padding-right:12px
-}
-#data th span.asc{
-    background:url(../img/sorta.gif) no-repeat right center;
-}
-#data th span.desc{
-    background:url(../img/sortd.gif) no-repeat right center;
-}

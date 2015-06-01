@@ -52,26 +52,29 @@ else {
     <br>
      <div class="msg"></div>
      <div class="col-sm-12">
-         <form id="frm_filtro" method="post" action="">
-             <select id="estatus" name="estatus">
-                 <option value="0"></option>
-                 <option value="1">Desactivo</option>
-                 <option value="2">Activo</option>
+       <form id="frm_filtro" method="post" action="" class="form-inline">
+           <div class="form-group">
+             <select id="estatus" name="estatus" class="form-control">
+               <option value="0"></option>
+               <option value="1">Desactivo</option>
+               <option value="2">Activo</option>
              </select>
-             <button type="button" id="btnfiltrar">Filtrar</button>
-             <a href="javascript:;" id="btncancel">Todos</a>
+           </div>
+           <button type="button" id="btnfiltrar" class="btn btn-success">Filtrar</button>
+           <a href="javascript:;" id="btncancel" class="btn btn-default">Todos</a>
+
          </form>
      </div>
     <table class="table table-striped" id="data">
       <thead>
         <tr>
-            <th class="t-head-first"><span title="id">Id</span></th>
-            <th class="t-head"><span title="nombre">Nombre</span></th>
-            <th class="t-head"><span title="created">Fecha de creación</span></th>
-            <th class="t-head"><span title="created_by_user_id">Creado por</span></th>
-            <th class="t-head"><span title="activo">Estatus</span></th>
-            <th class="t-head">Modificar</th>
-            <th class="t-head-last">Eliminar</th>
+            <th ><span title="id">Id</span></th>
+            <th ><span title="nombre">Nombre</span></th>
+            <th ><span title="created">Fecha de creación</span></th>
+            <th ><span title="created_by_user_id">Creado por</span></th>
+            <th ><span title="activo">Estatus</span></th>
+            <th >Modificar</th>
+            <th >Eliminar</th>
         </tr>
       </thead>
       <tbody>
