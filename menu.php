@@ -39,7 +39,7 @@
           <?php
         } elseif (isset($_SESSION['perfil']) && $_SESSION['perfil'] == "0") {
           ?>
-          <li><a href="form_select_stock_2.php">Hola mundo</a></li>
+<!--          <li><a href="form_select_stock_2.php">Hola mundo</a></li>-->
           <?php
         }
         ?>
