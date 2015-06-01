@@ -8,7 +8,7 @@ if (!isset($_SESSION['sessA']))
 else if ($_SESSION['perfil'] != "1")
   echo '<div class="row><div class="col-sm-12 text-center"><h2>No tienes permiso para entrar a esta sección</h2></div></div>';
 else {
-
+    $userId=$_SESSION['userId'];
   ?>
 
   <!-- Cambio dinamico -->
