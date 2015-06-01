@@ -174,3 +174,24 @@ thead > tr > td:last-of-type{
     padding-bottom: .5rem;
   }
 }
+
+/* Flechas de ordenamiento */
+#data{
+    border-collapse:collapse;
+    width:940px;
+}
+#data th{
+    border:1px solid #999;
+    padding:8px;
+    background:#F8F8F8
+}
+#data th span{
+    cursor:pointer;
+    padding-right:12px
+}
+#data th span.asc{
+    background:url(../img/sorta.gif) no-repeat right center;
+}
+#data th span.desc{
+    background:url(../img/sortd.gif) no-repeat right center;
+}

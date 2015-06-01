@@ -1,0 +1,252 @@
+<?php
+session_start();
+include('config/conexion.php');
+include('header.php');
+include ('menu.php');
+if (!isset($_SESSION['sessA']))
+  echo '<div class="row"><div class="col-sm-12 text-center"><h2>No ha iniciado sesión de Administrador</h2></div></div>';
+else if ($_SESSION['perfil'] != "1")
+  echo '<div class="row><div class="col-sm-12 text-center"><h2>No tienes permiso para entrar a esta sección</h2></div></div>';
+else {
+
+  ?>
+
+  <!-- Cambio dinamico -->
+  <div class="container">
+    <div class="row">
+      <div class="titulo-crud text-center">
+        CATEGORIAS
+      </div>
+      <div class="col-md-12">	
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+          Nueva Categoría
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  	<div class="modal-dialog">
+  	  <div class="modal-content">
+  	    <div class="modal-header">
+  	      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  	      <h4 class="modal-title" id="myModalLabel">Nueva Categoría</h4>
+  	    </div>
+            <div class="error"></div>
+  	    <form id="formAddCategory" name="formAddCategory" method="POST">
+  	      <div class="modal-body">
+  		<div class="form-group">
+  		  <label>Nombre de la Categoría</label>
+  		  <input type="text" id="inputCategory" name="inputCategory" class="form-control">
+  		</div>  
+  		<input type="hidden" name="inputUser" value="<?= $userId; ?>" >
+  	      </div>
+  	      <div class="modal-footer">
+  		<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+  		<button type="submit" class="btn btn-primary" >Crear categoría</button>
+  	      </div>
+  	    </form>
+  	  </div>
+  	</div>
+        </div>
+      </div>	  
+    </div>
+
+    <br>
+     <div class="msg"></div>
+     <div class="col-sm-12">
+         <form id="frm_filtro" method="post" action="">
+             <select id="estatus" name="estatus">
+                 <option value="0"></option>
+                 <option value="1">Desactivo</option>
+                 <option value="2">Activo</option>
+             </select>
+             <button type="button" id="btnfiltrar">Filtrar</button>
+             <a href="javascript:;" id="btncancel">Todos</a>
+         </form>
+     </div>
+    <table class="table table-striped" id="data">
+      <thead>
+        <tr>
+            <th class="t-head-first"><span title="id">Id</span></th>
+            <th class="t-head"><span title="nombre">Nombre</span></th>
+            <th class="t-head"><span title="created">Fecha de creación</span></th>
+            <th class="t-head"><span title="created_by_user_id">Creado por</span></th>
+            <th class="t-head"><span title="activo">Estatus</span></th>
+            <th class="t-head">Modificar</th>
+            <th class="t-head-last">Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+	
+      </tbody>    
+    </table>
+  </div>
+
+  <script type="text/javascript">
+      var ordenar = '';
+    $(document).ready(function () {
+
+        //Ordenamiento
+        filtrar();
+        function filtrar(){
+            $.ajax({
+                type: "POST",
+                data: $("#frm_filtro").serialize()+ordenar,
+                url: "controllers/select_category.php?action=listar",
+                success: function(msg){
+                    //$("#data tbody").empty();
+                    $("#data tbody").html(msg);
+                }
+            });
+        }
+        
+        //Ordenar ASC y DESC header tabla
+        $("#data th span").click(function(){
+            if($(this).hasClass("desc")){
+                $("#data th span").removeClass("desc").removeClass("asc");
+                $(this).addClass("asc");
+                ordenar = "&orderby="+$(this).attr("title")+" asc";
+            }else{
+                $("#data th span").removeClass("desc").removeClass("asc");
+                $(this).addClass("desc");
+                ordenar = "&orderby="+$(this).attr("title")+" desc";
+            }
+            filtrar();
+        });
+        
+        //Ordenar por formulario
+        $("#btnfiltrar").click(function(){ 
+            filtrar();
+            //alert("y ahora?");
+        });
+        
+        // boton cancelar
+	$("#btncancel").click(function(){ 
+            $("#frm_filtro select").find("option[value='0']").attr("selected",true)
+            filtrar() 
+	});
+        
+        /*Carga de función por que no funcionaba por si sola, ya que los elementos (función ajax hacia php) se cargaban después de cargar el script:
+         http://www.forosdelweb.com/f179/javascript-no-funciona-luego-carga-ajax-1118659/
+         */
+        $("#data tbody").on("click", ".delete", function(){
+            //alert("Hope");
+            var idCatDel = $(this).data('id');
+            alert("Eliminando..." + idCatDel);
+            if(confirm("Seguro que deseas eliminar?") == true){
+                $.ajax({
+                    type: 'POST',
+                    url: 'controllers/delete_category.php',
+                    data: {categoryDel: idCatDel},
+                    success: function(msg){
+                        //alert(msg);
+                        if (msg == "true") {
+                            $('.msg').css({color: "#00FFF0"});
+                            $('.msg').html("Se elimino la categoría con éxito.");
+                                setTimeout(function () {
+                                  location.href = 'form_select_category_2.php';
+                                }, 1500);
+                        } else {
+                            $('.msg').css({color: "#FF0000"});
+                            $('.msg').html(msg);
+                        }
+                    }
+		});
+            }//end if confirm
+        });
+        
+        
+        /*function filtrar(){
+            $.ajax({
+               data:$("#frm_filtro").serialize()+ordenar,
+               type: "POST",
+               dataType: "json",
+               url: "controllers/select_category.php?action=listar",
+               success: function(data){
+                   var html = '';
+                   if(data.length > 0){
+                       $.each(data, function(i, item){
+                           html += '<tr>';
+                           html += '<td>'+item.id+'</td>';
+                           html += '<td>'+item.name+'</td>';
+                           html += '<td>'+item.created+'</td>';
+                           html += '<td>'+item.created_by+'</td>';
+                           html += '<td>'+item.status+'</td>';
+                           html += '<td>'+item.mod+'</td>';
+                           html += '<td><a class="delete" data-id="'+item.id+'" onClick="delete2()" >Dar de baja</a></td> ';
+                           html += '</tr>';
+                       });
+                   }
+                   $("#data tbody").html(html);
+               }
+            });
+        }*/
+         
+        /*$('.delete').click(function () {
+            var idCatDel = $(this).data('id');
+            alert("Eliminando..." + idUserDel);
+            if(confirm("Seguro que deseas eliminar?") == true){
+                $.ajax({
+                    type: 'POST',
+                    url: 'controllers/delete_category.php',
+                    data: {categoryDel: idCatDel},
+                    success: function(msg){
+                        //alert(msg);
+                        if (msg == "true") {
+                            $('.msg').css({color: "#00FFF0"});
+                            $('.msg').html("Se elimino la categoría con éxito.");
+                                setTimeout(function () {
+                                  location.href = 'form_select_category.php';
+                                }, 1500);
+                        } else {
+                            $('.msg').css({color: "#FF0000"});
+                            $('.msg').html(msg);
+                        }
+                    }
+		});
+            }//end if confirm
+        });*/
+        
+      $('#formAddCategory').validate({
+        rules: {
+          inputCategory: {required: true}
+        },
+        messages: {
+          inputCategory: "Debes introducir una categoría"
+        },
+        tooltip_options: {
+          inputCategory: {trigger: "focus", placement: 'bottom'}
+        },
+        submitHandler: function (form) {
+          $.ajax({
+            type: "POST",
+            url: "controllers/create_category.php",
+            data: $('form#formAddCategory').serialize(),
+            success: function (msg) {
+              //alert(msg);
+              if (msg == "true") {
+                $('.error').html("Se creo la categoría con éxito.");
+                setTimeout(function () {
+                  location.href = 'form_select_category_2.php';
+                }, 3000);
+              } else {
+                $('.error').css({color: "#FF0000"});
+                $('.error').html(msg);
+              }
+            },
+            error: function () {
+              alert("Error al crear categoría ");
+            }
+          });
+        }
+
+      });
+      
+      $('#myModal').on('shown.bs.modal', function () {
+        $('#inputCategory').focus()
+      })
+    });
+  </script>
+
+  <?php
+}//fin else sesión
+include ('footer.php');
+?>
