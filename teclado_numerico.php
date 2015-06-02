@@ -8,9 +8,9 @@
     <span class="btn btn-info btn-numeric-form">5</span>
     <span class="btn btn-info btn-numeric-form">6</span>
     <br>
-    <span class="btn btn-info btn-numeric-form">1</span>
-    <span class="btn btn-info btn-numeric-form">2</span>
-    <span class="btn btn-info btn-numeric-form">3</span>
+    <span class="btn btn-info btn-numeric-form" onclick="teclado(1)">1</span>
+    <span class="btn btn-info btn-numeric-form" onclick="teclado(2)">2</span>
+    <span class="btn btn-info btn-numeric-form" onclick="teclado(3)">3</span>
     <br>
     <span class="btn btn-default btn-numeric-form erase"><i class="fa fa-arrow-left"></i></span>
     <span class="btn btn-info btn-numeric-form">0</span>
