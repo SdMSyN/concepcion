@@ -15,6 +15,15 @@ body{
   margin-left: 1rem;
 }
 
+.numeric-form-sales > .btn{
+  font-size: 3rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  min-width: 6rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+}
+
 .titulo{
   padding-top: 3rem;
   font-size: 6rem;
@@ -170,6 +179,17 @@ thead > tr > td:first-of-type {
 thead > tr > td:last-of-type{
  border-top-right-radius: 1rem;
 }
+/*VENTAS*/
+.div-img-sales{
+  color: #ac2925;
+  font-size: 2rem;
+}
+.img-sales{
+  height: 9rem;
+  width: 100%;
+  border-radius: 1rem;
+}
+/*FIN VENTAS*/
 
 /*RESPONSIVO*/
 @media (max-width: 767px) {

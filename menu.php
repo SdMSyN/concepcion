@@ -48,7 +48,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <?php
-        if (isset($_SESSION['sessA'])) {
+        if (isset($_SESSION['perfil'])) {
           echo '<li class="no-a user-name">Bienvenido ' . $_SESSION['userName'] . '</li>';
           echo '<li><a href="controllers/proc_destroy_login_admin.php">Cerrar Sesión</a></li>';
         }

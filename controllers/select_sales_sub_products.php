@@ -11,7 +11,7 @@
     $optProducts='';
     if($resGetProducts->num_rows > 0){
         while($rowGetProducts = $resGetProducts->fetch_assoc()){
-            $optProducts .= '<div class="col-md-2"><img src="uploads/'.$rowGetProducts['img'].'" class="clickProduct" title="'.$rowGetProducts['id'].'" width="100%">Product.-'.$rowGetProducts['nombre'].'</div>';
+            $optProducts .= '<div class="col-md-2" div-img-sales><img src="uploads/'.$rowGetProducts['img'].'" class="clickProduct img-sales" title="'.$rowGetProducts['id'].'" width="100%">Product.-'.$rowGetProducts['nombre'].'</div>';
         }
     }else{
         $optProducts .= '<h3>No existen productos en ésta categoría.</h3>';
