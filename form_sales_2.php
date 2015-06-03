@@ -46,7 +46,7 @@ else {
             <label>Total:</label>
             <input type="text" id="inputTotal" name="inputTotal" readonly step=0.01 class="form-control" >
           </div>
-          <button type="submit" class="enviarTicket btn btn-success">Cobrar</button>
+          <button type="submit" class="enviarTicket btn btn-success"><i class="fa fa-money"></i> Cobrar</button>
       </form>
       </div>
       <div class="teclado text-center">
@@ -55,7 +55,7 @@ else {
             <input type="text" class="typeahead tt-query" autocomplete="off" spellcheck="false" placeholder="Busca el producto" id="inputCod" name="inputCod">
             <input type="hidden" name="idStore" value="<?= $idStore; ?>" >
           </div>
-          <button type="submit" class="btn btn-success">Enviar</button>
+          <button type="submit" class="btn btn-success"><i class="fa fa-list"></i> Agregar</button>
           <div class="errorSearchProduct"></div>
       </form>
       <div id="teclado_numerico_2" class="text-center">
