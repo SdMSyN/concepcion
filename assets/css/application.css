@@ -52,6 +52,10 @@ body{
 .container{
   min-height: 83%;
 }
+.img-product-list{
+  width: 8rem;
+  height: 5.2rem;
+}
 .footer{
   background-color: #596cb6;
   color: whitesmoke;

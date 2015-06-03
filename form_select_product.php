@@ -19,7 +19,7 @@ else {
     while ($rowGetProducts = $resGetProducts->fetch_assoc()) {
       $optProducts .= '<tr>';
       $optProducts .= '<td>' . $rowGetProducts['id'] . '</td>';
-      $optProducts .= '<td><img src="' . $rutaImgProd . $rowGetProducts['img'] . '" width="50px"></td>';
+      $optProducts .= '<td><img src="' . $rutaImgProd . $rowGetProducts['img'] . '" class="img-product-list"></td>';
       $optProducts .= '<td>' . $rowGetProducts['nombre'] . '</td>';
       $optProducts .= '<td>' . $rowGetProducts['categoria'] . '</td>';
       $optProducts .= '<td>' . $rowGetProducts['precio'] . '</td>';

@@ -29,8 +29,8 @@
     }
     else{
         $_SESSION['sess']=false;
-        //echo "Error en la consulta<br>".$sqlGetStore."<br>".$con->error;
-        echo "Acceso denegado";
+        echo "Error en la consulta<br>".$sqlGetStore."<br>".$con->error;
+//        echo "Acceso denegado";
     }
       
 ?>
