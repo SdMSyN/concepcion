@@ -48,7 +48,7 @@ else{
             <div class="row teclado">
                 <form id="formTeclado" method="POST" >
                     <div class="row">
-                        <input type="text" class="typeahead tt-query" autocomplete="off" spellcheck="false" placeholder="Type your Query" id="inputCod" name="inputCod">
+                        <input type="text" class="typeahead tt-query" autocomplete="off" spellcheck="false" placeholder="Busca el producto" id="inputCod" name="inputCod">
                         <input type="hidden" name="idStore" value="<?=$idStore;?>" >
                         <button type="submit" class="">Enviar</button>
                     </div>
