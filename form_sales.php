@@ -17,7 +17,7 @@ else {
   if ($resGetCategories->num_rows > 0) {
     while ($rowGetCategories = $resGetCategories->fetch_assoc()) {
       //$optCategories .= '<button type="button" class="clickCategory" title="'.$rowGetCategories['id'].'">'.$rowGetCategories['nombre'].'</button> ';
-      $optCategories .= '<div class="col-md-2 div-img-sales"><img src="uploads/' . $rowGetCategories['img'] . '" class="clickCategory img-sales" title="' . $rowGetCategories['id'] . '" width="100%">' . $rowGetCategories['nombre'] . '</div>';
+      $optCategories .= '<div class="col-sm-2 div-img-sales"><img src="uploads/' . $rowGetCategories['img'] . '" class="clickCategory img-sales" title="' . $rowGetCategories['id'] . '" width="100%">' . $rowGetCategories['nombre'] . '</div>';
     }
   } else {
     $optCategories .= 'No hay categorias disponibles';
@@ -26,7 +26,7 @@ else {
 
   <!-- Cambio dinamico -->
   <div class="row">
-    <div class="col-md-5 sales sales-izquierda">
+    <div class="col-sm-5 sales sales-izquierda">
       <div class="ticket text-center">
         <form id="formTicket" method="POST" action="controllers/set_sale.php" class="form-inline" >
           <div class="cobrar">
@@ -83,7 +83,7 @@ else {
         </div>
       </div>
     </div> <!--  fin IZQUIERDA-->
-    <div class="col-md-7 sales sales-derecha text-center">
+    <div class="col-sm-7 sales sales-derecha text-center">
       <div class="row productCategory div-sales">
         <?= $optCategories; ?>
       </div>

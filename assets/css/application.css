@@ -218,6 +218,9 @@ thead > tr > td:last-of-type{
 .cobrar{
   margin-bottom: 1rem;
 }
+#inputPrecioF, #inputCant{
+  width: 110px;
+}
 
 /*FIN VENTAS*/
 
