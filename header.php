@@ -21,7 +21,14 @@
     <script src="assets/js/additional-methods.min.js"></script>
     <script src="assets/js/jquery-validate.bootstrap-tooltip.min.js"></script>
     <script src="assets/js/application.js"></script>
-    
+    <!--
+        <script src="assets/js/typeahead.js"></script>
+        <script src="assets/js/typeahead.jquery.js"></script>
+        <script src="assets/js/typeahead.bundle.js"></script>
+        <script src="assets/js/bloodhound.js"></script>
+        <script src="assets/js/typeahead.min.js"></script>
+    -->
+    <script src="assets/js/typeahead.min.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

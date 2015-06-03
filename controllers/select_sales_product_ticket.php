@@ -3,9 +3,9 @@
     include ('../config/variables.php');
     
     $store_id=$_POST['idStore'];
-    $product_id=$_POST['idProduct'];
+    $product_id=$_POST['inputCod'];
     
-    $sqlGetProduct="SELECT id, nombre, precio, (SELECT cantidad FROM $tStock WHERE producto_id='$product_id' AND tienda_id='$store_id' LIMIT 1) as cantidad FROM $tProduct WHERE id='$product_id' ";
+    $sqlGetProduct="SELECT id, nombre, precio, (SELECT cantidad FROM $tStock WHERE producto_id='$product_id' AND tienda_id='$store_id' LIMIT 1) as cantidad FROM $tProduct WHERE codigo_barras='$product_id' OR nombre='$product_id' ";
     
     $resGetProduct = $con->query($sqlGetProduct);
     $optProduct='';
