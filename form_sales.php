@@ -24,11 +24,19 @@ else {
   }
   ?>
 
-    <!-- Cambio dinamico -->
+  <!-- Cambio dinamico -->
   <div class="row">
-    <div class="col-md-4 sales sales-izquierda">
-      <div class="ticket">
-      <form id="formTicket" method="POST" action="controllers/set_sale.php" class="form-inline" >
+    <div class="col-md-5 sales sales-izquierda">
+      <div class="ticket text-center">
+        <form id="formTicket" method="POST" action="controllers/set_sale.php" class="form-inline" >
+          <div class="cobrar">
+            <div class="form-group">
+              <label>Total:</label>
+              <input type="text" id="inputTotal" name="inputTotal" readonly step=0.01 class="form-control" >
+            </div>
+            <button type="submit" class="enviarTicket btn btn-success"><i class="fa fa-money"></i> Cobrar</button>
+          </div>
+          <div class="line"></div>
           <table id="dataTicket" class="table table-striped">
             <thead>
               <tr>
@@ -42,12 +50,8 @@ else {
             <tbody>
             </tbody>
           </table>
-          <div class="form-group">
-            <label>Total:</label>
-            <input type="text" id="inputTotal" name="inputTotal" readonly step=0.01 class="form-control" >
-          </div>
-          <button type="submit" class="enviarTicket btn btn-success"><i class="fa fa-money"></i> Cobrar</button>
-      </form>
+
+        </form>
       </div>
       <div class="teclado text-center">
         <form id="formTeclado" method="POST" class="form-inline">
@@ -57,29 +61,29 @@ else {
           </div>
           <button type="submit" class="btn btn-success"><i class="fa fa-list"></i> Agregar</button>
           <div class="errorSearchProduct"></div>
-      </form>
-      <div id="teclado_numerico_2" class="text-center">
-        <div class="numeric-form-sales">
-          <span class="btn btn-info btn-numeric-form" onclick="teclado(7)">7</span>
-          <span class="btn btn-info btn-numeric-form" onclick="teclado(8)">8</span>
-          <span class="btn btn-info btn-numeric-form" onclick="teclado(9)">9</span>
-          <br>
-          <span class="btn btn-info btn-numeric-form" onclick="teclado(4)">4</span>
-          <span class="btn btn-info btn-numeric-form" onclick="teclado(5)">5</span>
-          <span class="btn btn-info btn-numeric-form" onclick="teclado(6)">6</span>
-          <br>
-          <span class="btn btn-info btn-numeric-form" onclick="teclado(1)">1</span>
-          <span class="btn btn-info btn-numeric-form" onclick="teclado(2)">2</span>
-          <span class="btn btn-info btn-numeric-form" onclick="teclado(3)">3</span>
-          <br>
-          <span class="btn btn-default btn-numeric-form erase"><i class="fa fa-arrow-left"></i></span>
-          <span class="btn btn-info btn-numeric-form" onclick="teclado(0)">0</span>
-          <span class="btn btn-default btn-numeric-form" onClick="borrarTeclado()" >C</span>
+        </form>
+        <div id="teclado_numerico_2" class="text-center">
+          <div class="numeric-form-sales">
+            <span class="btn btn-info btn-numeric-form" onclick="teclado(7)">7</span>
+            <span class="btn btn-info btn-numeric-form" onclick="teclado(8)">8</span>
+            <span class="btn btn-info btn-numeric-form" onclick="teclado(9)">9</span>
+            <br>
+            <span class="btn btn-info btn-numeric-form" onclick="teclado(4)">4</span>
+            <span class="btn btn-info btn-numeric-form" onclick="teclado(5)">5</span>
+            <span class="btn btn-info btn-numeric-form" onclick="teclado(6)">6</span>
+            <br>
+            <span class="btn btn-info btn-numeric-form" onclick="teclado(1)">1</span>
+            <span class="btn btn-info btn-numeric-form" onclick="teclado(2)">2</span>
+            <span class="btn btn-info btn-numeric-form" onclick="teclado(3)">3</span>
+            <br>
+            <span class="btn btn-default btn-numeric-form erase"><i class="fa fa-arrow-left"></i></span>
+            <span class="btn btn-info btn-numeric-form" onclick="teclado(0)">0</span>
+            <span class="btn btn-default btn-numeric-form" onClick="borrarTeclado()" >C</span>
+          </div>
         </div>
       </div>
-      </div>
     </div> <!--  fin IZQUIERDA-->
-    <div class="col-md-8 sales sales-derecha text-center">
+    <div class="col-md-7 sales sales-derecha text-center">
       <div class="row productCategory div-sales">
         <?= $optCategories; ?>
       </div>
@@ -336,7 +340,7 @@ else {
      $(this).parent().parent().find("#inputPrecioF").val(precioF);
      calcTotal();
      }
-     
+       
      function calcTotal(){
      var total=0;
      $(".ticket #dataTicket tbody #inputPrecioF").each(function(){

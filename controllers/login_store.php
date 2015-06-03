@@ -12,6 +12,7 @@
     $lon=$tmpLon[0].".".substr($tmpLon[1], 0, 3);
     
     $sqlGetStore="SELECT * FROM $tStore WHERE id='$storeId' AND password='$storePass' AND latitud LIKE '$lat%' AND longitud LIKE '$lon%' ";
+//    $sqlGetStore="SELECT * FROM $tStore WHERE id='$storeId' AND password='$storePass' ";
     $resGetStore=$con->query($sqlGetStore);
     if($resGetStore->num_rows > 0){
         $rowGetStore=$resGetStore->fetch_assoc();
