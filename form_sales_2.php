@@ -48,9 +48,10 @@ else{
             <div class="row teclado">
                 <form id="formTeclado" method="POST" >
                     <div class="row">
-                        <input type="text" class="typeahead tt-query" autocomplete="off" spellcheck="false" placeholder="Type your Query" id="inputCod" name="inputCod">
+                        <input type="text" class="typeahead tt-query" autocomplete="off" spellcheck="false" placeholder="Busca el producto" id="inputCod" name="inputCod">
                         <input type="hidden" name="idStore" value="<?=$idStore;?>" >
                         <button type="submit" class="">Enviar</button>
+                        <div class="errorSearchProduct"></div>
                     </div>
                 </form>
                     <div id="teclado_numerico_2">
@@ -69,7 +70,7 @@ else{
                           <br>
                           <span class="btn btn-default btn-numeric-form erase"><i class="fa fa-arrow-left"></i></span>
                           <span class="btn btn-info btn-numeric-form" onclick="teclado(0)">0</span>
-                          <span class="btn btn-default btn-numeric-form">C</span>
+                          <span class="btn btn-default btn-numeric-form" onClick="borrarTeclado()" >C</span>
                         </div>
                       </div>
             </div>
@@ -267,10 +268,14 @@ else{
                 data: $('form#formTeclado').serialize(),
                 success: function (msg) {
                     //alert(msg);
-                    $(".ticket #dataTicket tbody").append(msg);
-                    $(".ticket #dataTicket tbody #inputCant").focus();
-                    $(".ticket #dataTicket tbody #inputCant").select();
-                    calcTotal();
+                    if(msg=="false"){
+                        $(".errorSearchProduct").html("Error al introducir producto");
+                    }else{
+                        $(".ticket #dataTicket tbody").append(msg);
+                        $(".ticket #dataTicket tbody #inputCant").focus();
+                        $(".ticket #dataTicket tbody #inputCant").select();
+                        calcTotal();
+                    }
                 },
                 error: function () {
                     alert("Error al buscar producto ");
@@ -309,6 +314,9 @@ else{
             }
         }
 
+        function borrarTeclado(){
+            input.val("");
+        }
         /*function actCant(){
             var precioU = parseFloat($(this).parent().parent().find("#inputPrecioU").val());
             var cantidad = parseInt($(this).parent().parent().find("#inputCant").val());
