@@ -6,7 +6,10 @@
     else if($_POST['tarea']=="catProduct") $category_id=$_POST['idCategory'];
     else $category_id="";
     
-    $sqlGetProducts="SELECT * FROM $tProduct WHERE categoria_id='$category_id' AND activo='1' ";
+    if($_POST['tarea']=="catProduct") 
+        $sqlGetProducts="SELECT * FROM $tProduct WHERE categoria_id='$category_id' AND activo='1' ";
+    else 
+        $sqlGetProducts="SELECT * FROM $tProduct WHERE subcategoria_id='$category_id' AND activo='1' ";
     $resGetProducts=$con->query($sqlGetProducts);
     $optProducts='';
     if($resGetProducts->num_rows > 0){
