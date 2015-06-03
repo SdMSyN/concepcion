@@ -18,7 +18,7 @@
             $array[]=$rowGetProduct['nombre'];
         }
     }else{
-        $array[0] = $sqlGetProduct;
+        $array[0] = "";
     }
     echo json_encode($array);
 ?>

@@ -18,7 +18,8 @@
     }
     else{
         $_SESSION['sessU']=false;
-        echo "Error en la consulta<br>".$con->error;
+        //echo "Error en la consulta<br>".$con->error;
+        echo "Usuario incorrecto";
     }
       
 ?>
