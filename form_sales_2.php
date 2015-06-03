@@ -51,6 +51,7 @@ else{
                         <input type="text" class="typeahead tt-query" autocomplete="off" spellcheck="false" placeholder="Busca el producto" id="inputCod" name="inputCod">
                         <input type="hidden" name="idStore" value="<?=$idStore;?>" >
                         <button type="submit" class="">Enviar</button>
+                        <div class="errorSearchProduct"></div>
                     </div>
                 </form>
                     <div id="teclado_numerico_2">
@@ -267,10 +268,14 @@ else{
                 data: $('form#formTeclado').serialize(),
                 success: function (msg) {
                     //alert(msg);
-                    $(".ticket #dataTicket tbody").append(msg);
-                    $(".ticket #dataTicket tbody #inputCant").focus();
-                    $(".ticket #dataTicket tbody #inputCant").select();
-                    calcTotal();
+                    if(msg=="false"){
+                        $(".errorSearchProduct").html("Error al introducir producto");
+                    }else{
+                        $(".ticket #dataTicket tbody").append(msg);
+                        $(".ticket #dataTicket tbody #inputCant").focus();
+                        $(".ticket #dataTicket tbody #inputCant").select();
+                        calcTotal();
+                    }
                 },
                 error: function () {
                     alert("Error al buscar producto ");

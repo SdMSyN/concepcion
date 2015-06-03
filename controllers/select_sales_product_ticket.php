@@ -20,7 +20,7 @@
             $optProduct .= '</tr>';
         }
     }else{
-        $optProduct = "Error al introducir producto";
+        $optProduct = "false";
     }
     echo $optProduct;
 ?>
