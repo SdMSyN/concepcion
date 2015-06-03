@@ -181,13 +181,35 @@ thead > tr > td:last-of-type{
 }
 /*VENTAS*/
 .div-img-sales{
-  color: #ac2925;
+/*  color: whitesmoke;*/
   font-size: 2rem;
 }
 .img-sales{
   height: 9rem;
   width: 100%;
   border-radius: 1rem;
+  -webkit-box-shadow: 4px 4px 5px 0px rgba(59, 0, 178, 0.75);
+  -moz-box-shadow:    4px 4px 5px 0px rgba(59, 0, 178, 0.75);
+  box-shadow:         4px 4px 5px 0px rgba(59, 0, 178, 0.75);
+}
+.div-sales{
+  margin-bottom: .8rem;
+}
+.ticket{
+  min-height: 40%;
+}
+.line{
+  width: 100%;
+  min-height: 2px;
+  background-color: #ecdbff;
+  margin-bottom: .7rem;
+}
+.deleteItem{
+  color: red;
+  font-size: 2.6rem;
+}
+.deleteItem > .fa{
+  padding-top: .3rem;
 }
 /*FIN VENTAS*/
 
@@ -224,14 +246,15 @@ thead > tr > td:last-of-type{
 
 /*Autocompletar */
 .typeahead, .tt-query, .tt-hint {
+  margin-left: 2rem;
 	border: 2px solid #CCCCCC;
 	border-radius: 8px;
-	font-size: 24px;
+	font-size: 20px;
 	height: 30px;
 	line-height: 30px;
 	outline: medium none;
 	padding: 8px 12px;
-	width: 396px;
+	width: 270px;
 }
 .typeahead {
 	background-color: #FFFFFF;
@@ -252,12 +275,12 @@ thead > tr > td:last-of-type{
 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 	margin-top: 12px;
 	padding: 8px 0;
-	width: 422px;
+	width: 300px;
 }
 .tt-suggestion {
-	font-size: 24px;
-	line-height: 24px;
-	padding: 3px 20px;
+	font-size: 20px;
+	line-height: 20px;
+	padding: 3px 18px;
 }
 .tt-suggestion.tt-is-under-cursor {
 	background-color: #0097CF;
