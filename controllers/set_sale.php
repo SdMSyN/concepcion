@@ -8,7 +8,6 @@
         $cad.=$_POST['inputPrecioU'][$i].'--';
         $cad.=$_POST['inputCant'][$i].'--';
         $cad.=$_POST['inputPrecioF'][$i].'--';
-        $cad.=$_POST['inputTotal'][$i].'--';
         $cad.='<br>';
     }
     echo $cad.'=='.$_POST['inputTotal'];
