@@ -69,7 +69,7 @@ else{
                           <br>
                           <span class="btn btn-default btn-numeric-form erase"><i class="fa fa-arrow-left"></i></span>
                           <span class="btn btn-info btn-numeric-form" onclick="teclado(0)">0</span>
-                          <span class="btn btn-default btn-numeric-form">C</span>
+                          <span class="btn btn-default btn-numeric-form" onClick="borrarTeclado()" >C</span>
                         </div>
                       </div>
             </div>
@@ -309,6 +309,9 @@ else{
             }
         }
 
+        function borrarTeclado(){
+            input.val("");
+        }
         /*function actCant(){
             var precioU = parseFloat($(this).parent().parent().find("#inputPrecioU").val());
             var cantidad = parseInt($(this).parent().parent().find("#inputCant").val());
