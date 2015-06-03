@@ -55,13 +55,13 @@ else{
                 </form>
                     <div id="teclado_numerico_2">
                         <div class="numeric-form text-center">
-                          <span class="btn btn-info btn-numeric-form">7</span>
-                          <span class="btn btn-info btn-numeric-form">8</span>
-                          <span class="btn btn-info btn-numeric-form">9</span>
+                          <span class="btn btn-info btn-numeric-form" onclick="teclado(7)">7</span>
+                          <span class="btn btn-info btn-numeric-form" onclick="teclado(8)">8</span>
+                          <span class="btn btn-info btn-numeric-form" onclick="teclado(9)">9</span>
                           <br>
-                          <span class="btn btn-info btn-numeric-form">4</span>
-                          <span class="btn btn-info btn-numeric-form">5</span>
-                          <span class="btn btn-info btn-numeric-form">6</span>
+                          <span class="btn btn-info btn-numeric-form" onclick="teclado(4)">4</span>
+                          <span class="btn btn-info btn-numeric-form" onclick="teclado(5)">5</span>
+                          <span class="btn btn-info btn-numeric-form" onclick="teclado(6)">6</span>
                           <br>
                           <span class="btn btn-info btn-numeric-form" onclick="teclado(1)">1</span>
                           <span class="btn btn-info btn-numeric-form" onclick="teclado(2)">2</span>
@@ -156,7 +156,7 @@ else{
         $(".ticket #dataTicket tbody").on("focus", "#inputCant", function(){
             //alert("focus Cantidad");
             input = $(this);
-            banFocusInput = true;
+            //banFocusInput = true;
             actTodo();
         });
         
@@ -290,19 +290,21 @@ else{
 
  <script type="text/javascript">
     var input;
-    var banFocusInput=false;
+    //var banFocusInput=false;
         $("input").on("focus", function () {
          input = $(this);
-         banFocusInput = false;
+         //banFocusInput = false;
          //alert(input.val());
         });
         
         function teclado(numero) {
             if (input != null){
                 //alert(input);
-                if(banFocusInput)input.val(numero);
-                else input.val(input.val()+numero);
-                //input.val(input.val()+numero);
+                
+                /*if(banFocusInput)input.val(numero);
+                else input.val(input.val()+numero);*/
+            
+                input.val(input.val()+numero);
                 //actCant();
             }
         }
