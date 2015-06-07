@@ -3,7 +3,7 @@
     include ('../config/variables.php');
     
     if($_GET['action'] == 'listar'){
-        $sqlGetCateories = "SELECT id, nombre, created, (SELECT CONCAT(nombre,' ',ap,' ',am) FROM $tUser WHERE id=$tSubCategory.create_by) as created_by, (SELECT nombre FROM $tEst WHERE id=$tSubCategory.activo ) as activo, (SELECT nombre FROM $tCategory WHERE id=$tSubCategory.categoria_id) as category FROM $tSubCategory ";
+        $sqlGetCateories = "SELECT id, nombre, created, activo, (SELECT CONCAT(nombre,' ',ap,' ',am) FROM $tUser WHERE id=$tSubCategory.create_by) as created_by, (SELECT nombre FROM $tEst WHERE id=$tSubCategory.activo ) as activoN, (SELECT nombre FROM $tCategory WHERE id=$tSubCategory.categoria_id) as category FROM $tSubCategory ";
         //$datos=array();
         //
         // Ordenar por
@@ -27,9 +27,12 @@
             $datos .= '<td>'.$rowGetCategories['category'].'</td>';
             $datos .= '<td>'.$rowGetCategories['created'].'</td>';
             $datos .= '<td>'.$rowGetCategories['created_by'].'</td>';
-            $datos .= '<td>'.$rowGetCategories['activo'].'</td>';
+            $datos .= '<td>'.$rowGetCategories['activoN'].'</td>';
             $datos .= '<td><a href="form_update_subcategory.php?id='.$rowGetCategories['id'].'" >Modificar</a></td>';
-            $datos .= '<td><a class="delete" data-id="'.$rowGetCategories['id'].'" >Dar de baja</a></td>';
+            if($rowGetCategories['activo']==0)
+                $datos .= '<td><a class="activate" data-id="'.$rowGetCategories['id'].'" >Dar de alta</a></td>';
+            else
+                $datos .= '<td><a class="delete" data-id="'.$rowGetCategories['id'].'" >Dar de baja</a></td>';
             //$datos .= '<td style="cursor: pointer"><elim><h2><button type="button" class="elim">Dar de baja</button></h2></elim></td>';
             $datos .= '</tr>';
             /*$datos[] = array(

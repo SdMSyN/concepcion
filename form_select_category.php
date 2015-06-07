@@ -138,7 +138,7 @@ else {
                 $.ajax({
                     type: 'POST',
                     url: 'controllers/delete_category.php',
-                    data: {categoryDel: idCatDel},
+                    data: {categoryDel: idCatDel, est: 1},
                     success: function(msg){
                         //alert(msg);
                         if (msg == "true") {
@@ -155,7 +155,31 @@ else {
 		});
             }//end if confirm
         });
-        
+        $("#data tbody").on("click", ".activate", function(){
+            //alert("Hope");
+            var idCatAct = $(this).data('id');
+            //alert("Eliminando..." + idCatAct);
+            if(confirm("Seguro que deseas activar?") == true){
+                $.ajax({
+                    type: 'POST',
+                    url: 'controllers/delete_category.php',
+                    data: {categoryDel: idCatAct, est: 0},
+                    success: function(msg){
+                        //alert(msg);
+                        if (msg == "true") {
+                            $('.msg').css({color: "#00FFF0"});
+                            $('.msg').html("Se activo la Categoría con éxito.");
+                                setTimeout(function () {
+                                  location.href = 'form_select_category.php';
+                                }, 1500);
+                        } else {
+                            $('.msg').css({color: "#FF0000"});
+                            $('.msg').html(msg);
+                        }
+                    }
+		});
+            }//end if confirm
+        });
         
         /*function filtrar(){
             $.ajax({
