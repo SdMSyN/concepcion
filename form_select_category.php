@@ -134,7 +134,7 @@ else {
             //alert("Hope");
             var idCatDel = $(this).data('id');
             alert("Eliminando..." + idCatDel);
-            if(confirm("Seguro que deseas eliminar?") == true){
+            if(confirm("Seguro que deseas dar de baja?") == true){
                 $.ajax({
                     type: 'POST',
                     url: 'controllers/delete_category.php',
