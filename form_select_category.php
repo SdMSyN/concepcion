@@ -134,7 +134,7 @@ else {
             //alert("Hope");
             var idCatDel = $(this).data('id');
             alert("Eliminando..." + idCatDel);
-            if(confirm("Seguro que deseas eliminar?") == true){
+            if(confirm("Seguro que deseas dar de baja?") == true){
                 $.ajax({
                     type: 'POST',
                     url: 'controllers/delete_category.php',
@@ -145,7 +145,7 @@ else {
                             $('.msg').css({color: "#00FFF0"});
                             $('.msg').html("Se elimino la categoría con éxito.");
                                 setTimeout(function () {
-                                  location.href = 'form_select_category_2.php';
+                                  location.href = 'form_select_category.php';
                                 }, 1500);
                         } else {
                             $('.msg').css({color: "#FF0000"});
