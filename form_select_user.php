@@ -196,11 +196,34 @@ else {
                 $.ajax({
                     type: 'POST',
                     url: 'controllers/delete_user.php',
-                    data: {userDel: idUserDel},
+                    data: {userDel: idUserDel, est: 1},
                     success: function(msg){
                         //alert(msg);
                         if (msg == "true") {
                             $('.error').html("Se elimino el usuario con éxito.");
+                                setTimeout(function () {
+                                  location.href = 'form_select_user.php';
+                                }, 3000);
+                        } else {
+                            $('.error').css({color: "#FF0000"});
+                            $('.error').html(msg);
+                        }
+                    }
+		});
+            }//end if confirm
+        });
+        $("#data tbody").on("click", ".activate", function(){
+            var idUserDel = $(this).data('id');
+            //alert("Eliminando..." + idUserDel);
+            if(confirm("Seguro que deseas activar?") == true){
+                $.ajax({
+                    type: 'POST',
+                    url: 'controllers/delete_user.php',
+                    data: {userDel: idUserDel, est: 0},
+                    success: function(msg){
+                        //alert(msg);
+                        if (msg == "true") {
+                            $('.error').html("Se activo el usuario con éxito.");
                                 setTimeout(function () {
                                   location.href = 'form_select_user.php';
                                 }, 3000);
