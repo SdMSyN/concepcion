@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-06-2015 a las 19:47:38
+-- Tiempo de generación: 07-06-2015 a las 21:32:53
 -- Versión del servidor: 5.6.14
 -- Versión de PHP: 5.5.6
 
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `categorias` (
   `img` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `created_by_user_id` (`created_by_user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 -- --------------------------------------------------------
 
@@ -73,6 +73,18 @@ CREATE TABLE IF NOT EXISTS `costales` (
   PRIMARY KEY (`id`),
   KEY `tienda_id` (`tienda_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estatus`
+--
+
+CREATE TABLE IF NOT EXISTS `estatus` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -109,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `productos` (
   `updated_by_user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `categoria_id` (`categoria_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -147,7 +159,7 @@ CREATE TABLE IF NOT EXISTS `subcategorias` (
   KEY `categoria_id` (`categoria_id`),
   KEY `create_by` (`create_by`),
   KEY `update_by` (`update_by`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 -- --------------------------------------------------------
 
@@ -168,7 +180,7 @@ CREATE TABLE IF NOT EXISTS `tiendas` (
   `password` varchar(15) NOT NULL,
   `created` date NOT NULL,
   `updated` date NOT NULL,
-  `activa` tinyint(4) NOT NULL,
+  `activo` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
