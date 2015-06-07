@@ -27,7 +27,7 @@
             $datos .= '<td>'.$rowGetProducts['categoria'].'</td>';
             $datos .= '<td>'.$rowGetProducts['subcategoria'].'</td>';
             $datos .= '<td>'.$rowGetProducts['precio'].'</td>';
-            $datos .= '<td>'.$rowGetProducts['activo'].'</td>';
+            $datos .= '<td>'.$rowGetProducts['activoN'].'</td>';
             $datos .= '<td><a href="form_update_product.php?id=' . $rowGetProducts['id'] . '" >Modificar</a></td>';
             if($rowGetProducts['activo']==0)
                 $datos .= '<td><a class="activate" data-id="' . $rowGetProducts['id'] . '" >Dar de alta</a></td>';
