@@ -97,7 +97,7 @@ else {
             url: "controllers/update_store.php",
             data: $('form#formUpdStore').serialize(),
             success: function (msg) {
-              alert(msg);
+              //alert(msg);
               if (msg == "true") {
                 $('.error').html("Se modifico la tienda con éxito.");
                 setTimeout(function () {
