@@ -26,7 +26,7 @@ else {
       </div>
       <div class="col-md-12">	
         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-          Nueva SubCategoría
+          Nueva Subcategoría
         </button>
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

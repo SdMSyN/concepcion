@@ -30,252 +30,176 @@ else {
   }
 
   /* Obtenemos los productos */
-  $sqlGetProducts = "SELECT id, nombre FROM $tProduct WHERE activo='1' ";
-  $resGetProducts = $con->query($sqlGetProducts);
-  $optProducts = '<option></option>';
-  if ($resGetProducts->num_rows > 0) {
-    while ($rowGetProducts = $resGetProducts->fetch_assoc()) {
-      $optProducts.='<option value="' . $rowGetProducts['id'] . '">' . $rowGetProducts['nombre'] . '</option>';
-    }
-  } else {
-    $optProducts = '<option>No existen productos aún</option>';
+  $sqlGetProducts="SELECT id, nombre FROM $tProduct";
+  $resGetProducts=$con->query($sqlGetProducts);
+  $optProducts='<option></option>';
+  if($resGetProducts -> num_rows > 0){
+      while($rowGetProducts = $resGetProducts -> fetch_assoc()){
+          $optProducts.='<option value="'.$rowGetProducts['id'].'">'.$rowGetProducts['nombre'].'</option>';
+      }
+  }else{
+      $optProducts='<option>No existen productos aún</option>';
   }
-
+  
   /* Obtenemos las tiendas */
-  $sqlGetStores = "SELECT id, nombre FROM $tStore";
-  $resGetStores = $con->query($sqlGetStores);
-  $optStores = '<option></option>';
-  if ($resGetStores->num_rows > 0) {
-    while ($rowGetStores = $resGetStores->fetch_assoc()) {
-      $optStores.='<option value="' . $rowGetStores['id'] . '">' . $rowGetStores['nombre'] . '</option>';
-    }
-  } else {
-    $optStores = '<option>No existen tiendas aún</option>';
+  $sqlGetStores="SELECT id, nombre FROM $tStore";
+  $resGetStores=$con->query($sqlGetStores);
+  $optStores='<option></option>';
+  if($resGetStores -> num_rows > 0){
+      while($rowGetStores = $resGetStores -> fetch_assoc()){
+          $optStores.='<option value="'.$rowGetStores['id'].'">'.$rowGetStores['nombre'].'</option>';
+      }
+  }else{
+      $optStores='<option>No existen tiendas aún</option>';
   }
   ?>
 
   <!-- Cambio dinamico -->
   <div class="container">
     <div class="row">
-      <div class="titulo-crud text-center">ALMACENES</div>  
-      <form class="form-horizontal">
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Seleccione una tienda</label>
-          <div class="col-sm-4">
-            <select id="inputStore" class="form-control">
-              <?= $optStores; ?>
-            </select>
-          </div>
-        </div>
-      </form>
-      <div class="row stock-title" >
-        <div class="col-md-9 text-center" id="stockName"></div>
-        <div class="col-md-3 buttonProduct"></div>
+      <div class="titulo-crud text-center">
+        Almacenes
       </div>
-      <div class="msg"></div>
       <div class="col-md-12">
-        <form id="formSave" name="formSave" method="POST">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <td>Id</td>
-                <td>Producto</td>
-                <td>Cantidad</td>
-                <td>Sumar/Restar</td>
-              </tr>
-            </thead>
-            <tbody id="tableStockStore">
-            </tbody>
-          </table>
-            <input type="hidden" name="inputUser" value="<?= $userId; ?>" > 
-          <div id="saveButton"></div>
-        </form>
-      </div>
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalAdd">
+          Nuevo Producto en Almacén
+        </button>
+      </div>	  
     </div>
-  </div><!-- fin container -->
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Agregar producto</h4>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Añadir Producto en Almacén</h4>
+          </div>
+          <div class="error"></div>
+          <form id="formAddStock" name="formAddStock" method="POST">
+            <div class="modal-body">
+              <div class="form-group">
+                <label>Producto</label>
+                <select id="inputProducto" name="inputProducto" class="form-control">
+                    <?= $optProducts; ?>
+                </select>
+              </div>              
+              <div class="form-group">
+                <label>Cantidad</label>
+                <input type="number" id="inputCant" name="inputCant" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Tienda</label>
+                <select id="inputTienda" name="inputTienda" class="form-control">
+                    <?= $optStores; ?>
+                </select>
+              </div>
+              
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary" >Añadir a almacén</button>
+              </div>
+          </form>
         </div>
-        <div class="error"></div>
-        <form id="formAddProductStock" name="formAddProductStock" method="POST">
-          <div class="modal-body">
-            <div class="form-group">
-              <label>Producto:</label>
-              <select name="inputProduct" id="inputProduct" class="form-control">
-                <?= $optProducts; ?>
-              </select>
-            </div>  
-            <input type="text" name="inputCampo" id="inputCampo" class="hidden">
-            <input type="text" name="inputUser" id="inputUser" class="hidden" value="<?= $userId; ?>">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary" >Agregar producto</button>
-          </div>
-        </form>
       </div>
     </div>
   </div>
 
+    </br>
+    <div class="msg"></div>
+  <br>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <td class="t-head-first">Id</td>
+        <td class="t-head">Producto</td>
+        <td class="t-head">Cantidad</td>
+        <td class="t-head">Tienda</td>
+        <td class="t-head">Modificar</td>
+        <td class="t-head-last">Vaciar</td>
+      </tr>
+    </thead>
+    <tbody>
+      <?= $optStocks; ?>
+    </tbody>    
+  </table>
+  </table>
+
+  </div><!-- fin container -->
+
   <script type="text/javascript">
     $(document).ready(function () {
-      $('#inputStore').focus();
-      $('#inputStore').change(function () {
-        var selectStore = $('#inputStore').val();
-        //alert(selectStore);
-        $.ajax({
-          type: 'POST',
-          url: 'controllers/select_stock_store.php',
-          data: {storeId: selectStore},
-          success: function (msg) {
-            //alert(msg);
-            if (msg == "false") {
-              $('#tableStockStore').html('<tr><td colspan="4">No existen productos en éste almacén</td></tr>');
-            } else {
-              $('#tableStockStore').html(msg);
-            }
-          }
-        });//end ajax
-        if (selectStore == "") {
-          $('.buttonProduct').empty();
-        } else {
-          $('.buttonProduct').html('<button type="button" class="btn btn-primary" data-whatever="' + selectStore + '" data-toggle="modal" data-target="#myModal" id="buttonAddProduct">Añadir producto</button>');
-          $('#saveButton').html('<button type="submit" class="btn btn-primary" >Guardar</button>');
-        }
 
-        $.ajax({
-          type: 'POST',
-          url: 'controllers/select_stock_name.php',
-          data: {storeId: selectStore},
-          success: function (msg) {
-            //alert(msg);
-            if (msg == "false") {
-              $('#stockName').empty();
-            } else {
-              $('#stockName').html(msg);
-            }
-          }
-        });//end ajax
-
-      });
-
-      $('#myModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget)
-        var recipient = button.data('whatever')
-        var modal = $(this)
-        modal.find('.modal-body #inputCampo').val(recipient)
-      });
-
-      $('#formAddProductStock').validate({
-        rules: {
-          inputProduct: {required: true}
-        },
-        messages: {
-          inputProduct: "Nombre del producto obligatorio"
-        },
-        tooltip_options: {
-          inputProduct: {trigger: "focus", placement: 'bottom'}
-        },
-        submitHandler: function (form) {
-          $.ajax({
-            type: "POST",
-            url: "controllers/create_stock.php",
-            data: $('form#formAddProductStock').serialize(),
-            success: function (msg) {
-              var selectStore = $('#inputCampo').val();
-              //alert(msg);
-              if (msg == "true") {
-                $('.error').css({color: "#009900"});
-                $('.error').html("Se añadio el producto con éxito.");
-                setTimeout(function () {
-                  pintarTabla(selectStore)
-                }, 1500);
-              } else {
-                $('.error').css({color: "#FF0000"});
-                $('.error').html(msg);
-              }
-            },
-            error: function () {
-              alert("Error al añadir producto ");
-            }
-          });
-        }
-
-      });
-
-      function pintarTabla(tienda) {
-        var selectStore = tienda;
-        //alert(selectStore);
-        $.ajax({
-          type: 'POST',
-          url: 'controllers/select_stock_store.php',
-          data: {storeId: selectStore},
-          success: function (msg) {
-            //alert(msg);
-            if (msg == "false") {
-              $('#myModal .error').css({color: "#FF0000"});
-              $('#myModal .error').html('Error al añadir producto a almacén');
-            } else {
-              $('#myModal').modal('hide');
-              $('#tableStockStore').html(msg);
-            }
-          }
-        });//end ajax
-      }
-      function pintarTabla2(tienda) {
-        //alert("tienda");
-        var selectStore = tienda;
-        $.ajax({
-          type: 'POST',
-          url: 'controllers/select_stock_store.php',
-          data: {storeId: selectStore},
-          success: function (msg) {
-            if (msg == "false") {
-              $('.error').css({color: "#FF0000"});
-              $('.error').html('Error al añadir producto a almacén');
-            } else {
-              $('#tableStockStore').html(msg);
-            }
-          }
-        });//end ajax
-      }
-
-      $('#formSave').submit(function (event) {
-        var selectStore = $('#tienda').val();
-        //alert(selectStore);
-        $.ajax({
-          type: "POST",
-          url: "controllers/update_stock.php",
-          data: $('form#formSave').serialize(),
-          success: function (msg) {
-            //alert(msg);
-            if (msg == "true") {
-              $('.msg').css({color: "#009900"});
-              $('.msg').html("Se añadio el producto con éxito.");
-              pintarTabla2(selectStore);
-              setTimeout(function () {
-                  $('.msg').empty();
-                }, 1500);
-            } else {
-              $('.msg').css({color: "#FF0000"});
-              $('.msg').html(msg);
-            }
-          },
-          error: function () {
-            alert("Error al añadir producto ");
-          }
+      $('.delete').click(function () {
+            var idStockDel = $(this).data('id');
+            //alert("Eliminando..." + idUserDel);
+            if(confirm("Seguro que deseas vaciar?") == true){
+                $.ajax({
+                    type: 'POST',
+                    url: 'controllers/delete_stock.php',
+                    data: {stockDel: idStockDel},
+                    success: function(msg){
+                        //alert(msg);
+                        if (msg == "true") {
+                            $('.msg').html("Se vacio el producto de almacén con éxito.");
+                                setTimeout(function () {
+                                  location.href = 'form_select_stock.php';
+                                }, 2000);
+                        } else {
+                            $('.error').css({color: "#FF0000"});
+                            $('.error').html(msg);
+                        }
+                    }
+		});
+            }//end if confirm
         });
-        event.preventDefault();
+
+        $('#formAddStock').validate({
+            rules: {
+                inputProducto: {required: true},
+                inputCant: {required: true, digits: true},
+                inputTienda: {required: true}
+            },
+            messages: {
+                inputProducto: "Producto obligatorio",
+                inputCant: {
+                    required: "Cantidad obligatoria",
+                    digits: "La cantidad solo permite dígitos"
+                },
+                inputTienda: "Tienda obligatoria"
+            },
+            tooltip_options: {
+                inputProducto: {trigger: "focus", placement: 'bottom'},
+                inputCant: {trigger: "focus", placement: 'bottom'},
+                inputTienda: {trigger: "focus", placement: 'bottom'}
+            },
+            submitHandler: function (form) {
+                $.ajax({
+                    type: "POST",
+                    url: "controllers/create_stock.php",
+                    data: $('form#formAddStock').serialize(),
+                    success: function (msg) {
+                        //alert(msg);
+                        if (msg == "true") {
+                            $('.error').html("Se creo el producto en almacén con éxito.");
+                            setTimeout(function () {
+                                location.href = 'form_select_stock.php';
+                            }, 3000);
+                        } else {
+                            $('.error').css({color: "#FF0000"});
+                            $('.error').html(msg);
+                        }
+                    },
+                    error: function () {
+                        alert("Error al crear producto en almacén ");
+                    }
+                });
+            }
+        });
+        
+      $('#myModalAdd').on('shown.bs.modal', function () {
+        $('#inputProducto').focus()
       });
-      
-      $('#myModal').on('shown.bs.modal', function () {
-        $('#inputProduct').focus()
-      })
     });
   </script>
 

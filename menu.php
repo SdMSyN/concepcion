@@ -37,7 +37,7 @@
         <?php
         if (isset($_SESSION['perfil']) && $_SESSION['perfil'] == "1" && isset($_SESSION['sessA'])) {
           ?>
-          <li><a href="form_select_stock_2.php">Almacen</a></li>
+          <li><a href="form_select_stock.php">Almacen</a></li>
           <li><a href="form_select_product.php">Productos</a></li>
           <li><a href="form_select_user.php">Usuarios</a></li>
           <li><a href="form_select_store.php">Tiendas</a></li>
