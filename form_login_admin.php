@@ -45,7 +45,7 @@ include('header.php');
         inputAdmin: "Debes introducir un usuario",
         inputPassAdmin: {
             required: "Debes introducir una contraseña",
-            digits: "Caracter invalido"
+            digits: "Caracter invalido "
         }
       },
       tooltip_options: {
