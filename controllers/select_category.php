@@ -3,7 +3,7 @@
     include ('../config/variables.php');
     
     if($_GET['action'] == 'listar'){
-        $sqlGetCateories = "SELECT id, nombre, created, (SELECT CONCAT(nombre,' ',ap,' ',am) FROM $tUser WHERE id=$tCategory.created_by_user_id ) as created_by, (SELECT nombre FROM $tEst WHERE id=$tCategory.activo ) activo FROM $tCategory ";
+        $sqlGetCateories = "SELECT id, nombre, created, (SELECT CONCAT(nombre,' ',ap,' ',am) FROM $tUser WHERE id=$tCategory.created_by_user_id ) as created_by, (SELECT nombre FROM $tEst WHERE id=$tCategory.activo ) activoN, activo FROM $tCategory ";
         //$datos=array();
         //
         // Ordenar por
@@ -26,9 +26,12 @@
             $datos .= '<td>'.$rowGetCategories['nombre'].'</td>';
             $datos .= '<td>'.$rowGetCategories['created'].'</td>';
             $datos .= '<td>'.$rowGetCategories['created_by'].'</td>';
-            $datos .= '<td>'.$rowGetCategories['activo'].'</td>';
+            $datos .= '<td>'.$rowGetCategories['activoN'].'</td>';
             $datos .= '<td><a href="form_update_category.php?id='.$rowGetCategories['id'].'" >Modificar</a></td>';
-            $datos .= '<td><a class="delete" data-id="'.$rowGetCategories['id'].'" >Dar de baja</a></td>';
+            if($rowGetCategories['activo']==0)
+                $datos .= '<td><a class="activate" data-id="'.$rowGetCategories['id'].'" >Dar de alta</a></td>';
+            else
+                $datos .= '<td><a class="delete" data-id="'.$rowGetCategories['id'].'" >Dar de baja</a></td>';
             //$datos .= '<td style="cursor: pointer"><elim><h2><button type="button" class="elim">Dar de baja</button></h2></elim></td>';
             $datos .= '</tr>';
             /*$datos[] = array(

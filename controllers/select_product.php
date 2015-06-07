@@ -3,7 +3,7 @@
     include ('../config/variables.php');
     
     if($_GET['action'] == 'listar'){
-        $sqlGetProducts = "SELECT id, nombre, (SELECT nombre FROM $tCategory WHERE id=$tProduct.categoria_id) as categoria, (SELECT nombre FROM $tSubCategory WHERE id=$tProduct.subcategoria_id) as subcategoria, precio, img, (SELECT nombre FROM $tEst WHERE id=$tProduct.activo) as activo  FROM $tProduct  ";
+        $sqlGetProducts = "SELECT id, nombre, (SELECT nombre FROM $tCategory WHERE id=$tProduct.categoria_id) as categoria, (SELECT nombre FROM $tSubCategory WHERE id=$tProduct.subcategoria_id) as subcategoria, precio, img, (SELECT nombre FROM $tEst WHERE id=$tProduct.activo) as activoN, activo  FROM $tProduct  ";
         
         // Ordenar por
 	$est = $_POST['estatus'] - 1;
@@ -29,7 +29,10 @@
             $datos .= '<td>'.$rowGetProducts['precio'].'</td>';
             $datos .= '<td>'.$rowGetProducts['activo'].'</td>';
             $datos .= '<td><a href="form_update_product.php?id=' . $rowGetProducts['id'] . '" >Modificar</a></td>';
-            $datos .= '<td><a class="delete" data-id="' . $rowGetProducts['id'] . '" >Dar de baja</a></td>';
+            if($rowGetProducts['activo']==0)
+                $datos .= '<td><a class="activate" data-id="' . $rowGetProducts['id'] . '" >Dar de alta</a></td>';
+            else
+                $datos .= '<td><a class="delete" data-id="' . $rowGetProducts['id'] . '" >Dar de baja</a></td>';
             $datos .= '</tr>';
         }
         echo $datos;

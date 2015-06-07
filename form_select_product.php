@@ -197,11 +197,34 @@ else {
           $.ajax({
             type: 'POST',
             url: 'controllers/delete_product.php',
-            data: {productDel: idProductDel},
+            data: {productDel: idProductDel, est: 1},
             success: function (msg) {
               //alert(msg);
               if (msg == "true") {
                 $('.error').html("Se elimino el producto con éxito.");
+                setTimeout(function () {
+                  location.href = 'form_select_product.php';
+                }, 3000);
+              } else {
+                $('.error').css({color: "#FF0000"});
+                $('.error').html(msg);
+              }
+            }
+          });
+        }//end if confirm
+      });
+      $("#data tbody").on("click", ".activate", function(){
+        var idProductDel = $(this).data('id');
+        //alert("Eliminando..." + idUserDel);
+        if (confirm("Seguro que deseas activar?") == true) {
+          $.ajax({
+            type: 'POST',
+            url: 'controllers/delete_product.php',
+            data: {productDel: idProductDel, est: 0},
+            success: function (msg) {
+              //alert(msg);
+              if (msg == "true") {
+                $('.error').html("Se activo el producto con éxito.");
                 setTimeout(function () {
                   location.href = 'form_select_product.php';
                 }, 3000);
