@@ -19,7 +19,7 @@
     }
     else{
         $_SESSION['sessA']=false;
-        echo "Error en la consulta<br>".$con->error;
+        echo "Datos de acceso incorrectos<br>".$con->error;
     }
       
 ?>

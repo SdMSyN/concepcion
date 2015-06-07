@@ -39,11 +39,14 @@ include('header.php');
     $('#formLoginAdmin').validate({
       rules: {
         inputAdmin: {required: true},
-        inputPassAdmin: {required: true}
+        inputPassAdmin: {required: true, digits: true}
       },
       messages: {
         inputAdmin: "Debes introducir un usuario",
-        inputPassAdmin: "Debes introducir una contraseña"
+        inputPassAdmin: {
+            required: "Debes introducir una contraseña",
+            digits: "Caracter invalido"
+        }
       },
       tooltip_options: {
         inputAdmin: {trigger: "focus", placement: 'bottom'},
