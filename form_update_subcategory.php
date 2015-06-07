@@ -38,19 +38,21 @@ else {
       </div>
       <div class="msg"></div>
       <div class="col-md-12">
-        <form id="formUpdSubCategory" name="formUpdSubCategory" method="POST" class="form-horizontal">
           <legend>Modificación de datos de Subcategoria</legend>       
             <div class="error"></div>
+        <form id="formUpdSubCategory" name="formUpdSubCategory" method="POST" class="form-horizontal">
             <input type="hidden" name="inputSubCategoryId" value="<?= $subCategoryId; ?>" >
             <input type="hidden" name="inputUser" value="<?= $userId; ?>" >
             <div class="form-group">
-                <label>Categoría Superior</label>
-                <select id="inputCategory" name="inputCategory" class="form-control">
-                    <?= $optCategories; ?>
-                </select>
+              <label class="col-sm-2 control-label">Categoría Superior</label>
+              <div class="col-sm-10">
+                  <select id="inputCategory" name="inputCategory" class="form-control">
+                      <?= $optCategories; ?>
+                  </select>
               </div>
+            </div>
             <div class="form-group">
-              <label class="col-sm-2">Nombre de la Categoría</label>
+              <label class="col-sm-2 control-label">Nombre de la Categoría</label>
               <div class="col-sm-10">
                 <input type="text" id="inputSubCategory" name="inputSubCategory" class="form-control" value="<?= $rowGetSubCategory['nombre']; ?>">
               </div>
