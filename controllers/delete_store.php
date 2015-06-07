@@ -5,7 +5,7 @@
     $idStore=$_POST['storeDel'];
     
     //$sqlDeleteStore="DELETE FROM $tStore WHERE id='$idStore' ";
-    $sqlDeleteStore="UPDATE $tStore SET activa='0' WHERE id='$idStore' ";
+    $sqlDeleteStore="UPDATE $tStore SET activo='0' WHERE id='$idStore' ";
     if ($con->query($sqlDeleteStore) === TRUE) {
         echo "true";
     } else {
