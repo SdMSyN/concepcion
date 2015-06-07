@@ -9,7 +9,8 @@
     if($con->query($sqlCreateSubCategory) === TRUE ){
         echo 'true';
     }else{
-        echo 'Error al crear subcategoría<br>'.$con->error;
+        if($con->errno == "1062") echo "Error: Ya existe una categoría con éste nombre";
+        else echo 'Error al crear subcategoría<br>'.$con->error;
     }
       
 ?>

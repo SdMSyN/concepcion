@@ -8,7 +8,9 @@
     if($con->query($sqlCreateCategory) === TRUE ){
         echo 'true';
     }else{
-        echo 'Error al crear categoría<br>'.$con->error;
+        //echo 'Error al crear categoría<br>'.$con->errno;
+        if($con->errno == "1062") echo "Error: Ya existe una categoría con éste nombre";
+        else echo 'Error al crear categoría<br>'.$con->error;
     }
       
 ?>
