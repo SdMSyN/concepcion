@@ -117,6 +117,7 @@ else {
                 url: "controllers/select_store.php?action=listar",
                 success: function(msg){
                     //$("#data tbody").empty();
+                    //alert(msg);
                     $("#data tbody").html(msg);
                 }
             });

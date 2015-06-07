@@ -228,7 +228,7 @@ else {
               if (msg == "true") {
                 $('.error').html("Se creo la categoría con éxito.");
                 setTimeout(function () {
-                  location.href = 'form_select_category_2.php';
+                  location.href = 'form_select_category.php';
                 }, 3000);
               } else {
                 $('.error').css({color: "#FF0000"});
