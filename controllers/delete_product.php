@@ -5,10 +5,16 @@
     $idProduct=$_POST['productDel'];
     
     //$sqlDeleteUser="DELETE FROM $tUser WHERE id='$idUser' ";
-    $sqlDeleteProduct="UPDATE $tProduct SET activo='0' WHERE id='$idProduct' ";
+    if($_POST['est']==1)
+        $sqlDeleteProduct="UPDATE $tProduct SET activo='0' WHERE id='$idProduct' ";
+    else
+        $sqlDeleteProduct="UPDATE $tProduct SET activo='1' WHERE id='$idProduct' ";
     if ($con->query($sqlDeleteProduct) === TRUE) {
         echo "true";
     } else {
-        echo "Error al borrar usuario: " . $con->error;
+        if($_POST['est']==1)
+            echo "Error al borrar producto: " . $con->error;
+        else
+            echo "Error al activar producto: " . $con->error;
     }
 ?>
