@@ -145,7 +145,7 @@ else {
                             $('.msg').css({color: "#00FFF0"});
                             $('.msg').html("Se elimino la categoría con éxito.");
                                 setTimeout(function () {
-                                  location.href = 'form_select_category_2.php';
+                                  location.href = 'form_select_category.php';
                                 }, 1500);
                         } else {
                             $('.msg').css({color: "#FF0000"});
