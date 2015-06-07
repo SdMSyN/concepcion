@@ -6,8 +6,10 @@
     $productId = $_POST['productId'];
     $nombre = $_POST['inputNombre'];
     $precio=$_POST['inputPrecio'];
+    $codBar=$_POST['inputCB'];
     $descrip=$_POST['inputDesc'];
     $categoria=$_POST['inputCategoria'];
+    $subCategoria=$_POST['inputSubCategoria'];
     (isset($_REQUEST['inputPanFrio'])) ? $panFrio = 1 : $panFrio = 0;
     $nameImg=$_FILES['inputImg']['name'];
     
@@ -43,7 +45,7 @@
                     }
             }
             if($ban){
-                $sqlUpdateProduct="UPDATE $tProduct SET nombre='$nombre', precio='$precio', img='$docName', descripcion='$descrip', pan_frio='$panFrio', categoria_id='$categoria', updated='$dateNow', updated_by_user_id='$userId' WHERE id='$productId' ";
+                $sqlUpdateProduct="UPDATE $tProduct SET nombre='$nombre', precio='$precio', codigo_barras='$codBar', img='$docName', descripcion='$descrip', pan_frio='$panFrio', categoria_id='$categoria', subcategoria_id='$subCategoria', updated='$dateNow', updated_by_user_id='$userId' WHERE id='$productId' ";
                 if($con->query($sqlUpdateProduct) === TRUE){
                         echo "true";
                 }else{
@@ -54,7 +56,7 @@
             }
         }
         else{
-            $sqlUpdateProduct="UPDATE $tProduct SET nombre='$nombre', precio='$precio', descripcion='$descrip', pan_frio='$panFrio', categoria_id='$categoria', updated='$dateNow', updated_by_user_id='$userId' WHERE id='$productId' ";
+            $sqlUpdateProduct="UPDATE $tProduct SET nombre='$nombre', precio='$precio', codigo_barras='$codBar', descripcion='$descrip', pan_frio='$panFrio', categoria_id='$categoria', subcategoria_id='$subCategoria', updated='$dateNow', updated_by_user_id='$userId' WHERE id='$productId' ";
             if($con->query($sqlUpdateProduct) === TRUE){
                     echo "true";
             }else{

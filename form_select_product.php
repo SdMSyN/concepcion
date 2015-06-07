@@ -73,6 +73,10 @@ else {
                 <label>Precio</label>
                 <input type="number" step="any" id="inputPrecio" name="inputPrecio" class="form-control">
               </div>
+              <div class="form-group">
+                <label>Código de barras</label>
+                <input type="number" id="inputCB" name="inputCB" class="form-control">
+              </div>
               <div class="form-group">           
                 <label for="exampleInputFile">Imagen</label>
                 <input type="file" id="inputImg" name="inputImg" >
@@ -87,6 +91,10 @@ else {
                 <select id="inputCategoria" name="inputCategoria" class="form-control">
                   <?= $optCategories; ?>
                 </select>
+              </div>
+              <div class="form-group">
+                <label>Subcategoría</label>
+                <select id="inputSubCategoria" name="inputSubCategoria" class="form-control"></select>
               </div>
               <div class="form-group">
                 <label>
@@ -272,6 +280,26 @@ else {
         e.preventDefault(); //Evitamos que se mande del formulario de forma convencional
       });
 
+      $("#inputCategoria").change(function(){
+         var category=$("#inputCategoria option:selected").val();
+         //alert(category);
+         $.ajax({
+             url: 'controllers/select_sub_from_category.php',
+             type: 'POST',
+             data: {categoryId: category},
+             success: function(res){
+                 //alert(res);
+                 $("#inputSubCategoria").html("");
+                 $("#inputSubCategoria").html(res);
+             }
+         })
+      });
+      
+      /*$("#myModalAdd #inputSubCategoria").on("change", function(){
+          var subC=$("#inputSubCategoria option:selected").val();
+          alert(subC);
+      });*/
+      
       $('#myModalAdd').on('shown.bs.modal', function () {
         $('#inputNombre').focus()
       });

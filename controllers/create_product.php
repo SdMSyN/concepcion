@@ -5,13 +5,15 @@
     $userId = $_POST['userId'];
     $nombre = $_POST['inputNombre'];
     $precio=$_POST['inputPrecio'];
+    $codBar=$_POST['inputCB'];
     $descrip=$_POST['inputDesc'];
     $categoria=$_POST['inputCategoria'];
+    $subCategoria=$_POST['inputSubCategoria'];
     (isset($_REQUEST['inputPanFrio'])) ? $panFrio = 1 : $panFrio = 0;
-    $nameImg=$_FILES['inputImg']['name'];
+    //$nameImg=$_FILES['inputImg']['name'];
     
-    //echo $nombre.'--'.$precio.'--'.$descrip.'--'.$categoria.'--'.$panFrio.'--'.$nameImg;
-    
+    //echo $nombre.'--'.$precio.'--'.$descrip.'--'.$categoria.'--'.$subCategoria.'--';
+   
         $sqlGetNumProdcuts="SELECT * FROM $tProduct ";
 	$resGetNumProducts=$con->query($sqlGetNumProdcuts);
 	$countNumProducts=$resGetNumProducts->num_rows;
@@ -41,7 +43,7 @@
 		}
 	}
 	if($ban){
-		$sqlInsertProduct="INSERT INTO $tProduct (nombre, precio, img, descripcion, activo, codigo_barras, pan_frio, categoria_id, created, updated, created_by_user_id, updated_by_user_id) VALUES ('$nombre', '$precio', '$docName', '$descrip', '1', '', '$panFrio', '$categoria', '$dateNow', '$dateNow', '$userId', '$userId' ) ";
+		$sqlInsertProduct="INSERT INTO $tProduct (nombre, precio, img, descripcion, activo, codigo_barras, pan_frio, categoria_id, subcategoria_id, created, updated, created_by_user_id, updated_by_user_id) VALUES ('$nombre', '$precio', '$docName', '$descrip', '1', '$codBar', '$panFrio', '$categoria', '$subCategoria', '$dateNow', '$dateNow', '$userId', '$userId' ) ";
 		if($con->query($sqlInsertProduct) === TRUE){
 			echo "true";
 		}else{

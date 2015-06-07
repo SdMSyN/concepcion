@@ -27,6 +27,19 @@ else {
     else
       $optCategories .= '<option value="' . $rowGetCategories['id'] . '">' . $rowGetCategories['nombre'] . '</option>';
   }
+  
+  /* Obtenemos las subcategorias */
+    $idCategory=$rowGetProduct['categoria_id'];
+    $sqlGetSubCategory = "SELECT id, nombre FROM $tSubCategory WHERE categoria_id='$idCategory' ";
+    $resGetSubCategory = $con->query($sqlGetSubCategory);
+    $optSubCategories = '';
+    //$datos .= '<tr><td colspan="7">'.$sqlGetCateories.'</td></tr>';
+    while ($rowGetSubCategory = $resGetSubCategory->fetch_assoc()) {
+         if ($rowGetSubCategory['id'] == $rowGetProduct['subcategoria_id'])
+            $optSubCategories .= '<option value="'.$rowGetSubCategory['id'].'" selected>'.$rowGetSubCategory['nombre'].'</option>';
+         else
+             $optSubCategories .= '<option value="'.$rowGetSubCategory['id'].'" >'.$rowGetSubCategory['nombre'].'</option>';
+    }
 
   /* Comprobamos si es pan frio */
   $optPanFrio = '';
@@ -52,6 +65,10 @@ else {
           <label>Precio</label>
           <input type="text" step="any" id="inputPrecio" name="inputPrecio" class="form-control" value="<?= $rowGetProduct['precio']; ?>">
         </div>
+        <div class="form-group">
+          <label>Código de Barras</label>
+          <input type="number" id="inputCB" name="inputCB" class="form-control" value="<?= $rowGetProduct['codigo_barras']; ?>">
+        </div>
         <div class="form-group">           
           <label for="exampleInputFile">Imagen</label>
           <input type="file" id="inputImg" name="inputImg" >
@@ -63,8 +80,14 @@ else {
         </div>
         <div class="form-group">
           <label>Categoría</label>
-          <select id="inputCategoria" name="inputCategoria" class="form-control" value="<?= $rowGetProduct['categoria_id']; ?>">
+          <select id="inputCategoria" name="inputCategoria" class="form-control" >
             <?= $optCategories; ?>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Subcategoría</label>
+          <select id="inputSubCategoria" name="inputSubCategoria" class="form-control" >
+            <?= $optSubCategories; ?>
           </select>
         </div>
         <div class="checkbox">
@@ -139,6 +162,21 @@ else {
         e.preventDefault(); //Evitamos que se mande del formulario de forma convencional
       });
 
+      $("#inputCategoria").change(function(){
+         var category=$("#inputCategoria option:selected").val();
+         //alert(category);
+         $.ajax({
+             url: 'controllers/select_sub_from_category.php',
+             type: 'POST',
+             data: {categoryId: category},
+             success: function(res){
+                 //alert(res);
+                 $("#inputSubCategoria").html("");
+                 $("#inputSubCategoria").html(res);
+             }
+         })
+      });
+      
     });
   </script>
 
