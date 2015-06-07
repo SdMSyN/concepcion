@@ -11,7 +11,7 @@ else {
   $idStore = $_SESSION['storeId'];
   $idUser = $_SESSION['userId'];
 
-  $sqlGetCategories = "SELECT * FROM $tCategory WHERE  activo='1' ";
+  $sqlGetCategories = "SELECT * FROM $tCategory WHERE activo='1' ";
   $resGetCategories = $con->query($sqlGetCategories);
   $optCategories = '';
   if ($resGetCategories->num_rows > 0) {
@@ -110,7 +110,7 @@ else {
               $.ajax({
                 type: "POST",
                 url: "controllers/select_sales_sub_products.php",
-                data: {idCategory: category, tarea: "catProduct"},
+                data: {idCategory: category, tarea: "catProduct", idStore: <?= $idStore; ?>},
                 success: function (msg2) {
                   $(".productSubCategory").html('');
                   $(".productInfo").html(msg2);
@@ -131,7 +131,7 @@ else {
         $.ajax({
           type: "POST",
           url: "controllers/select_sales_sub_products.php",
-          data: {idSubCategory: subCategory, tarea: "subProduct"},
+          data: {idSubCategory: subCategory, tarea: "subProduct", idStore: <?= $idStore; ?>},
           success: function (msg) {
             $(".productInfo").html(msg);
           }
