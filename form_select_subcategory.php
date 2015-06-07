@@ -85,7 +85,7 @@ else {
             <th ><span title="nombre">Nombre</span></th>
             <th ><span title="categoria_id">Categoría</span></th>
             <th ><span title="created">Fecha de creación</span></th>
-            <th ><span title="created_by_user_id">Creado por</span></th>
+            <th ><span title="create_by">Creado por</span></th>
             <th ><span title="activo">Estatus</span></th>
             <th >Modificar</th>
             <th >Eliminar</th>

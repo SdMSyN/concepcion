@@ -10,24 +10,6 @@ else if ($_SESSION['perfil'] != "1")
 else {
   $userId = $_SESSION['userId'];
 
-  $sqlGetStore = "SELECT * FROM $tStore WHERE activa='1' ";
-  $resGetStore = $con->query($sqlGetStore);
-  $optStore = '';
-  if ($resGetStore->num_rows > 0) {
-    while ($rowGetStore = $resGetStore->fetch_assoc()) {
-      $optStore .= '<tr>';
-      $optStore .= '<td>' . $rowGetStore['id'] . '</td>';
-      $optStore .= '<td>' . $rowGetStore['nombre'] . '</td>';
-      $optStore .= '<td>' . $rowGetStore['direccion'] . '</td>';
-      $optStore .= '<td>' . $rowGetStore['created'] . '</td>';
-      $optStore .= '<td><a href="https://www.google.com.mx/maps/@' . $rowGetStore['latitud'] . ',' . $rowGetStore['longitud'] . ',16z" target="_about">Ver</a></td>';
-      $optStore .= '<td><a href="form_update_store.php?id=' . $rowGetStore['id'] . '" >Modificar</a></td>';
-      $optStore .= '<td><a class="delete" data-id="' . $rowGetStore['id'] . '" >Dar de baja</a></td>';
-      $optStore .= '</tr>';
-    }
-  } else {
-    $optStore.='<tr><td colspan="4">No existen tiendas aún.</td></tr>';
-  }
   ?>
 
   <!-- Cambio dinamico -->
@@ -91,28 +73,82 @@ else {
 
     <br>
     <div class="error2"></div>
-    <table class="table table-striped">
+    <div class="col-sm-12">
+       <form id="frm_filtro" method="post" action="" class="form-inline">
+           <div class="form-group">
+             <select id="estatus" name="estatus" class="form-control">
+               <option value="0"></option>
+               <option value="1">Desactivo</option>
+               <option value="2">Activo</option>
+             </select>
+           </div>
+           <button type="button" id="btnfiltrar" class="btn btn-success">Filtrar</button>
+           <a href="javascript:;" id="btncancel" class="btn btn-default">Todos</a>
+
+         </form>
+     </div>
+    <table class="table table-striped" id="data">
       <thead>
         <tr>
-          <td class="t-head-first">Id</td>
-          <td class="t-head">Nombre</td>
-          <td class="t-head">Dirección</td>
-          <td class="t-head">Fecha de creación</td>
-          <td class="t-head">Ver en el mapa</td>
-          <td class="t-head">Modificar</td>
-          <td class="t-head">Eliminar</td>
+          <th class="t-head-first"><span title="id">Id</span></th>
+          <th class="t-head"><span title="nombre">Nombre</span></th>
+          <th class="t-head">Dirección</th>
+          <th class="t-head"><span title="created">Fecha de creación</span></th>
+          <th class="t-head"><span title="activo">Activo</span></th>
+          <th class="t-head">Ver en el mapa</th>
+          <th class="t-head">Modificar</th>
+          <th class="t-head">Eliminar</th>
         </tr>
       </thead>
       <tbody>
-        <?= $optStore; ?>
+        <!--<?= $optStore; ?>-->
       </tbody>    
     </table>
   </div>
 
   <script type="text/javascript">
+    var ordenar = '';
     $(document).ready(function () {
-
-      $('.delete').click(function () {
+        filtrar();
+        function filtrar(){
+            $.ajax({
+                type: "POST",
+                data: $("#frm_filtro").serialize()+ordenar,
+                url: "controllers/select_store.php?action=listar",
+                success: function(msg){
+                    //$("#data tbody").empty();
+                    $("#data tbody").html(msg);
+                }
+            });
+        }
+        
+        //Ordenar ASC y DESC header tabla
+        $("#data th span").click(function(){
+            if($(this).hasClass("desc")){
+                $("#data th span").removeClass("desc").removeClass("asc");
+                $(this).addClass("asc");
+                ordenar = "&orderby="+$(this).attr("title")+" asc";
+            }else{
+                $("#data th span").removeClass("desc").removeClass("asc");
+                $(this).addClass("desc");
+                ordenar = "&orderby="+$(this).attr("title")+" desc";
+            }
+            filtrar();
+        });
+        
+        //Ordenar por formulario
+        $("#btnfiltrar").click(function(){ 
+            filtrar();
+            //alert("y ahora?");
+        });
+        
+        // boton cancelar
+	$("#btncancel").click(function(){ 
+            $("#frm_filtro select").find("option[value='0']").attr("selected",true)
+            filtrar() 
+	});
+        
+      $("#data tbody").on("click", ".delete", function(){
         var idStoreDel = $(this).data('id');
         //alert("Eliminando..." + idUserDel);
         if (confirm("¿Seguro que deseas eliminar?") == true) {
