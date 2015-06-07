@@ -3,7 +3,7 @@
     include ('../config/variables.php');
     
     if($_GET['action'] == 'listar'){
-        $sqlGetCateories = "SELECT id, nombre, created, (SELECT CONCAT(nombre,' ',ap,' ',am) FROM $tUser WHERE id=$tCategory.created_by_user_id ) as created_by, (SELECT nombre FROM $tEst WHERE id='$tCategory.activo' ) activo FROM $tCategory ";
+        $sqlGetCateories = "SELECT id, nombre, created, (SELECT CONCAT(nombre,' ',ap,' ',am) FROM $tUser WHERE id=$tCategory.created_by_user_id ) as created_by, (SELECT nombre FROM $tEst WHERE id=$tCategory.activo ) activo FROM $tCategory ";
         //$datos=array();
         //
         // Ordenar por
