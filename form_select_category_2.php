@@ -8,7 +8,27 @@ if (!isset($_SESSION['sessA']))
 else if ($_SESSION['perfil'] != "1")
   echo '<div class="row><div class="col-sm-12 text-center"><h2>No tienes permiso para entrar a esta sección</h2></div></div>';
 else {
-    $userId=$_SESSION['userId'];
+  // al logear al admin no deberia haber necesidad de identificar una tienda
+  //$storeId = $_SESSION['storeId'];
+  $userId = $_SESSION['userId'];
+
+  $sqlGetCategory = "SELECT id, nombre, created, (SELECT CONCAT(nombre,' ',ap,' ',am) FROM $tUser WHERE id=$tCategory.created_by_user_id ) as created_by FROM $tCategory WHERE activo='1' ";
+  $resGetCategory = $con->query($sqlGetCategory);
+  $optCategory = '';
+  if ($resGetCategory->num_rows > 0) {
+    while ($rowGetCategory = $resGetCategory->fetch_assoc()) {
+      $optCategory .= '<tr>';
+      $optCategory .= '<td>' . $rowGetCategory['id'] . '</td>';
+      $optCategory .= '<td>' . $rowGetCategory['nombre'] . '</td>';
+      $optCategory .= '<td>' . $rowGetCategory['created'] . '</td>';
+      $optCategory .= '<td>' . $rowGetCategory['created_by'] . '</td>';
+      $optCategory .= '<td><a href="form_update_category.php?id=' . $rowGetCategory['id'] . '" >Modificar</a></td>';
+      $optCategory .= '<td><a class="delete" data-id="' . $rowGetCategory['id'] . '" >Dar de baja</a></td>';
+      $optCategory .= '</tr>';
+    }
+  } else {
+    $optCategory.='<tr><td colspan="6">No existen categorías aún.</td></tr>';
+  }
   ?>
 
   <!-- Cambio dinamico -->
@@ -51,141 +71,29 @@ else {
 
     <br>
      <div class="msg"></div>
-     <div class="col-sm-12">
-       <form id="frm_filtro" method="post" action="" class="form-inline">
-           <div class="form-group">
-             <select id="estatus" name="estatus" class="form-control">
-               <option value="0"></option>
-               <option value="1">Desactivo</option>
-               <option value="2">Activo</option>
-             </select>
-           </div>
-           <button type="button" id="btnfiltrar" class="btn btn-success">Filtrar</button>
-           <a href="javascript:;" id="btncancel" class="btn btn-default">Todos</a>
-
-         </form>
-     </div>
-    <table class="table table-striped" id="data">
+    <table class="table table-striped">
       <thead>
         <tr>
-            <th ><span title="id">Id</span></th>
-            <th ><span title="nombre">Nombre</span></th>
-            <th ><span title="created">Fecha de creación</span></th>
-            <th ><span title="created_by_user_id">Creado por</span></th>
-            <th ><span title="activo">Estatus</span></th>
-            <th >Modificar</th>
-            <th >Eliminar</th>
+            <td class="t-head-first">Id</td>
+            <td class="t-head">Nombre</td>
+            <td class="t-head">Fecha de creación</td>
+            <td class="t-head-last">Creado por</td>
+            <td class="t-head">Modificar</td>
+            <td class="t-head-last">Eliminar</td>
         </tr>
       </thead>
       <tbody>
-	
+	<?= $optCategory; ?>
       </tbody>    
     </table>
   </div>
 
   <script type="text/javascript">
-      var ordenar = '';
     $(document).ready(function () {
 
-        //Ordenamiento
-        filtrar();
-        function filtrar(){
-            $.ajax({
-                type: "POST",
-                data: $("#frm_filtro").serialize()+ordenar,
-                url: "controllers/select_category.php?action=listar",
-                success: function(msg){
-                    //$("#data tbody").empty();
-                    $("#data tbody").html(msg);
-                }
-            });
-        }
-        
-        //Ordenar ASC y DESC header tabla
-        $("#data th span").click(function(){
-            if($(this).hasClass("desc")){
-                $("#data th span").removeClass("desc").removeClass("asc");
-                $(this).addClass("asc");
-                ordenar = "&orderby="+$(this).attr("title")+" asc";
-            }else{
-                $("#data th span").removeClass("desc").removeClass("asc");
-                $(this).addClass("desc");
-                ordenar = "&orderby="+$(this).attr("title")+" desc";
-            }
-            filtrar();
-        });
-        
-        //Ordenar por formulario
-        $("#btnfiltrar").click(function(){ 
-            filtrar();
-            //alert("y ahora?");
-        });
-        
-        // boton cancelar
-	$("#btncancel").click(function(){ 
-            $("#frm_filtro select").find("option[value='0']").attr("selected",true)
-            filtrar() 
-	});
-        
-        /*Carga de función por que no funcionaba por si sola, ya que los elementos (función ajax hacia php) se cargaban después de cargar el script:
-         http://www.forosdelweb.com/f179/javascript-no-funciona-luego-carga-ajax-1118659/
-         */
-        $("#data tbody").on("click", ".delete", function(){
-            //alert("Hope");
+        $('.delete').click(function () {
             var idCatDel = $(this).data('id');
-            alert("Eliminando..." + idCatDel);
-            if(confirm("Seguro que deseas eliminar?") == true){
-                $.ajax({
-                    type: 'POST',
-                    url: 'controllers/delete_category.php',
-                    data: {categoryDel: idCatDel},
-                    success: function(msg){
-                        //alert(msg);
-                        if (msg == "true") {
-                            $('.msg').css({color: "#00FFF0"});
-                            $('.msg').html("Se elimino la categoría con éxito.");
-                                setTimeout(function () {
-                                  location.href = 'form_select_category_2.php';
-                                }, 1500);
-                        } else {
-                            $('.msg').css({color: "#FF0000"});
-                            $('.msg').html(msg);
-                        }
-                    }
-		});
-            }//end if confirm
-        });
-        
-        
-        /*function filtrar(){
-            $.ajax({
-               data:$("#frm_filtro").serialize()+ordenar,
-               type: "POST",
-               dataType: "json",
-               url: "controllers/select_category.php?action=listar",
-               success: function(data){
-                   var html = '';
-                   if(data.length > 0){
-                       $.each(data, function(i, item){
-                           html += '<tr>';
-                           html += '<td>'+item.id+'</td>';
-                           html += '<td>'+item.name+'</td>';
-                           html += '<td>'+item.created+'</td>';
-                           html += '<td>'+item.created_by+'</td>';
-                           html += '<td>'+item.status+'</td>';
-                           html += '<td>'+item.mod+'</td>';
-                           html += '<td><a class="delete" data-id="'+item.id+'" onClick="delete2()" >Dar de baja</a></td> ';
-                           html += '</tr>';
-                       });
-                   }
-                   $("#data tbody").html(html);
-               }
-            });
-        }*/
-         
-        /*$('.delete').click(function () {
-            var idCatDel = $(this).data('id');
-            alert("Eliminando..." + idUserDel);
+            //alert("Eliminando..." + idUserDel);
             if(confirm("Seguro que deseas eliminar?") == true){
                 $.ajax({
                     type: 'POST',
@@ -206,7 +114,7 @@ else {
                     }
 		});
             }//end if confirm
-        });*/
+        });
         
       $('#formAddCategory').validate({
         rules: {
@@ -228,7 +136,7 @@ else {
               if (msg == "true") {
                 $('.error').html("Se creo la categoría con éxito.");
                 setTimeout(function () {
-                  location.href = 'form_select_category_2.php';
+                  location.href = 'form_select_category.php';
                 }, 3000);
               } else {
                 $('.error').css({color: "#FF0000"});
