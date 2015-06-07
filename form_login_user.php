@@ -11,6 +11,7 @@ else {
 
   <!-- Cambio dinamico -->
   <div class="container">
+    <a href="form_login_store.php" class="btn btn-primary pull-right " style="margin-top: 1rem;">Regresar</a>
     <div class="row">
       <div class="col-sm-12 col-md-offset-2 col-md-8">
         <div class="titulo text-center">

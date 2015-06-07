@@ -9,17 +9,23 @@
         <span class="icon-bar"></span>
       </button>
       <?php
-      if (isset($_SESSION['perfil']) && $_SESSION['perfil'] == "1" ) {
-        ?>
+      if (isset($_SESSION['perfil']) && $_SESSION['perfil'] == "1") {
+        if (isset($_SESSION['sessA'])) {
+          ?>
           <a class="navbar-brand" href="index_admin.php">Inicio</a>
-        <?php
-      }elseif (isset($_SESSION['perfil']) && $_SESSION['perfil'] == "0" ){
-        ?>
+          <?php
+        } else {
+          ?>
           <a class="navbar-brand" href="form_sales.php">Inicio</a>
-        <?php
-      }else{
+          <?php
+        }
+      } elseif (isset($_SESSION['perfil']) && $_SESSION['perfil'] == "3" && isset($_SESSION['sess'])) {
         ?>
-          <a class="navbar-brand" href="form_login_store.php">Inicio</a>
+        <a class="navbar-brand" href="form_sales.php">Inicio</a>
+        <?php
+      } else {
+        ?>
+        <a class="navbar-brand" href="form_login_store.php">Inicio</a>
         <?php
       }
       ?>      
@@ -29,7 +35,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <?php
-        if (isset($_SESSION['perfil']) && $_SESSION['perfil'] == "1") {
+        if (isset($_SESSION['perfil']) && $_SESSION['perfil'] == "1" && isset($_SESSION['sessA'])) {
           ?>
           <li><a href="form_select_stock_2.php">Almacen</a></li>
           <li><a href="form_select_product.php">Productos</a></li>
@@ -38,9 +44,9 @@
           <li><a href="form_select_category.php">Categorías</a></li>
           <li><a href="form_select_subcategory.php">Subcategorías</a></li>
           <?php
-        } elseif (isset($_SESSION['perfil']) && $_SESSION['perfil'] == "0") {
+        } elseif (isset($_SESSION['perfil']) && $_SESSION['perfil'] == "3" && isset($_SESSION['sess'])) {
           ?>
-<!--          <li><a href="form_select_stock_2.php">Hola mundo</a></li>-->
+          <!--          <li><a href="form_select_stock_2.php">Hola mundo</a></li>-->
           <?php
         }
         ?>
