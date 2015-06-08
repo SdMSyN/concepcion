@@ -30,12 +30,17 @@ else {
   	      <h4 class="modal-title" id="myModalLabel">Nueva Categoría</h4>
   	    </div>
             <div class="error"></div>
-  	    <form id="formAddCategory" name="formAddCategory" method="POST">
+  	    <form id="formAddCategory" name="formAddCategory" method="POST" enctype="multipart/form-data">
   	      <div class="modal-body">
   		<div class="form-group">
   		  <label>Nombre de la Categoría</label>
   		  <input type="text" id="inputCategory" name="inputCategory" class="form-control">
   		</div>  
+                  <div class="form-group">           
+                    <label for="inputImg">Imagen</label>
+                    <input type="file" id="inputImg" name="inputImg" >
+                    <p class="help-block">Tamaño Máximo 1Mb</p>
+                  </div>
   		<input type="hidden" name="inputUser" value="<?= $userId; ?>" >
   	      </div>
   	      <div class="modal-footer">
@@ -243,10 +248,19 @@ else {
           inputCategory: {trigger: "focus", placement: 'bottom'}
         },
         submitHandler: function (form) {
+          var formData = form[0];
+          var data = new FormData(formData);
+          e.preventDefault();
           $.ajax({
             type: "POST",
             url: "controllers/create_category.php",
-            data: $('form#formAddCategory').serialize(),
+            //data: $('form#formAddCategory').serialize(),
+            data: data,
+            //contentType: false,
+            processData: false,
+            contentType: "multipart/form-data",
+            //cache: false,
+            //mimeType: "multipart/form-data",
             success: function (msg) {
               //alert(msg);
               if (msg == "true") {
@@ -264,7 +278,6 @@ else {
             }
           });
         }
-
       });
       
       $('#myModal').on('shown.bs.modal', function () {
