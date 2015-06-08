@@ -152,7 +152,7 @@ else {
       $("#data tbody").on("click", ".delete", function(){
         var idStoreDel = $(this).data('id');
         //alert("Eliminando..." + idUserDel);
-        if (confirm("¿Seguro que deseas eliminar?") == true) {
+        if (confirm("¿Está seguro(a) que desea dar de baja este registro?") == true) {
           $.ajax({
             type: 'POST',
             url: 'controllers/delete_store.php',
@@ -160,7 +160,8 @@ else {
             success: function (msg) {
               //alert(msg);
               if (msg == "true") {
-                $('.error2').html("Se elimino la tienda con éxito.");
+                $('.error2').css({color: "#77DD77"});
+                $('.error2').html("Se dio de baja la tienda con éxito.");
                 setTimeout(function () {
                   location.href = 'form_select_store.php';
                 }, 3000);
@@ -209,6 +210,7 @@ else {
             success: function (msg) {
               //alert(msg);
               if (msg == "true") {
+                $('.error').css({color: "#77DD77"});
                 $('.error').html("Se creo la tienda con éxito.");
                 setTimeout(function () {
                   location.href = 'form_select_store.php';

@@ -102,8 +102,8 @@ else {
                     success: function(msg){
                         //alert(msg);
                         if (msg == "true") {
-                            $('.msg').css({color: "#00FFF0"});
-                            $('.msg').html("Se elimino la categoría con éxito.");
+                            $('.msg').css({color: "#77DD77"});
+                            $('.msg').html("Se dio de baja la categoría con éxito.");
                                 setTimeout(function () {
                                   location.href = 'form_select_category.php';
                                 }, 1500);
@@ -134,6 +134,7 @@ else {
             success: function (msg) {
               //alert(msg);
               if (msg == "true") {
+                $('.error').css({color: "#77DD77"});
                 $('.error').html("Se creo la categoría con éxito.");
                 setTimeout(function () {
                   location.href = 'form_select_category.php';

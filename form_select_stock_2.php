@@ -133,7 +133,7 @@ else {
       $('.delete').click(function () {
             var idStockDel = $(this).data('id');
             //alert("Eliminando..." + idUserDel);
-            if(confirm("Seguro que deseas vaciar?") == true){
+            if(confirm("¿Seguro que desea vaciar?") == true){
                 $.ajax({
                     type: 'POST',
                     url: 'controllers/delete_stock.php',
@@ -141,6 +141,7 @@ else {
                     success: function(msg){
                         //alert(msg);
                         if (msg == "true") {
+                            $('.error').css({color: "#77DD77"});
                             $('.msg').html("Se vacio el producto de almacén con éxito.");
                                 setTimeout(function () {
                                   location.href = 'form_select_stock.php';
@@ -181,6 +182,7 @@ else {
                     success: function (msg) {
                         //alert(msg);
                         if (msg == "true") {
+                            $('.error').css({color: "#77DD77"});
                             $('.error').html("Se creo el producto en almacén con éxito.");
                             setTimeout(function () {
                                 location.href = 'form_select_stock.php';
