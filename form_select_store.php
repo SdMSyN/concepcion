@@ -156,7 +156,7 @@ else {
           $.ajax({
             type: 'POST',
             url: 'controllers/delete_store.php',
-            data: {storeDel: idStoreDel},
+            data: {storeDel: idStoreDel, est: 1},
             success: function (msg) {
               //alert(msg);
               if (msg == "true") {
@@ -172,7 +172,30 @@ else {
           });
         }//end if confirm
       });
-
+      $("#data tbody").on("click", ".activate", function(){
+        var idStoreDel = $(this).data('id');
+        //alert("Eliminando..." + idUserDel);
+        if (confirm("¿Seguro que deseas activar?") == true) {
+          $.ajax({
+            type: 'POST',
+            url: 'controllers/delete_store.php',
+            data: {storeDel: idStoreDel, est: 0},
+            success: function (msg) {
+              //alert(msg);
+              if (msg == "true") {
+                $('.error2').html("Se activo la tienda con éxito.");
+                setTimeout(function () {
+                  location.href = 'form_select_store.php';
+                }, 3000);
+              } else {
+                $('.error2').css({color: "#FF0000"});
+                $('.error2').html(msg);
+              }
+            }
+          });
+        }//end if confirm
+      });
+      
       $('#formAddStore').validate({
         rules: {
           inputNombre: {required: true},
