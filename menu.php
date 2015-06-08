@@ -43,6 +43,7 @@
           <li><a href="form_select_store.php">Tiendas</a></li>
           <li><a href="form_select_category.php">Categorías</a></li>
           <li><a href="form_select_subcategory.php">Subcategorías</a></li>
+          <li><a href="form_select_report.php">Reportes</a></li>
           <?php
         } elseif (isset($_SESSION['perfil']) && $_SESSION['perfil'] == "3" && isset($_SESSION['sess'])) {
           ?>
