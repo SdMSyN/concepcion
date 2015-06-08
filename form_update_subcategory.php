@@ -12,7 +12,7 @@ else {
   //$storeId = $_SESSION['storeId'];
   $subCategoryId = $_GET['id'];
   $userId = $_SESSION['userId'];
-  
+  include('config/variables.php');
   $sqlGetSubCategory = "SELECT * FROM $tSubCategory WHERE id='$subCategoryId' ";
   $resGetSubCategory = $con->query($sqlGetSubCategory);
   $rowGetSubCategory = $resGetSubCategory->fetch_assoc();
@@ -40,7 +40,7 @@ else {
       <div class="col-md-12">
           <legend>Modificación de datos de Subcategoria</legend>       
             <div class="error"></div>
-        <form id="formUpdSubCategory" name="formUpdSubCategory" method="POST" class="form-horizontal">
+        <form id="formUpdSubCategory" name="formUpdSubCategory" method="POST" class="form-horizontal"  enctype="multipart/form-data">
             <input type="hidden" name="inputSubCategoryId" value="<?= $subCategoryId; ?>" >
             <input type="hidden" name="inputUser" value="<?= $userId; ?>" >
             <div class="form-group">
@@ -56,6 +56,14 @@ else {
               <div class="col-sm-10">
                 <input type="text" id="inputSubCategory" name="inputSubCategory" class="form-control" value="<?= $rowGetSubCategory['nombre']; ?>">
               </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2">Imagen de la subcategoría</label>
+                <div class="col-sm-10">
+                    <img src="<?=$rutaImgSubCat.$rowGetSubCategory['img'];?>" width="20%">
+                    <input type="file" id="inputImg" name="inputImg" >
+                    <p class="help-block">Tamaño Máximo 1Mb</p>
+                </div>
             </div>
             <div class="form-group">
               <div class="col-sm-offset-0 col-sm-12">
@@ -74,21 +82,27 @@ else {
       $('#formUpdSubCategory').validate({
         rules: {
           inputCategory: {required: true},
-          inputSubCategory: {required: true}
+          inputSubCategory: {required: true},
+          inputImg: {extension: "jpg|png|bmp|jpeg|gif"}
         },
         messages: {
           inputCategory: "Debes introducir una categoría",
-          inputSubCategory: "Debes introducir una categoría"
+          inputSubCategory: "Debes introducir una categoría",
+          inputImg: "Formato de imagen no valido"
         },
         tooltip_options: {
           inputCategory: {trigger: "focus", placement: 'bottom'},
-          inputSubCategory: {trigger: "focus", placement: 'bottom'}
+          inputSubCategory: {trigger: "focus", placement: 'bottom'},
+          inputImg: {trigger: "focus", placement: 'bottom'}
         },
         submitHandler: function (form) {
           $.ajax({
             type: "POST",
             url: "controllers/update_subcategory.php",
-            data: $('form#formUpdSubCategory').serialize(),
+            //data: $('form#formUpdSubCategory').serialize(),
+            data: new FormData($("form#formUpdSubCategory")[0]),
+            contentType: false,
+            processData: false,
             success: function (msg) {
               //alert(msg);
               if (msg == "true") {

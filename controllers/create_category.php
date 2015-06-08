@@ -16,9 +16,10 @@
         if($con->errno == "1062") echo "Error: Ya existe una categoría con éste nombre";
         else echo 'Error al crear categoría<br>'.$con->error;
     }*/
+        $ext=explode(".", $_FILES['inputImg']['name']);
         $ban=false;
 	$error="";
-	$docName=$_FILES['inputImg']['name'];
+	$docName=$category.".".$ext[1];
 	//echo "--".$docName."--";
 	if ($_FILES["inputImg"]["error"] > 0){
             $error.= "Ha ocurrido un error";

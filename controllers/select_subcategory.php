@@ -3,7 +3,7 @@
     include ('../config/variables.php');
     
     if($_GET['action'] == 'listar'){
-        $sqlGetCateories = "SELECT id, nombre, created, activo, (SELECT CONCAT(nombre,' ',ap,' ',am) FROM $tUser WHERE id=$tSubCategory.create_by) as created_by, (SELECT nombre FROM $tEst WHERE id=$tSubCategory.activo ) as activoN, (SELECT nombre FROM $tCategory WHERE id=$tSubCategory.categoria_id) as category FROM $tSubCategory ";
+        $sqlGetCateories = "SELECT id, nombre, created, activo, (SELECT CONCAT(nombre,' ',ap,' ',am) FROM $tUser WHERE id=$tSubCategory.create_by) as created_by, (SELECT nombre FROM $tEst WHERE id=$tSubCategory.activo ) as activoN, (SELECT nombre FROM $tCategory WHERE id=$tSubCategory.categoria_id) as category, img FROM $tSubCategory ";
         //$datos=array();
         //
         // Ordenar por
@@ -24,6 +24,7 @@
             $datos .= '<tr>';
             $datos .= '<td>'.$rowGetCategories['id'].'</td>';
             $datos .= '<td>'.$rowGetCategories['nombre'].'</td>';
+            $datos .= '<td><img src="'.$rutaImgSubCat.$rowGetCategories['img'].'" width="20%"></td>';
             $datos .= '<td>'.$rowGetCategories['category'].'</td>';
             $datos .= '<td>'.$rowGetCategories['created'].'</td>';
             $datos .= '<td>'.$rowGetCategories['created_by'].'</td>';

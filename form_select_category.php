@@ -238,13 +238,19 @@ else {
         
       $('#formAddCategory').validate({
         rules: {
-          inputCategory: {required: true}
+          inputCategory: {required: true},
+          inputImg: {required: true, extension: "jpg|png|bmp|jpeg|gif"}
         },
         messages: {
-          inputCategory: "Debes introducir una categoría"
+          inputCategory: "Debes introducir una categoría",
+          inputImg:{
+              required: "Imagen obligatoria",
+              extension: "Formato de imagen no valido"
+          }
         },
         tooltip_options: {
-          inputCategory: {trigger: "focus", placement: 'bottom'}
+          inputCategory: {trigger: "focus", placement: 'bottom'},
+          inputImg: {trigger: "focus", placement: 'bottom'}
         },
         submitHandler: function (form) {
           //var data = new FormData();

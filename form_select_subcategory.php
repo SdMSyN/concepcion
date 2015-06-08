@@ -37,7 +37,7 @@ else {
   	      <h4 class="modal-title" id="myModalLabel">Nueva Subcategoría</h4>
   	    </div>
             <div class="error"></div>
-  	    <form id="formAddSubCategory" name="formAddCategory" method="POST">
+  	    <form id="formAddSubCategory" name="formAddCategory" method="POST" enctype="multipart/form-data">
   	      <div class="modal-body">
                 <div class="form-group">
   		  <label>Categoría Superior</label>
@@ -49,6 +49,11 @@ else {
   		  <label>Nombre de la Subcategoría</label>
   		  <input type="text" id="inputSubCategory" name="inputSubCategory" class="form-control">
   		</div>  
+                <div class="form-group">           
+                    <label for="inputImg">Imagen</label>
+                    <input type="file" id="inputImg" name="inputImg" >
+                    <p class="help-block">Tamaño Máximo 1Mb</p>
+                  </div>
   		<input type="hidden" name="inputUser" value="<?= $userId; ?>" >
   	      </div>
   	      <div class="modal-footer">
@@ -83,6 +88,7 @@ else {
         <tr>
             <th ><span title="id">Id</span></th>
             <th ><span title="nombre">Nombre</span></th>
+            <th >Imagen</th>
             <th ><span title="categoria_id">Categoría</span></th>
             <th ><span title="created">Fecha de creación</span></th>
             <th ><span title="create_by">Creado por</span></th>
@@ -250,21 +256,30 @@ else {
       $('#formAddSubCategory').validate({
         rules: {
           inputCategory: {required: true},
-          inputSubCategory: {required: true}
+          inputSubCategory: {required: true},
+          inputImg: {required: true, extension: "jpg|png|bmp|jpeg|gif"}
         },
         messages: {
           inputCategory: "Debes introducir una categoría",
-          inputSubCategory: "Debes introducir una Subcategoría"
+          inputSubCategory: "Debes introducir una Subcategoría",
+          inputImg:{
+              required: "Imagen obligatoria",
+              extension: "Formato de imagen no valido"
+          }
         },
         tooltip_options: {
           inputCategory: {trigger: "focus", placement: 'bottom'},
-          inputSubCategory: {trigger: "focus", placement: 'bottom'}
+          inputSubCategory: {trigger: "focus", placement: 'bottom'},
+          inputImg: {trigger: "focus", placement: 'bottom'}
         },
         submitHandler: function (form) {
           $.ajax({
             type: "POST",
             url: "controllers/create_subcategory.php",
-            data: $('form#formAddSubCategory').serialize(),
+            //data: $('form#formAddSubCategory').serialize(),
+            data: new FormData($("form#formAddSubCategory")[0]),
+            contentType: false,
+            processData: false,
             success: function (msg) {
               //alert(msg);
               if (msg == "true") {
