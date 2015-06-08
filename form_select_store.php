@@ -176,7 +176,7 @@ else {
       $("#data tbody").on("click", ".activate", function(){
         var idStoreDel = $(this).data('id');
         //alert("Eliminando..." + idUserDel);
-        if (confirm("¿Seguro que deseas activar?") == true) {
+        if (confirm("¿Seguro que desea dar de alta el registro?") == true) {
           $.ajax({
             type: 'POST',
             url: 'controllers/delete_store.php',
