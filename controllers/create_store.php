@@ -16,7 +16,8 @@
     if($con->query($sqlCreateStore) === TRUE ){
         echo 'true';
     }else{
-        echo 'Error al crear Tienda<br>'.$con->error;
+        if($con->errno == "1062") echo "Error: Ya existe una categoría con éste nombre";
+        else echo 'Error al crear categoría<br>'.$con->error;
     }
       
 ?>
