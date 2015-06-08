@@ -26,7 +26,7 @@ else {
       </div>
       <div class="col-md-12">	
         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-          Nueva SubCategoría
+          Nueva Subcategoría
         </button>
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -148,7 +148,7 @@ else {
             //alert("Hope");
             var idCatDel = $(this).data('id');
             //alert("Eliminando..." + idCatDel);
-            if(confirm("Seguro que deseas eliminar?") == true){
+            if(confirm("¿Está seguro(a) que desea dar de baja este registro?") == true){
                 $.ajax({
                     type: 'POST',
                     url: 'controllers/delete_subcategory.php',
@@ -156,8 +156,8 @@ else {
                     success: function(msg){
                         //alert(msg);
                         if (msg == "true") {
-                            $('.msg').css({color: "#00FFF0"});
-                            $('.msg').html("Se elimino la Subcategoría con éxito.");
+                            $('.msg').css({color: "#77DD77"});
+                            $('.msg').html("Se dio de baja la subcategoría con éxito.");
                                 setTimeout(function () {
                                   location.href = 'form_select_subcategory.php';
                                 }, 1500);
@@ -173,7 +173,7 @@ else {
             //alert("Hope");
             var idCatAct = $(this).data('id');
             //alert("Eliminando..." + idCatAct);
-            if(confirm("Seguro que deseas activar?") == true){
+            if(confirm("¿Está seguro que desea activar?") == true){
                 $.ajax({
                     type: 'POST',
                     url: 'controllers/delete_subcategory.php',
@@ -181,7 +181,7 @@ else {
                     success: function(msg){
                         //alert(msg);
                         if (msg == "true") {
-                            $('.msg').css({color: "#00FFF0"});
+                            $('.msg').css({color: "#77DD77"});
                             $('.msg').html("Se activo la Subcategoría con éxito.");
                                 setTimeout(function () {
                                   location.href = 'form_select_subcategory.php';
@@ -268,6 +268,7 @@ else {
             success: function (msg) {
               //alert(msg);
               if (msg == "true") {
+                $('.error').css({color: "#77DD77"});
                 $('.error').html("Se creo la Subcategoría con éxito.");
                 setTimeout(function () {
                   location.href = 'form_select_subcategory.php';

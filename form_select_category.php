@@ -91,7 +91,6 @@ else {
   <script type="text/javascript">
       var ordenar = '';
     $(document).ready(function () {
-
         //Ordenamiento
         filtrar();
         function filtrar(){
@@ -138,8 +137,7 @@ else {
         $("#data tbody").on("click", ".delete", function(){
             //alert("Hope");
             var idCatDel = $(this).data('id');
-            alert("Eliminando..." + idCatDel);
-            if(confirm("Seguro que deseas dar de baja?") == true){
+            if(confirm("¿Está seguro(a) que desea dar de baja este registro?") == true){
                 $.ajax({
                     type: 'POST',
                     url: 'controllers/delete_category.php',
@@ -147,8 +145,8 @@ else {
                     success: function(msg){
                         //alert(msg);
                         if (msg == "true") {
-                            $('.msg').css({color: "#00FFF0"});
-                            $('.msg').html("Se elimino la categoría con éxito.");
+                            $('.msg').css({color: "#77DD77"});
+                            $('.msg').html("Se dio de Baja la categoría con éxito.");
                                 setTimeout(function () {
                                   location.href = 'form_select_category.php';
                                 }, 1500);
@@ -164,7 +162,7 @@ else {
             //alert("Hope");
             var idCatAct = $(this).data('id');
             //alert("Eliminando..." + idCatAct);
-            if(confirm("Seguro que deseas activar?") == true){
+            if(confirm("¿Está seguro(a) que desea dar de Alta el registro?") == true){
                 $.ajax({
                     type: 'POST',
                     url: 'controllers/delete_category.php',
@@ -172,7 +170,7 @@ else {
                     success: function(msg){
                         //alert(msg);
                         if (msg == "true") {
-                            $('.msg').css({color: "#00FFF0"});
+                            $('.msg').css({color: "#77DD77"});
                             $('.msg').html("Se activo la Categoría con éxito.");
                                 setTimeout(function () {
                                   location.href = 'form_select_category.php';
@@ -264,6 +262,7 @@ else {
             success: function (msg) {
               //alert(msg);
               if (msg == "true") {
+                $('.error').css({color: "#77DD77"});
                 $('.error').html("Se creo la categoría con éxito.");
                 setTimeout(function () {
                   location.href = 'form_select_category.php';

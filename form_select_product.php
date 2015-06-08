@@ -193,7 +193,7 @@ else {
       $("#data tbody").on("click", ".delete", function(){
         var idProductDel = $(this).data('id');
         //alert("Eliminando..." + idUserDel);
-        if (confirm("Seguro que deseas eliminar?") == true) {
+        if (confirm("¿Está seguro(a) que desea dar de baja este registro?") == true) {
           $.ajax({
             type: 'POST',
             url: 'controllers/delete_product.php',
@@ -201,7 +201,8 @@ else {
             success: function (msg) {
               //alert(msg);
               if (msg == "true") {
-                $('.error').html("Se elimino el producto con éxito.");
+                $('.error').css({color: "#77DD77"});
+                $('.error').html("Se dio de baja el producto con éxito.");
                 setTimeout(function () {
                   location.href = 'form_select_product.php';
                 }, 3000);
@@ -216,7 +217,7 @@ else {
       $("#data tbody").on("click", ".activate", function(){
         var idProductDel = $(this).data('id');
         //alert("Eliminando..." + idUserDel);
-        if (confirm("Seguro que deseas activar?") == true) {
+        if (confirm("¿Está seguro(a) que desea dar de alta el registro?") == true) {
           $.ajax({
             type: 'POST',
             url: 'controllers/delete_product.php',

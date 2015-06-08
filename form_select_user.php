@@ -192,7 +192,7 @@ else {
       $("#data tbody").on("click", ".delete", function(){
             var idUserDel = $(this).data('id');
             //alert("Eliminando..." + idUserDel);
-            if(confirm("Seguro que deseas eliminar?") == true){
+            if(confirm("¿Está seguro(a) que desea dar de baja este registro?") == true){
                 $.ajax({
                     type: 'POST',
                     url: 'controllers/delete_user.php',
@@ -200,7 +200,7 @@ else {
                     success: function(msg){
                         //alert(msg);
                         if (msg == "true") {
-                            $('.error').html("Se elimino el usuario con éxito.");
+                            $('.error').html("Se dio de baja el usuario con éxito.");
                                 setTimeout(function () {
                                   location.href = 'form_select_user.php';
                                 }, 3000);
@@ -215,7 +215,7 @@ else {
         $("#data tbody").on("click", ".activate", function(){
             var idUserDel = $(this).data('id');
             //alert("Eliminando..." + idUserDel);
-            if(confirm("Seguro que deseas activar?") == true){
+            if(confirm("¿Está seguro(a) que desea activar el registro?") == true){
                 $.ajax({
                     type: 'POST',
                     url: 'controllers/delete_user.php',
@@ -223,12 +223,13 @@ else {
                     success: function(msg){
                         //alert(msg);
                         if (msg == "true") {
+                            $('.error').css({color: "#77DD77"});
                             $('.error').html("Se activo el usuario con éxito.");
                                 setTimeout(function () {
                                   location.href = 'form_select_user.php';
                                 }, 3000);
                         } else {
-                            $('.error').css({color: "#FF0000"});
+                            $('.error').css({color: "#77dd77"});
                             $('.error').html(msg);
                         }
                     }
@@ -284,6 +285,7 @@ else {
             success: function (msg) {
               //alert(msg);
               if (msg == "true") {
+                $('.error').css({color: "#77DD77"});
                 $('.error').html("Se creo el usuario con éxito.");
                 setTimeout(function () {
                   location.href = 'form_select_user.php';
