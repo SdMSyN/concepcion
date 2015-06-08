@@ -75,6 +75,7 @@ else {
         <tr>
             <th ><span title="id">Id</span></th>
             <th ><span title="nombre">Nombre</span></th>
+            <th >Imagen</th>
             <th ><span title="created">Fecha de creación</span></th>
             <th ><span title="created_by_user_id">Creado por</span></th>
             <th ><span title="activo">Estatus</span></th>
@@ -246,17 +247,18 @@ else {
           inputCategory: {trigger: "focus", placement: 'bottom'}
         },
         submitHandler: function (form) {
-          var formData = form[0];
-          var data = new FormData(formData);
-          e.preventDefault();
+          //var data = new FormData();
+          //data.append('file', $('#inputImg')[0].files[0]);
+          //form.preventDefault();
           $.ajax({
             type: "POST",
             url: "controllers/create_category.php",
             //data: $('form#formAddCategory').serialize(),
-            data: data,
-            //contentType: false,
+            //data: data,
+            data: new FormData($("form#formAddCategory")[0]),
+            contentType: false,
             processData: false,
-            contentType: "multipart/form-data",
+            //contentType: "multipart/form-data",
             //cache: false,
             //mimeType: "multipart/form-data",
             success: function (msg) {

@@ -3,7 +3,7 @@
     include ('../config/variables.php');
     
     if($_GET['action'] == 'listar'){
-        $sqlGetCateories = "SELECT id, nombre, created, (SELECT CONCAT(nombre,' ',ap,' ',am) FROM $tUser WHERE id=$tCategory.created_by_user_id ) as created_by, (SELECT nombre FROM $tEst WHERE id=$tCategory.activo ) activoN, activo FROM $tCategory ";
+        $sqlGetCateories = "SELECT id, nombre, created, (SELECT CONCAT(nombre,' ',ap,' ',am) FROM $tUser WHERE id=$tCategory.created_by_user_id ) as created_by, (SELECT nombre FROM $tEst WHERE id=$tCategory.activo ) activoN, activo, img FROM $tCategory ";
         //$datos=array();
         //
         // Ordenar por
@@ -24,6 +24,7 @@
             $datos .= '<tr>';
             $datos .= '<td>'.$rowGetCategories['id'].'</td>';
             $datos .= '<td>'.$rowGetCategories['nombre'].'</td>';
+            $datos .= '<td><img src="'.$rutaImgCat.$rowGetCategories['img'].'" width="20%"></td>';
             $datos .= '<td>'.$rowGetCategories['created'].'</td>';
             $datos .= '<td>'.$rowGetCategories['created_by'].'</td>';
             $datos .= '<td>'.$rowGetCategories['activoN'].'</td>';
