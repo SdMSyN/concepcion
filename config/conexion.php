@@ -19,7 +19,7 @@
         $tWaste="sobrantes";
         $tStore="tiendas";
         $tUser="usuarios";
-        $tSaleInfo="venta_info";
+        $tSaleInfo="ventas_info";
         $tSaleProd="ventas_prod";
         $tEst="estatus";
 ?>

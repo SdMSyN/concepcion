@@ -10,10 +10,10 @@
     
     if($_POST['tarea']=="catProduct") 
         //$sqlGetProducts="SELECT * FROM $tProduct WHERE categoria_id='$category_id' AND activo='1' ";
-        $sqlGetProducts="SELECT $tProduct.img, $tProduct.id, $tProduct.nombre FROM $tProduct, $tStock WHERE $tStock.tienda_id='$idStore' AND $tProduct.categoria_id='$category_id' ";
+        $sqlGetProducts="SELECT $tProduct.img, $tProduct.id, $tProduct.nombre FROM $tProduct, $tStock WHERE $tStock.tienda_id='$idStore' AND $tStock.producto_id=$tProduct.id AND $tProduct.categoria_id='$category_id' ";
     else 
         //$sqlGetProducts="SELECT * FROM $tProduct WHERE subcategoria_id='$category_id' AND activo='1' ";
-        $sqlGetProducts="SELECT $tProduct.img, $tProduct.id, $tProduct.nombre FROM $tProduct, $tStock WHERE $tStock.tienda_id='$idStore' AND $tProduct.subcategoria_id='$category_id' ";
+        $sqlGetProducts="SELECT $tProduct.img, $tProduct.id, $tProduct.nombre FROM $tProduct, $tStock WHERE $tStock.tienda_id='$idStore' AND $tStock.producto_id=$tProduct.id AND $tProduct.subcategoria_id='$category_id' ";
     
     $resGetProducts=$con->query($sqlGetProducts);
     $optProducts='';

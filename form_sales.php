@@ -29,10 +29,20 @@ else {
     <div class="col-sm-5 sales sales-izquierda">
       <div class="ticket text-center">
         <form id="formTicket" method="POST" action="controllers/set_sale.php" class="form-inline" >
+            <input type="hidden" name="idStore" value="<?= $idStore; ?>">
+            <input type="hidden" name="idUser" value="<?= $idUser; ?>">
           <div class="cobrar">
             <div class="form-group">
-              <label>Total:</label>
-              <input type="text" id="inputTotal" name="inputTotal" readonly step=0.01 class="form-control" >
+                <label>Total:</label></br>
+                <input type="text" id="inputTotal" name="inputTotal" readonly step=0.01 class="form-control" >
+            </div>
+            <div class="form-group">
+                <label>Recibido:</label></br>
+                <input type="text" id="inputRecibido" name="inputRecibido" step=0.01 class="form-control calcChange" >
+            </div>
+            <div class="form-group">
+                <label>Cambio:</label></br>
+                <input type="text" id="inputCambio" name="inputCambio" readonly step=0.01 class="form-control" >
             </div>
             <button type="submit" class="enviarTicket btn btn-success"><i class="fa fa-money"></i> Cobrar</button>
           </div>
@@ -178,6 +188,23 @@ else {
 
       $(".ticket #dataTicket tbody").on("keyup change blur keypress keydown", ".cant", actCant);
 
+      /*$("#formTicket").on("change blur click", ".calcChange", function(){
+          var total = parseFloat($(this).parent().parent().find("#inputTotal").val());
+          var dinero = parseFloat($(this).val());
+          var cambio = dinero-total;
+          //alert(cambio);
+          $("#inputCambio").val(cambio);
+          calcChange();
+      });*/
+      $("#formTicket").on("change blur click", ".calcChange", calcChange);
+      function calcChange(){
+          var total = parseFloat($(this).parent().parent().find("#inputTotal").val());
+          var dinero = parseFloat($(this).parent().parent().find("#inputRecibido").val());
+          var cambio = dinero-total;
+          //alert(cambio);
+          $(this).parent().parent().find("#inputCambio").val(cambio);
+      }
+      
       function actCant() {
         var precioU = parseFloat($(this).parent().parent().find("#inputPrecioU").val());
         var cantidad = parseInt($(this).parent().parent().find("#inputCant").val());
@@ -203,6 +230,13 @@ else {
         });
         total = total.toFixed(2);
         $("#inputTotal").val(total);
+        
+        //calculamos cambio
+        var total = parseFloat($("#inputTotal").val());
+        var dinero = parseFloat($("#inputRecibido").val());
+        var cambio = dinero-total;
+        //console.log(total);
+        $("#inputCambio").val(cambio);
       }
 
       function actTodo() {
