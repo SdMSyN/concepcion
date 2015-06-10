@@ -27,9 +27,12 @@
         $optStockStore .= '<label for="inputWeek">Semana</label>';
         $optStockStore .= '<input type="week" id="inputWeek" name="inputWeek" class="form-control" >';
     $optStockStore .= '</div>';
-    $optStockStore .= '<button type="button" id="generateReport" class="btn btn-primary generateReport">Generar</button>';
-    $optStockStore .= '<button type="button" class="btn btn-default cleanReport">Limpiar</button>';
-    $optStockStore .= '<button type="button" class="btn btn-default reportStock">Almacén</button>';
+    $optStockStore .= '<div class="col-sm-12 text-center">';
+    $optStockStore .= '<button type="button" id="generateReport" class="btn btn-primary generateReport">Mostrar reporte tienda</button>&nbsp;&nbsp;&nbsp;';
+    $optStockStore .= '<button type="button" class="btn btn-default cleanReport">Limpiar filtro</button>&nbsp;&nbsp;&nbsp;';
+    $optStockStore .= '<button type="button" class="btn btn-primary reportStock">Mostrar reporte almacén</button>&nbsp;&nbsp;&nbsp;';
+    $optStockStore .= '<a href="javascript:void(0)" id="imprime" class="btn btn-success">Imprimir<span class="glyphicon glyphicon-print"></span></a>';
+    $optStockStore .= '</div>';
     $optStockStore .= '</form>';
 
     echo $optStockStore;

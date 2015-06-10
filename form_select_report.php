@@ -44,7 +44,7 @@ else {
       <div class="col-md-12 btnFiltros">
         
       </div>
-      <div class="col-md-12 report">
+      <div class="col-md-12 report" id="myPrintArea">
           <table class="table table-striped" id="tableReport">
               <thead>
                   <tr>
@@ -64,7 +64,7 @@ else {
       </div>
     </div>
   </div><!-- fin container -->
-
+  
   <script type="text/javascript">
     $(document).ready(function () {
       $('#inputStore').focus();
@@ -141,6 +141,11 @@ else {
          $("#inputMonth").val(""); 
          $("#inputWeek").val(""); 
       });
+    });
+    
+    //$('#imprime').click(function() {
+    $(".btnFiltros").on("click", "#imprime", function(){
+        $("div#myPrintArea").printArea();
     });
   </script>
 

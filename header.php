@@ -21,6 +21,7 @@
     <script src="assets/js/additional-methods.min.js"></script>
     <script src="assets/js/jquery-validate.bootstrap-tooltip.min.js"></script>
     <script src="assets/js/application.js"></script>
+    <script src="assets/js/jquery.PrintArea.js"></script>
     <!--
         <script src="assets/js/typeahead.js"></script>
         <script src="assets/js/typeahead.jquery.js"></script>
