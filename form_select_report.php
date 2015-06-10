@@ -48,7 +48,7 @@ else {
           <table class="table table-striped" id="tableReport">
               <thead>
                   <tr>
-                      <th>Id</th>
+                      <th>#</th>
                       <th>Producto</th>
                       <th>C.U.</th>
                       <th>Cant.</th>

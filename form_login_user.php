@@ -21,7 +21,7 @@ else {
 	  <div class="error"></div>
 	  <div class="form-group">
 	    <label>Usuario:</label>
-	    <input type="text" id="inputPassUser" name="inputPassUser" class="form-control" >
+            <input type="password" id="inputPassUser" name="inputPassUser" class="form-control" >
 	  </div>
 	    <?php include ('teclado_numerico.php'); ?>
 	  <div class="numeric-form text-center">

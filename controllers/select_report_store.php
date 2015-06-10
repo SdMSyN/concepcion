@@ -16,16 +16,20 @@
     if($action=="day"){
         $sqlGetInfoSale .= "AND fecha='$dateNow' ";
     }else{
-        if(isset($_POST['inputSellers']) && $seller != ""){
-            $sqlGetInfoSale .= " AND usuario_id='$seller' ";
-        }
-        if(isset($_POST['inputMonth']) && $month != ""){
-            $mes=($month{5}.$month{6});
-            $sqlGetInfoSale .= " AND month(fecha)='$mes' ";
-        }
-        if(isset($_POST['inputWeek']) && $week != ""){
-            $sema=($week{6}.$week{7})-1;
-            $sqlGetInfoSale .= " AND week(fecha)='$sema' ";
+        if($seller != "" && $month=="" && $week==""){
+            $sqlGetInfoSale .= "AND usuario_id='$seller' AND fecha='$dateNow' ";
+        }else{
+            if(isset($_POST['inputSellers']) && $seller != ""){
+                $sqlGetInfoSale .= " AND usuario_id='$seller' ";
+            }
+            if(isset($_POST['inputMonth']) && $month != ""){
+                $mes=($month{5}.$month{6});
+                $sqlGetInfoSale .= " AND month(fecha)='$mes' ";
+            }
+            if(isset($_POST['inputWeek']) && $week != ""){
+                $sema=($week{6}.$week{7})-1;
+                $sqlGetInfoSale .= " AND week(fecha)='$sema' ";
+            }
         }
     }
     
@@ -33,8 +37,10 @@
     $resGetInfoSale=$con->query($sqlGetInfoSale);
     $optReport='';
     if($resGetInfoSale->num_rows > 0){
+        $i=1;
+        $cantT=0;
+        $costoFT=0;
         while($rowGetInfoSale = $resGetInfoSale->fetch_assoc()){
-            $i=1;
             $idInfoSale=$rowGetInfoSale['id'];
             $sqlGetProductSale="SELECT (SELECT nombre FROM $tProduct WHERE id=$tSaleProd.producto_id) as producto, cantidad as cant, costo_unitario as cu, costo_total as ct FROM $tSaleProd WHERE venta_info_id='$idInfoSale' ";
             $resGetProductSale=$con->query($sqlGetProductSale);
@@ -51,8 +57,11 @@
                 $optReport.='<td>'.$rowGetInfoSale['hora'].'</td>';
                 $optReport.='</tr>';
                 $i++;
+                $cantT+=$rowGetProductSale['cant'];
+                $costoFT+=$rowGetProductSale['ct'];
             }
         }
+        $optReport.='<tr><td></td><td></td><td></td><td><b>'.$cantT.'</b></td><td colspan=5><b>'.$costoFT.'</b></td><td colspan=4></td></tr>';
     }else{
         $optReport = '<tr><td colspan="9">No hay ventas.</td></tr>';
     }
