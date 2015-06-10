@@ -53,8 +53,8 @@ else {
                       <th>C.U.</th>
                       <th>Cant.</th>
                       <th>C.F.</th>
-                      <th>User</th>
-                      <th>Store</th>
+                      <th>Vendedor</th>
+                      <th>Tienda</th>
                       <th>Fecha</th>
                       <th>Hora</th>
                   </tr>
@@ -115,6 +115,18 @@ else {
         $.ajax({
           type: 'POST',
           url: 'controllers/select_report_store.php?action=filter',
+          data: $('form#formSelectReport').serialize(),
+          success: function (msg) {
+            //alert(msg);
+            $('.report #tableReport tbody').html(msg);
+          }
+        });//end ajax
+      });
+      
+      $(".btnFiltros").on("click", ".reportStock", function(){
+        $.ajax({
+          type: 'POST',
+          url: 'controllers/select_report_stock.php',
           data: $('form#formSelectReport').serialize(),
           success: function (msg) {
             //alert(msg);

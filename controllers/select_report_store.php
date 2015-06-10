@@ -61,7 +61,7 @@
                 $costoFT+=$rowGetProductSale['ct'];
             }
         }
-        $optReport.='<tr><td></td><td></td><td></td><td><b>'.$cantT.'</b></td><td colspan=5><b>'.$costoFT.'</b></td><td colspan=4></td></tr>';
+        $optReport.='<tr><td></td><td><b>Totales</b></td><td></td><td><b>'.$cantT.'</b></td><td colspan=5><b>'.$costoFT.'</b></td><td colspan=4></td></tr>';
     }else{
         $optReport = '<tr><td colspan="9">No hay ventas.</td></tr>';
     }
