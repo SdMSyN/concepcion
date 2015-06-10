@@ -1,3 +1,11 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="../assets/js/jquery.min.js"></script>
+        <script src="../assets/js/bootstrap.min.js"></script>
+        <script src="../assets/js/jquery.PrintArea.js"></script>
+    </head>
+    <body>
 <?php
     include ('../config/conexion.php');
     include ('../config/variables.php');
@@ -13,6 +21,7 @@
     $sqlGetStore="SELECT * FROM $tStore WHERE id='$idStore' ";
     $resGetStore=$con->query($sqlGetStore);
     $rowGetStore=$resGetStore->fetch_assoc();
+    $cad.='<div id="myPrintArea">';
     $cad.='<p>'.$rowGetStore['nombre'].'<br>'.$rowGetStore['direccion'].'<br>'.$rowGetStore['cp'].'<br>RFC: '.$rowGetStore['rfc'].'<br>Tel: '.$rowGetStore['tel'].'</p>';
     
     //Obtenemos datos del vendedor y fecha de venta
@@ -70,6 +79,8 @@
     $cad.='</tbody></table>';
     $cad.='<p>Total: '.$total.'<br>Efectivo: '.$recibido.'<br>Cambio: '.$cambio.'</p>';
     $cad.='Gracias por su preferencia.';
+    $cad.='</div>';
+    $cad.='<p><a href="javascript:void(0)" id="imprime">Imprime</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../form_sales.php">Cancelar/Atras</a></p>';
     
     echo $cad;
     
@@ -94,3 +105,14 @@
     echo $_POST['inputTotal'].'<br>';*/
     
 ?>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#imprime').click(function() {
+            $("div#myPrintArea").printArea();
+        });
+    });
+</script>
+
+</body>
+</html>
