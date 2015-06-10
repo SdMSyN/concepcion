@@ -301,3 +301,7 @@ thead > tr > td:last-of-type{
 .tt-suggestion p {
 	margin: 0;
 }
+
+#myPrintArea .ticket, #myPrintArea table{
+    font-size: 12px;
+}

@@ -31,7 +31,7 @@
     $optStockStore .= '<button type="button" id="generateReport" class="btn btn-primary generateReport">Mostrar reporte tienda</button>&nbsp;&nbsp;&nbsp;';
     $optStockStore .= '<button type="button" class="btn btn-default cleanReport">Limpiar filtro</button>&nbsp;&nbsp;&nbsp;';
     $optStockStore .= '<button type="button" class="btn btn-primary reportStock">Mostrar reporte almacén</button>&nbsp;&nbsp;&nbsp;';
-    $optStockStore .= '<a href="javascript:void(0)" id="imprime" class="btn btn-success">Imprimir<span class="glyphicon glyphicon-print"></span></a>';
+    $optStockStore .= '<a href="javascript:void(0)" id="imprime" class="btn btn-success">Imprimir <span class="glyphicon glyphicon-print"></span></a>';
     $optStockStore .= '</div>';
     $optStockStore .= '</form>';
 
