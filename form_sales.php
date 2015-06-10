@@ -38,7 +38,7 @@ else {
             </div>
             <div class="form-group">
                 <label>Recibido:</label></br>
-                <input type="text" id="inputRecibido" name="inputRecibido" step=0.01 class="form-control calcChange" >
+                <input type="text" id="inputRecibido" name="inputRecibido" step=0.01 class="form-control calcChange" required title="Pago del cliente, obligatorio">
             </div>
             <div class="form-group">
                 <label>Cambio:</label></br>
