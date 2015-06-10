@@ -187,10 +187,10 @@ thead > tr > td:last-of-type{
 .div-img-sales{
 /*  color: whitesmoke;*/
   font-size: 1.2rem;
-  height: 12rem;
+  height: 10.5rem;
 }
 .img-sales{
-  height: 8rem;
+  height: 7.5rem;
   width: 100%;
   border-radius: 1rem;
   -webkit-box-shadow: 4px 4px 5px 0px rgba(59, 0, 178, 0.75);
@@ -198,7 +198,7 @@ thead > tr > td:last-of-type{
   box-shadow:         4px 4px 5px 0px rgba(59, 0, 178, 0.75);
 }
 .div-sales{
-  margin-bottom: .8rem;
+  margin-bottom: .5rem;
 }
 .ticket{
   min-height: 40%;
