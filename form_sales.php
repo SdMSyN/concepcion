@@ -26,25 +26,28 @@ else {
 
   <!-- Cambio dinamico -->
   <div class="row">
-    <div class="col-sm-5 sales sales-izquierda">
+    <div class="col-xs-5 sales sales-izquierda">
       <div class="ticket text-center">
-        <form id="formTicket" method="POST" action="controllers/set_sale.php" class="form-inline" >
-            <input type="hidden" name="idStore" value="<?= $idStore; ?>">
-            <input type="hidden" name="idUser" value="<?= $idUser; ?>">
-          <div class="cobrar">
-            <div class="form-group">
-                <label>Total:</label></br>
-                <input type="text" id="inputTotal" name="inputTotal" readonly step=0.01 class="form-control" >
+        <form id="formTicket" method="POST" action="controllers/set_sale.php" >
+          <input type="hidden" name="idStore" value="<?= $idStore; ?>">
+          <input type="hidden" name="idUser" value="<?= $idUser; ?>">
+          <div class="cobrar row">
+            <div class="form-group col-xs-3">
+              <label>Total:</label></br>
+              <input type="text" id="inputTotal" name="inputTotal" readonly step=0.01 class="form-control col-xs-12" >
             </div>
-            <div class="form-group">
-                <label>Recibido:</label></br>
-                <input type="text" id="inputRecibido" name="inputRecibido" step=0.01 class="form-control calcChange" >
+            <div class="form-group col-xs-3">
+              <label>Recibido:</label></br>
+              <input type="text" id="inputRecibido" name="inputRecibido" step=0.01 class="form-control calcChange" >
             </div>
-            <div class="form-group">
-                <label>Cambio:</label></br>
-                <input type="text" id="inputCambio" name="inputCambio" readonly step=0.01 class="form-control" >
+            <div class="form-group col-xs-3">
+              <label>Cambio:</label></br>
+              <input type="text" id="inputCambio" name="inputCambio" readonly step=0.01 class="form-control" >
             </div>
-            <button type="submit" class="enviarTicket btn btn-success"><i class="fa fa-money"></i> Cobrar</button>
+            <div class="form-group col-xs-3">
+              <label>Cobrar:</label></br>
+              <button type="submit" class="enviarTicket btn btn-success"><i class="fa fa-money" style="font-size: 2.2rem;"></i></button>
+            </div>
           </div>
           <div class="line"></div>
           <table id="dataTicket" class="table table-striped">
@@ -60,7 +63,6 @@ else {
             <tbody>
             </tbody>
           </table>
-
         </form>
       </div>
       <div class="teclado text-center">
