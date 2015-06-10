@@ -123,6 +123,12 @@ else {
         });//end ajax
       });
 
+      $(".btnFiltros").on("click", ".cleanReport", function(){
+         //alert("limpiando");
+         $("#inputSellers").val(""); 
+         $("#inputMonth").val(""); 
+         $("#inputWeek").val(""); 
+      });
     });
   </script>
 

@@ -28,6 +28,7 @@
         $optStockStore .= '<input type="week" id="inputWeek" name="inputWeek" class="form-control" >';
     $optStockStore .= '</div>';
     $optStockStore .= '<button type="button" id="generateReport" class="btn btn-primary generateReport">Generar</button>';
+    $optStockStore .= '<button type="button" class="btn btn-default cleanReport">Limpiar</button>';
     $optStockStore .= '</form>';
 
     echo $optStockStore;
