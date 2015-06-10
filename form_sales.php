@@ -37,8 +37,8 @@ else {
               <input type="text" id="inputTotal" name="inputTotal" readonly step=0.01 class="form-control col-xs-12" >
             </div>
             <div class="form-group col-xs-3">
-              <label>Recibido:</label></br>
-              <input type="text" id="inputRecibido" name="inputRecibido" step=0.01 class="form-control calcChange" >
+                <label>Recibido:</label></br>
+                <input type="text" id="inputRecibido" name="inputRecibido" step=0.01 class="form-control calcChange" required title="Pago del cliente, obligatorio">
             </div>
             <div class="form-group col-xs-3">
               <label>Cambio:</label></br>

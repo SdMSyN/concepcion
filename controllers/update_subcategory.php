@@ -7,7 +7,7 @@
     $categoryId = $_POST['inputCategory'];
     $subCategory=$_POST['inputSubCategory'];
     $nameImg=$_FILES['inputImg']['name'];
-    $sqlUpdateCategory="";
+    $sqlUpdateSubCategory="";
     
     if($nameImg=="" || $nameImg==NULL){
         $sqlUpdateSubCategory="UPDATE $tSubCategory SET nombre='$subCategory', categoria_id='$categoryId', updated='$dateNow', update_by='$userId' WHERE id='$subCategoryId' ";
