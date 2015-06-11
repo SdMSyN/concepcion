@@ -25,10 +25,10 @@ body{
 }
 
 .titulo{
-  padding-top: 3rem;
-  font-size: 6rem;
+  padding-top: 1rem;
+  font-size: 4rem;
   font-family: 'Playball', cursive;
-  padding-bottom: 1rem;
+  padding-bottom: .5rem;
 }
 
 .titulo-crud{
@@ -74,6 +74,15 @@ body{
 .user-name{
   color: whitesmoke;
   font-style: italic;
+}
+
+.img-round{
+  height: 300px;
+  width: 300px;
+  border-radius: 150px;
+  -webkit-box-shadow: 0px 0px 40px 0px rgba(124, 33, 158, 0.8);
+-moz-box-shadow:    0px 0px 40px 0px rgba(124, 33, 158, 0.8);
+box-shadow:         0px 0px 40px 0px rgba(124, 33, 158, 0.8);
 }
 
 /*Stock*/
@@ -242,6 +251,16 @@ thead > tr > td:last-of-type{
     color: #ecdbff;
     background-color: #4488ad;
   }
+    .titulo{
+    padding-top: .5rem;
+    font-size: 3rem;
+    padding-bottom: .5rem;
+  }
+  .img-round{
+  height: 150px;
+  width: 150px;
+  border-radius: 75px;
+  }
 }
 /*RESPONSIVE*/
 @media (max-width: 640px) {
@@ -253,12 +272,17 @@ thead > tr > td:last-of-type{
     margin-bottom: .5rem;
     margin-left: .5rem;
   }
-
-  .titulo{
-    padding-top: 1rem;
-    font-size: 4rem;
-    padding-bottom: .5rem;
+   .titulo{
+    padding-top: .3rem;
+    font-size: 2rem;
+    padding-bottom: .3rem;
   }
+  .img-round{
+  height: 100px;
+  width: 100px;
+  border-radius: 50px;
+  }
+
 }
 
 /*Autocompletar */
