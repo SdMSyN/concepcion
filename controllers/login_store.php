@@ -8,9 +8,11 @@
     
     $tmpLat = explode(".", $storeLat);
     $tmpLon = explode(".", $storeLon);
-    $lat=$tmpLat[0].".".substr($tmpLat[1], 0, 3);
-    $lon=$tmpLon[0].".".substr($tmpLon[1], 0, 3);
-    
+    //$lat=$tmpLat[0].".".substr($tmpLat[1], 0, 3);
+    //$lon=$tmpLon[0].".".substr($tmpLon[1], 0, 3);
+    $lat = $tmpLat[0];
+	$lon = $tmpLon[0];
+	
     $sqlGetStore="SELECT * FROM $tStore WHERE id='$storeId' AND password='$storePass' AND latitud LIKE '$lat%' AND longitud LIKE '$lon%' ";
 //    $sqlGetStore="SELECT * FROM $tStore WHERE id='$storeId' AND password='$storePass' ";
     $resGetStore=$con->query($sqlGetStore);
@@ -30,8 +32,8 @@
     }
     else{
         $_SESSION['sess']=false;
-        //echo "Error en la consulta<br>".$sqlGetStore."<br>".$con->error;
-        echo "Acceso denegado";
+        echo "Error en la consulta<br>".$sqlGetStore."<br>".$con->error;
+        //echo "Acceso denegado";
     }
       
 ?>

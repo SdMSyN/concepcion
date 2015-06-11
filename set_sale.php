@@ -127,7 +127,7 @@
     $rowGetStore=$resGetStore->fetch_assoc();
     $cad.='<div id="myPrintArea">';
     $cad.='<div class="col-sm-2 ticket">';
-    $cad.='<p class="text-center">"La Concepción Apizaco"<br>Sucursal: '.$rowGetStore['nombre'].'<br>Dirección: '.$rowGetStore['direccion'].'<br>CP: '.$rowGetStore['cp'].'<br>RFC: '.$rowGetStore['rfc'].'<br>Tel: '.$rowGetStore['tel'].'</p>';
+    $cad.='<p class="text-center">"La concepción Apizaco"<br>Sucursal: '.$rowGetStore['nombre'].'<br>Dirección: '.$rowGetStore['direccion'].'<br>CP: '.$rowGetStore['cp'].'<br>RFC: '.$rowGetStore['rfc'].'<br>Tel: '.$rowGetStore['tel'].'</p>';
     
     //Obtenemos datos del vendedor y fecha de venta
     $sqlGetUser="SELECT CONCAT(ap,' ',am,' ',nombre) as nombre FROM $tUser WHERE id='$idUser' ";

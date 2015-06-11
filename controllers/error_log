@@ -1,0 +1,4 @@
+[10-Jun-2015 13:38:02 America/Mexico_City] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/laconcepcionfam/public_html/config/conexion.php on line 8
+[10-Jun-2015 13:38:02 America/Mexico_City] PHP Fatal error:  Call to a member function query() on a non-object in /home/laconcepcionfam/public_html/controllers/login_admin.php on line 8
+[10-Jun-2015 13:38:06 America/Mexico_City] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/laconcepcionfam/public_html/config/conexion.php on line 8
+[10-Jun-2015 13:38:06 America/Mexico_City] PHP Fatal error:  Call to a member function query() on a non-object in /home/laconcepcionfam/public_html/controllers/login_admin.php on line 8

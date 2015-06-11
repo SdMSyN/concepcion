@@ -58,7 +58,7 @@ else {
           <div class="form-group">
             <label>Perfil</label>
             <select id="inputPerfil" name="inputPerfil" class="form-control">>
-              <?= $$optPerfils; ?>
+              <?= $optPerfils; ?>
             </select>
           </div>
           <div class="form-group">

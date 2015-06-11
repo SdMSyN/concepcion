@@ -10,14 +10,15 @@ else if (!isset($_SESSION['sessU']))
 else {
   $idStore = $_SESSION['storeId'];
   $idUser = $_SESSION['userId'];
-
+	include('config/variables.php');
+  
   $sqlGetCategories = "SELECT * FROM $tCategory WHERE activo='1' ";
   $resGetCategories = $con->query($sqlGetCategories);
   $optCategories = '';
   if ($resGetCategories->num_rows > 0) {
     while ($rowGetCategories = $resGetCategories->fetch_assoc()) {
       //$optCategories .= '<button type="button" class="clickCategory" title="'.$rowGetCategories['id'].'">'.$rowGetCategories['nombre'].'</button> ';
-      $optCategories .= '<div class="col-sm-2 div-img-sales"><img src="uploads/' . $rowGetCategories['img'] . '" class="clickCategory img-sales" title="' . $rowGetCategories['id'] . '" width="100%">' . $rowGetCategories['nombre'] . '</div>';
+      $optCategories .= '<div class="col-sm-2 div-img-sales"><img src="'.$rutaImgCat . $rowGetCategories['img'] . '" class="clickCategory img-sales" title="' . $rowGetCategories['id'] . '" width="100%">' . $rowGetCategories['nombre'] . '</div>';
     }
   } else {
     $optCategories .= 'No hay categorias disponibles';

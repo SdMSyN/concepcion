@@ -4,7 +4,8 @@
     
     $store = $_POST['storeId'];
     
-    $sqlGetSellers="SELECT id, CONCAT(nombre,' ',ap,' ',am) as nombre FROM $tUser WHERE perfil_id='3' ";
+    //$sqlGetSellers="SELECT id, CONCAT(nombre,' ',ap,' ',am) as nombre FROM $tUser WHERE perfil_id='3' ";
+    $sqlGetSellers="SELECT id, CONCAT(nombre,' ',ap,' ',am) as nombre FROM $tUser  ";
     $resGetSellers=$con->query($sqlGetSellers);
     $optSellers='<<option></option>';
     if($resGetSellers->num_rows > 0){
