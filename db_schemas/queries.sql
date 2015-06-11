@@ -14,3 +14,8 @@ ALTER TABLE  `almacenes` ADD  `created` DATE NOT NULL AFTER  `id` ,
 ADD  `user_create` INT NOT NULL AFTER  `created` ,
 ADD  `updated` DATE NOT NULL AFTER  `user_create` ,
 ADD  `user_update` INT NOT NULL AFTER  `updated` ;
+
+/* Alterar la tabla ventas_info */
+ALTER TABLE  `ventas_info` ADD  `pago` FLOAT( 8, 2 ) NOT NULL ,
+ADD  `total` FLOAT( 8, 2 ) NOT NULL ,
+ADD  `cambio` FLOAT( 8, 2 ) NOT NULL ;
