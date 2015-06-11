@@ -203,7 +203,8 @@ else {
       function calcChange(){
           var total = parseFloat($(this).parent().parent().find("#inputTotal").val());
           var dinero = parseFloat($(this).parent().parent().find("#inputRecibido").val());
-          var cambio = dinero-total;
+        if(dinero < total) alert("El dinero recibido no puede ser menor al total de la venta.");
+        var cambio = dinero-total;
           //alert(cambio);
           $(this).parent().parent().find("#inputCambio").val(cambio);
       }
