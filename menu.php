@@ -56,9 +56,16 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <?php
-        if (isset($_SESSION['perfil'])) {
+        if (isset($_SESSION['perfil']) && $_SESSION['perfil'] == "1" ) {
           echo '<li class="no-a user-name">Bienvenido ' . $_SESSION['userName'] . '</li>';
           echo '<li><a href="controllers/proc_destroy_login_admin.php">Cerrar Sesión</a></li>';
+        }else if(isset($_SESSION['perfil']) && $_SESSION['perfil'] != "1"){
+          echo '<li class="no-a user-name">Bienvenido ' . $_SESSION['userName'] . '</li>';
+          echo '<li><a href="controllers/proc_destroy_login.php">Cerrar Sesión</a></li>';
+        }else{
+          //echo '<li class="no-a user-name">Bienvenido ' . $_SESSION['userName'] . '</li>';
+          //echo '<li><a href="controllers/proc_destroy_login_admin.php">Cerrar Sesión</a></li>';
+            echo '<li>¿Seguro que iniciaste Sesión?</li>';
         }
         ?>
       </ul>
