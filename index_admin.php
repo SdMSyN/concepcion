@@ -11,11 +11,13 @@ else {
   ?>
   <!-- Cambio dinamico -->
   <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="titulo text-center">
-          Bienvenido <?php $_SESSION['userName'] ?>
-        </div>
+    <div class="row text-center">
+      <div class="col-xs-12">
+            <img src="assets/img/bginicioA.jpg" class="img-round"> 
+      </div>
+      <div class="col-md-12 titulo">
+        BIENVENIDO AL SISTEMA ADMINISTRATIVO DE LA <br>
+        PANADERIA LA CONCEPCION FAM
       </div>	  
     </div>
   </div>
