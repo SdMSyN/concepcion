@@ -50,6 +50,15 @@ else {
               <button type="submit" class="enviarTicket btn btn-success"><i class="fa fa-money" style="font-size: 2.2rem;"></i></button>
             </div>
           </div>
+          <div class="cobrar row">
+              <div class="form-group col-xs-3">
+                <label><input type="checkbox" id="inputDonacion" name="inputDonacion" class="checkbox form-control">¿Donar?</label>
+              </div>
+              <div class="form-group col-xs-9 form-inline">
+                  <label>Administrador</label>
+                      <input type="password" id="inputAdmin" name="inputAdmin" class="checkbox form-control" readonly >
+              </div>
+          </div>
           <div class="line"></div>
           <table id="dataTicket" class="table table-striped">
             <thead>
@@ -203,11 +212,32 @@ else {
       function calcChange(){
           var total = parseFloat($(this).parent().parent().find("#inputTotal").val());
           var dinero = parseFloat($(this).parent().parent().find("#inputRecibido").val());
-        if(dinero < total) alert("El dinero recibido no puede ser menor al total de la venta.");
+        if(dinero < total){
+            //alert("El dinero recibido no puede ser menor al total de la venta.");
+            $(this).parent().parent().find(".enviarTicket").attr("disabled", true);
+        }else
+            $(this).parent().parent().find(".enviarTicket").removeAttr("disabled");
         var cambio = dinero-total;
           //alert(cambio);
           $(this).parent().parent().find("#inputCambio").val(cambio);
       }
+      
+      $("#inputDonacion").click(function(){
+          if($('#inputDonacion').is(':checked')){
+              $("#inputRecibido").attr("disabled", true);
+              $("#inputAdmin").attr("readonly", false);
+            //$(this).parent().parent().find("#inputRecibido").attr("disabled", true);
+            //$(this).parent().parent().find("#inputAdmin").attr("readonly", true);
+            //inputAdmin
+          }
+          else{
+              $("#inputRecibido").removeAttr("disabled");
+              $("#inputAdmin").attr("readonly", true);
+              //$(this).parent().parent().find("#inputRecibido").removeAttr("disabled");
+              //$(this).parent().parent().find("#inputAdmin").attr("readonly", false);
+          }
+          //alert("Donando sangre");
+      });
       
       function actCant() {
         var precioU = parseFloat($(this).parent().parent().find("#inputPrecioU").val());
