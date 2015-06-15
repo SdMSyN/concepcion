@@ -22,4 +22,9 @@
         $tSaleInfo="ventas_info";
         $tSaleProd="ventas_prod";
         $tEst="estatus";
+        $tOrderInfo="pedidos_info";
+        $tOrderPay="pedidos_pagos";
+        $tOrderProd="pedidos_prod";
+        $tOrderEst="pedido_est";
+        $tOrderEstPay="pedido_est_pago";
 ?>

@@ -70,7 +70,7 @@
         <?php
       } else {
         ?>
-        <a class="navbar-brand" href="../form_login_store.php">Inicio</a>
+        <a class="navbar-brand" href="../form_sales.php">Inicio</a>
         <a class="navbar-brand" href="../form_orders.php">Pedidos</a>
         <?php
       }
@@ -116,49 +116,41 @@
 <?php
     include ('../config/conexion.php');
     include ('../config/variables.php');
+    
   
     $idStore=$_POST['idStore'];
     $idUser=$_POST['idUser'];
     
-    (isset($_POST['inputDonacion'])) ? $dona=$_POST['inputDonacion'] : $dona="false";
-    ($dona!="on") ? $recibido=$_POST['inputRecibido'] : $recibido="0.00";
+    //(isset($_POST['inputDonacion'])) ? $dona=$_POST['inputDonacion'] : $dona="false";
     $total=$_POST['inputTotal'];
-    ($dona!="on") ? $cambio=$_POST['inputCambio'] : $cambio="0.00";
-    ($dona=="on") ? $idAdmin=$_POST['inputAdmin'] : $idAdmin="";
+    $recibido=$_POST['inputRecibido'];
+    $aPagar=$_POST['inputPago'];
+    $cambio=$_POST['inputCambio'];
+    $cliente=$_POST['inputNameClient'];
+    $fecEntrega=$_POST['inputFecEntrega'];
+    //($dona=="on") ? $idAdmin=$_POST['inputAdmin'] : $idAdmin="";
     $cad='';
     //Obtenemos datos de la tienda
-    //echo '<h2>'.$dona.'</h2>';
-    
-    $donarAct=true;
-    if($dona=="on"){
-        $sqlGetUserDon="SELECT id FROM $tUser WHERE password='$idAdmin' AND perfil_id='1' ";
-        $resGetUserDon=$con->query($sqlGetUserDon);
-        if($resGetUserDon->num_rows >0){
-            $rowGetUserDon=$resGetUserDon->fetch_assoc();
-            $idUser=$rowGetUserDon['id'];
-        }else{
-            $donarAct=false;
-        }
-    }
-    //echo '<div class="row text-center">'.$cad.'<br>User: '.$idUser.'<br>'.$donarAct.'</div>';
-    if($donarAct==true){
-        $sqlGetStore="SELECT * FROM $tStore WHERE id='$idStore' ";
-        $resGetStore=$con->query($sqlGetStore);
-        $rowGetStore=$resGetStore->fetch_assoc();
-        $cad.='<div id="myPrintArea">';
-        $cad.='<div class="col-sm-2 ticket">';
-        $cad.='<p class="text-center">"La Concepción Apizaco"<br>Sucursal: '.$rowGetStore['nombre'].'<br>Dirección: '.$rowGetStore['direccion'].'<br>CP: '.$rowGetStore['cp'].'<br>RFC: '.$rowGetStore['rfc'].'<br>Tel: '.$rowGetStore['tel'].'</p>';
 
-        //Obtenemos datos del vendedor y fecha de venta
-        $sqlGetUser="SELECT CONCAT(ap,' ',am,' ',nombre) as nombre FROM $tUser WHERE id='$idUser' ";
-        $resGetUser=$con->query($sqlGetUser);
-        $rowGetUser=$resGetUser->fetch_assoc();
-        $cad.='<p class="text-center">Le atendio: '.$rowGetUser['nombre'].'</br>Fecha: '.$dateNow.'<br>Hora: '.$timeNow.'</p>';
+    $sqlGetStore="SELECT * FROM $tStore WHERE id='$idStore' ";
+    $resGetStore=$con->query($sqlGetStore);
+    $rowGetStore=$resGetStore->fetch_assoc();
+    $cad.='<div id="myPrintArea">';
+    $cad.='<div class="col-sm-2 ticket">';
+    $cad.='<p class="text-center">"La Concepción Apizaco"<br>Sucursal: '.$rowGetStore['nombre'].'<br>Dirección: '.$rowGetStore['direccion'].'<br>CP: '.$rowGetStore['cp'].'<br>RFC: '.$rowGetStore['rfc'].'<br>Tel: '.$rowGetStore['tel'].'</p>';
 
+    //Obtenemos datos del vendedor y fecha de venta
+    $sqlGetUser="SELECT CONCAT(ap,' ',am,' ',nombre) as nombre FROM $tUser WHERE id='$idUser' ";
+    $resGetUser=$con->query($sqlGetUser);
+    $rowGetUser=$resGetUser->fetch_assoc();
+    $cad.='<p class="text-center">Le atendio: '.$rowGetUser['nombre'].'</br>Fecha: '.$dateNow.'<br>Hora: '.$timeNow.'</p>';
 
-        $sqlCreateInfoSale="INSERT INTO $tSaleInfo (usuario_id, tienda_id, fecha, hora, pago, total, cambio) VALUES ('$idUser', '$idStore', '$dateNow', '$timeNow', '$recibido', '$total', '$cambio' )";
-        if($con->query($sqlCreateInfoSale) === TRUE){
-            $idInfoSale=$con->insert_id;
+    $sqlCreateInfoOrder="INSERT INTO $tOrderInfo (usuario_id, tienda_id, nombre_cliente, fecha, hora, total, est_pedido_id, est_pedido_pago_id, fecha_entrega) VALUES ('$idUser', '$idStore', '$cliente', '$dateNow', '$timeNow', '$total', '1', '1', '$fecEntrega' )";
+    if($con->query($sqlCreateInfoOrder) === TRUE){
+        $idInfoOrder=$con->insert_id;
+        
+        $sqlCreatePayOrder="INSERT INTO $tOrderPay (pedido_info_id, pago, recibido, cambio, usuario_id) VALUES ('$idInfoOrder', '$aPagar', '$recibido', '$cambio', '$idUser') ";
+        if($con->query($sqlCreatePayOrder) === TRUE){
             $cad.='<table><thead><tr><th>Producto</th><th>C.U.</th><th>Cant.</th><th>C.T.</th></tr></thead><tbody>';
             for($i=0; $i<count($_POST['id']); $i++){
                 $idProduct=$_POST['id'][$i];
@@ -166,55 +158,37 @@
                 $costoU=$_POST['inputPrecioU'][$i];
                 $costoF=$_POST['inputPrecioF'][$i];
 
-                $sqlInsertProductSale="INSERT INTO $tSaleProd (producto_id, venta_info_id, cantidad, costo_unitario, costo_total) VALUES ('$idProduct', '$idInfoSale', '$cant', '$costoU', '$costoF') ";
-                if($con->query($sqlInsertProductSale) === TRUE){
-                    $sqlGetCantStock="SELECT cantidad FROM $tStock WHERE producto_id='$idProduct' AND tienda_id='$idStore'";
-                    $resGetCantStock=$con->query($sqlGetCantStock);
-                    if($resGetCantStock->num_rows > 0){
-                        $rowGetCantStock=$resGetCantStock->fetch_assoc();
-                        $cantStock = $rowGetCantStock['cantidad'] - $cant;
-                        $sqlUpdStock="UPDATE $tStock SET cantidad='$cantStock' WHERE producto_id='$idProduct' AND tienda_id='$idStore'  ";
-                        if($con->query($sqlUpdStock) === TRUE){
-                            $sqlGetProduct="SELECT nombre FROM $tProduct WHERE id='$idProduct' ";
-                            $resGetProduct=$con->query($sqlGetProduct);
-                            $rowGetProduct=$resGetProduct->fetch_assoc();
-                            $productName=$rowGetProduct['nombre'];
-                            $cad.='<tr>';
-                            $cad.='<td>'.$productName.'</td>';
-                            $cad.='<td class="text-right">'.$costoU.'</td>';
-                            $cad.='<td class="text-right">'.$cant.'</td>';
-                            $cad.='<td class="text-right">'.$costoF.'</td>';
-                            $cad.='</tr>';
-                            //header("Location: ../form_sales.php");
-                            //echo "true";
-                        }else{
-                            echo "Error al modificar cantidades de almacén.<br>".$con->error;
-                        }
-                    }else{
-                        echo "Error al buscar producto en almacén.<br>".$con->error;
-                    }
+                $sqlInsertProductOrder="INSERT INTO $tOrderProd (producto_id, pedido_info_id, cantidad, costo_unitario, costo_total) VALUES ('$idProduct', '$idInfoOrder', '$cant', '$costoU', '$costoF') ";
+                if($con->query($sqlInsertProductOrder) === TRUE){
+                    $sqlGetProduct="SELECT nombre FROM $tProduct WHERE id='$idProduct' ";
+                    $resGetProduct=$con->query($sqlGetProduct);
+                    $rowGetProduct=$resGetProduct->fetch_assoc();
+                    $productName=$rowGetProduct['nombre'];
+                    $cad.='<tr>';
+                    $cad.='<td>'.$productName.'</td>';
+                    $cad.='<td class="text-right">'.$costoU.'</td>';
+                    $cad.='<td class="text-right">'.$cant.'</td>';
+                    $cad.='<td class="text-right">'.$costoF.'</td>';
+                    $cad.='</tr>';
                 }else{
-                    echo "Error al crear la lista de productos vendidos.<br>".$con->error;
+                    echo "Error al crear la lista de productos del pedido.<br>".$con->error;
                 }
             }//end for
         }else{
-            echo "Error al crear información de la venta.<br>".$con->error;
+            echo "Error al crear datos de pago del pedido.";
         }
-
-        $cad.='</tbody></table>';
-        $cad.='<p class="text-right">Total: '.$total.'<br>Efectivo: '.$recibido.'<br>Cambio: '.$cambio.'</p>';
-        if($dona=="on") $cad.='<p class="text-center"><b>DONACIÓN</b></p>';
-        $cad.='<p class="text-center">Gracias por su preferencia.</p>';
-        $cad.='</div><div class="col-sm-10"></div>';//Fin col-sm-2
-        $cad.='</div></div>';//Fin área imprime -- Fin row
-        $cad.='<div class="row"><p><a href="javascript:void(0)" id="imprime" class="btn btn-success">Imprime <span class="glyphicon glyphicon-print"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../form_sales.php">Cancelar/Atrás</a></p></div>';
-
-        echo $cad;
-    }//end else $donarAct
-    else{
-        $cad.='<div class="col-sm-12 text-center"><h3>No se puede donar ya que el administrador es incorrecto.</h3><br><a href="../form_sales.php">Cancelar/Atrás</a></div></div>';
-        echo $cad;
+    }else{
+        echo "Error al crear información del pedido.<br>".$con->error;
     }
+
+    $cad.='</tbody></table>';
+    $cad.='<p class="text-right">Total: '.$total.'<br>Pagado: '.$aPagar.'<br>Efectivo: '.$recibido.'<br>Cambio: '.$cambio.'</p>';
+    $cad.='<p class="text-center">Gracias por su preferencia.</p>';
+    $cad.='</div><div class="col-sm-10"></div>';//Fin col-sm-2
+    $cad.='</div></div>';//Fin área imprime -- Fin row
+    $cad.='<div class="row"><p><a href="javascript:void(0)" id="imprime" class="btn btn-success">Imprime <span class="glyphicon glyphicon-print"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../form_orders.php">Cancelar/Atrás</a></p></div>';
+
+    echo $cad;
 
 ?>
 

@@ -22,6 +22,8 @@
       } elseif (isset($_SESSION['perfil']) && $_SESSION['perfil'] == "3" && isset($_SESSION['sess'])) {
         ?>
         <a class="navbar-brand" href="form_sales.php">Inicio</a>
+        <a class="navbar-brand" href="form_orders.php">Pedidos</a>
+        <a class="navbar-brand" href="form_orders_est.php">Seguimiento de pedidos</a>
         <?php
       } else {
         ?>

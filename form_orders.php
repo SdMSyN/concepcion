@@ -12,7 +12,7 @@ else {
   $idUser = $_SESSION['userId'];
 	include('config/variables.php');
   
-  $sqlGetCategories = "SELECT * FROM $tCategory WHERE activo='1' ";
+  $sqlGetCategories = "SELECT * FROM $tCategory ";
   $resGetCategories = $con->query($sqlGetCategories);
   $optCategories = '';
   if ($resGetCategories->num_rows > 0) {
@@ -28,31 +28,46 @@ else {
   <!-- Cambio dinamico -->
   <div class="row">
       <div class="titulo-crud text-center">
-        Ventas
+        Pedidos
       </div>
     <div class="col-xs-5 sales sales-izquierda">
       <div class="ticket text-center">
-        <form id="formTicket" method="POST" action="controllers/set_sale.php" >
+        <form id="formTicket" method="POST" action="controllers/set_order.php" >
           <input type="hidden" name="idStore" value="<?= $idStore; ?>">
           <input type="hidden" name="idUser" value="<?= $idUser; ?>">
           <div class="cobrar row">
-            <div class="form-group col-xs-3">
+            <div class="form-group col-xs-4">
               <label>Total:</label></br>
               <input type="text" id="inputTotal" name="inputTotal" readonly step=0.01 class="form-control col-xs-12" >
             </div>
-            <div class="form-group col-xs-3">
-                <label>Recibido:</label></br>
-                <input type="text" id="inputRecibido" name="inputRecibido" step=0.01 class="form-control calcChange" required title="Pago del cliente, obligatorio">
+            <div class="form-group col-xs-4">
+              <label>Nombre cliente:</label></br>
+              <input type="text" id="inputNameClient" name="inputNameClient" class="form-control col-xs-12" required title="Nombre del cliente, obligatorio">
             </div>
-            <div class="form-group col-xs-3">
-              <label>Cambio:</label></br>
-              <input type="text" id="inputCambio" name="inputCambio" readonly step=0.01 class="form-control" >
-            </div>
-            <div class="form-group col-xs-3">
+            <div class="form-group col-xs-4">
               <label>Cobrar:</label></br>
               <button type="submit" class="enviarTicket btn btn-success"><i class="fa fa-money" style="font-size: 2.2rem;"></i></button>
             </div>
           </div>
+          <div class="cobrar row">
+            <div class="form-group col-xs-2">
+                <label>A pagar:</label></br>
+                <input type="text" id="inputPago" name="inputPago" step=0.01 class="form-control calcChange" required title="Pago del cliente, obligatorio">
+            </div>
+            <div class="form-group col-xs-2">
+                <label>Recibido:</label></br>
+                <input type="text" id="inputRecibido" name="inputRecibido" step=0.01 class="form-control calcChange" required title="Dinero que entrega el cliente, obligatorio">
+            </div>
+            <div class="form-group col-xs-2">
+              <label>Cambio:</label></br>
+              <input type="text" id="inputCambio" name="inputCambio" readonly step=0.01 class="form-control" >
+            </div>
+            <div class="form-group col-xs-4">
+              <label>Fecha de entrega:</label></br>
+              <input type="date" id="inputFecEntrega" name="inputFecEntrega" class="form-control" required title="Fecha de entrega del pedido, obligatoria." min="<?= $dateNow; ?>">
+            </div>
+          </div>
+          <!-- ¿Se podrían donar los pedidos?
           <div class="cobrar row">
               <div class="form-group col-xs-3">
                 <label><input type="checkbox" id="inputDonacion" name="inputDonacion" class="checkbox form-control">¿Donar?</label>
@@ -62,6 +77,7 @@ else {
                       <input type="password" id="inputAdmin" name="inputAdmin" class="checkbox form-control" readonly >
               </div>
           </div>
+          -->
           <div class="line"></div>
           <table id="dataTicket" class="table table-striped">
             <thead>
@@ -127,14 +143,14 @@ else {
         //alert(category);
         $.ajax({
           type: "POST",
-          url: "controllers/select_sales_sub_categories.php",
+          url: "controllers/select_orders_sub_categories.php",
           data: {idCategory: category},
           success: function (msg) {
             //alert(msg);
             if (msg == "false") {
               $.ajax({
                 type: "POST",
-                url: "controllers/select_sales_sub_products.php",
+                url: "controllers/select_orders_sub_products.php",
                 data: {idCategory: category, tarea: "catProduct", idStore: <?= $idStore; ?>},
                 success: function (msg2) {
                   $(".productSubCategory").html('');
@@ -150,12 +166,11 @@ else {
       });
 
       $(".productSubCategory").on("click", ".clickSubCategory", function () {
-        //$(".clickSubCategory").click(function(){
         var subCategory = $(this).attr("title");
         //alert(subCategory);
         $.ajax({
           type: "POST",
-          url: "controllers/select_sales_sub_products.php",
+          url: "controllers/select_orders_sub_products.php",
           data: {idSubCategory: subCategory, tarea: "subProduct", idStore: <?= $idStore; ?>},
           success: function (msg) {
             $(".productInfo").html(msg);
@@ -168,7 +183,7 @@ else {
         //alert(product);
         $.ajax({
           type: "POST",
-          url: "controllers/select_sales_product.php",
+          url: "controllers/select_orders_product.php",
           data: {idProduct: product, idStore: <?= $idStore; ?>},
           success: function (msg) {
             $(".ticket #dataTicket tbody").append(msg);
@@ -186,9 +201,7 @@ else {
       })
 
       $(".ticket #dataTicket tbody").on("focus", "#inputCant", function () {
-        //alert("focus Cantidad");
         input = $(this);
-        //banFocusInput = true;
         actTodo();
       });
 
@@ -196,64 +209,47 @@ else {
         actTodo();
       });
 
-      //$(".teclado #teclado_numerico_2").on("keyup change click keyprees kewdown", ".cant", actCant);
       $(".teclado #teclado_numerico_2").on("click", function () {
         actTodo();
       });
 
       $(".ticket #dataTicket tbody").on("keyup change blur keypress keydown", ".cant", actCant);
 
-      /*$("#formTicket").on("change blur click", ".calcChange", function(){
-          var total = parseFloat($(this).parent().parent().find("#inputTotal").val());
-          var dinero = parseFloat($(this).val());
-          var cambio = dinero-total;
-          //alert(cambio);
-          $("#inputCambio").val(cambio);
-          calcChange();
-      });*/
       $("#formTicket").on("change blur click", ".calcChange", calcChange);
+      
       function calcChange(){
-          var total = parseFloat($(this).parent().parent().find("#inputTotal").val());
-          var dinero = parseFloat($(this).parent().parent().find("#inputRecibido").val());
-        if(dinero < total){
+          var pago = parseFloat($(this).parent().parent().find("#inputPago").val());
+          var recibido = parseFloat($(this).parent().parent().find("#inputRecibido").val());
+        if(recibido < pago){
             //alert("El dinero recibido no puede ser menor al total de la venta.");
-            $(this).parent().parent().find(".enviarTicket").attr("disabled", true);
+            $(".enviarTicket").attr("disabled", true);
         }else
-            $(this).parent().parent().find(".enviarTicket").removeAttr("disabled");
-        var cambio = dinero-total;
+            $(".enviarTicket").removeAttr("disabled");
+        var cambio = recibido-pago;
           //alert(cambio);
           $(this).parent().parent().find("#inputCambio").val(cambio);
       }
       
+      /* Por si se dona el pedido
       $("#inputDonacion").click(function(){
           if($('#inputDonacion').is(':checked')){
               $("#inputRecibido").attr("disabled", true);
               $("#inputAdmin").attr("readonly", false);
-            //$(this).parent().parent().find("#inputRecibido").attr("disabled", true);
-            //$(this).parent().parent().find("#inputAdmin").attr("readonly", true);
-            //inputAdmin
           }
           else{
               $("#inputRecibido").removeAttr("disabled");
               $("#inputAdmin").attr("readonly", true);
-              //$(this).parent().parent().find("#inputRecibido").removeAttr("disabled");
-              //$(this).parent().parent().find("#inputAdmin").attr("readonly", false);
           }
           //alert("Donando sangre");
-      });
+      });*/
       
       function actCant() {
         var precioU = parseFloat($(this).parent().parent().find("#inputPrecioU").val());
         var cantidad = parseInt($(this).parent().parent().find("#inputCant").val());
-        var cantidadMax = parseInt($(this).parent().parent().find("#inputCantMax").val());
         //alert(cantidadMax);
         if (cantidad < 0) {
           //cantidad = 0;
-          $(this).parent().parent().find("#inputCant").val("0");
-        }
-        if (cantidad > cantidadMax) {
-          //cantidad = cantidadMax;
-          $(this).parent().parent().find("#inputCant").val(cantidadMax);
+          $(this).parent().parent().find("#inputCant").val("1");
         }
         var precioF = precioU * cantidad;
         $(this).parent().parent().find("#inputPrecioF").val(precioF);
@@ -269,9 +265,9 @@ else {
         $("#inputTotal").val(total);
         
         //calculamos cambio
-        var total = parseFloat($("#inputTotal").val());
-        var dinero = parseFloat($("#inputRecibido").val());
-        var cambio = dinero-total;
+        var pago = parseFloat($("#inputPago").val());
+        var recibido = parseFloat($("#inputRecibido").val());
+        var cambio = recibido-pago;
         //console.log(total);
         $("#inputCambio").val(cambio);
       }
@@ -280,51 +276,20 @@ else {
         $(".ticket #dataTicket tbody #inputCant").each(function () {
           var precioU = parseFloat($(this).parent().parent().find("#inputPrecioU").val());
           var cantidad = parseInt($(this).parent().parent().find("#inputCant").val());
-          var cantidadMax = parseInt($(this).parent().parent().find("#inputCantMax").val());
           //alert(cantidadMax);
           if (cantidad < 0) {
             //cantidad = 0;
-            $(this).parent().parent().find("#inputCant").val("0");
-          }
-          if (cantidad > cantidadMax) {
-            //cantidad = cantidadMax;
-            $(this).parent().parent().find("#inputCant").val(cantidadMax);
+            $(this).parent().parent().find("#inputCant").val("1");
           }
           var precioF = precioU * cantidad;
           $(this).parent().parent().find("#inputPrecioF").val(precioF);
           calcTotal();
         })
       }
-      /*$(".ticket #dataTicket tbody").on("keyup change blur keypress keydown", ".cant", function(){
-       var precioU = parseFloat($(this).parent().parent().find("#inputPrecioU").val());
-       var cantidad = parseInt($(this).parent().parent().find("#inputCant").val());
-       var cantidadMax = parseInt($(this).parent().parent().find("#inputCantMax").val());
-       //alert(cantidadMax);
-       if(cantidad < 0){
-       //cantidad = 0;
-       $(this).parent().parent().find("#inputCant").val("0");
-       }
-       if(cantidad > cantidadMax){
-       //cantidad = cantidadMax;
-       $(this).parent().parent().find("#inputCant").val(cantidadMax);
-       }
-       var precioF = precioU * cantidad;
-       $(this).parent().parent().find("#inputPrecioF").val(precioF);
-       calcTotal();
-       });*/
-
-      /*function calcTotal(){
-       var total=0;
-       $(".ticket #dataTicket tbody #inputPrecioF").each(function(){
-       total += parseFloat($(this).val());
-       });
-       total=total.toFixed(2);
-       $("#inputTotal").val(total);
-       }*/
 
       $('input.typeahead').typeahead({
         name: 'inputCod',
-        remote: 'controllers/select_sales_product_json.php?query=%QUERY&store=<?= $idStore; ?>',
+        remote: 'controllers/select_orders_product_json.php?query=%QUERY&store=<?= $idStore; ?>',
         limit: 5
       });
 
@@ -333,7 +298,7 @@ else {
           inputCod: {required: true}
         },
         messages: {
-          inputCod: "Debes introducir una nombre o código de barras"
+          inputCod: "Debes introducir un nombre o código de barras"
         },
         tooltip_options: {
           inputCod: {trigger: "focus", placement: 'bottom'}
@@ -341,7 +306,7 @@ else {
         submitHandler: function (form) {
           $.ajax({
             type: "POST",
-            url: "controllers/select_sales_product_ticket.php",
+            url: "controllers/select_orders_product_ticket.php",
             data: $('form#formTeclado').serialize(),
             success: function (msg) {
               //alert(msg);
@@ -360,10 +325,6 @@ else {
           });
         }
       });
-      /*$('input.typeahead-devs').typeahead({
-       name: 'inputCod',
-       local: ['Sunday', 'Monday', 'Tuesday','Wednesday','Thursday','Friday','Saturday']
-       });*/
 
 
     });
