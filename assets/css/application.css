@@ -204,6 +204,21 @@ thead > tr > td:first-of-type {
 thead > tr > td:last-of-type{
  border-top-right-radius: 1rem;
 }
+
+thead > tr > th {
+ background-color: #779ECB;
+ color: whitesmoke;
+}
+
+thead > tr > th:first-of-type {
+ border-top-left-radius: 1rem;
+}
+
+thead > tr > th:last-of-type{
+ border-top-right-radius: 1rem;
+}
+
+
 /*VENTAS*/
 .div-img-sales{
 /*  color: whitesmoke;*/
