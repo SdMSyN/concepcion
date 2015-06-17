@@ -34,7 +34,7 @@
     }
     
     $optStockStore = '';
-    $optStockStore .= '<form method="POST" id="formSelectReport" class="form-inline">';
+    $optStockStore .= '<form method="POST" id="formSelectReport" class="form-inline text-center">';
     $optStockStore .= '<input type="hidden" id="inputStore" name="inputStore" value="'.$store.'">';
     $optStockStore .= '<div class="form-group">';
         $optStockStore .= '<label for="inputSellers">Vendedores</label>';

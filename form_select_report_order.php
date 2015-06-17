@@ -38,7 +38,7 @@ else {
         </div>
       </form>
       <div class="row stock-title" >
-        <div class="col-md-9 text-center" id="stockName"></div>
+        <div class="col-md-12 text-center" id="stockName"></div>
       </div>
       <div class="msg"></div>
       <div class="col-md-12 btnFiltros">
