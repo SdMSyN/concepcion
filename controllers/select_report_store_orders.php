@@ -55,7 +55,7 @@
             $optReport.='<td>'.$rowGetInfoOrder['fecha_entrega'].'</td>';
             $optReport.='<td>'.$rowGetInfoOrder['estOrder'].'</td>';
             $optReport.='<td>'.$rowGetInfoOrder['estOrderPay'].'</td>';
-            $optReport.='<td></td>';
+            $optReport.='<td><a href="form_select_order_detail.php?id='.$rowGetInfoOrder['id'].'" class="btn btn-success">Detalles</a></td>';
             $optReport.='</tr>';
         }
     }else{
