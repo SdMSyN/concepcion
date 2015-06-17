@@ -30,8 +30,16 @@ body{
   font-family: 'Playball', cursive;
   padding-bottom: .5rem;
 }
-
+.report-buttons{
+  margin-top: 1rem;
+}
 .titulo-crud{
+  font-size: 4.5rem;
+  font-family: 'Playball';
+  padding-bottom: .2rem;
+}
+
+.titulo-crud2{
   font-size: 5rem;
   font-family: 'Playball';
   padding-bottom: .7rem;

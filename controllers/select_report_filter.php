@@ -55,7 +55,7 @@
             $optStockStore .= '<select id="inputEstPay" name="inputEstPay" class="form-control" >'.$optEstsPay.'</select>';
         $optStockStore .= '</div>';
     }
-    $optStockStore .= '<div class="col-sm-12 text-center">';
+    $optStockStore .= '<div class="report-buttons">';
     $optStockStore .= '<button type="button" id="generateReport" class="btn btn-primary generateReport">Mostrar reporte pedidos</button>&nbsp;&nbsp;&nbsp;';
     $optStockStore .= '<button type="button" class="btn btn-default cleanReport">Limpiar filtro</button>&nbsp;&nbsp;&nbsp;';
     if($tarea!="order")

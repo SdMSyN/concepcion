@@ -107,7 +107,7 @@ else {
       </div>
     </div> <!--  fin IZQUIERDA-->
     <div class="col-sm-7 sales sales-derecha text-center">
-      <div class="titulo-crud">
+      <div class="titulo-crud2">
         Ventas
       </div>
       <div class="row productCategory div-sales">
