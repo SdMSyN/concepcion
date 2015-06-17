@@ -36,7 +36,8 @@
     $optStockStore = '';
     $optStockStore .= '<form method="POST" id="formSelectReport" class="form-inline">';
     $optStockStore .= '<input type="hidden" id="inputStore" name="inputStore" value="'.$store.'">';
-    $optStockStore .= '<div class="form-group"><label for="inputSellers">Vendedores</label>';
+    $optStockStore .= '<div class="form-group">';
+        $optStockStore .= '<label for="inputSellers">Vendedores</label>';
         $optStockStore .= '<select id="inputSellers" name="inputSellers" class="form-control">'.$optSellers.'</select>';
     $optStockStore .= '</div><div class="form-group">';
         $optStockStore .= '<label for="inputMonth">Mes</label>';
@@ -55,7 +56,7 @@
             $optStockStore .= '<select id="inputEstPay" name="inputEstPay" class="form-control" >'.$optEstsPay.'</select>';
         $optStockStore .= '</div>';
     }
-    $optStockStore .= '<div class="report-buttons">';
+    $optStockStore .= '<div class="report-buttons text-center">';
     $optStockStore .= '<button type="button" id="generateReport" class="btn btn-primary generateReport">Mostrar reporte pedidos</button>&nbsp;&nbsp;&nbsp;';
     $optStockStore .= '<button type="button" class="btn btn-default cleanReport">Limpiar filtro</button>&nbsp;&nbsp;&nbsp;';
     if($tarea!="order")
