@@ -4,14 +4,21 @@
     
     $store = $_POST['storeId'];
     
-    $sqlGetStockStore="SELECT id, cantidad, tienda_id, (SELECT nombre FROM $tProduct WHERE id=$tStock.producto_id) as producto FROM $tStock WHERE tienda_id='$store' ";
+    $sqlGetStockStore="SELECT id, cantidad, tienda_id, (SELECT nombre FROM $tProduct WHERE id=$tStock.producto_id ORDER BY categoria_id DESC) as producto, producto_id FROM $tStock WHERE tienda_id='$store' ORDER BY producto_id ASC";
+    //$sqlGetStockStore="SELECT $tStock.id, $tStock.cantidad, $tStock.tienda_id, (SELECT nombre FROM $tProduct WHERE id=$tStock.producto_id) as producto, $tStock.producto_id FROM $tStock, $tProduct WHERE tienda_id='$store' ORDER BY $tProduct.categoria_id ";
     $resGetStockStore=$con->query($sqlGetStockStore);
     $optStockStore='';
     if($resGetStockStore->num_rows > 0){
         while($rowGetStockStore = $resGetStockStore->fetch_assoc()){
+            /*$productId=$rowGetStockStore['producto_id'];
+            $sqlGetCategory="SELECT (SELECT nombre FROM $tCategory WHERE id=$tProduct.categoria_id) as category FROM $tProduct WHERE id='$productId' ";
+            $resGetCategory=$con->query($sqlGetCategory);
+            $rowGetCategory=$resGetCategory->fetch_assoc();*/
+            
             $optStockStore.='<tr>';
             $optStockStore.='<td><input type="hidden" value="'.$rowGetStockStore['id'].'" name="stockId[]" >'.$rowGetStockStore['id'].'</td>';
             $optStockStore.='<td>'.$rowGetStockStore['producto'].'</td>';
+            //$optStockStore.='<td>'.$rowGetCategory['category'].'</td>';
             $optStockStore.='<td>'.$rowGetStockStore['cantidad'].'</td>';
             $optStockStore.='<td class="col-sm-2"><input type="number" name="inputAlm[]" id="inputAlm[]" value="0" class="form-control"></td>';
             $optStockStore.='<input type="hidden" value="'.$rowGetStockStore['tienda_id'].'" name="tienda" id="tienda" ';

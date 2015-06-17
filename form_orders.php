@@ -48,7 +48,7 @@ else {
           </div>
           <div class="cobrar row">
             <div class="form-group col-xs-2">
-                <label>A pagar:</label></br>
+                <label>Abono:</label></br>
                 <input type="text" id="inputPago" name="inputPago" step=0.01 class="form-control calcChange" required title="Pago del cliente, obligatorio">
             </div>
             <div class="form-group col-xs-2">

@@ -149,7 +149,7 @@
     if($con->query($sqlCreateInfoOrder) === TRUE){
         $idInfoOrder=$con->insert_id;
         
-        $sqlCreatePayOrder="INSERT INTO $tOrderPay (pedido_info_id, pago, recibido, cambio, usuario_id) VALUES ('$idInfoOrder', '$aPagar', '$recibido', '$cambio', '$idUser') ";
+        $sqlCreatePayOrder="INSERT INTO $tOrderPay (pedido_info_id, pago, recibido, cambio, usuario_id, fecha) VALUES ('$idInfoOrder', '$aPagar', '$recibido', '$cambio', '$idUser', '$dateNow' ) ";
         if($con->query($sqlCreatePayOrder) === TRUE){
             $cad.='<table><thead><tr><th>Producto</th><th>C.U.</th><th>Cant.</th><th>C.T.</th></tr></thead><tbody>';
             for($i=0; $i<count($_POST['id']); $i++){
@@ -181,8 +181,9 @@
         echo "Error al crear información del pedido.<br>".$con->error;
     }
 
+    $porPagar=$total - $aPagar;
     $cad.='</tbody></table>';
-    $cad.='<p class="text-right">Total: '.$total.'<br>Pagado: '.$aPagar.'<br>Efectivo: '.$recibido.'<br>Cambio: '.$cambio.'</p>';
+    $cad.='<p class="text-right">Total: '.$total.'<br>Abonado: '.$aPagar.'<br>Recibido: '.$recibido.'<br>Cambio: '.$cambio.'<br><b>Por pagar: '.$porPagar.'</b></p>';
     $cad.='<p class="text-center">Gracias por su preferencia.</p>';
     $cad.='</div><div class="col-sm-10"></div>';//Fin col-sm-2
     $cad.='</div></div>';//Fin área imprime -- Fin row
@@ -202,7 +203,7 @@
 
 
   <footer class="footer">
-    <p >SOTFLUTIONS 2015</p>
+    <p >Desarrollado por <a href="http://softlutions.biz" target="_blank" ><b>SOFTLUTIONS</b></a> 2015</p>
   </footer>
   </body>
 </html>

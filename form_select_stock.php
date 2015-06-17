@@ -80,6 +80,7 @@ else {
               <tr>
                 <td>Id</td>
                 <td>Producto</td>
+                <!--<td>Categoría</td>-->
                 <td>Cantidad</td>
                 <td>Sumar/Restar</td>
               </tr>
