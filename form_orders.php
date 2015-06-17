@@ -27,9 +27,6 @@ else {
 
   <!-- Cambio dinamico -->
   <div class="row">
-      <div class="titulo-crud text-center">
-        Pedidos
-      </div>
     <div class="col-xs-5 sales sales-izquierda">
       <div class="ticket text-center">
         <form id="formTicket" method="POST" action="controllers/set_order.php" >
@@ -125,6 +122,9 @@ else {
       </div>
     </div> <!--  fin IZQUIERDA-->
     <div class="col-sm-7 sales sales-derecha text-center">
+      <div class="titulo-crud text-center">
+        Pedidos
+      </div>
       <div class="row productCategory div-sales">
         <?= $optCategories; ?>
       </div>

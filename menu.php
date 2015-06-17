@@ -21,9 +21,7 @@
         }
       } elseif (isset($_SESSION['perfil']) && $_SESSION['perfil'] == "3" && isset($_SESSION['sess'])) {
         ?>
-        <a class="navbar-brand" href="form_sales.php">Inicio</a>
-        <a class="navbar-brand" href="form_orders.php">Pedidos</a>
-        <a class="navbar-brand" href="form_orders_est.php">Seguimiento de pedidos</a>
+          <a class="navbar-brand" href="form_sales.php">Inicio</a>
         <?php
       } else {
         ?>
@@ -49,7 +47,8 @@
           <?php
         } elseif (isset($_SESSION['perfil']) && $_SESSION['perfil'] == "3" && isset($_SESSION['sess'])) {
           ?>
-          <!--          <li><a href="form_select_stock_2.php">Hola mundo</a></li>-->
+          <li><a href="form_orders.php">Pedidos</a></li>
+          <li><a href="form_orders_est.php">Seguimiento de pedidos</a></li>
           <?php
         }
         ?>

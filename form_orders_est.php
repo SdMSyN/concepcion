@@ -77,7 +77,7 @@ else {
   	      </div>
   	      <div class="modal-footer">
   		<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-  		<button type="submit" class="btn btn-primary enviarPago" >Pagar</button>
+  		<button type="submit" class="btn btn-primary enviarPago" >Pagar <i class="fa fa-money" style="font-size: 2.2rem;"></i></button>
   	      </div>
   	    </form>
   	  </div>

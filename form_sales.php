@@ -27,9 +27,6 @@ else {
 
   <!-- Cambio dinamico -->
   <div class="row">
-      <div class="titulo-crud text-center">
-        Ventas
-      </div>
     <div class="col-xs-5 sales sales-izquierda">
       <div class="ticket text-center">
         <form id="formTicket" method="POST" action="controllers/set_sale.php" >
@@ -53,13 +50,14 @@ else {
               <button type="submit" class="enviarTicket btn btn-success"><i class="fa fa-money" style="font-size: 2.2rem;"></i></button>
             </div>
           </div>
-          <div class="cobrar row">
+          <div class="cobrar row form-inline">
               <div class="form-group col-xs-3">
-                <label><input type="checkbox" id="inputDonacion" name="inputDonacion" class="checkbox form-control">¿Donar?</label>
+                <label>¿Donar?</label>
+                <input type="checkbox" id="inputDonacion" name="inputDonacion" class="checkbox form-control">
               </div>
-              <div class="form-group col-xs-9 form-inline">
+              <div class="form-group col-xs-9">
                   <label>Administrador</label>
-                      <input type="password" id="inputAdmin" name="inputAdmin" class="checkbox form-control" readonly >
+                      <input type="password" id="inputAdmin" name="inputAdmin" class="form-control" readonly >
               </div>
           </div>
           <div class="line"></div>
@@ -109,6 +107,9 @@ else {
       </div>
     </div> <!--  fin IZQUIERDA-->
     <div class="col-sm-7 sales sales-derecha text-center">
+      <div class="titulo-crud">
+        Ventas
+      </div>
       <div class="row productCategory div-sales">
         <?= $optCategories; ?>
       </div>
