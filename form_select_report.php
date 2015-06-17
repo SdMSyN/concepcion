@@ -74,7 +74,7 @@ else {
         $.ajax({
           type: 'POST',
           url: 'controllers/select_report_filter.php',
-          data: {storeId: selectStore},
+          data: {storeId: selectStore, tarea: "filter"},
           success: function (msg) {
             //alert(msg);
             $('.btnFiltros').html(msg);
