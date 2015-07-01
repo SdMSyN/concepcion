@@ -37,6 +37,7 @@ else {
         <tr>
             <th>Nombre Cliente</th>
             <th>Fecha de pedido</th>
+            <th>Fecha de entrega</th>
             <th>Total</th>
             <th>Pagado</th>
             <th>Pendiente</th>

@@ -4,7 +4,7 @@
     
     if($_GET['action'] == 'listar'){
         $nameClient= $_POST['inputNombreCliente'];
-        $sqlGetOrders = "SELECT id, nombre_cliente, fecha, total, (SELECT SUM(pago) FROM $tOrderPay WHERE pedido_info_id=$tOrderInfo.id ) as pago FROM $tOrderInfo WHERE est_pedido_id='1' ";
+        $sqlGetOrders = "SELECT id, nombre_cliente, fecha, fecha_entrega, total, (SELECT SUM(pago) FROM $tOrderPay WHERE pedido_info_id=$tOrderInfo.id ) as pago FROM $tOrderInfo WHERE est_pedido_id='1' ";
 
         // Ordenar por
         $sqlGetOrders .= ($nameClient != '') ? "AND nombre_cliente LIKE '%$nameClient%' " : "";
@@ -17,6 +17,7 @@
             $datos .= '<tr>';
             $datos .= '<td>'.$rowGetOrders['nombre_cliente'].'</td>';
             $datos .= '<td>'.$rowGetOrders['fecha'].'</td>';
+            $datos .= '<td>'.$rowGetOrders['fecha_entrega'].'</td>';
             $datos .= '<td>'.$rowGetOrders['total'].'</td>';
             $datos .= '<td>'.$rowGetOrders['pago'].'</td>';
             $datos .= '<td>'.$pend.'</td>';
