@@ -10,7 +10,7 @@ else {
   ?>
 
   <!-- Cambio dinamico -->
-  <div class="container">
+  <div class="container login_user">
     <a href="form_login_store.php" class="btn btn-primary pull-right " style="margin-top: 1rem;">Regresar</a>
     <div class="row">
       <div class="col-sm-12 col-md-offset-2 col-md-8">
@@ -74,7 +74,6 @@ else {
     // variable para indicar la pantalla para el teclado numerico
     var input = $('#inputPassUser');
   </script>
-
   <?php
 }//fin else sesión
 include ('footer.php');
