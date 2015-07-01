@@ -46,6 +46,10 @@
         $optStockStore .= '<label for="inputWeek">Semana</label>';
         $optStockStore .= '<input type="week" id="inputWeek" name="inputWeek" class="form-control" >';
     $optStockStore .= '</div>';
+    $optStockStore .= '</div><div class="form-group">';
+        $optStockStore .= '<label for="inputDay">Día</label>';
+        $optStockStore .= '<input type="date" id="inputDay" name="inputDay" class="form-control" >';
+    $optStockStore .= '</div>';
     if($tarea=="order"){
         $optStockStore .= '</div><div class="form-group">';
             $optStockStore .= '<label for="inputEst">Estatus</label>';
@@ -57,7 +61,10 @@
         $optStockStore .= '</div>';
     }
     $optStockStore .= '<div class="report-buttons text-center">';
-    $optStockStore .= '<button type="button" id="generateReport" class="btn btn-primary generateReport">Mostrar reporte pedidos</button>&nbsp;&nbsp;&nbsp;';
+    if($tarea!="order")
+        $optStockStore .= '<button type="button" id="generateReport" class="btn btn-primary generateReport">Mostrar reporte</button>&nbsp;&nbsp;&nbsp;';
+    else
+        $optStockStore .= '<button type="button" id="generateReport" class="btn btn-primary generateReport">Mostrar reporte pedidos</button>&nbsp;&nbsp;&nbsp;';
     $optStockStore .= '<button type="button" class="btn btn-default cleanReport">Limpiar filtro</button>&nbsp;&nbsp;&nbsp;';
     if($tarea!="order")
         $optStockStore .= '<button type="button" class="btn btn-primary reportStock">Mostrar reporte almacén</button>&nbsp;&nbsp;&nbsp;';

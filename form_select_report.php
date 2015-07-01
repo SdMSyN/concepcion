@@ -141,6 +141,7 @@ else {
          $("#inputSellers").val(""); 
          $("#inputMonth").val(""); 
          $("#inputWeek").val(""); 
+         $("#inputDay").val(""); 
       });
     });
     

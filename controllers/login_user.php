@@ -3,7 +3,7 @@
     include ('../config/conexion.php');
     $userPass = $_POST['inputPassUser'];
     
-    $sqlGetUser="SELECT * FROM $tUser WHERE password='$userPass' ";
+    $sqlGetUser="SELECT * FROM $tUser WHERE password='$userPass' AND activo='1' ";
     $resGetUser=$con->query($sqlGetUser);
     if($resGetUser->num_rows > 0){
         $rowGetUser=$resGetUser->fetch_assoc();
