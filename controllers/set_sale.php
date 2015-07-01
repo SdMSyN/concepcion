@@ -224,6 +224,7 @@
         $(document).ready(function () {
           $('#imprime').click(function () {
             $("div#myPrintArea").printArea();
+            setTimeout("location.href='../form_sales.php'", 1000);
           });
         });
       </script>
