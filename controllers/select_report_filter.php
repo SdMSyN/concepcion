@@ -46,6 +46,10 @@
         $optStockStore .= '<label for="inputWeek">Semana</label>';
         $optStockStore .= '<input type="week" id="inputWeek" name="inputWeek" class="form-control" >';
     $optStockStore .= '</div>';
+    $optStockStore .= '</div><div class="form-group">';
+        $optStockStore .= '<label for="inputDay">Día</label>';
+        $optStockStore .= '<input type="date" id="inputDay" name="inputDay" class="form-control" >';
+    $optStockStore .= '</div>';
     if($tarea=="order"){
         $optStockStore .= '</div><div class="form-group">';
             $optStockStore .= '<label for="inputEst">Estatus</label>';

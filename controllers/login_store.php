@@ -13,7 +13,8 @@
     $lat = $tmpLat[0];
 	$lon = $tmpLon[0];
 	
-    $sqlGetStore="SELECT * FROM $tStore WHERE id='$storeId' AND password='$storePass' AND latitud LIKE '$lat%' AND longitud LIKE '$lon%' ";
+    //$sqlGetStore="SELECT * FROM $tStore WHERE id='$storeId' AND password='$storePass' AND latitud LIKE '$lat%' AND longitud LIKE '$lon%' ";
+    $sqlGetStore="SELECT * FROM $tStore WHERE id='$storeId' AND password='$storePass' ";
 //    $sqlGetStore="SELECT * FROM $tStore WHERE id='$storeId' AND password='$storePass' ";
     $resGetStore=$con->query($sqlGetStore);
     if($resGetStore->num_rows > 0){

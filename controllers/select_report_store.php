@@ -6,6 +6,7 @@
     $seller = $_POST['inputSellers'];
     $month = $_POST['inputMonth'];
     $week = $_POST['inputWeek'];
+    $day = $_POST['inputDay'];
     $action = $_GET['action'];
     //echo $store.'--'.$sellers.'--'.$month.'--'.$week;
     
@@ -14,10 +15,10 @@
     $sqlGetInfoSale = "SELECT id, (SELECT nombre FROM $tUser WHERE id=$tSaleInfo.usuario_id) as user, (SELECT nombre FROM $tStore WHERE id=$tSaleInfo.tienda_id) as store, fecha, hora, pago, cambio FROM $tSaleInfo WHERE tienda_id='$store' ";
     
     if($action=="day"){
-        $sqlGetInfoSale .= "AND fecha='$dateNow' ";
-    }else{
-        if($seller != "" && $month=="" && $week==""){
-            $sqlGetInfoSale .= "AND usuario_id='$seller' AND fecha='$dateNow' ";
+        $sqlGetInfoSale .= " AND fecha='$dateNow' ";
+    }else{//reporte con filtro
+        if($seller != "" && $month=="" && $week=="" && $day==""){
+            $sqlGetInfoSale .= " AND usuario_id='$seller' AND fecha='$dateNow' ";
         }else{
             if(isset($_POST['inputSellers']) && $seller != ""){
                 $sqlGetInfoSale .= " AND usuario_id='$seller' ";
@@ -29,6 +30,9 @@
             if(isset($_POST['inputWeek']) && $week != ""){
                 $sema=($week{6}.$week{7})-1;
                 $sqlGetInfoSale .= " AND week(fecha)='$sema' ";
+            }
+            if(isset($_POST['inputDay']) && $day != ""){
+                $sqlGetInfoSale .= " AND fecha='$day' ";
             }
         }
     }
