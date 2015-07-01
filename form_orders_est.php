@@ -41,8 +41,8 @@ else {
             <th>Total</th>
             <th>Pagado</th>
             <th>Pendiente</th>
-            <th>Pagar</th>
             <th>Estatus</th>
+            <th>Pagar</th>
         </tr>
       </thead>
       <tbody>
