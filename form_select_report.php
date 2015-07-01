@@ -53,6 +53,7 @@ else {
                       <th>C.U.</th>
                       <th>Cant.</th>
                       <th>C.F.</th>
+                      <th>Donación</th>
                       <th>Vendedor</th>
                       <th>Tienda</th>
                       <th>Fecha</th>

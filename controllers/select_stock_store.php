@@ -4,10 +4,11 @@
     
     $store = $_POST['storeId'];
     
-    $sqlGetStockStore="SELECT id, cantidad, tienda_id, (SELECT nombre FROM $tProduct WHERE id=$tStock.producto_id ORDER BY categoria_id DESC) as producto, producto_id FROM $tStock WHERE tienda_id='$store' ORDER BY producto_id ASC";
-    //$sqlGetStockStore="SELECT $tStock.id, $tStock.cantidad, $tStock.tienda_id, (SELECT nombre FROM $tProduct WHERE id=$tStock.producto_id) as producto, $tStock.producto_id FROM $tStock, $tProduct WHERE tienda_id='$store' ORDER BY $tProduct.categoria_id ";
+    //$sqlGetStockStore="SELECT id, cantidad, tienda_id, (SELECT nombre FROM $tProduct WHERE id=$tStock.producto_id ORDER BY categoria_id DESC) as producto, producto_id FROM $tStock WHERE tienda_id='$store' ORDER BY producto_id ASC";
+    $sqlGetStockStore="SELECT $tStock.id as stockId, $tStock.cantidad as stockCant, $tStock.tienda_id as stockStore, $tStock.producto_id as stockProductId, $tProduct.categoria_id as productCategory, $tProduct.nombre as productName, $tCategory.nombre as categoryName FROM $tStock INNER JOIN $tProduct ON $tProduct.id=$tStock.producto_id INNER JOIN $tCategory ON $tCategory.id=$tProduct.categoria_id WHERE $tStock.tienda_id='$store' ORDER BY categoryName ";
     $resGetStockStore=$con->query($sqlGetStockStore);
     $optStockStore='';
+    echo $sqlGetStockStore;
     if($resGetStockStore->num_rows > 0){
         while($rowGetStockStore = $resGetStockStore->fetch_assoc()){
             /*$productId=$rowGetStockStore['producto_id'];
@@ -16,12 +17,12 @@
             $rowGetCategory=$resGetCategory->fetch_assoc();*/
             
             $optStockStore.='<tr>';
-            $optStockStore.='<td><input type="hidden" value="'.$rowGetStockStore['id'].'" name="stockId[]" >'.$rowGetStockStore['id'].'</td>';
-            $optStockStore.='<td>'.$rowGetStockStore['producto'].'</td>';
-            //$optStockStore.='<td>'.$rowGetCategory['category'].'</td>';
-            $optStockStore.='<td>'.$rowGetStockStore['cantidad'].'</td>';
+            $optStockStore.='<td><input type="hidden" value="'.$rowGetStockStore['stockId'].'" name="stockId[]" >'.$rowGetStockStore['stockId'].'</td>';
+            $optStockStore.='<td>'.$rowGetStockStore['productName'].'</td>';
+            $optStockStore.='<td>'.$rowGetStockStore['categoryName'].'</td>';
+            $optStockStore.='<td>'.$rowGetStockStore['stockCant'].'</td>';
             $optStockStore.='<td class="col-sm-2"><input type="number" name="inputAlm[]" id="inputAlm[]" value="0" class="form-control"></td>';
-            $optStockStore.='<input type="hidden" value="'.$rowGetStockStore['tienda_id'].'" name="tienda" id="tienda" ';
+            $optStockStore.='<input type="hidden" value="'.$rowGetStockStore['stockStore'].'" name="tienda" id="tienda" ';
             $optStockStore.='</tr>';
         }
         //$optStockStore.='<tr><td colspan="2"><button type="button" class="btn btn-primary" data-id="'.$store.'">Añadir producto a almacén</button></td> ';
