@@ -23,7 +23,8 @@
         $total=$rowGetTotal['total'];
         
         if($pagoPedido >= $total){
-            $sqlUpdEstPayInfo="UPDATE $tOrderInfo SET est_pedido_id='2', est_pedido_pago_id='2' WHERE id='$idPay' ";
+            //$sqlUpdEstPayInfo="UPDATE $tOrderInfo SET est_pedido_id='2', est_pedido_pago_id='2' WHERE id='$idPay' ";
+            $sqlUpdEstPayInfo="UPDATE $tOrderInfo SET est_pedido_pago_id='2' WHERE id='$idPay' ";
             if($con->query($sqlUpdEstPayInfo) === TRUE){
                 echo "true";
             }else{
