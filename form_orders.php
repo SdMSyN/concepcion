@@ -290,7 +290,7 @@ else {
       $('input.typeahead').typeahead({
         name: 'inputCod',
         remote: 'controllers/select_orders_product_json.php?query=%QUERY&store=<?= $idStore; ?>',
-        limit: 5
+        limit: 8
       });
 
       $('#formTeclado').validate({
