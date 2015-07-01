@@ -42,6 +42,7 @@ else {
             <th>Pagado</th>
             <th>Pendiente</th>
             <th>Pagar</th>
+            <th>Estatus</th>
         </tr>
       </thead>
       <tbody>
@@ -176,6 +177,30 @@ else {
             //alert(cambio);
             $(this).parent().parent().find("#inputCambio").val(cambio);
         }
+        
+        $("#data tbody").on("click", ".entregar", function(){
+            var idOrderGive = $(this).data('id');
+            if(confirm("¿Está seguro(a) que desea entregar el pedido (¿Ya te pagaron?)?") == true){
+                $.ajax({
+                    type: 'POST',
+                    url: 'controllers/update_order.php',
+                    data: {orderId: idOrderGive},
+                    success: function(msg){
+                        alert(msg);
+                        if (msg == "true") {
+                            $('.msg').css({color: "#77DD77"});
+                            $('.msg').html("Se entrego el pedido con éxito.");
+                                setTimeout(function () {
+                                  location.href = 'form_orders_est.php';
+                                }, 1500);
+                        } else {
+                            $('.msg').css({color: "#FF0000"});
+                            $('.msg').html(msg);
+                        }
+                    }
+		});
+            }//end if confirm
+        });
 
       
       $('#myModal').on('shown.bs.modal', function () {
