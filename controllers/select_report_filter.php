@@ -57,7 +57,10 @@
         $optStockStore .= '</div>';
     }
     $optStockStore .= '<div class="report-buttons text-center">';
-    $optStockStore .= '<button type="button" id="generateReport" class="btn btn-primary generateReport">Mostrar reporte pedidos</button>&nbsp;&nbsp;&nbsp;';
+    if($tarea!="order")
+        $optStockStore .= '<button type="button" id="generateReport" class="btn btn-primary generateReport">Mostrar reporte vendedor</button>&nbsp;&nbsp;&nbsp;';
+    else
+        $optStockStore .= '<button type="button" id="generateReport" class="btn btn-primary generateReport">Mostrar reporte pedidos</button>&nbsp;&nbsp;&nbsp;';
     $optStockStore .= '<button type="button" class="btn btn-default cleanReport">Limpiar filtro</button>&nbsp;&nbsp;&nbsp;';
     if($tarea!="order")
         $optStockStore .= '<button type="button" class="btn btn-primary reportStock">Mostrar reporte almacén</button>&nbsp;&nbsp;&nbsp;';
