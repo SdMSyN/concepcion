@@ -354,5 +354,5 @@ thead > tr > th:last-of-type{
 }
 
 #myPrintArea .ticket, #myPrintArea table{
-    font-size: 12px;
+    font-size: 10px;
 }
