@@ -195,7 +195,7 @@ else {
                 $('.error').html("Se añadio el producto con éxito.");
                 setTimeout(function () {
                   pintarTabla(selectStore)
-                }, 1500);
+                }, 500);
               } else {
                 $('.error').css({color: "#FF0000"});
                 $('.error').html(msg);
@@ -257,7 +257,8 @@ else {
             //alert(msg);
             if (msg == "true") {
               $('.msg').css({color: "#009900"});
-              $('.msg').html("Se añadio el producto con éxito.");
+              $('.msg').html("Se modifico el almacen con éxito");
+              alert("Se modifico el almacen con éxito");
               pintarTabla2(selectStore);
               setTimeout(function () {
                   $('.msg').empty();
