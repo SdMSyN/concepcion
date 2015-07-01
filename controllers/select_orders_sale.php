@@ -20,7 +20,7 @@
             $datos .= '<td>'.$rowGetOrders['total'].'</td>';
             $datos .= '<td>'.$rowGetOrders['pago'].'</td>';
             $datos .= '<td>'.$pend.'</td>';
-            $datos .= '<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-whatever="'.$rowGetOrders['id'].'"><i class="fa fa-money" style="font-size: 1.8rem;"></button></td>';
+            $datos .= '<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-whatever="'.$rowGetOrders['id'].'" data-pend="'.$pend.'" ><i class="fa fa-money" style="font-size: 1.8rem;"></button></td>';
             $datos .= '</tr>';
         }
         echo $datos;

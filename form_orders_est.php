@@ -60,6 +60,10 @@ else {
             <div class="error"></div>
   	    <form id="formAddPay" name="formAddPay" method="POST" >
   	      <div class="modal-body">
+                <div class="form-group">
+  		  <label>Cantidad pendiente</label>
+  		  <input type="number" id="inputPend" name="inputPend" class="form-control" readonly>
+  		</div> 
   		<div class="form-group">
   		  <label>Cantidad a pagar</label>
   		  <input type="number" id="inputPago" name="inputPago" class="form-control">
@@ -116,8 +120,10 @@ else {
         $('#myModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget)
             var recipient = button.data('whatever') 
+            var pendiente = button.data('pend')
             var modal = $(this)
             modal.find('.modal-body #inputCampo').val(recipient)
+            modal.find('.modal-body #inputPend').val(pendiente)
 	});
         
         $('#formAddPay').validate({
