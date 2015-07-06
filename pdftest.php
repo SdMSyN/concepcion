@@ -7,7 +7,7 @@ class PDF extends FPDF
 function Header()
 {
     // Arial bold 15
-    $this->SetFont('Arial','B',9);
+    $this->SetFont('Arial','B',8);
     // Movernos a la derecha
     $this->Cell(1,1);
     // Título
