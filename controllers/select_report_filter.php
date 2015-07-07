@@ -34,7 +34,7 @@
     }
     
     $optStockStore = '';
-    $optStockStore .= '<form method="POST" id="formSelectReport" class="form-inline text-center">';
+    $optStockStore .= '<form method="POST" id="formSelectReport" class="form-inline text-center" action="controllers/select_report_store_2.php" >';
     $optStockStore .= '<input type="hidden" id="inputStore" name="inputStore" value="'.$store.'">';
     $optStockStore .= '<div class="form-group">';
         $optStockStore .= '<label for="inputSellers">Vendedores</label>';
@@ -68,7 +68,10 @@
     $optStockStore .= '<button type="button" class="btn btn-default cleanReport">Limpiar filtro</button>&nbsp;&nbsp;&nbsp;';
     if($tarea!="order")
         $optStockStore .= '<button type="button" class="btn btn-primary reportStock">Mostrar reporte almacén</button>&nbsp;&nbsp;&nbsp;';
-    $optStockStore .= '<a href="javascript:void(0)" id="imprime" class="btn btn-success">Imprimir <span class="glyphicon glyphicon-print"></span></a>';
+    if($tarea=="order")
+        $optStockStore .= '<a href="javascript:void(0)" id="imprime" class="btn btn-success">Imprimir <span class="glyphicon glyphicon-print"></span></a>';
+    else
+        $optStockStore .= '<button type="submit" class="btn btn-success">Imprimir <span class="glyphicon glyphicon-print"></span></button>';
     $optStockStore .= '</div>';
     $optStockStore .= '</form>';
 
