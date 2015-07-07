@@ -17,7 +17,8 @@
             $rowGetCategory=$resGetCategory->fetch_assoc();*/
             
             $optStockStore.='<tr>';
-            $optStockStore.='<td><input type="hidden" value="'.$rowGetStockStore['stockId'].'" name="stockId[]" >'.$rowGetStockStore['stockId'].'</td>';
+            //$optStockStore.='<td><input type="hidden" value="'.$rowGetStockStore['stockId'].'" name="stockId[]" >'.$rowGetStockStore['stockId'].'</td>';
+            $optStockStore.='<input type="hidden" value="'.$rowGetStockStore['stockId'].'" name="stockId[]" >';
             $optStockStore.='<td>'.$rowGetStockStore['productName'].'</td>';
             $optStockStore.='<td>'.$rowGetStockStore['categoryName'].'</td>';
             $optStockStore.='<td>'.$rowGetStockStore['stockCant'].'</td>';

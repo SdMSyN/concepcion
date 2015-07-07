@@ -21,7 +21,7 @@
         //$datos .= '<tr><td colspan="7">'.$sqlGetCateories.'</td></tr>';
         while ($rowGetUsers = $resGetUsers->fetch_assoc()) {
             $datos .= '<tr>';
-            $datos .= '<td>'.$rowGetUsers['id'].'</td>';
+            //$datos .= '<td>'.$rowGetUsers['id'].'</td>';
             $datos .= '<td>'.$rowGetUsers['nombre'].'</td>';
             $datos .= '<td>'.$rowGetUsers['created'].'</td>';
             $datos .= '<td>'.$rowGetUsers['perfil'].'</td>';

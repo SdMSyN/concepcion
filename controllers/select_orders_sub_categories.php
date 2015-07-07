@@ -9,7 +9,7 @@
     $optSubCategories='';
     if($resGetSubCategories->num_rows > 0){
         while($rowGetSubCategories = $resGetSubCategories->fetch_assoc()){
-            $optSubCategories .= '<div class="col-md-2 div-img-sales"><img src="../'.$rutaImgSubCat.$rowGetSubCategories['img'].'" class="clickSubCategory img-sales" title="'.$rowGetSubCategories['id'].'">'.$rowGetSubCategories['nombre'].'</div>';
+            $optSubCategories .= '<div class="col-md-2 div-img-sales"><img src="./'.$rutaImgSubCat.$rowGetSubCategories['img'].'" class="clickSubCategory img-sales" title="'.$rowGetSubCategories['id'].'">'.$rowGetSubCategories['nombre'].'</div>';
         }
     }else{
         $optSubCategories = "false";

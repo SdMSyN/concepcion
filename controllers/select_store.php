@@ -21,7 +21,7 @@
         //$datos .= '<tr><td colspan="7">'.$sqlGetCateories.'</td></tr>';
         while ($rowGetStore = $resGetStore->fetch_assoc()) {
             $datos .= '<tr>';
-            $datos .= '<td>'.$rowGetStore['id'].'</td>';
+            //$datos .= '<td>'.$rowGetStore['id'].'</td>';
             $datos .= '<td>'.$rowGetStore['nombre'].'</td>';
             $datos .= '<td>'.$rowGetStore['direccion'].'</td>';
             $datos .= '<td>'.$rowGetStore['created'].'</td>';

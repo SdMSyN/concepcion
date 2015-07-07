@@ -73,7 +73,7 @@ else {
     <table class="table table-striped" id="data">
       <thead>
         <tr>
-            <th ><span title="id">Id</span></th>
+            <!--<th ><span title="id">Id</span></th>-->
             <th ><span title="nombre">Nombre</span></th>
             <th >Imagen</th>
             <th ><span title="created">Fecha de creación</span></th>

@@ -90,7 +90,7 @@ else {
     <table class="table table-striped" id="data">
       <thead>
         <tr>
-          <th class="t-head-first"><span title="id">Id</span></th>
+          <!--<th class="t-head-first"><span title="id">Id</span></th>-->
           <th class="t-head"><span title="nombre">Nombre</span></th>
           <th class="t-head">Dirección</th>
           <th class="t-head"><span title="created">Fecha de creación</span></th>

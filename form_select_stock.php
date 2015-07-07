@@ -78,7 +78,7 @@ else {
           <table class="table table-striped">
             <thead>
               <tr>
-                <td>Id</td>
+                <!--<td>Id</td>-->
                 <td>Producto</td>
                 <td>Categoría</td>
                 <td>Cantidad</td>

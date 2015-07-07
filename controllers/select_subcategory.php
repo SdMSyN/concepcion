@@ -22,7 +22,7 @@
         //$datos .= '<tr><td colspan="7">'.$sqlGetCateories.'</td></tr>';
         while($rowGetCategories = $resGetCategories->fetch_assoc()){
             $datos .= '<tr>';
-            $datos .= '<td>'.$rowGetCategories['id'].'</td>';
+            //$datos .= '<td>'.$rowGetCategories['id'].'</td>';
             $datos .= '<td>'.$rowGetCategories['nombre'].'</td>';
             $datos .= '<td><img src="'.$rutaImgSubCat.$rowGetCategories['img'].'" width="20%"></td>';
             $datos .= '<td>'.$rowGetCategories['category'].'</td>';
