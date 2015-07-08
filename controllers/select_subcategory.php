@@ -24,7 +24,7 @@
             $datos .= '<tr>';
             //$datos .= '<td>'.$rowGetCategories['id'].'</td>';
             $datos .= '<td>'.$rowGetCategories['nombre'].'</td>';
-            $datos .= '<td><img src="'.$rutaImgSubCat.$rowGetCategories['img'].'" width="20%"></td>';
+            $datos .= '<td><img src="'.$rutaImgSubCat.$rowGetCategories['img'].'" class="img-product-list"></td>';
             $datos .= '<td>'.$rowGetCategories['category'].'</td>';
             $datos .= '<td>'.$rowGetCategories['created'].'</td>';
             $datos .= '<td>'.$rowGetCategories['created_by'].'</td>';
@@ -34,16 +34,8 @@
                 $datos .= '<td><a class="activate" data-id="'.$rowGetCategories['id'].'" >Dar de alta</a></td>';
             else
                 $datos .= '<td><a class="delete" data-id="'.$rowGetCategories['id'].'" >Dar de baja</a></td>';
-            //$datos .= '<td style="cursor: pointer"><elim><h2><button type="button" class="elim">Dar de baja</button></h2></elim></td>';
             $datos .= '</tr>';
-            /*$datos[] = array(
-                'id' => $rowGetCategories['id'],
-                'name' => $rowGetCategories['nombre'],
-                'created' => $rowGetCategories['created'],
-                'created_by' => $rowGetCategories['created_by_user_id'],
-                'status' => $rowGetCategories['activo'],
-                'mod' => '<a href="form_update_category.php?id='.$rowGetCategories['id'].'" >Modificar</a>'
-            );*/
+
         }
         echo $datos;
     }
