@@ -44,9 +44,9 @@
         $this->Cell(12,7,'C.U.',1,0,'C');
         $this->Cell(12,7,'Cant.',1,0,'C');
         $this->Cell(12,7,'C.F.',1,0,'C');
-        $this->Cell(12,7,utf8_decode('Donación'),1,0,'C');
-        $this->Cell(30,7,'Vendedor',1,0,'C');
-        $this->Cell(30,7,'Tienda',1,0,'C');
+        $this->Cell(17,7,utf8_decode('Donación'),1,0,'C');
+        $this->Cell(28,7,'Vendedor',1,0,'C');
+        $this->Cell(25,7,'Tienda',1,0,'C');
         $this->Cell(15,7,'Fecha',1,0,'C');
         $this->Cell(15,7,'Hora',1,0,'C');    								
         // Salto de línea
@@ -106,9 +106,9 @@
         $pdf->Cell(12,7,'Totales','B',0,'C');
         $pdf->Cell(12,7,$cantT,'B',0,'C');
         $pdf->Cell(12,7,$costoFT,'B',0,'C');
-        $pdf->Cell(12,7,'','B',0,'C');
-        $pdf->Cell(30,7,'','B',0,'C');
-        $pdf->Cell(30,7,'','B',0,'C');
+        $pdf->Cell(17,7,'','B',0,'C');
+        $pdf->Cell(28,7,'','B',0,'C');
+        $pdf->Cell(25,7,'','B',0,'C');
         $pdf->Cell(15,7,'','B',0,'C');
         $pdf->Cell(15,7,'','B',1,'C');  
     }else{

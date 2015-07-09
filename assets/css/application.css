@@ -148,17 +148,17 @@ box-shadow:         0px 0px 40px 0px rgba(124, 33, 158, 0.8);
   background-color: #394d9a;
 }
 .navbar-default .navbar-toggle .icon-bar {
-  background-color: #ecf0f1;
+  background-color: #ecf0f1; 
 }
 .navbar-default .navbar-collapse,
 .navbar-default .navbar-form {
-  border-color: #ecf0f1;
+  border-color: #ecf0f1;  
 }
 .navbar-default .navbar-link {
-  color: #ecf0f1;
+  color: #ecf0f1; 
 }
 .navbar-default .navbar-link:hover {
-  color: #351174;
+  color: #351174; 
 }
 
 @media (max-width: 767px) {
