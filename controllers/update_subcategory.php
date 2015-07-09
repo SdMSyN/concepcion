@@ -46,7 +46,8 @@
     if($con->query($sqlUpdateSubCategory) === TRUE ){
         echo 'true';
     }else{
-        echo 'Error al modificar subcategoría<br>'.$con->error;
+        //echo 'Error al modificar subcategoría<br>'.$con->error;
+        echo 'Error al modificar subcategoría, verifica los datos.<br>';
     }
       
 ?>

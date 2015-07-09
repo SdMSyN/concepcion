@@ -142,7 +142,7 @@ else {
       </tr>
     </thead>
     <tbody>
-      <!-- <?= $optProducts; ?> -->
+      
     </tbody>    
   </table>
 
@@ -202,10 +202,11 @@ else {
               //alert(msg);
               if (msg == "true") {
                 $('.error').css({color: "#77DD77"});
-                $('.error').html("Se dio de baja el producto con éxito.");
-                setTimeout(function () {
+                alert("Se dio de baja el producto con éxito.");
+                /*setTimeout(function () {
                   location.href = 'form_select_product.php';
-                }, 3000);
+                }, 3000);*/
+                filtrar();
               } else {
                 $('.error').css({color: "#FF0000"});
                 $('.error').html(msg);
@@ -225,10 +226,11 @@ else {
             success: function (msg) {
               //alert(msg);
               if (msg == "true") {
-                $('.error').html("Se activo el producto con éxito.");
-                setTimeout(function () {
+                alert("Se activo el producto con éxito.");
+                /*setTimeout(function () {
                   location.href = 'form_select_product.php';
-                }, 3000);
+                }, 3000);*/
+                filtrar();
               } else {
                 $('.error').css({color: "#FF0000"});
                 $('.error').html(msg);

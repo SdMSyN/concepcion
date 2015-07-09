@@ -62,7 +62,7 @@
     }
     $optStockStore .= '<div class="report-buttons text-center">';
     if($tarea!="order")
-        $optStockStore .= '<button type="button" id="generateReport" class="btn btn-primary generateReport">Mostrar reporte</button>&nbsp;&nbsp;&nbsp;';
+        $optStockStore .= '<button type="submit" class="btn btn-success">Imprimir <span class="glyphicon glyphicon-print"></span></button><button type="button" id="generateReport" class="btn btn-primary generateReport">Mostrar reporte</button>&nbsp;&nbsp;&nbsp;';
     else
         $optStockStore .= '<button type="button" id="generateReport" class="btn btn-primary generateReport">Mostrar reporte pedidos</button>&nbsp;&nbsp;&nbsp;';
     $optStockStore .= '<button type="button" class="btn btn-default cleanReport">Limpiar filtro</button>&nbsp;&nbsp;&nbsp;';
@@ -71,7 +71,7 @@
     if($tarea=="order")
         $optStockStore .= '<a href="javascript:void(0)" id="imprime" class="btn btn-success">Imprimir <span class="glyphicon glyphicon-print"></span></a>';
     else
-        $optStockStore .= '<button type="submit" class="btn btn-success">Imprimir <span class="glyphicon glyphicon-print"></span></button>';
+        $optStockStore .= '<a href="controllers/select_report_store_stock.php?idStore='.$store.'" class="btn btn-success">Imprimir <span class="glyphicon glyphicon-print"></span></button>';
     $optStockStore .= '</div>';
     $optStockStore .= '</form>';
 

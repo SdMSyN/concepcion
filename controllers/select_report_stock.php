@@ -26,10 +26,8 @@
                 $optReport.='<td>'.$rowGetProductSale['precio'].'</td>';
                 $optReport.='<td>'.$rowGetInfoStock['cantidad'].'</td>';
                 $optReport.='<td>'.$costoF.'</td>';
-                $optReport.='<td></td>';
                 $optReport.='<td>'.$rowGetInfoStock['store'].'</td>';
                 $optReport.='<td>'.$rowGetInfoStock['updated'].'</td>';
-                $optReport.='<td></td>';
                 $optReport.='</tr>';
                 $i++;
                 $cantT+=$rowGetInfoStock['cantidad'];

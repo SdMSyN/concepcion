@@ -43,13 +43,13 @@
 		}
 	}
 	if($ban){
-		$sqlInsertProduct="INSERT INTO $tProduct (nombre, precio, img, descripcion, activo, codigo_barras, pan_frio, categoria_id, subcategoria_id, created, updated, created_by_user_id, updated_by_user_id) VALUES ('$nombre', '$precio', '$docName', '$descrip', '1', '$codBar', '$panFrio', '$categoria', '$subCategoria', '$dateNow', '$dateNow', '$userId', '$userId' ) ";
-		if($con->query($sqlInsertProduct) === TRUE){
-			echo "true";
-		}else{
-                    echo "Error al crear producto<br>".$con->error;
-                }
-		
+            $sqlInsertProduct="INSERT INTO $tProduct (nombre, precio, img, descripcion, activo, codigo_barras, pan_frio, categoria_id, subcategoria_id, created, updated, created_by_user_id, updated_by_user_id) VALUES ('$nombre', '$precio', '$docName', '$descrip', '1', '$codBar', '$panFrio', '$categoria', '$subCategoria', '$dateNow', '$dateNow', '$userId', '$userId' ) ";
+            if($con->query($sqlInsertProduct) === TRUE){
+                echo "true";
+            }else{
+                if($con->errno == "1062") echo "Error: Ya existe un producto con éste nombre";
+                else echo "Error al crear producto<br>".$con->error;
+            }
 	}else{
 		echo $error;
 	}

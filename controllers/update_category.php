@@ -44,7 +44,7 @@
     if($con->query($sqlUpdateCategory) === TRUE ){
         echo 'true';
     }else{
-        echo 'Error al modificar categoría<br>'.$con->error;
+        echo 'Error al modificar categoría<br>';
     }
       
 ?>
