@@ -15,7 +15,7 @@
     
     //echo $nombre.'--'.$precio.'--'.$descrip.'--'.$categoria.'--'.$panFrio.'--'.$nameImg;
     
-        $sqlGetNumProdcuts="SELECT * FROM $tProduct ";
+        $sqlGetNumProdcuts="SELECT * FROM $tProduct WHERE id='$productId' ";
 	$resGetNumProducts=$con->query($sqlGetNumProdcuts);
 	$countNumProducts=$resGetNumProducts->num_rows;
         $rowGetNumProducts=$resGetNumProducts->fetch_assoc();
