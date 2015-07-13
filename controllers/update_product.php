@@ -18,12 +18,14 @@
         $sqlGetNumProdcuts="SELECT * FROM $tProduct ";
 	$resGetNumProducts=$con->query($sqlGetNumProdcuts);
 	$countNumProducts=$resGetNumProducts->num_rows;
+        $rowGetNumProducts=$resGetNumProducts->fetch_assoc();
 	//echo $cadIdUser;
         if($_FILES['inputImg']['name'] != ""){
             $ext=explode(".", $_FILES['inputImg']['name']);
             $ban=false;
             $error="";
-            $docName=$countNumProducts.".".$ext[1];
+            //$docName=$countNumProducts.".".$ext[1];
+            $docName=$rowGetNumProducts['categoria_id']."_".$rowGetNumProducts['subcategoria_id']."_".$rowGetNumProducts['id'].".".$ext[1];
             //echo "--".$docName."--";
             if ($_FILES["inputImg"]["error"] > 0){
                     $error.= "Ha ocurrido un error";
