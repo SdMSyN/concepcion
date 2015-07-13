@@ -252,6 +252,11 @@ thead > tr > td:last-of-type,th:last-of-type{
   width: 110px;
 }
 
+.mygrid-wrapper-div{
+    overflow: scroll;
+    height: 300px;
+}
+
 /*FIN VENTAS*/
 
 /*RESPONSIVO*/

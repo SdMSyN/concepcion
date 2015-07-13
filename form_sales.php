@@ -61,6 +61,7 @@ else {
               </div>
           </div>
           <div class="line"></div>
+          <div class="mygrid-wrapper-div">
           <table id="dataTicket" class="table table-striped">
             <thead>
               <tr>
@@ -74,6 +75,7 @@ else {
             <tbody>
             </tbody>
           </table>
+          </div>
         </form>
       </div>
       <div class="teclado text-center">
