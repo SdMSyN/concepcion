@@ -8,7 +8,7 @@
         
         // Ordenar por
 	$est = $_POST['estatus'] - 1;
-        if($est >= 0) $sqlGetProducts .= " WHERE activo='$est' ";
+        if($est >= 0) $sqlGetProducts .= " WHERE $tProduct.activo='$est' ";
         
         //Ordenar ASC y DESC
 	$vorder = (isset($_POST['orderby'])) ? $_POST['orderby'] : "";
@@ -19,6 +19,7 @@
         }
         
         //Ejecutamos query
+        //echo '<br>query: '.$sqlGetProducts.'<br>';
         $resGetProducts = $con->query($sqlGetProducts);
         $datos = '';
         //$datos .= '<tr><td colspan="7">'.$sqlGetCateories.'</td></tr>';
