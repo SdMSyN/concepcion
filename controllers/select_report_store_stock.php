@@ -18,12 +18,12 @@
         $this->Cell(1,1);
         // Título
         $this->Cell(12,7,'#',1,0,'C');
-        $this->Cell(50,7,'Producto',1,0,'C');
+        $this->Cell(65,7,'Producto',1,0,'C');
         $this->Cell(12,7,'C.U.',1,0,'C');
         $this->Cell(12,7,'Cant.',1,0,'C');
         $this->Cell(12,7,'C.F.',1,0,'C');
         $this->Cell(30,7,'Tienda',1,0,'C');
-        $this->Cell(50,7,utf8_decode('Fecha de modificación'),1,0,'C');  								
+        $this->Cell(40,7,utf8_decode('Fecha de modificación'),1,0,'C');  								
         // Salto de línea
         $this->Ln(9);
       }
@@ -57,24 +57,24 @@
             while($rowGetProductSale = $resGetProductSale->fetch_assoc()){
                 $costoF=$rowGetInfoStock['cantidad']*$rowGetProductSale['precio'];
                 $pdf->Cell(12,7,$i,'B',0,'C');
-                $pdf->Cell(50,7,utf8_decode($rowGetProductSale['nombre']),'B',0,'C');
+                $pdf->Cell(65,7,utf8_decode($rowGetProductSale['nombre']),'B',0,'C');
                 $pdf->Cell(12,7,$rowGetProductSale['precio'],'B',0,'C');
                 $pdf->Cell(12,7,$rowGetInfoStock['cantidad'],'B',0,'C');
                 $pdf->Cell(12,7,$costoF,'B',0,'C');
                 $pdf->Cell(30,7,utf8_decode($rowGetInfoStock['store']),'B',0,'C');
-                $pdf->Cell(50,7,$rowGetInfoStock['updated'],'B',1,'C');
+                $pdf->Cell(40,7,$rowGetInfoStock['updated'],'B',1,'C');
                 $i++;
                 $cantT+=$rowGetInfoStock['cantidad'];
                 $costoFT+=$costoF;
             }
         }
         $pdf->Cell(12,7,'','B',0,'C');
-        $pdf->Cell(50,7,'Dinero en almacén','B',0,'C');
+        $pdf->Cell(65,7,'Dinero en almacén','B',0,'C');
         $pdf->Cell(12,7,$cantT,'B',0,'C');
-        $pdf->Cell(12,7,'Cantidad'.$costoFT,'B',0,'C');
+        $pdf->Cell(25,7,'Cantidad '.$costoFT,'B',0,'C');
         $pdf->Cell(12,7,'','B',0,'C');
         $pdf->Cell(30,7,'','B',0,'C');
-        $pdf->Cell(50,7,'','B',1,'C'); 
+        $pdf->Cell(27,7,'','B',1,'C'); 
     }else{
         $pdf->Cell(145, 7, 'No hay ventas.', 'B', 0, 'C');
     }
