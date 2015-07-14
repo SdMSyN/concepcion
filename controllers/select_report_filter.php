@@ -85,6 +85,7 @@
           $optStockStore .= '</div>';
       }
     $optStockStore .= '</div>';
+    
     $optStockStore .= '<div class="col-md-12">';
       $optStockStore .= '<div class="report-buttons text-center">';
       $optStockStore .= '<button type="button" class="btn btn-default cleanReport">Limpiar filtro</button>&nbsp;&nbsp;&nbsp;';
