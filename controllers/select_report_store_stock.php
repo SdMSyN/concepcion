@@ -18,14 +18,14 @@
         // Movernos a la derecha
         $this->Cell(1,1);
         // Título
-        $this->Cell(12,7,'#',1,0,'C');
-        $this->Cell(65,7,'Producto',1,0,'C');
-        $this->Cell(65,7,utf8_decode('Categoría'),1,0,'C');
-        $this->Cell(12,7,'C.U.',1,0,'C');
-        $this->Cell(12,7,'Cant.',1,0,'C');
-        $this->Cell(12,7,'C.F.',1,0,'C');
+        $this->Cell(6,7,'#',1,0,'C');
+        $this->Cell(68,7,'Producto',1,0,'C');
+        $this->Cell(24,7,utf8_decode('Categoría'),1,0,'C');
+        $this->Cell(10,7,'C.U.',1,0,'C');
+        $this->Cell(10,7,'Cant.',1,0,'C');
+        $this->Cell(10,7,'C.F.',1,0,'C');
         $this->Cell(30,7,'Tienda',1,0,'C');
-        $this->Cell(40,7,utf8_decode('Fecha de modificación'),1,0,'C');  								
+        $this->Cell(36,7,utf8_decode('Fecha de modificación'),1,0,'C');  								
         // Salto de línea
         $this->Ln(9);
       }
@@ -59,24 +59,24 @@
             $resGetProductSale=$con->query($sqlGetProductSale);
             while($rowGetProductSale = $resGetProductSale->fetch_assoc()){
                 $costoF=$rowGetInfoStock['cantidad']*$rowGetProductSale['precio'];
-                $pdf->Cell(12,7,$i,'B',0,'C');
-                $pdf->Cell(65,7,utf8_decode($rowGetProductSale['nombre']),'B',0,'C');
-                $pdf->Cell(65,7,utf8_decode($rowGetProductSale['categoria']),'B',0,'C');
-                $pdf->Cell(12,7,$rowGetProductSale['precio'],'B',0,'C');
-                $pdf->Cell(12,7,$rowGetInfoStock['cantidad'],'B',0,'C');
-                $pdf->Cell(12,7,$costoF,'B',0,'C');
+                $pdf->Cell(6,7,$i,'B',0,'C');
+                $pdf->Cell(68,7,utf8_decode($rowGetProductSale['nombre']),'B',0,'C');
+                $pdf->Cell(24,7,utf8_decode($rowGetProductSale['categoria']),'B',0,'C');
+                $pdf->Cell(10,7,$rowGetProductSale['precio'],'B',0,'C');
+                $pdf->Cell(10,7,$rowGetInfoStock['cantidad'],'B',0,'C');
+                $pdf->Cell(10,7,$costoF,'B',0,'C');
                 $pdf->Cell(30,7,utf8_decode($rowGetInfoStock['store']),'B',0,'C');
-                $pdf->Cell(40,7,$rowGetInfoStock['updated'],'B',1,'C');
+                $pdf->Cell(36,7,$rowGetInfoStock['updated'],'B',1,'C');
                 $i++;
                 $cantT+=$rowGetInfoStock['cantidad'];
                 $costoFT+=$costoF;
             }
         }
-        $pdf->Cell(73,7,'','B',0,'C');
-        $pdf->Cell(110,7,'Cantidad: '.$cantT.utf8_decode('   Dinero en almacén: ').$costoFT,'B',1);
+        $pdf->Cell(94,7,'','B',0,'C');
+        $pdf->Cell(100,7,'Cantidad: '.$cantT.utf8_decode('   Dinero en almacén: ').$costoFT,'B',1);
  
     }else{
-        $pdf->Cell(183, 7, 'No hay ventas.', 'B', 0, 'C');
+        $pdf->Cell(194, 7, 'No hay ventas.', 'B', 0, 'C');
     }
 
     $pdf->Output();
