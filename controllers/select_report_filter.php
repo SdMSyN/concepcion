@@ -34,48 +34,77 @@
     }
     
     $optStockStore = '';
-    $optStockStore .= '<form method="POST" id="formSelectReport" class="form-inline text-center" action="controllers/select_report_store_2.php" >';
+    $optStockStore .= '<form method="POST" id="formSelectReport" class="form-horizontal" action="controllers/select_report_store_2.php" >';
     $optStockStore .= '<input type="hidden" id="inputStore" name="inputStore" value="'.$store.'">';
-    $optStockStore .= '<div class="form-group">';
-        $optStockStore .= '<label for="inputSellers">Vendedores</label>';
-        $optStockStore .= '<select id="inputSellers" name="inputSellers" class="form-control">'.$optSellers.'</select>';
-    $optStockStore .= '</div><div class="form-group">';
-        $optStockStore .= '<label for="inputMonth">Mes</label>';
-        $optStockStore .= '<input type="month" id="inputMonth" name="inputMonth" class="form-control">';
-    $optStockStore .= '</div><div class="form-group">';
-        $optStockStore .= '<label for="inputWeek">Semana</label>';
-        $optStockStore .= '<input type="week" id="inputWeek" name="inputWeek" class="form-control" >';
+    $optStockStore .= '<div class="col-md-6">';
+      $optStockStore .= '<div class="form-group">';
+          $optStockStore .= '<label class="col-sm-3 control-label" for="inputSellers">Vendedor: </label>';
+          $optStockStore .= '<div class="col-sm-9">';
+            $optStockStore .= '<select id="inputSellers" name="inputSellers" class="form-control">'.$optSellers.'</select>';
+          $optStockStore .= '</div>';
+      $optStockStore .= '</div>';
+      $optStockStore .= '<div class="form-group">';
+          $optStockStore .= '<label class="col-sm-3 control-label" for="inputMonth">Mes: </label>';
+          $optStockStore .= '<div class="col-sm-9">';
+            $optStockStore .= '<input type="month" id="inputMonth" name="inputMonth" class="form-control">';
+          $optStockStore .= '</div>';
+      $optStockStore .= '</div>';
+      $optStockStore .= '<div class="form-group">';
+          $optStockStore .= '<label class="col-sm-3 control-label" for="inputWeek">Semana: </label>';
+          $optStockStore .= '<div class="col-sm-9">';
+            $optStockStore .= '<input type="week" id="inputWeek" name="inputWeek" class="form-control" >';
+          $optStockStore .= '</div>';
+      $optStockStore .= '</div>';
     $optStockStore .= '</div>';
-    $optStockStore .= '</div><div class="form-group">';
-        $optStockStore .= '<label for="inputDay">Día</label>';
-        $optStockStore .= '<input type="date" id="inputDay" name="inputDay" class="form-control" >';
+    
+    $optStockStore .= '<div class="col-md-6">';
+      $optStockStore .= '<div class="form-group">';
+          $optStockStore .= '<label class="col-sm-3 control-label" for="inputDay">Día: </label>';
+          $optStockStore .= '<div class="col-sm-9">';
+            $optStockStore .= '<input type="date" id="inputDay" name="inputDay" class="form-control" >';
+          $optStockStore .= '</div>';
+      $optStockStore .= '</div>';
+      $optStockStore .= '<div class="form-group">';
+          $optStockStore .= '<label class="col-sm-3 control-label" for="inputSellers">Categoria: </label>';
+          $optStockStore .= '<div class="col-sm-9">';
+            $optStockStore .= '<select id="inputCategories" name="inputCategories" class="form-control">'.$optSellers.'</select>';
+          $optStockStore .= '</div>';
+      $optStockStore .= '</div>';
+      if($tarea=="order"){
+          $optStockStore .= '<div class="form-group">';
+              $optStockStore .= '<label class="col-sm-3 control-label" for="inputEst">Estatus: </label>';
+              $optStockStore .= '<div class="col-sm-9">';
+                $optStockStore .= '<select id="inputEst" name="inputEst" class="form-control" >'.$optEsts.'</select>';
+              $optStockStore .= '</div>';
+          $optStockStore .= '</div>';
+          $optStockStore .= '<div class="form-group">';
+              $optStockStore .= '<label class="col-sm-3 control-label" for="inputEstPay">Estatus pago: </label>';
+              $optStockStore .= '<div class="col-sm-9">';
+                $optStockStore .= '<select id="inputEstPay" name="inputEstPay" class="form-control" >'.$optEstsPay.'</select>';
+              $optStockStore .= '</div>';
+          $optStockStore .= '</div>';
+      }
     $optStockStore .= '</div>';
-    if($tarea=="order"){
-        $optStockStore .= '</div><div class="form-group">';
-            $optStockStore .= '<label for="inputEst">Estatus</label>';
-            $optStockStore .= '<select id="inputEst" name="inputEst" class="form-control" >'.$optEsts.'</select>';
-        $optStockStore .= '</div>';
-        $optStockStore .= '</div><div class="form-group">';
-            $optStockStore .= '<label for="inputEstPay">Estatus pago</label>';
-            $optStockStore .= '<select id="inputEstPay" name="inputEstPay" class="form-control" >'.$optEstsPay.'</select>';
-        $optStockStore .= '</div>';
-    }
-    $optStockStore .= '<div class="report-buttons text-center">';
-    if($tarea!="order"){
-        $optStockStore .= '<button type="button" id="generateReport" class="btn btn-primary generateReport">Mostrar reporte ventas</button>&nbsp;&nbsp;&nbsp;';
-        $optStockStore .= '<button type="submit" class="btn btn-success">Imprimir ventas <span class="glyphicon glyphicon-print"></span></button>  ';
-    }
-    else
-        $optStockStore .= '<button type="button" id="generateReport" class="btn btn-primary generateReport">Mostrar reporte pedidos</button>&nbsp;&nbsp;&nbsp;';
-    $optStockStore .= '<button type="button" class="btn btn-default cleanReport">Limpiar filtro</button>&nbsp;&nbsp;&nbsp;';
-    if($tarea!="order")
-        $optStockStore .= '<button type="button" class="btn btn-primary reportStock">Mostrar reporte almacén</button>&nbsp;&nbsp;&nbsp;';
-    if($tarea=="order")
-        $optStockStore .= '<a href="javascript:void(0)" id="imprime" class="btn btn-success">Imprimir <span class="glyphicon glyphicon-print"></span></a>';
-    else
-        $optStockStore .= '<a href="controllers/select_report_store_stock.php?idStore='.$store.'" class="btn btn-success">Imprimir almacen <span class="glyphicon glyphicon-print"></span></button>';
+    $optStockStore .= '<div class="col-md-12">';
+      $optStockStore .= '<div class="report-buttons text-center">';
+      $optStockStore .= '<button type="button" class="btn btn-default cleanReport">Limpiar filtro</button>&nbsp;&nbsp;&nbsp;';
+        if($tarea!="order"){
+            $optStockStore .= '<button type="button" id="generateReport" class="btn btn-primary generateReport">Mostrar reporte ventas</button>&nbsp;&nbsp;&nbsp;';
+            $optStockStore .= '<button type="submit" class="btn btn-success">Imprimir ventas <span class="glyphicon glyphicon-print"></span></button>&nbsp;&nbsp;&nbsp;';
+        }
+        else
+          $optStockStore .= '<button type="button" id="generateReport" class="btn btn-primary generateReport">Mostrar reporte pedidos</button>&nbsp;&nbsp;&nbsp;';
+        if($tarea!="order")
+            $optStockStore .= '<button type="button" class="btn btn-primary reportStock">Mostrar reporte almacén</button>&nbsp;&nbsp;&nbsp;';
+        if($tarea=="order")
+            $optStockStore .= '<a href="javascript:void(0)" id="imprime" class="btn btn-success">Imprimir <span class="glyphicon glyphicon-print"></span></a>';
+        else
+            $optStockStore .= '<a href="controllers/select_report_store_stock.php?idStore='.$store.'" class="btn btn-success">Imprimir almacen <span class="glyphicon glyphicon-print"></span></button>';
+      $optStockStore .= '</div>';
     $optStockStore .= '</div>';
     $optStockStore .= '</form>';
+   
+    
 
     echo $optStockStore;
 ?>

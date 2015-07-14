@@ -113,6 +113,10 @@ box-shadow:         0px 0px 40px 0px rgba(124, 33, 158, 0.8);
   padding-top: 1rem;
 }
 
+.btnFiltros{
+  padding-bottom: 1.2rem;
+}
+
 /*CUSTON NAV-BAR*/
 .navbar-default {
   background-color: #596cb6;
@@ -160,6 +164,7 @@ box-shadow:         0px 0px 40px 0px rgba(124, 33, 158, 0.8);
 .navbar-default .navbar-link:hover {
   color: #351174; 
 }
+
 
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
