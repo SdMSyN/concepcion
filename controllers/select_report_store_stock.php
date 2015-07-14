@@ -68,15 +68,11 @@
                 $costoFT+=$costoF;
             }
         }
-        $pdf->Cell(12,7,'','B',0,'C');
-        $pdf->Cell(65,7,'Dinero en almacén','B',0,'C');
-        $pdf->Cell(12,7,$cantT,'B',0,'C');
-        $pdf->Cell(25,7,'Cantidad '.$costoFT,'B',0,'C');
-        $pdf->Cell(12,7,'','B',0,'C');
-        $pdf->Cell(30,7,'','B',0,'C');
-        $pdf->Cell(27,7,'','B',1,'C'); 
+        $pdf->Cell(73,7,'','B',0,'C');
+        $pdf->Cell(110,7,'Cantidad: '.$cantT.'   Dinero en almacén: '.$costoFT,'B',1);
+ 
     }else{
-        $pdf->Cell(145, 7, 'No hay ventas.', 'B', 0, 'C');
+        $pdf->Cell(183, 7, 'No hay ventas.', 'B', 0, 'C');
     }
 
     $pdf->Output();
