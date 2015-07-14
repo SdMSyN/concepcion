@@ -69,7 +69,7 @@
             }
         }
         $pdf->Cell(73,7,'','B',0,'C');
-        $pdf->Cell(110,7,'Cantidad: '.$cantT.'   Dinero en almacén: '.$costoFT,'B',1);
+        $pdf->Cell(110,7,'Cantidad: '.$cantT.utf8_decode('   Dinero en almacén: ').$costoFT,'B',1);
  
     }else{
         $pdf->Cell(183, 7, 'No hay ventas.', 'B', 0, 'C');
