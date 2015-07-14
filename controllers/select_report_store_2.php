@@ -7,6 +7,7 @@
     $month = $_POST['inputMonth'];
     $week = $_POST['inputWeek'];
     $day = $_POST['inputDay'];
+    $category = $_POST['inputCategory'];
     //echo $store.'--'.$sellers.'--'.$month.'--'.$week;
 
     $sqlGetInfoSale = "SELECT id, (SELECT nombre FROM $tUser WHERE id=$tSaleInfo.usuario_id) as user, (SELECT nombre FROM $tStore WHERE id=$tSaleInfo.tienda_id) as store, fecha, hora, pago, cambio FROM $tSaleInfo WHERE tienda_id='$store' ";
@@ -42,6 +43,7 @@
         $this->Cell(1,1);
         // Título
         $this->Cell(50,7,'Producto',1,0,'C');
+        $this->Cell(50,7,utf8_decode('Categoría'),1,0,'C');
         $this->Cell(12,7,'C.U.',1,0,'C');
         $this->Cell(12,7,'Cant.',1,0,'C');
         $this->Cell(12,7,'C.F.',1,0,'C');
@@ -78,10 +80,17 @@
         $costoFT=0;
         while($rowGetInfoSale = $resGetInfoSale->fetch_assoc()){
             $idInfoSale=$rowGetInfoSale['id'];
-            $sqlGetProductSale="SELECT (SELECT nombre FROM $tProduct WHERE id=$tSaleProd.producto_id) as producto, cantidad as cant, costo_unitario as cu, costo_total as ct FROM $tSaleProd WHERE venta_info_id='$idInfoSale' ";
+            //$sqlGetProductSale="SELECT (SELECT nombre FROM $tProduct WHERE id=$tSaleProd.producto_id) as producto, cantidad as cant, costo_unitario as cu, costo_total as ct FROM $tSaleProd WHERE venta_info_id='$idInfoSale' ";
+            $sqlGetProductSale="SELECT $tProduct.nombre as producto, $tSaleProd.cantidad as cant, $tSaleProd.costo_unitario as cu, $tSaleProd.costo_total as ct, $tCategory.nombre as category FROM $tSaleProd INNER JOIN $tProduct ON $tProduct.id=$tSaleProd.producto_id INNER JOIN $tCategory ON $tCategory.id=$tProduct.categoria_id  ";
+            $sqlGetProductSale.=" WHERE $tSaleProd.venta_info_id='$idInfoSale' ";
+            //si el filtro categoría esta activo
+            if($category!=""){
+               $sqlGetProductSale.="AND $tProduct.categoria_id='$category' ";
+            }
             $resGetProductSale=$con->query($sqlGetProductSale);
             while($rowGetProductSale = $resGetProductSale->fetch_assoc()){
                 $pdf->Cell(50, 7, $rowGetProductSale['producto'], 'B', 0, 'C');
+                $pdf->Cell(50, 7, $rowGetProductSale['category'], 'B', 0, 'C');
                 $pdf->Cell(12, 7, $rowGetProductSale['cu'], 'B', 0, 'C');
                 $pdf->Cell(12, 7, $rowGetProductSale['cant'], 'B', 0, 'C');
                 if($rowGetInfoSale['pago']=="0.00" && $rowGetInfoSale['cambio']=="0.00"){
@@ -103,6 +112,7 @@
                 $costoFT+=$rowGetProductSale['ct'];
             }
         }
+        $pdf->Cell(37,7,'','B',0,'C');
         $pdf->Cell(37,7,'','B',0,'C');
         $pdf->Cell(12,7,'Totales','B',0,'C');
         $pdf->Cell(12,7,$cantT,'B',0,'C');

@@ -7,6 +7,7 @@
     $month = $_POST['inputMonth'];
     $week = $_POST['inputWeek'];
     $day = $_POST['inputDay'];
+    $category = $_POST['inputCategory'];
     $action = $_GET['action'];
     //echo $store.'--'.$sellers.'--'.$month.'--'.$week;
     
@@ -46,12 +47,29 @@
         $costoFT=0;
         while($rowGetInfoSale = $resGetInfoSale->fetch_assoc()){
             $idInfoSale=$rowGetInfoSale['id'];
-            $sqlGetProductSale="SELECT (SELECT nombre FROM $tProduct WHERE id=$tSaleProd.producto_id) as producto, cantidad as cant, costo_unitario as cu, costo_total as ct FROM $tSaleProd WHERE venta_info_id='$idInfoSale' ";
+            //$sqlGetProductSale="SELECT (SELECT nombre FROM $tProduct WHERE id=$tSaleProd.producto_id) as producto, cantidad as cant, costo_unitario as cu, costo_total as ct";
+            $sqlGetProductSale="SELECT $tProduct.nombre as producto, $tSaleProd.cantidad as cant, $tSaleProd.costo_unitario as cu, $tSaleProd.costo_total as ct, $tCategory.nombre as category FROM $tSaleProd INNER JOIN $tProduct ON $tProduct.id=$tSaleProd.producto_id INNER JOIN $tCategory ON $tCategory.id=$tProduct.categoria_id  ";
+            //$sqlGetProductSale.=" FROM $tSaleProd WHERE venta_info_id='$idInfoSale' ";
+            $sqlGetProductSale.=" WHERE $tSaleProd.venta_info_id='$idInfoSale' ";
+//si el filtro categoría esta activo
+            if($category!=""){
+               //$sqlGetProductSale.=', (SELECT categoria_id FROM $tProduct WHERE id=$tSaleProd.producto_id) as category';
+               $sqlGetProductSale.="AND $tProduct.categoria_id='$category' ";
+            }
+            
             $resGetProductSale=$con->query($sqlGetProductSale);
             while($rowGetProductSale = $resGetProductSale->fetch_assoc()){
+                //obtenemos el nombre de la categoría
+                /*if($category!=""){
+                    $idCategory=$rowGetProductSale['category'];
+                    $sqlGetCategory="SELECT nombre FROM $tCategory WHERE id='$idCategory' ";
+                    $resGetCategory=$con->query($sqlGetCategory);
+                    $rowGetCategory=$resGetCategory->fetch_assoc();
+                }*/
                 $optReport.='<tr>';
                 $optReport.='<td>'.$i.'</td>';
                 $optReport.='<td>'.$rowGetProductSale['producto'].'</td>';
+                $optReport .= ($category!="") ? '<td>'.$rowGetProductSale['category'].'</td>' : '<td></td>';
                 $optReport.='<td>'.$rowGetProductSale['cu'].'</td>';
                 $optReport.='<td>'.$rowGetProductSale['cant'].'</td>';
                 //$optReport.='<td>'.$rowGetProductSale['ct'].'</td>';

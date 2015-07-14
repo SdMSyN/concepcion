@@ -69,9 +69,11 @@ else {
   
   <script type="text/javascript">
     $(document).ready(function () {
+        
       $('#inputStore').focus();
+      var selectStore="";
       $('#inputStore').change(function () {
-        var selectStore = $('#inputStore').val();
+        selectStore = $('#inputStore').val();
         //alert(selectStore);
         $.ajax({
           type: 'POST',
@@ -86,7 +88,7 @@ else {
                 data: $('form#formSelectReport').serialize(),
                 success: function (msg) {
                   //alert(msg);
-                  $('.report #tableReport thead').html('<tr><th>#</th><th>Producto</th><th>C.U.</th><th>Cant.</th><th>C.F.</th><th>Donación</th><th>Vendedor</th><th>Tienda</th><th>Fecha</th><th>Hora</th></tr>');
+                  $('.report #tableReport thead').html('<tr><th>#</th><th>Producto</th><th>Categoría</th><th>C.U.</th><th>Cant.</th><th>C.F.</th><th>Donación</th><th>Vendedor</th><th>Tienda</th><th>Fecha</th><th>Hora</th></tr>');
                   $('.report #tableReport tbody').html(msg);
                 }
               });//end ajax
@@ -114,6 +116,11 @@ else {
         });//end ajax
       });   
 
+        $('.btnFiltros').on("change", "#inputCategory", function(){
+            var idCategory = $('#inputCategory').val();
+            $('#printStock').attr("href", "controllers/select_report_store_stock.php?idStore="+selectStore+"&inputCategory="+idCategory);
+        });
+        
       $(".btnFiltros").on("click", "#generateReport", function(){
         $.ajax({
           type: 'POST',
@@ -121,7 +128,7 @@ else {
           data: $('form#formSelectReport').serialize(),
           success: function (msg) {
             //alert(msg);
-            $('.report #tableReport thead').html('<tr><th>#</th><th>Producto</th><th>C.U.</th><th>Cant.</th><th>C.F.</th><th>Donación</th><th>Vendedor</th><th>Tienda</th><th>Fecha</th><th>Hora</th></tr>');
+            $('.report #tableReport thead').html('<tr><th>#</th><th>Producto</th><th>Categoría</th><th>C.U.</th><th>Cant.</th><th>C.F.</th><th>Donación</th><th>Vendedor</th><th>Tienda</th><th>Fecha</th><th>Hora</th></tr>');
             $('.report #tableReport tbody').html(msg);
           }
         });//end ajax
@@ -134,7 +141,7 @@ else {
           data: $('form#formSelectReport').serialize(),
           success: function (msg) {
             //alert(msg);
-            $('.report #tableReport thead').html('<tr><th>#</th><th>Producto</th><th>C.U.</th><th>Cant.</th><th>C.F.</th><th>Tienda</th><th>Fecha</th></tr>');
+            $('.report #tableReport thead').html('<tr><th>#</th><th>Producto</th><th>Categoría</th><th>C.U.</th><th>Cant.</th><th>C.F.</th><th>Tienda</th><th>Fecha</th></tr>');
             $('.report #tableReport tbody').html(msg);
           }
         });//end ajax
@@ -146,6 +153,7 @@ else {
          $("#inputMonth").val(""); 
          $("#inputWeek").val(""); 
          $("#inputDay").val(""); 
+         $("#inputCategory").val(""); 
       });
     });
     

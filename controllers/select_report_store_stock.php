@@ -3,6 +3,7 @@
     include ('../config/variables.php');
     
     $store = $_GET['idStore'];
+    $category = $_GET['inputCategory'];
     //echo $store.'--'.$sellers.'--'.$month.'--'.$week;
     
     $sqlGetInfoStock = "SELECT producto_id as id, updated, cantidad, (SELECT nombre FROM $tStore WHERE id=$tStock.tienda_id) as store FROM $tStock WHERE tienda_id='$store' ";
@@ -19,6 +20,7 @@
         // Título
         $this->Cell(12,7,'#',1,0,'C');
         $this->Cell(65,7,'Producto',1,0,'C');
+        $this->Cell(65,7,utf8_decode('Categoría'),1,0,'C');
         $this->Cell(12,7,'C.U.',1,0,'C');
         $this->Cell(12,7,'Cant.',1,0,'C');
         $this->Cell(12,7,'C.F.',1,0,'C');
@@ -52,12 +54,14 @@
         $costoFT=0;
         while($rowGetInfoStock = $resGetInfoStock->fetch_assoc()){
             $idInfoSale=$rowGetInfoStock['id'];
-            $sqlGetProductSale="SELECT nombre, precio FROM $tProduct WHERE id='$idInfoSale' ";
+            $sqlGetProductSale="SELECT nombre, precio, (SELECT nombre FROM $tCategory WHERE id=$tProduct.categoria_id) as categoria FROM $tProduct WHERE id='$idInfoSale' ";
+            if($category!="") $sqlGetProductSale.=" AND categoria_id='$category' ";
             $resGetProductSale=$con->query($sqlGetProductSale);
             while($rowGetProductSale = $resGetProductSale->fetch_assoc()){
                 $costoF=$rowGetInfoStock['cantidad']*$rowGetProductSale['precio'];
                 $pdf->Cell(12,7,$i,'B',0,'C');
                 $pdf->Cell(65,7,utf8_decode($rowGetProductSale['nombre']),'B',0,'C');
+                $pdf->Cell(65,7,utf8_decode($rowGetProductSale['categoria']),'B',0,'C');
                 $pdf->Cell(12,7,$rowGetProductSale['precio'],'B',0,'C');
                 $pdf->Cell(12,7,$rowGetInfoStock['cantidad'],'B',0,'C');
                 $pdf->Cell(12,7,$costoF,'B',0,'C');
