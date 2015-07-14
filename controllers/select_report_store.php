@@ -18,7 +18,9 @@
     if($action=="day"){
         $sqlGetInfoSale .= " AND fecha='$dateNow' ";
     }else{//reporte con filtro
-        if($seller != "" && $month=="" && $week=="" && $day==""){
+        if($seller == "" && $month=="" && $week=="" && $day=="" && $category==""){
+            $sqlGetInfoSale .= " AND fecha='$dateNow' ";
+        }else if($seller != "" && $month=="" && $week=="" && $day==""){
             $sqlGetInfoSale .= " AND usuario_id='$seller' AND fecha='$dateNow' ";
         }else{
             if(isset($_POST['inputSellers']) && $seller != ""){
