@@ -69,7 +69,8 @@
                 $optReport.='<tr>';
                 $optReport.='<td>'.$i.'</td>';
                 $optReport.='<td>'.$rowGetProductSale['producto'].'</td>';
-                $optReport .= ($category!="") ? '<td>'.$rowGetProductSale['category'].'</td>' : '<td></td>';
+                //$optReport .= ($category!="") ? '<td>'.$rowGetProductSale['category'].'</td>' : '<td></td>';
+                $optReport .= '<td>'.$rowGetProductSale['category'].'</td>';
                 $optReport.='<td>'.$rowGetProductSale['cu'].'</td>';
                 $optReport.='<td>'.$rowGetProductSale['cant'].'</td>';
                 //$optReport.='<td>'.$rowGetProductSale['ct'].'</td>';
