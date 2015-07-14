@@ -11,7 +11,7 @@
     //echo $store.'--'.$sellers.'--'.$month.'--'.$week;
 
     $sqlGetInfoSale = "SELECT id, (SELECT nombre FROM $tUser WHERE id=$tSaleInfo.usuario_id) as user, (SELECT nombre FROM $tStore WHERE id=$tSaleInfo.tienda_id) as store, fecha, hora, pago, cambio FROM $tSaleInfo WHERE tienda_id='$store' ";
-        if($seller == "" && $month=="" && $week=="" && $day==""){
+        if($seller == "" && $month=="" && $week=="" && $day=="" && $category==""){
             $sqlGetInfoSale .= " AND fecha='$dateNow' ";
         }else if($seller != "" && $month=="" && $week=="" && $day==""){
             $sqlGetInfoSale .= " AND usuario_id='$seller' AND fecha='$dateNow' ";
