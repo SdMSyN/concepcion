@@ -8,7 +8,7 @@
     $sqlGetInfoStock = "SELECT producto_id as id, updated, cantidad, (SELECT nombre FROM $tStore WHERE id=$tStock.tienda_id) as store FROM $tStock WHERE tienda_id='$store' ";
     
           //fpdf
-    require('fpdf/fpdf.php');
+    require('../fpdf/fpdf.php');
     class PDF extends FPDF{
     // Cabecera de página
       function Header(){

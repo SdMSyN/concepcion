@@ -151,9 +151,9 @@ else {
             //alert(resultado);
             if (resultado == "true") {
               $('.error').html("Se modifico el producto con éxito.");
-              setTimeout(function () {
+              /*setTimeout(function () {
                 location.href = 'form_select_product.php';
-              }, 3000);
+              }, 3000);*/
             } else {
               $('.error').html(resultado);
             }
