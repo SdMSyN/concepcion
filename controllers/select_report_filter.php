@@ -117,7 +117,7 @@
         if($tarea=="order")
             $optStockStore .= '<a href="javascript:void(0)" id="imprime" class="btn btn-success">Imprimir <span class="glyphicon glyphicon-print"></span></a>';
         else
-            $optStockStore .= '<a href="controllers/select_report_store_stock.php?idStore='.$store.'" class="btn btn-success" id="printStock">Imprimir almacén <span class="glyphicon glyphicon-print"></span></button>';
+            $optStockStore .= '<a href="controllers/select_report_store_stock.php?idStore='.$store.'&inputCategory=0"  class="btn btn-success" id="printStock">Imprimir almacén <span class="glyphicon glyphicon-print"></span></button>';
       $optStockStore .= '</div>';
     $optStockStore .= '</div>';
     $optStockStore .= '</form>';
