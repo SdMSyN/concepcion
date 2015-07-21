@@ -32,6 +32,7 @@ else {
   <div class="container">
     <div class="row">
       <div class="titulo-crud text-center">Información de pedido</div>  
+      <!--
       <form class="form-horizontal">
         <div class="form-group">
           <label class="col-sm-2 control-label">Seleccione los detalles que desea visualizar</label>
@@ -44,6 +45,7 @@ else {
           </div>
         </div>
       </form>
+      -->
       <div class="msg"></div>
       <div class="col-md-12 report" id="myPrintArea">
             <table class="table table-striped">
@@ -63,22 +65,22 @@ else {
               </thead>
               <tbody><?= $optReport; ?> </tbody>
           </table>
-          <table class="table table-striped" id="tableReport">
+          <div class="table table-striped" id="tableReport">
               
-          </table>
+          </div>
       </div>
     </div>
   </div><!-- fin container -->
   
   <script type="text/javascript">
     $(document).ready(function () {
-      $('#inputOpt').focus();
+      /*$('#inputOpt').focus();
       $('#inputOpt').change(function () {
         var selectOpt = $('#inputOpt').val();
         //alert(selectOpt);
         $.ajax({
           type: 'POST',
-          url: 'controllers/select_report_detail_filter.php',
+          url: 'controllers/select_report_detail_filter_2.php',
           data: {orderId: <?=$orderId;?>, tarea: selectOpt},
           success: function (msg) {
             $('.report #tableReport').html("");
@@ -86,9 +88,22 @@ else {
           }
         });
         
-      });   
-  });
+      }); */  
+
   
+    details();
+    function details(){
+        $.ajax({
+          type: 'POST',
+          url: 'controllers/select_report_detail_filter_2.php',
+          data: {orderId: <?=$orderId;?>, tarea: "homework"},
+          success: function (msg) {
+            $('.report #tableReport').html("");
+            $('.report #tableReport').html(msg);
+          }
+        });
+    }
+ });  
     //$('#imprime').click(function() {
     $(".btnFiltros").on("click", "#imprime", function(){
         $("div#myPrintArea").printArea();
