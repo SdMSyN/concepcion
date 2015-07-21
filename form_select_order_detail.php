@@ -75,7 +75,7 @@ else {
       $('#inputOpt').focus();
       $('#inputOpt').change(function () {
         var selectOpt = $('#inputOpt').val();
-        alert(selectOpt);
+        //alert(selectOpt);
         $.ajax({
           type: 'POST',
           url: 'controllers/select_report_detail_filter.php',

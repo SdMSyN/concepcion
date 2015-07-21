@@ -6,7 +6,10 @@
     $category = $_GET['inputCategory'];
     //echo $store.'--'.$sellers.'--'.$month.'--'.$week;
     
-    $sqlGetInfoStock = "SELECT producto_id as id, updated, cantidad, (SELECT nombre FROM $tStore WHERE id=$tStock.tienda_id) as store FROM $tStock WHERE tienda_id='$store' ";
+    $sqlGetInfoStock = "SELECT producto_id as id, updated, cantidad, "
+            . "(SELECT nombre FROM $tStore WHERE id=$tStock.tienda_id) as store, "
+            . "(SELECT categoria_id FROM $tProduct WHERE id=$tStock.producto_id) as category2 "
+            . "FROM $tStock WHERE tienda_id='$store' ORDER BY category2 ";
     
           //fpdf
     require('../fpdf/fpdf.php');

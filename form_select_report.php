@@ -137,7 +137,7 @@ else {
       $(".btnFiltros").on("click", ".reportStock", function(){
         $.ajax({
           type: 'POST',
-          url: 'controllers/select_report_stock.php',
+          url: 'controllers/select_report_stock_2.php',
           data: $('form#formSelectReport').serialize(),
           success: function (msg) {
             //alert(msg);
