@@ -96,12 +96,14 @@ else {
                 <label>Subcategoría</label>
                 <select id="inputSubCategoria" name="inputSubCategoria" class="form-control"></select>
               </div>
+              <!--
               <div class="form-group">
                 <label>
                   <input type="checkbox" id="inputPanFrio" name="inputPanFrio" >Pan frío
                 </label>
               </div>
-
+              -->
+              <input type="hidden" id="inputPanFrio" name="inputPanFrio" >
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 <button type="submit" class="btn btn-primary" >Crear producto</button>

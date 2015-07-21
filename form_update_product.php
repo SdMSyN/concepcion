@@ -90,11 +90,14 @@ else {
             <?= $optSubCategories; ?>
           </select>
         </div>
+        <!--
         <div class="checkbox">
           <label>
             <?= $optPanFrio; ?> Pan frío
           </label>
         </div>
+        -->
+        <input type="hidden" id="inputPanFrio" name="inputPanFrio" >
         <a href="form_select_product.php" class="btn btn-default"><i class="fa fa-mail-reply"></i> Atras</a>
         <button type="submit" class="btn btn-primary" >Modificar producto</button>
       </form>
