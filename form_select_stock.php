@@ -250,6 +250,7 @@ else {
 
       $('#formSave').submit(function (event) {
         var selectStore = $('#tienda').val();
+        var timeM = 6000;
         //alert(selectStore);
         $('body').removeClass('loaded');
         $.ajax({
@@ -261,16 +262,21 @@ else {
             if (msg == "true") {
               $('.msg').css({color: "#009900"});
               $('.msg').html("Se modifico el almacen con éxito");
-              alert("Se modifico el almacen con éxito");
               pintarTabla2(selectStore);
+              $('body').addClass('loaded');
+              alert("Se modifico el almacen con éxito");
               setTimeout(function () {
                   $('.msg').empty();
-                }, 10s000);
+              },timeM);              
             } else {
               $('.msg').css({color: "#FF0000"});
               $('.msg').html(msg);
+              $('body').addClass('loaded');
+              alert("error al intentar modificar el almacen");
+              setTimeout(function () {
+                  $('.msg').empty();
+              },timeM);
             }
-          $('body').addClass('loaded');
           },
           error: function () {
             alert("Error al añadir producto ");
