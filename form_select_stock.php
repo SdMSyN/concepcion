@@ -265,7 +265,7 @@ else {
               pintarTabla2(selectStore);
               setTimeout(function () {
                   $('.msg').empty();
-                }, 5000);
+                }, 10s000);
             } else {
               $('.msg').css({color: "#FF0000"});
               $('.msg').html(msg);
