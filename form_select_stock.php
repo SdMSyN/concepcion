@@ -244,6 +244,7 @@ else {
             } else {
               $('#tableStockStore').html(msg);
             }
+            $('body').addClass('loaded');
           }
         });//end ajax
       }
@@ -263,7 +264,6 @@ else {
               $('.msg').css({color: "#009900"});
               $('.msg').html("Se modifico el almacen con éxito");
               pintarTabla2(selectStore);
-              $('body').addClass('loaded');
               alert("Se modifico el almacen con éxito");
               setTimeout(function () {
                   $('.msg').empty();
