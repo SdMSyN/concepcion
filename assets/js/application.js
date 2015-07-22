@@ -1,5 +1,7 @@
  $( document ).ready(function() {
-  
+    $('body').addClass('loaded');
+
+        
 // ############ TECLADO NUMERICO
 var keys = document.querySelectorAll('#teclado_numerico span');
 

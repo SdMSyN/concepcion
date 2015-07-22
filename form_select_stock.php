@@ -129,6 +129,7 @@ else {
       $('#inputStore').change(function () {
         var selectStore = $('#inputStore').val();
         //alert(selectStore);
+        $('body').removeClass('loaded');
         $.ajax({
           type: 'POST',
           url: 'controllers/select_stock_store.php',
@@ -140,6 +141,7 @@ else {
             } else {
               $('#tableStockStore').html(msg);
             }
+          $('body').addClass('loaded');
           }
         });//end ajax
         if (selectStore == "") {
@@ -249,6 +251,7 @@ else {
       $('#formSave').submit(function (event) {
         var selectStore = $('#tienda').val();
         //alert(selectStore);
+        $('body').removeClass('loaded');
         $.ajax({
           type: "POST",
           url: "controllers/update_stock.php",
@@ -267,6 +270,7 @@ else {
               $('.msg').css({color: "#FF0000"});
               $('.msg').html(msg);
             }
+          $('body').addClass('loaded');
           },
           error: function () {
             alert("Error al añadir producto ");
