@@ -5,8 +5,18 @@
     $store_id=$_POST['idStore'];
     $product_id=$_POST['inputCod'];
     
-    $sqlGetProduct="SELECT id, nombre, precio, (SELECT cantidad FROM $tStock WHERE producto_id='$product_id' AND tienda_id='$store_id' LIMIT 1) as cantidad FROM $tProduct WHERE codigo_barras='$product_id' OR nombre='$product_id' ";
-    
+    /*$sqlGetProduct="SELECT id, nombre, precio, ".
+      "(SELECT cantidad FROM $tStock WHERE producto_id='$product_id' AND tienda_id='$store_id' LIMIT 1) as cantidad ".
+      "FROM $tProduct WHERE codigo_barras='$product_id' OR nombre='$product_id' ";
+    */
+     $sqlGetProduct="SELECT $tProduct.id as id, $tProduct.nombre as nombre, $tProduct.precio as precio, "
+        . "$tStock.cantidad as cantidad  "
+        . "FROM $tStock "
+             . "INNER JOIN $tProduct ON $tStock.producto_id=$tProduct.id "
+             . "INNER JOIN $tStore ON $tStore.id=$tStock.tienda_id "
+        . "WHERE  $tStock.tienda_id='$store_id' "
+             . "AND ($tProduct.nombre='$product_id' OR $tProduct.codigo_barras='$product_id') ";
+    //echo $sqlGetProduct;
     $resGetProduct = $con->query($sqlGetProduct);
     $optProduct='';
     if($resGetProduct->num_rows > 0){

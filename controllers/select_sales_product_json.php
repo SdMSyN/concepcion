@@ -9,7 +9,7 @@
         //$sqlGetProduct = "SELECT nombre FROM $tProduct WHERE codigo_barras LIKE '%{$query}%' OR nombre LIKE '%{$query}%' ";
         
         //$sqlGetProduct = "SELECT (SELECT nombre FROM $tProduct WHERE id=$tStock.producto_id) as nombre FROM $tStock, $tProduct WHERE $tStock.tienda_id='$store' AND ($tProduct.nombre LIKE '%{$query}%' OR $tProduct.codigo_barras LIKE '%{$query}%' )  ";
-        $sqlGetProduct = "SELECT $tProduct.nombre FROM $tStock, $tProduct WHERE $tStock.tienda_id='$store' AND ($tProduct.nombre LIKE '%{$query}%' OR $tProduct.codigo_barras LIKE '%{$query}%' )  ";
+        $sqlGetProduct = "SELECT $tProduct.id, $tProduct.nombre FROM $tStock, $tProduct WHERE $tStock.tienda_id='$store' AND ($tProduct.nombre LIKE '%{$query}%' OR $tProduct.codigo_barras LIKE '%{$query}%' )  ";
 
     
     $resGetProduct = $con->query($sqlGetProduct);

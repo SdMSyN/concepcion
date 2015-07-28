@@ -218,7 +218,7 @@ else {
       function calcChange(){
           var total = parseFloat($(this).parent().parent().find("#inputTotal").val());
           var dinero = parseFloat($(this).parent().parent().find("#inputRecibido").val());
-        if(dinero < total){
+        if(dinero < total || isNaN(dinero)){
             //alert("El dinero recibido no puede ser menor al total de la venta.");
             $(this).parent().parent().find(".enviarTicket").attr("disabled", true);
         }else
