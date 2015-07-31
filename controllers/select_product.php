@@ -4,7 +4,19 @@
     
     if($_GET['action'] == 'listar'){
         //$sqlGetProducts = "SELECT id, nombre, (SELECT nombre FROM $tCategory WHERE id=$tProduct.categoria_id) as categoria, (SELECT nombre FROM $tSubCategory WHERE id=$tProduct.subcategoria_id) as subcategoria, precio, img, (SELECT nombre FROM $tEst WHERE id=$tProduct.activo) as activoN, activo  FROM $tProduct  ";
-        $sqlGetProducts = "SELECT $tProduct.id as id, $tProduct.nombre as nombre, $tCategory.nombre as categoria, $tSubCategory.nombre  as subcategoria, $tProduct.precio as precio, $tProduct.img as img, $tEst.nombre as activoN, $tProduct.activo as activo, $tCategory.id as categoryId FROM $tProduct INNER JOIN $tCategory ON $tProduct.categoria_id=$tCategory.id INNER JOIN $tSubCategory ON $tProduct.subcategoria_id=$tSubCategory.id INNER JOIN $tEst ON $tProduct.activo=$tEst.id  ";
+        $sqlGetProducts = "SELECT $tProduct.id as id, "
+                . "$tProduct.nombre as nombre, "
+                . "$tCategory.nombre as categoria, "
+                . "$tSubCategory.nombre as subcategoria, "
+                . "$tProduct.precio as precio, "
+                . "$tProduct.img as img, "
+                . "$tEst.nombre as activoN, "
+                . "$tProduct.activo as activo, "
+                . "$tCategory.id as categoryId "
+                . "FROM $tProduct "
+                . "INNER JOIN $tCategory ON $tProduct.categoria_id=$tCategory.id "
+                . "INNER JOIN $tSubCategory ON $tProduct.subcategoria_id=$tSubCategory.id "
+                . "INNER JOIN $tEst ON $tProduct.activo=$tEst.id  ";
         
         // Ordenar por
 	$est = $_POST['estatus'] - 1;

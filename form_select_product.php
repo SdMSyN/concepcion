@@ -11,26 +11,6 @@ else if ($_SESSION['perfil'] != "1")
 else {
   $userId = $_SESSION['userId'];
 
-  /* Obtenemos los productos */
-  $sqlGetProducts = "SELECT id, nombre, (SELECT nombre FROM $tCategory WHERE id=$tProduct.categoria_id) as categoria, precio, img FROM $tProduct WHERE activo='1' ";
-  $resGetProducts = $con->query($sqlGetProducts);
-  $optProducts = '';
-  if ($resGetProducts->num_rows > 0) {
-    while ($rowGetProducts = $resGetProducts->fetch_assoc()) {
-      $optProducts .= '<tr>';
-      $optProducts .= '<td>' . $rowGetProducts['id'] . '</td>';
-      $optProducts .= '<td><img src="' . $rutaImgProd . $rowGetProducts['img'] . '" class="img-product-list"></td>';
-      $optProducts .= '<td>' . $rowGetProducts['nombre'] . '</td>';
-      $optProducts .= '<td>' . $rowGetProducts['categoria'] . '</td>';
-      $optProducts .= '<td>' . $rowGetProducts['precio'] . '</td>';
-      $optProducts .= '<td><a href="form_update_product.php?id=' . $rowGetProducts['id'] . '" >Modificar</a></td>';
-      $optProducts .= '<td><a class="delete" data-id="' . $rowGetProducts['id'] . '" >Dar de baja</a></td>';
-      $optProducts .= '</tr>';
-    }
-  } else {
-    $optProducts.='<tr><td colspan="7">No existen productos aún.</td></tr>';
-  }
-
   /* Obtenemos las categorias */
   $sqlGetCategories = "SELECT id, nombre FROM $tCategory ";
   $resGetCategories = $con->query($sqlGetCategories);
