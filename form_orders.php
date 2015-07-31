@@ -33,25 +33,25 @@ else {
           <input type="hidden" name="idStore" value="<?= $idStore; ?>">
           <input type="hidden" name="idUser" value="<?= $idUser; ?>">
           <div class="cobrar row">
-            <div class="form-group col-xs-4">
+            <div class="form-group col-xs-5">
               <label>Total:</label></br>
               <input type="text" id="inputTotal" name="inputTotal" readonly step=0.01 class="form-control col-xs-12" >
             </div>
-            <div class="form-group col-xs-4">
+            <div class="form-group col-xs-5">
               <label>Nombre cliente:</label></br>
               <input type="text" id="inputNameClient" name="inputNameClient" class="form-control col-xs-12" required title="Nombre del cliente, obligatorio">
             </div>
-            <div class="form-group col-xs-4">
+            <div class="form-group col-xs-2">
               <label>Cobrar:</label></br>
               <button type="submit" class="enviarTicket btn btn-success"><i class="fa fa-money" style="font-size: 2.2rem;"></i></button>
             </div>
           </div>
           <div class="cobrar row">
-            <div class="form-group col-xs-2">
+            <div class="form-group col-xs-3">
                 <label>Abono:</label></br>
                 <input type="text" id="inputPago" name="inputPago" step=0.01 class="form-control calcChange" required title="Pago del cliente, obligatorio">
             </div>
-            <div class="form-group col-xs-2">
+            <div class="form-group col-xs-3">
                 <label>Recibido:</label></br>
                 <input type="text" id="inputRecibido" name="inputRecibido" step=0.01 class="form-control calcChange" required title="Dinero que entrega el cliente, obligatorio">
             </div>
@@ -63,17 +63,18 @@ else {
               <label>Fecha de entrega:</label></br>
               <input type="date" id="inputFecEntrega" name="inputFecEntrega" class="form-control" required title="Fecha de entrega del pedido, obligatoria." min="<?= $dateNow; ?>">
             </div>
-          </div>
-          <div class="cobrar row">
-            <div class="form-group col-xs-6">
-                <label>Hora de entrega desde las:</label>
+          <div class="cobrar form-inline">
+            <div class="form-group">
+                <label>Horario de entrega, de:</label>
                 <input type="time" id="inputHEI" name="inputHEI" class="form-control" required title="Hora de entrega inicial, obligatoria">
             </div>
-            <div class="form-group col-xs-6">
-                <label> a las:</label>
+            <div class="form-group ">
+                <label> a:</label>
                 <input type="time" id="inputHEF" name="inputHEF" class="form-control" required title="Hora de entrega final, obligatoria">
             </div>
           </div>
+          </div>
+          
           <!-- ¿Se podrían donar los pedidos?
           <div class="cobrar row">
               <div class="form-group col-xs-3">
