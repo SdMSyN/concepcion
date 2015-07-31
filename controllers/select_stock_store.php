@@ -18,6 +18,7 @@
             . "INNER JOIN $tCategory ON $tCategory.id=$tProduct.categoria_id "
             . "WHERE $tStock.tienda_id='$store' "
             . "AND $tProduct.activo='1' "
+            . "AND $tCategory.activo='1' "
             . "ORDER BY categoryId, productName ";
     $resGetStockStore=$con->query($sqlGetStockStore);
     $optStockStore='';
