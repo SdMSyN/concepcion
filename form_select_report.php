@@ -122,6 +122,7 @@ else {
         });
         
       $(".btnFiltros").on("click", "#generateReport", function(){
+        $('body').removeClass('loaded');
         $.ajax({
           type: 'POST',
           url: 'controllers/select_report_store.php?action=filter',
@@ -130,11 +131,13 @@ else {
             //alert(msg);
             $('.report #tableReport thead').html('<tr><th>#</th><th>Producto</th><th>Categoría</th><th>C.U.</th><th>Cant.</th><th>C.F.</th><th>Donación</th><th>Vendedor</th><th>Tienda</th><th>Fecha</th><th>Hora</th></tr>');
             $('.report #tableReport tbody').html(msg);
+            $('body').addClass('loaded');
           }
         });//end ajax
       });
       
       $(".btnFiltros").on("click", ".reportStock", function(){
+      $('body').removeClass('loaded');
         $.ajax({
           type: 'POST',
           url: 'controllers/select_report_stock_2.php',
@@ -143,6 +146,7 @@ else {
             //alert(msg);
             $('.report #tableReport thead').html('<tr><th>#</th><th>Producto</th><th>Categoría</th><th>C.U.</th><th>Cant.</th><th>C.F.</th><th>Tienda</th><th>Fecha</th></tr>');
             $('.report #tableReport tbody').html(msg);
+            $('body').addClass('loaded');
           }
         });//end ajax
       });
