@@ -12,7 +12,7 @@ else {
   $idUser = $_SESSION['userId'];
 	include('config/variables.php');
   
-  $sqlGetCategories = "SELECT * FROM $tCategory ";
+  $sqlGetCategories = "SELECT * FROM $tCategory WHERE activo='1' ";
   $resGetCategories = $con->query($sqlGetCategories);
   $optCategories = '';
   if ($resGetCategories->num_rows > 0) {

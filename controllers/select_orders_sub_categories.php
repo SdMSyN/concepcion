@@ -4,7 +4,7 @@
     
     $category_id=$_POST['idCategory'];
     
-    $sqlGetSubCategories="SELECT * FROM $tSubCategory WHERE categoria_id='$category_id'  ";
+    $sqlGetSubCategories="SELECT * FROM $tSubCategory WHERE categoria_id='$category_id' AND activo='1' ORDER BY nombre ";
     $resGetSubCategories=$con->query($sqlGetSubCategories);
     $optSubCategories='';
     if($resGetSubCategories->num_rows > 0){
