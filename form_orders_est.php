@@ -187,7 +187,7 @@ else {
                     url: 'controllers/update_order.php',
                     data: {orderId: idOrderGive},
                     success: function(msg){
-                        alert(msg);
+                        //alert(msg);
                         if (msg == "true") {
                             $('.msg').css({color: "#77DD77"});
                             $('.msg').html("Se entrego el pedido con éxito.");
