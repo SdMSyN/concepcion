@@ -143,6 +143,10 @@ else {
          $("#inputSellers").val(""); 
          $("#inputMonth").val(""); 
          $("#inputWeek").val(""); 
+         $("#inputDay").val(""); 
+         $("#inputCategory").val(""); 
+         $("#inputEst").val(""); 
+         $("#inputEstPay").val(""); 
       });
     });
     
