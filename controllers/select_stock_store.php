@@ -5,7 +5,20 @@
     $store = $_POST['storeId'];
     
     //$sqlGetStockStore="SELECT id, cantidad, tienda_id, (SELECT nombre FROM $tProduct WHERE id=$tStock.producto_id ORDER BY categoria_id DESC) as producto, producto_id FROM $tStock WHERE tienda_id='$store' ORDER BY producto_id ASC";
-    $sqlGetStockStore="SELECT $tStock.id as stockId, $tStock.cantidad as stockCant, $tStock.tienda_id as stockStore, $tStock.producto_id as stockProductId, $tProduct.categoria_id as productCategory, $tProduct.nombre as productName, $tCategory.nombre as categoryName, $tCategory.id as categoryId FROM $tStock INNER JOIN $tProduct ON $tProduct.id=$tStock.producto_id INNER JOIN $tCategory ON $tCategory.id=$tProduct.categoria_id WHERE $tStock.tienda_id='$store' ORDER BY categoryId, productName ";
+    $sqlGetStockStore="SELECT $tStock.id as stockId, "
+            . "$tStock.cantidad as stockCant, "
+            . "$tStock.tienda_id as stockStore, "
+            . "$tStock.producto_id as stockProductId, "
+            . "$tProduct.categoria_id as productCategory, "
+            . "$tProduct.nombre as productName, "
+            . "$tCategory.nombre as categoryName, "
+            . "$tCategory.id as categoryId "
+            . "FROM $tStock "
+            . "INNER JOIN $tProduct ON $tProduct.id=$tStock.producto_id "
+            . "INNER JOIN $tCategory ON $tCategory.id=$tProduct.categoria_id "
+            . "WHERE $tStock.tienda_id='$store' "
+            . "AND $tProduct.activo='1' "
+            . "ORDER BY categoryId, productName ";
     $resGetStockStore=$con->query($sqlGetStockStore);
     $optStockStore='';
     echo $sqlGetStockStore;

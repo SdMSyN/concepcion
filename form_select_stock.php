@@ -11,7 +11,11 @@ else {
   $userId = $_SESSION['userId'];
 
   /* Obtenemos los productos disponibles */
-  $sqlGetStocks = "SELECT id, (SELECT nombre FROM $tProduct WHERE id=$tStock.producto_id) as producto, cantidad, ( SELECT nombre FROM $tStore WHERE id=$tStock.tienda_id) as tienda FROM $tStock ";
+  $sqlGetStocks = "SELECT id, "
+          . "(SELECT nombre FROM $tProduct WHERE id=$tStock.producto_id) as producto, "
+          . "cantidad, "
+          . "( SELECT nombre FROM $tStore WHERE id=$tStock.tienda_id) as tienda "
+          . "FROM $tStock ";
   $resGetStocks = $con->query($sqlGetStocks);
   $optStocks = '';
   if ($resGetStocks && $resGetStocks->num_rows > 0) {
@@ -30,7 +34,7 @@ else {
   }
 
   /* Obtenemos los productos */
-  $sqlGetProducts = "SELECT id, nombre FROM $tProduct WHERE activo='1' ";
+  $sqlGetProducts = "SELECT id, nombre FROM $tProduct WHERE activo='1' ORDER BY nombre  ";
   $resGetProducts = $con->query($sqlGetProducts);
   $optProducts = '<option></option>';
   if ($resGetProducts->num_rows > 0) {
