@@ -56,6 +56,7 @@ else {
                       <th>Hora</th>
                       <th>Total</th>
                       <th>Fecha de entrega</th>
+                      <th>Horario de entrega</th>
                       <th>Estatus pedido</th>
                       <th>Estatus de pago</th>
                       <th>Detalles</th>

@@ -11,7 +11,13 @@
     $action = $_GET['action'];
     //echo $store.'--'.$sellers.'--'.$month.'--'.$week;
     
-    $sqlGetInfoOrder = "SELECT id, nombre_cliente, (SELECT nombre FROM $tUser WHERE id=$tOrderInfo.usuario_id) as user, (SELECT nombre FROM $tStore WHERE id=$tOrderInfo.tienda_id) as store, fecha, hora, total, fecha_entrega, (SELECT nombre FROM $tOrderEst WHERE id=$tOrderInfo.est_pedido_id) as estOrder, (SELECT nombre FROM $tOrderEstPay WHERE id=$tOrderInfo.est_pedido_pago_id) as estOrderPay FROM $tOrderInfo WHERE tienda_id='$store' ";
+    $sqlGetInfoOrder = "SELECT id, nombre_cliente, "
+            . "(SELECT nombre FROM $tUser WHERE id=$tOrderInfo.usuario_id) as user, "
+            . "(SELECT nombre FROM $tStore WHERE id=$tOrderInfo.tienda_id) as store, "
+            . "fecha, hora, total, fecha_entrega, hora_entrega_inicial as hei, hora_entrega_final as hef, "
+            . "(SELECT nombre FROM $tOrderEst WHERE id=$tOrderInfo.est_pedido_id) as estOrder, "
+            . "(SELECT nombre FROM $tOrderEstPay WHERE id=$tOrderInfo.est_pedido_pago_id) as estOrderPay "
+            . "FROM $tOrderInfo WHERE tienda_id='$store' ";
     
     if($action=="day"){
         $sqlGetInfoOrder .= "AND fecha='$dateNow' ";
@@ -53,6 +59,7 @@
             $optReport.='<td>'.$rowGetInfoOrder['hora'].'</td>';
             $optReport.='<td>'.$rowGetInfoOrder['total'].'</td>';
             $optReport.='<td>'.$rowGetInfoOrder['fecha_entrega'].'</td>';
+            $optReport.='<td>De '.$rowGetInfoOrder['hei'].' a las '.$rowGetInfoOrder['hef'].'</td>';
             $optReport.='<td>'.$rowGetInfoOrder['estOrder'].'</td>';
             $optReport.='<td>'.$rowGetInfoOrder['estOrderPay'].'</td>';
             $optReport.='<td><a href="form_select_order_detail.php?id='.$rowGetInfoOrder['id'].'" class="btn btn-success">Detalles</a></td>';
