@@ -128,6 +128,9 @@
     $cambio=$_POST['inputCambio'];
     $cliente=$_POST['inputNameClient'];
     $fecEntrega=$_POST['inputFecEntrega'];
+    // Horarios de entrega
+    $hei=$_POST['inputHEI'];
+    $hef=$_POST['inputHEF'];
     //($dona=="on") ? $idAdmin=$_POST['inputAdmin'] : $idAdmin="";
     $cad='';
     //Obtenemos datos de la tienda
@@ -144,8 +147,9 @@
     $resGetUser=$con->query($sqlGetUser);
     $rowGetUser=$resGetUser->fetch_assoc();
     $cad.='<p class="text-center">Le atendio: '.$rowGetUser['nombre'].'</br>Fecha: '.$dateNow.'<br>Hora: '.$timeNow.'</p>';
-
-    $sqlCreateInfoOrder="INSERT INTO $tOrderInfo (usuario_id, tienda_id, nombre_cliente, fecha, hora, total, est_pedido_id, est_pedido_pago_id, fecha_entrega) VALUES ('$idUser', '$idStore', '$cliente', '$dateNow', '$timeNow', '$total', '1', '1', '$fecEntrega' )";
+    $cad.='<p class="text-center"><br>Fecha de entrega: '.$fecEntrega.'<br>Entregar entre las: '.$hei.' y las '.$hef.'.</p>';
+    
+    $sqlCreateInfoOrder="INSERT INTO $tOrderInfo (usuario_id, tienda_id, nombre_cliente, fecha, hora, total, est_pedido_id, est_pedido_pago_id, fecha_entrega, hora_entrega_inicial, hora_entrega_final) VALUES ('$idUser', '$idStore', '$cliente', '$dateNow', '$timeNow', '$total', '1', '1', '$fecEntrega', '$hei', '$hef' )";
     if($con->query($sqlCreateInfoOrder) === TRUE){
         $idInfoOrder=$con->insert_id;
         

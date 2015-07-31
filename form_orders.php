@@ -64,6 +64,16 @@ else {
               <input type="date" id="inputFecEntrega" name="inputFecEntrega" class="form-control" required title="Fecha de entrega del pedido, obligatoria." min="<?= $dateNow; ?>">
             </div>
           </div>
+          <div class="cobrar row">
+            <div class="form-group col-xs-6">
+                <label>Hora de entrega desde las:</label>
+                <input type="time" id="inputHEI" name="inputHEI" class="form-control" required title="Hora de entrega inicial, obligatoria">
+            </div>
+            <div class="form-group col-xs-6">
+                <label> a las:</label>
+                <input type="time" id="inputHEF" name="inputHEF" class="form-control" required title="Hora de entrega final, obligatoria">
+            </div>
+          </div>
           <!-- ¿Se podrían donar los pedidos?
           <div class="cobrar row">
               <div class="form-group col-xs-3">
