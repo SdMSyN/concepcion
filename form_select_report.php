@@ -65,6 +65,37 @@ else {
           </table>
       </div>
     </div>
+      <!-- modal para ver descripción del producto -->
+        <div class="modal fade bs-example-modal-lg" id="modalViewTicket" tabindex="-1" role="dialog" aria-labellebdy="myModal" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span>
+                        </button>
+                        <h4 class="modal-title" id="exampleModalLabel">Ticket</h4>
+                        <p class="msgModal"></p>
+                    </div>
+                        <div class="modal-body">
+                            <table class="table table-striped" id="tableReport">
+                                <thead>
+                                    <tr>
+                                        <td>#</td>
+                                        <td>Producto</td>
+                                        <td>Cantidad</td>
+                                        <td>C.U.</td>
+                                        <td>C.T.</td>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        </div>
+                </div>
+            </div>
+        </div><!-- end modal -->
   </div><!-- fin container -->
   
   <script type="text/javascript">
@@ -88,7 +119,7 @@ else {
                 data: $('form#formSelectReport').serialize(),
                 success: function (msg) {
                   //alert(msg);
-                  $('.report #tableReport thead').html('<tr><th>#</th><th>Producto</th><th>Categoría</th><th>C.U.</th><th>Cant.</th><th>C.F.</th><th>Donación</th><th>Vendedor</th><th>Tienda</th><th>Fecha</th><th>Hora</th></tr>');
+                  $('.report #tableReport thead').html('<tr><th>#</th><th>Ticket</th><th>SubTotal</th><th>Descuento</th><th>Total</th><th>Donación</th><th>Vendedor</th><th>Tienda</th><th>Fecha</th><th>Hora</th></tr>');
                   $('.report #tableReport tbody').html(msg);
                 }
               });//end ajax
@@ -125,11 +156,11 @@ else {
         $('body').removeClass('loaded');
         $.ajax({
           type: 'POST',
-          url: 'controllers/select_report_store.php?action=filter',
+          url: 'controllers/select_report_store_3.php?action=filter',
           data: $('form#formSelectReport').serialize(),
           success: function (msg) {
             //alert(msg);
-            $('.report #tableReport thead').html('<tr><th>#</th><th>Producto</th><th>Categoría</th><th>C.U.</th><th>Cant.</th><th>C.F.</th><th>Donación</th><th>Vendedor</th><th>Tienda</th><th>Fecha</th><th>Hora</th></tr>');
+            $('.report #tableReport thead').html('<tr><th>#</th><th>Ticket</th><th>SubTotal</th><th>Descuento</th><th>Total</th><th>Donación</th><th>Vendedor</th><th>Tienda</th><th>Fecha</th><th>Hora</th></tr>');
             $('.report #tableReport tbody').html(msg);
             $('body').addClass('loaded');
           }
@@ -161,6 +192,36 @@ else {
       });
     });
     
+    $('#modalViewTicket').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var idTicket = button.data('whatever');
+                $.ajax({
+                    type: "POST",
+                    url: "controllers/select_ticket_details.php",
+                    data: {idTicket: idTicket},
+                    success: function (msg) {
+                        console.log(msg);
+                        var msg = jQuery.parseJSON(msg);
+                        if (msg.error == 0) {
+                            $("#modalViewTicket .modal-body tbody").html("");
+                                $.each(msg.dataRes, function (i, item) {
+                                    var newRow = '<tr>'
+                                         + '<td>'+(i+1)+'</td>'
+                                         + '<td>'+msg.dataRes[i].nombre+'</td>'
+                                         + '<td>'+msg.dataRes[i].cant+'</td>'
+                                         + '<td>'+msg.dataRes[i].cu+'</td>'
+                                         + '<td>'+msg.dataRes[i].ct+'</td>'
+                                         + '</tr>';
+                                    $(newRow).appendTo("#modalViewTicket .modal-body tbody");
+                                })
+                        } else {
+                            var newRow = '<tr><td colspan="3">' + msg.msgErr + '</td></tr>';
+                            $("#modalViewTicket .modal-body tbody").html(newRow);
+                        }
+                    }
+                })
+            })
+            
     //$('#imprime').click(function() {
     $(".btnFiltros").on("click", "#imprime", function(){
         $("div#myPrintArea").printArea();
