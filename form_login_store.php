@@ -31,33 +31,36 @@ while ($rowGetStores = $resGetStores->fetch_assoc()) {
 
 <!-- Cambio dinamico -->
 <div class="container" >
-  <a href="form_login_admin.php" class="btn btn-primary pull-right " style="margin-top: 1rem;">Administrador</a>
+  
   <div class="row">
-    <div class="col-sm-12 col-md-offset-2 col-md-8">
+    <div class="col-sm-10 col-md-offset-2 col-md-8">
       <div class="titulo text-center">
-	<?= $tit; ?>
+		<?= $tit; ?>
       </div>
-      <form id="formLoginStore" name="formLoginStore" method="POST">
-	<div class="error"></div>
-	<div class="form-group">
-	  <label>Tienda: </label>
-	  <select id="inputStoreName" name="inputStoreName" class="form-control">
-	    <?= $optStores; ?>
-	  </select>
-	</div>
-	<div class="form-group">
-	  <label>Contraseña: </label>
-	  <input type="password" name="inputStorePass" id="inputStorePass" class="form-control" />
-	</div>
-	<input type="text" name="inputLat" id="inputLat" class="hide" />   
-	<input type="text" name="inputLon" id="inputLon" class="hide" /> 
-	<?php include ('teclado_numerico.php'); ?>
-	<div class="numeric-form text-center">
-	  <button type="submit" class="btn btn-success">Entrar</button>
-	</div>
-      </form>
-    </div>	  
+	</div>	
+	<div class="col-sm-2 text-right"><a href="form_login_admin.php" class="btn btn-primary pull-right " style="margin-top: 1rem;">Administrador</a></div>
   </div>
+      <form id="formLoginStore" name="formLoginStore" method="POST">
+		<div class="error"></div>
+		<div class="form-group">
+		  <label>Tienda: </label>
+		  <select id="inputStoreName" name="inputStoreName" class="form-control">
+			<?= $optStores; ?>
+		  </select>
+		</div>
+		<div class="form-group">
+		  <label>Contraseña: </label>
+		  <input type="password" name="inputStorePass" id="inputStorePass" class="form-control" />
+		</div>
+		<input type="text" name="inputLat" id="inputLat" class="hide" />   
+		<input type="text" name="inputLon" id="inputLon" class="hide" /> 
+		<?php include ('teclado_numerico.php'); ?>
+		<div class="numeric-form text-center">
+		  <button type="submit" class="btn btn-success">Entrar</button>
+		</div>
+      </form>
+      
+  
 </div>
 
 <script type="text/javascript">
