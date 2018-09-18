@@ -86,12 +86,12 @@
             $sqlGetStoreInfo = "SELECT nombre, direccion, rfc, cp, tel FROM $tStore WHERE id='$idStore' ";
             $resGetStoreInfo = $con->query($sqlGetStoreInfo);
             $rowGetStoreInfo = $resGetStoreInfo->fetch_assoc();
-            $cad .= '<p class="text-center" style="font-size: 7px; ">"Panaderia La Concepción"<br>'
-                    . 'Sucursal: ' . $rowGetStoreInfo['nombre'] . '<br>'
-                    . 'Dirección: ' . $rowGetStoreInfo['direccion'] . '<br>'
-                    . 'CP: ' . $rowGetStoreInfo['cp'] . '<br>'
-                    . 'RFC: ' . $rowGetStoreInfo['rfc'] . '<br>'
-                    . 'Tel: ' . $rowGetStoreInfo['tel'] . ' </p>';
+            $cad.='<p class="text-center">"La Concepción FAM Apizaco"<br>'
+                    . 'Matriz: ' . $rowGetStoreInfo['nombre'] 
+                    . '<br>Dirección: ' . $rowGetStoreInfo['direccion'] 
+                    . '<br>CP: ' . $rowGetStoreInfo['cp'] 
+                    . '<br>RFC: ' . $rowGetStoreInfo['rfc'] . ' (Regimen de incorporación fiscal)'
+                    . '<br>Tel: ' . $rowGetStoreInfo['tel'] . '</p>';
 
             //Obtenemos datos del vendedor y fecha de venta
             $sqlGetUser = "SELECT CONCAT(ap,' ',am,' ',nombre) as nombre FROM $tUser WHERE id='$idUser' ";

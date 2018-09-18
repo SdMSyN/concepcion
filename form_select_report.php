@@ -115,7 +115,7 @@ else {
             $('.btnFiltros').html(msg);
             $.ajax({
                 type: 'POST',
-                url: 'controllers/select_report_store.php?action=day',
+                url: 'controllers/select_report_store_3.php?action=day',
                 data: $('form#formSelectReport').serialize(),
                 success: function (msg) {
                   //alert(msg);

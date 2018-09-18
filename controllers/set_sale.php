@@ -148,7 +148,12 @@
         $rowGetStore = $resGetStore->fetch_assoc();
         $cad.='<div id="myPrintArea">';
         $cad.='<div class="col-sm-2 ticket">';
-        $cad.='<p class="text-center">"La Concepción Apizaco"<br>Sucursal: ' . $rowGetStore['nombre'] . '<br>Dirección: ' . $rowGetStore['direccion'] . '<br>CP: ' . $rowGetStore['cp'] . '<br>RFC: ' . $rowGetStore['rfc'] . '<br>Tel: ' . $rowGetStore['tel'] . '</p>';
+        $cad.='<p class="text-center">"La Concepción FAM Apizaco"<br>'
+                    . 'Matriz: ' . $rowGetStore['nombre'] 
+                    . '<br>Dirección: ' . $rowGetStore['direccion'] 
+                    . '<br>CP: ' . $rowGetStore['cp'] 
+                    . '<br>RFC: ' . $rowGetStore['rfc'] . ' (Regimen de incorporación fiscal)'
+                    . '<br>Tel: ' . $rowGetStore['tel'] . '</p>';
 
         //Obtenemos datos del vendedor y fecha de venta
         $sqlGetUser = "SELECT CONCAT(ap,' ',am,' ',nombre) as nombre FROM $tUser WHERE id='$idUser' ";
@@ -157,7 +162,8 @@
         $cad.='<p class="text-center">Le atendio: ' . $rowGetUser['nombre'] . '</br>Fecha: ' . $dateNow . '<br>Hora: ' . $timeNow . '</p>';
 
 
-        $sqlCreateInfoSale = "INSERT INTO $tSaleInfo (usuario_id, tienda_id, fecha, hora, pago, total, cambio) VALUES ('$idUser', '$idStore', '$dateNow', '$timeNow', '$recibido', '$total', '$cambio' )";
+        $sqlCreateInfoSale = "INSERT INTO $tSaleInfo (usuario_id, tienda_id, fecha, hora, pago, total, cambio, total_desc) "
+                . "VALUES ('$idUser', '$idStore', '$dateNow', '$timeNow', '$recibido', '$total', '$cambio', '$total' )";
         if ($con->query($sqlCreateInfoSale) === TRUE) {
           $idInfoSale = $con->insert_id;
           $cad.='<table><thead><tr><th>Producto</th><th style="padding-left: .5rem;">C.U.</th><th style="padding-left: .5rem;">Cant.</th><th style="padding-left: .5rem;">C.T.</th></tr></thead><tbody>';
@@ -208,6 +214,7 @@
           $cad.='<p class="text-center"><b>DONACIÓN</b></p>';
         
         $cad.='<p class="text-center">Gracias por su preferencia.</p>';
+        $cad.= '<p class="text-center" style="font-zie: 10px">Sistema Punto de Venta por <br>www.solucionesynegocios.com.mx</p>';
         $cad.='</div><div class="col-sm-10"></div>'; //Fin col-sm-2
         $cad.='</div></div>'; //Fin área imprime -- Fin row
         $cad.='<div style="padding-left: 1rem;"><p><a href="javascript:void(0)" id="imprime" class="btn btn-success">Imprime <span class="glyphicon glyphicon-print"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../form_sales.php" class="btn btn-default">Atrás</a></p></div>';
