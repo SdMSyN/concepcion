@@ -90,7 +90,8 @@
                     . 'Matriz: ' . $rowGetStoreInfo['nombre'] 
                     . '<br>Dirección: ' . $rowGetStoreInfo['direccion'] 
                     . '<br>CP: ' . $rowGetStoreInfo['cp'] 
-                    . '<br>RFC: ' . $rowGetStoreInfo['rfc'] . ' (Regimen de incorporación fiscal)'
+                    . '<br>RFC: ' . $rowGetStoreInfo['rfc']
+                    . '<br>Regimen de incorporación fiscal'
                     . '<br>Tel: ' . $rowGetStoreInfo['tel'] . '</p>';
 
             //Obtenemos datos del vendedor y fecha de venta
@@ -98,8 +99,9 @@
             $resGetUser = $con->query($sqlGetUser);
             $rowGetUser = $resGetUser->fetch_assoc();
             $cad .= '<p class="text-center">Le atendio: ' . $rowGetUser['nombre'] . '</br>Fecha: ' . $dateNow . '<br>Hora: ' . $timeNow . '</p>';
-
-           $idInfoSale = $idTicket;
+            $cad .= '<p>Núm. Ticket: <b>'.$idTicket.'</b></p>';
+            
+            $idInfoSale = $idTicket;
             $cad .= '<table><thead><tr><th>Producto</th><th style="padding-left: .5rem;">C.U.</th><th style="padding-left: .5rem;">Cant.</th><th style="padding-left: .5rem;">C.T.</th></tr></thead><tbody style="border: 1px solid black;">';
             //Obtenemos los productos vendidos
             $sqlGetSaleProd = "SELECT * FROM $tSaleProd WHERE venta_info_id = '$idTicket' ";
