@@ -23,3 +23,6 @@ ADD  `cambio` FLOAT( 8, 2 ) NOT NULL ;
 /* altera para añadir hora de pedido */
 
 ALTER TABLE `pedidos_info` ADD `hora_entrega_inicial` VARCHAR(5) NOT NULL , ADD `hora_entrega_final` VARCHAR(5) NOT NULL ;
+
+/*Cambiar estructura precios tabla ventas_info*/
+ALTER TABLE `ventas_info` CHANGE `total_desc` `total_desc` FLOAT(8,2) NOT NULL, CHANGE `cant_desc` `cant_desc` FLOAT(8,2) NOT NULL, CHANGE `cambio_desc` `cambio_desc` FLOAT(8,2) NOT NULL;

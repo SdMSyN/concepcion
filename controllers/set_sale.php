@@ -191,9 +191,9 @@
                                     $productName = $rowGetProduct['nombre'];
                                     $cad .= '<tr>';
                                     $cad .= '<td>' . $productName . '</td>';
-                                    $cad .= '<td class="text-right">' . $costoU . '</td>';
-                                    $cad .= '<td class="text-right">' . $cant . '</td>';
-                                    $cad .= '<td class="text-right">' . $costoF . '</td>';
+                                    $cad .= '<td class="text-right"> $' . $costoU . ' </td>';
+                                    $cad .= '<td class="text-right"> $' . $cant . ' </td>';
+                                    $cad .= '<td class="text-right"> $' . $costoF . ' </td>';
                                     $cad .= '</tr>';
                                     //header("Location: ../form_sales.php");
                                     //echo "true";
@@ -212,7 +212,7 @@
                 }
 
                 $cad .= '</tbody></table>';
-                $cad .= '<p class="text-right">Total: ' . $total . '<br>Efectivo: ' . $recibido . '<br>Cambio: ' . $cambio . '</p>';
+                $cad .= '<p class="text-right">Total: $' . $total . '<br>Efectivo: $' . $recibido . '<br>Cambio: $' . $cambio . '</p>';
                 if ($dona == "on")
                     $cad .= '<p class="text-center"><b>DONACIÓN</b></p>';
 

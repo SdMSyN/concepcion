@@ -118,9 +118,9 @@
                 $productName = $rowGetProduct['nombre'];
                 $cad .= '<tr style="border: 1px solid black;">';
                 $cad .= '<td style="border: 1px solid black;">' . $productName . '</td>';
-                $cad .= '<td class="text-right" style="border: 1px solid black;">' . $costoU . '</td>';
-                $cad .= '<td class="text-right" style="border: 1px solid black;">' . $cant . '</td>';
-                $cad .= '<td class="text-right" style="border: 1px solid black;">' . $costoF . '</td>';
+                $cad .= '<td class="text-right" style="border: 1px solid black;"> $' . $costoU . ' </td>';
+                $cad .= '<td class="text-right" style="border: 1px solid black;"> ' . $cant . ' </td>';
+                $cad .= '<td class="text-right" style="border: 1px solid black;"> $' . $costoF . ' </td>';
                 $cad .= '</tr>';
                 //header("Location: ../form_sales.php");
                 //echo "true";
@@ -128,14 +128,16 @@
 
             $cad .= '</tbody></table>';
             if ($descuentoDesc != 0) {
-                $cad .= '<p class="text-right">Subtotal: ' . $total
-                        . '<br>Descuento del: ' . $descuentoDesc . ' %'
-                        . '<br>Total: ' . $totalDesc
-                        . '<br>Efectivo: ' . $recibido
-                        . '<br>Cambio: ' . $cambioDesc
+                $cad .= '<p class="text-right">Subtotal: $' . $total
+                        . '<br>Descuento del: $' . $descuentoDesc . ' %'
+                        . '<br>Total: $' . $totalDesc
+                        . '<br>Efectivo: $' . $recibido
+                        . '<br>Cambio: $' . $cambioDesc
                         . '</p>';
             } else {
-                $cad .= '<p class="text-right">Total: ' . $total . '<br>Efectivo: ' . $recibido . '<br>Cambio: ' . $cambio . '</p>';
+                $cad .= '<p class="text-right">Total: $' . $total 
+                        . '<br>Efectivo: $' . $recibido 
+                        . '<br>Cambio: $' . $cambio . '</p>';
             }
 
             $cad .= '<p class="text-center">Gracias por su preferencia.</p>';
