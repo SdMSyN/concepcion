@@ -168,6 +168,7 @@
                 if ($con->query($sqlCreateInfoSale) === TRUE) {
                     $idInfoSale = $con->insert_id;
                     
+                    $idTicket = $idInfoSale;
                     $cad .= '<p>Núm. Ticket: <b>'.$idTicket.'</b></p>';
                     $cad .= '<table><thead><tr><th>Producto</th><th style="padding-left: .5rem;">C.U.</th><th style="padding-left: .5rem;">Cant.</th><th style="padding-left: .5rem;">C.T.</th></tr></thead><tbody>';
                     for ($i = 0; $i < count($_POST['id']); $i++) {
@@ -192,7 +193,7 @@
                                     $cad .= '<tr>';
                                     $cad .= '<td>' . $productName . '</td>';
                                     $cad .= '<td class="text-right"> $' . $costoU . ' </td>';
-                                    $cad .= '<td class="text-right"> $' . $cant . ' </td>';
+                                    $cad .= '<td class="text-right"> ' . $cant . ' </td>';
                                     $cad .= '<td class="text-right"> $' . $costoF . ' </td>';
                                     $cad .= '</tr>';
                                     //header("Location: ../form_sales.php");

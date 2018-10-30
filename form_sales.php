@@ -217,7 +217,11 @@ else {
       $("#formTicket").on("change blur click", ".calcChange", calcChange);
       function calcChange(){
           var total = parseFloat($(this).parent().parent().find("#inputTotal").val());
-          var dinero = parseFloat($(this).parent().parent().find("#inputRecibido").val());
+          var dinero = $(this).parent().parent().find("#inputRecibido").val();
+          dinero = parseFloat(dinero);
+          dinero = dinero.toFixed(2);
+          $(this).parent().parent().find("#inputRecibido").val(dinero);
+          //var dinero = parseFloat($(this).parent().parent().find("#inputRecibido").val());
         if(dinero < total || isNaN(dinero)){
             //alert("El dinero recibido no puede ser menor al total de la venta.");
             $(this).parent().parent().find(".enviarTicket").attr("disabled", true);
@@ -225,6 +229,7 @@ else {
             $(this).parent().parent().find(".enviarTicket").removeAttr("disabled");
         var cambio = dinero-total;
           //alert(cambio);
+          cambio = cambio.toFixed(2);
           $(this).parent().parent().find("#inputCambio").val(cambio);
       }
       
@@ -259,6 +264,8 @@ else {
           $(this).parent().parent().find("#inputCant").val(cantidadMax);
         }
         var precioF = precioU * cantidad;
+        precioF = parseFloat(precioF);
+        precioF = precioF.toFixed(2);
         $(this).parent().parent().find("#inputPrecioF").val(precioF);
         calcTotal();
       }
@@ -274,7 +281,9 @@ else {
         //calculamos cambio
         var total = parseFloat($("#inputTotal").val());
         var dinero = parseFloat($("#inputRecibido").val());
+        dinero = dinero.toFixed(2);
         var cambio = dinero-total;
+        cambio = toFixed(2);
         //console.log(total);
         $("#inputCambio").val(cambio);
       }
@@ -294,6 +303,8 @@ else {
             $(this).parent().parent().find("#inputCant").val(cantidadMax);
           }
           var precioF = precioU * cantidad;
+          precioF = parseFloat(precioF);
+          precioF = precioF.toFixed(2);
           $(this).parent().parent().find("#inputPrecioF").val(precioF);
           calcTotal();
         })
