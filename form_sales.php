@@ -204,7 +204,8 @@ else {
         actTodo();
       });
 
-      $(".ticket #dataTicket tbody").on("keyup change blur keypress keydown", ".cant", actCant);
+      //$(".ticket #dataTicket tbody").on("keyup change blur keypress keydown", ".cant", actCant);
+      $(".ticket #dataTicket tbody").on("keyup change blur keypress keydown click mouseup", ".cant", actCant);
 
       /*$("#formTicket").on("change blur click", ".calcChange", function(){
           var total = parseFloat($(this).parent().parent().find("#inputTotal").val());
