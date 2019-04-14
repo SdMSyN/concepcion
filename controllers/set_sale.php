@@ -122,7 +122,7 @@
             $idUser = $_POST['idUser'];
 
             (isset($_POST['inputDonacion'])) ? $dona = $_POST['inputDonacion'] : $dona = "false";
-            ($dona != "on") ? $recibido = $_POST['inputRecibido'] : $recibido = "0.00";
+            ($dona != "on") ? $recibido = $_POST['inputRecibido'].".00" : $recibido = "0.00";
             $total = $_POST['inputTotal'];
             ($dona != "on") ? $cambio = $_POST['inputCambio'] : $cambio = "0.00";
             ($dona == "on") ? $idAdmin = $_POST['inputAdmin'] : $idAdmin = "";
@@ -152,7 +152,7 @@
                         . 'Matriz: ' . $rowGetStore['nombre']
                         . '<br>Dirección: ' . $rowGetStore['direccion']
                         . '<br>CP: ' . $rowGetStore['cp']
-                        . '<br>RFC: ' . $rowGetStoreInfo['rfc']
+                        . '<br>RFC: ' . $rowGetStore['rfc']
                         . '<br>Regimen de incorporación fiscal'
                         . '<br>Tel: ' . $rowGetStore['tel'] . '</p>';
 
@@ -193,7 +193,7 @@
                                     $cad .= '<tr>';
                                     $cad .= '<td>' . $productName . '</td>';
                                     $cad .= '<td class="text-right"> $' . $costoU . ' </td>';
-                                    $cad .= '<td class="text-right"> ' . $cant . ' </td>';
+                                    $cad .= '<td class="text-center"> ' . $cant . ' </td>';
                                     $cad .= '<td class="text-right"> $' . $costoF . ' </td>';
                                     $cad .= '</tr>';
                                     //header("Location: ../form_sales.php");

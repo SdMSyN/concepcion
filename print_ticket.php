@@ -119,7 +119,7 @@
                 $cad .= '<tr style="border: 1px solid black;">';
                 $cad .= '<td style="border: 1px solid black;">' . $productName . '</td>';
                 $cad .= '<td class="text-right" style="border: 1px solid black;"> $' . $costoU . ' </td>';
-                $cad .= '<td class="text-right" style="border: 1px solid black;"> ' . $cant . ' </td>';
+                $cad .= '<td class="text-center" style="border: 1px solid black;"> ' . $cant . ' </td>';
                 $cad .= '<td class="text-right" style="border: 1px solid black;"> $' . $costoF . ' </td>';
                 $cad .= '</tr>';
                 //header("Location: ../form_sales.php");

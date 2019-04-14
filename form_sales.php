@@ -220,7 +220,7 @@ else {
           var dinero = $(this).parent().parent().find("#inputRecibido").val();
           dinero = parseFloat(dinero);
           dinero = dinero.toFixed(2);
-          $(this).parent().parent().find("#inputRecibido").val(dinero);
+          //$(this).parent().parent().find("#inputRecibido").val(dinero);
           //var dinero = parseFloat($(this).parent().parent().find("#inputRecibido").val());
         if(dinero < total || isNaN(dinero)){
             //alert("El dinero recibido no puede ser menor al total de la venta.");
