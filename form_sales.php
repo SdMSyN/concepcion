@@ -284,7 +284,7 @@ else {
         var dinero = parseFloat($("#inputRecibido").val());
         dinero = dinero.toFixed(2);
         var cambio = dinero-total;
-        cambio = toFixed(2);
+        cambio = cambio.toFixed(2);
         //console.log(total);
         $("#inputCambio").val(cambio);
       }
