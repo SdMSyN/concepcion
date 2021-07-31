@@ -13,7 +13,7 @@
 
     <!-- Bootstrap -->
     <link href="assets/css/application.css" rel="stylesheet">
-    
+    <link rel="stylesheet" type="text/css" href="/DataTables/datatables.css">
     <!-- jQuery -->
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
@@ -22,6 +22,8 @@
     <script src="assets/js/jquery-validate.bootstrap-tooltip.min.js"></script>
     <script src="assets/js/application.js"></script>
     <script src="assets/js/jquery.PrintArea.js"></script>
+    <script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script>
+
     <!--
         <script src="assets/js/typeahead.js"></script>
         <script src="assets/js/typeahead.jquery.js"></script>

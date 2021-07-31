@@ -12,6 +12,7 @@ else {
   $idUser = $_SESSION['userId'];
 	include('config/variables.php');
   
+  
   $sqlGetCategories = "SELECT * FROM $tCategory WHERE activo='1' ";
   $resGetCategories = $con->query($sqlGetCategories);
   $optCategories = '';
@@ -23,6 +24,7 @@ else {
   } else {
     $optCategories .= 'No hay categorias disponibles';
   }
+  
   ?>
 
   <!-- Cambio dinamico -->
@@ -56,8 +58,22 @@ else {
                 <input type="checkbox" id="inputDonacion" name="inputDonacion" class="checkbox form-control">
               </div>
               <div class="form-group col-xs-9">
-                  <label>Administrador</label>
+                  <label>Administrador</label> 
                       <input type="password" id="inputAdmin" name="inputAdmin" class="form-control" readonly >
+              </div>
+              </div>
+              <div class="efectivo row form-inline">
+                <div class="form-group col-xs-3">
+                  <label>Efectivo</label>
+                  <input type="checkbox" id="inputEfectivo" name="inputEfectivo" class="checkbox from-control">
+                </div>
+                <div class="form-group col-xs-6">
+                  <label>Cantidad</label>
+                  <input type="text" id="inputCantidad" name="inputCantidad" class="checkbox from-control">
+                </div>
+                <div class="form-group col-xs-3">
+                  <label>Pagar</label><br>
+                  <button type="submit" class="enviarpago btn btn-success"><i class="fa fa-money" style="font-size: 2.2rem;"></i></button>
               </div>
           </div>
           <div class="line"></div>
@@ -71,41 +87,10 @@ else {
                 <th>Precio F.</th>
                 <th></th>
               </tr>
-            </thead>
-            <tbody>
-            </tbody>
+            </thead> 
           </table>
           </div>
         </form>
-      </div>
-      <div class="teclado text-center">
-        <form id="formTeclado" method="POST" class="form-inline">
-          <div class="form-group">
-            <input type="text" class="typeahead tt-query" autocomplete="off" spellcheck="false" placeholder="Busca el producto" id="inputCod" name="inputCod">
-            <input type="hidden" name="idStore" value="<?= $idStore; ?>" >
-          </div>
-          <button type="submit" class="btn btn-success"><i class="fa fa-list"></i> Agregar</button>
-          <div class="errorSearchProduct"></div>
-        </form>
-        <div id="teclado_numerico_2" class="text-center">
-          <div class="numeric-form-sales">
-            <span class="btn btn-info btn-numeric-form" onclick="teclado(7)">7</span>
-            <span class="btn btn-info btn-numeric-form" onclick="teclado(8)">8</span>
-            <span class="btn btn-info btn-numeric-form" onclick="teclado(9)">9</span>
-            <br>
-            <span class="btn btn-info btn-numeric-form" onclick="teclado(4)">4</span>
-            <span class="btn btn-info btn-numeric-form" onclick="teclado(5)">5</span>
-            <span class="btn btn-info btn-numeric-form" onclick="teclado(6)">6</span>
-            <br>
-            <span class="btn btn-info btn-numeric-form" onclick="teclado(1)">1</span>
-            <span class="btn btn-info btn-numeric-form" onclick="teclado(2)">2</span>
-            <span class="btn btn-info btn-numeric-form" onclick="teclado(3)">3</span>
-            <br>
-            <span class="btn btn-default btn-numeric-form erase"><i class="fa fa-arrow-left"></i></span>
-            <span class="btn btn-info btn-numeric-form" onclick="teclado(0)">0</span>
-            <span class="btn btn-default btn-numeric-form" onClick="borrarTeclado()" >C</span>
-          </div>
-        </div>
       </div>
     </div> <!--  fin IZQUIERDA-->
     <div class="col-sm-7 sales sales-derecha text-center">
@@ -113,7 +98,15 @@ else {
         Ventas
       </div>
       <div class="row productCategory div-sales">
-        <?= $optCategories; ?>
+      <table id="Ventas" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Imagen</th>
+            </tr>
+        </thead>
+    </table>
       </div>
       <div class="line"></div>
       <div class="row productSubCategory div-sales"></div>
@@ -122,9 +115,48 @@ else {
     </div><!--  fin DERECHA-->
   </div>
 
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $('#example').DataTable();
+} );
+</script>
 
   <script type="text/javascript">
-    $(document).ready(function () {
+  //Funcion para llenar la DataTable haciendo solo una peticion a la base de datos
+  function filtrar(){
+    $.ajax({
+      type: "POST",
+      data: {idProduct: product, idStore: <?= $idStore; ?>},
+      url: "../controllers/select_sales_products_json.php",
+      success: function(msg){
+        var msg = jQuery.parseJSON(msg);
+        if(msg.error == 0){
+          (".ventas #dataventas tbody").append(msg);
+          $.each(msg.dataRes, function(i, item)){
+            var newRow = '<tr>'
+            +'<td>'+msg.dataRes[i].id+'</td>'
+            +'<td>'+msg.dataRes[i].nombre+'</td>'
+            +'<td>'+msg.dataRes[i].imagen+'</td>'
+            '</tr>';
+            $(newRow).appendTo("#data tbody");
+          }
+        }
+      }
+    });
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+   /* $(document).ready(function () {
       $(".clickCategory").click(function () {
         var category = $(this).attr("title");
         //alert(category);
@@ -181,7 +213,7 @@ else {
           }
         });
       });
-
+      */
       $(".ticket #dataTicket tbody").on("click", ".deleteItem", function (e) {
         e.preventDefault();
         $(this).parent().parent().remove();
