@@ -69,7 +69,7 @@ else {
                 </div>
                 <div class="form-group col-xs-6">
                   <label>Cantidad</label>
-                  <input type="text" id="inputCantidad" name="inputCantidad" class="checkbox from-control">
+                  <input type="text" id="inputCantidad" name="inputCantidad" class="form-control" readonly>
                 </div>
                 <div class="form-group col-xs-3">
                   <label>Pagar</label><br>
@@ -98,15 +98,15 @@ else {
         Ventas
       </div>
       <div class="row productCategory div-sales">
-      <table id="Ventas" class="table table-striped table-bordered" style="width:100%">
+       <table id="ventas" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Imagen</th>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Imagen</th>
             </tr>
         </thead>
-    </table>
+       </table>
       </div>
       <div class="line"></div>
       <div class="row productSubCategory div-sales"></div>
@@ -115,46 +115,29 @@ else {
     </div><!--  fin DERECHA-->
   </div>
 
-  <script type="text/javascript">
-  $(document).ready(function() {
-    $('#example').DataTable();
-} );
-</script>
 
-  <script type="text/javascript">
+
+
+<script type="text/javascript">
   //Funcion para llenar la DataTable haciendo solo una peticion a la base de datos
-  function filtrar(){
+  function product(){
     $.ajax({
       type: "POST",
-      data: {idProduct: product, idStore: <?= $idStore; ?>},
-      url: "../controllers/select_sales_products_json.php",
+      url: "controllers/select_sales_products_json.php",
       success: function(msg){
-        var msg = jQuery.parseJSON(msg);
-        if(msg.error == 0){
-          (".ventas #dataventas tbody").append(msg);
-          $.each(msg.dataRes, function(i, item)){
-            var newRow = '<tr>'
-            +'<td>'+msg.dataRes[i].id+'</td>'
-            +'<td>'+msg.dataRes[i].nombre+'</td>'
-            +'<td>'+msg.dataRes[i].imagen+'</td>'
-            '</tr>';
-            $(newRow).appendTo("#data tbody");
-          }
-        }
+        var msg =jQuery.parseJSON(msg);
+        (".ventas").append(msg);
+        $.each(msg.dataRes)
+        var newRow = '<tr>'
+        +'<td>'+msg.dataRes[i].id+'</td>'
+        +'<td>'+msg.dataRes[i].nombre+'</td>'
+        +'<td>'+msg.dataRes[i].imagen+'</td>'
+        '</tr>';
+        $(newRow).appendTo("#ventas");
       }
     });
   }
   
-
-
-
-
-
-
-
-
-
-
 
    /* $(document).ready(function () {
       $(".clickCategory").click(function () {
@@ -282,6 +265,17 @@ else {
           }
           //alert("Donando sangre");
       });
+
+      $("#inputEfectivo").click(function(){
+        if($('#inputEfectivo').is(':checked')){
+            $('#inputRecibido').attr("disabled", true);
+            $('#inputRecibido').attr("readonly", false);
+        }
+        else{
+          $("inputEfectivo").removeAttr("disabled");
+          $("inputCantidad").attr("readonly", true);
+        }
+      })
       
       function actCant() {
         var precioU = parseFloat($(this).parent().parent().find("#inputPrecioU").val());
@@ -441,7 +435,7 @@ else {
     function borrarTeclado() {
       input.val("");
     }
-    /*function actCant(){
+    function actCant(){
      var precioU = parseFloat($(this).parent().parent().find("#inputPrecioU").val());
      var cantidad = parseInt($(this).parent().parent().find("#inputCant").val());
      var cantidadMax = parseInt($(this).parent().parent().find("#inputCantMax").val());
@@ -466,7 +460,7 @@ else {
      });
      total=total.toFixed(2);
      $("#inputTotal").val(total);
-     }*/
+     }
   </script>
   <?php
 }//fin else sesión
