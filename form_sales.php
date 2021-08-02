@@ -121,25 +121,25 @@ else {
 <script type="text/javascript">
 $(document).ready(function ( ){
   //Funcion para llenar la DataTable haciendo solo una peticion a la base de datos
+  product();
   function product(){
     $.ajax({
       type: "POST",
-      data: {idStore: <?= $idStore; ?>},
       url: "controllers/select_sales_products_json.php",
       success: function(msg){
         var msg = jQuery.parseJSON(msg);
+        console.log( msg );
         if(msg.error == 0){
-            alert(msg.productos[0].idP);
           $("#ventas");
-          $.each(msg.productos, function(i, item){
+          $.each(msg.dataRes, function(i, item){
             var newRow = '<tr>'
-            +'<td>'+msg.productos[i].idProducto+'</td>'
-            +'<td>'+msg.productos[i].nameProducto+'</td>'
-            +'<td>'+msg.productos[i].imgProducto+'</td>'
+            +'<td>'+msg.dataRes[i].idProducto+'</td>'
+            +'<td>'+msg.dataRes[i].nameProducto+'</td>'
+            +'<td>'+msg.dataRes[i].imgProducto+'</td>'
             '</tr>';
             $(newRow).appendTo("#ventas");
-          } 
-          )}
+          } ); 
+        }
       }
     });
   }
