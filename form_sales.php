@@ -130,28 +130,17 @@ $(document).ready(function ( ){
         var msg = jQuery.parseJSON(msg);
         console.log( msg );
         if(msg.error == 0){
-<<<<<<< HEAD
             alert(msg.productos[0].idP);
           $("#ventas, tbody");
           $.each(msg.productos, function(i, item){
-=======
-          $("#ventas");
-          $.each(msg.dataRes, function(i, item){
->>>>>>> 6c3b58e335e39458c32e2fd4353f54dc017215e4
             var newRow = '<tr>'
             +'<td>'+msg.dataRes[i].idProducto+'</td>'
             +'<td>'+msg.dataRes[i].nameProducto+'</td>'
             +'<td>'+msg.dataRes[i].imgProducto+'</td>'
             '</tr>';
-<<<<<<< HEAD
             $(newRow).appendTo("#ventas tbody");
           } 
           )}
-=======
-            $(newRow).appendTo("#ventas");
-          } ); 
-        }
->>>>>>> 6c3b58e335e39458c32e2fd4353f54dc017215e4
       }
     });
   }
