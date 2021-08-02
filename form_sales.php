@@ -119,8 +119,7 @@ else {
 
 
 <script type="text/javascript">
-<<<<<<< HEAD
-$(document).ready(function (){
+$(document).ready(function ( ){
   //Funcion para llenar la DataTable haciendo solo una peticion a la base de datos
   function product(){
     $.ajax({
@@ -130,48 +129,21 @@ $(document).ready(function (){
       success: function(msg){
         var msg = jQuery.parseJSON(msg);
         if(msg.error == 0){
-          alert(msg.dataRes[0].id);
-          (".ventas ").append(msg);
-          $.each(msg.dataRes, function(i, item)){
+            alert(msg.productos[0].idP);
+          $("#ventas");
+          $.each(msg.productos, function(i, item){
             var newRow = '<tr>'
-            +'<td>'+msg.dataRes[i].idP+'</td>'
-            +'<td>'+msg.dataRes[i].nameP+'</td>'
-            +'<td>'+msg.dataRes[i].imgP+'</td>'
+            +'<td>'+msg.productos[i].idProducto+'</td>'
+            +'<td>'+msg.productos[i].nameProducto+'</td>'
+            +'<td>'+msg.productos[i].imgProducto+'</td>'
             '</tr>';
             $(newRow).appendTo("#ventas");
-          }
-        }
+          } 
+          )}
       }
     });
   }
 
-=======
-    $(document).ready(function () {
-  //Funcion para llenar la DataTable haciendo solo una peticion a la base de datos
-      product();
-      function product() {
-          $.ajax({
-              type: "POST",
-              url: "controllers/select_sales_products_json.php",
-              success: function (msg) {
-                  var msg = jQuery.parseJSON(msg);
-                  console.log( msg );
-                  if (msg.error == 0) {
-                      // (".ventas ").append(msg);
-                      $.each(msg.dataRes, function (i, item) {
-                          var newRow = '<tr>' +
-                            '<td>' + msg.dataRes[i].id + '</td>' +
-                            '<td>' + msg.dataRes[i].nombre + '</td>' +
-                            '<td>' + msg.dataRes[i].imagen + '</td>'
-                          '</tr>';
-                          $(newRow).appendTo("#ventas");
-                      })
-                  }
-              }
-          });
-      }
-  
->>>>>>> 331f15cc0cacdf7b859b6ec3b0246701877ceef2
 
    /* $(document).ready(function () {
       $(".clickCategory").click(function () {
