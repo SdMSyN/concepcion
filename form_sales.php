@@ -106,6 +106,14 @@ else {
               <th>Imagen</th>
             </tr>
           </thead>
+          <tfoot>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Imagen</th>
+            </tr>
+        </tfoot>
+    </table>
        </table>
       </div>
       <div class="line"></div>
@@ -117,9 +125,8 @@ else {
 
 
 
-
 <script type="text/javascript">
-$(document).ready(function ( ){
+$(document).ready(function (){
   //Funcion para llenar la DataTable haciendo solo una peticion a la base de datos
   product();
   function product(){
@@ -128,23 +135,26 @@ $(document).ready(function ( ){
       url: "controllers/select_sales_products_json.php",
       success: function(msg){
         var msg = jQuery.parseJSON(msg);
-        console.log( msg );
+        var list = {msg};
+        for (var i in list){
+          console.log(i);
+        }
+          //console.log( msg );
         if(msg.error == 0){
-            alert(msg.productos[0].idP);
-          $("#ventas, tbody");
-          $.each(msg.productos, function(i, item){
+            //alert(msg.dataRes[0].idP);
+          $("#ventas").DataTable();        
+          $.each(msg.dataRes, function(i, item){
             var newRow = '<tr>'
             +'<td>'+msg.dataRes[i].idProducto+'</td>'
             +'<td>'+msg.dataRes[i].nameProducto+'</td>'
             +'<td>'+msg.dataRes[i].imgProducto+'</td>'
             '</tr>';
-            $(newRow).appendTo("#ventas tbody");
-          } 
-          )}
+            $(newRow).appendTo("#ventas");
+          }); 
+        }
       }
     });
   }
-
 
    /* $(document).ready(function () {
       $(".clickCategory").click(function () {

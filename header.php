@@ -13,6 +13,7 @@
 
     <!-- Bootstrap -->
     <link href="assets/css/application.css" rel="stylesheet">
+    <link href="assets/css/datatables.min.css" rel="stylesheet"/>
     
     <!-- jQuery -->
     <script src="assets/js/jquery.min.js"></script>
@@ -31,6 +32,8 @@
         <script src="assets/js/typeahead.min.js"></script>
     -->
     <script src="assets/js/typeahead.min.js"></script>
+    <script src="assets/js/datatables.min.js"></script>
+
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
