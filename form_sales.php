@@ -105,7 +105,7 @@ else {
               <th>Nombre</th>
               <th>Imagen</th>
             </tr>
-        </thead>
+          </thead>
        </table>
       </div>
       <div class="line"></div>
@@ -130,14 +130,14 @@ $(document).ready(function ( ){
         var msg = jQuery.parseJSON(msg);
         if(msg.error == 0){
             alert(msg.productos[0].idP);
-          $("#ventas");
+          $("#ventas, tbody");
           $.each(msg.productos, function(i, item){
             var newRow = '<tr>'
             +'<td>'+msg.productos[i].idProducto+'</td>'
             +'<td>'+msg.productos[i].nameProducto+'</td>'
             +'<td>'+msg.productos[i].imgProducto+'</td>'
             '</tr>';
-            $(newRow).appendTo("#ventas");
+            $(newRow).appendTo("#ventas tbody");
           } 
           )}
       }
