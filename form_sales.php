@@ -119,6 +119,7 @@ else {
 
 
 <script type="text/javascript">
+<<<<<<< HEAD
 $(document).ready(function (){
   //Funcion para llenar la DataTable haciendo solo una peticion a la base de datos
   function product(){
@@ -144,6 +145,33 @@ $(document).ready(function (){
     });
   }
 
+=======
+    $(document).ready(function () {
+  //Funcion para llenar la DataTable haciendo solo una peticion a la base de datos
+      product();
+      function product() {
+          $.ajax({
+              type: "POST",
+              url: "controllers/select_sales_products_json.php",
+              success: function (msg) {
+                  var msg = jQuery.parseJSON(msg);
+                  console.log( msg );
+                  if (msg.error == 0) {
+                      // (".ventas ").append(msg);
+                      $.each(msg.dataRes, function (i, item) {
+                          var newRow = '<tr>' +
+                            '<td>' + msg.dataRes[i].id + '</td>' +
+                            '<td>' + msg.dataRes[i].nombre + '</td>' +
+                            '<td>' + msg.dataRes[i].imagen + '</td>'
+                          '</tr>';
+                          $(newRow).appendTo("#ventas");
+                      })
+                  }
+              }
+          });
+      }
+  
+>>>>>>> 331f15cc0cacdf7b859b6ec3b0246701877ceef2
 
    /* $(document).ready(function () {
       $(".clickCategory").click(function () {
