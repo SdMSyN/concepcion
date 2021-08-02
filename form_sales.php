@@ -119,6 +119,7 @@ else {
 
 
 <script type="text/javascript">
+$(document).ready(function (){
   //Funcion para llenar la DataTable haciendo solo una peticion a la base de datos
   function product(){
     $.ajax({
@@ -132,9 +133,9 @@ else {
           (".ventas ").append(msg);
           $.each(msg.dataRes, function(i, item)){
             var newRow = '<tr>'
-            +'<td>'+msg.dataRes[i].id+'</td>'
-            +'<td>'+msg.dataRes[i].nombre+'</td>'
-            +'<td>'+msg.dataRes[i].imagen+'</td>'
+            +'<td>'+msg.dataRes[i].idP+'</td>'
+            +'<td>'+msg.dataRes[i].nameP+'</td>'
+            +'<td>'+msg.dataRes[i].imgP+'</td>'
             '</tr>';
             $(newRow).appendTo("#ventas");
           }
@@ -142,7 +143,7 @@ else {
       }
     });
   }
-  
+
 
    /* $(document).ready(function () {
       $(".clickCategory").click(function () {
