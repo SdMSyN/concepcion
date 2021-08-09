@@ -8,7 +8,7 @@
     $resGetStockName=$con->query($sqlGetStockName);
     if($resGetStockName->num_rows > 0){
         $rowGetStockName=$resGetStockName->fetch_assoc();
-        echo $rowGetStockName['nombre'];
+        echo utf8_decode( $rowGetStockName['nombre'] );
     }else{
         echo 'false';
     }

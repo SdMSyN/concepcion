@@ -29,11 +29,11 @@ if ($action == "day") {
             $sqlGetInfoSale .= " AND usuario_id='$seller' ";
         }
         if (isset($_POST['inputMonth']) && $month != "") {
-            $mes = ($month{5} . $month{6});
+            $mes = ($month[5] . $month[6]);
             $sqlGetInfoSale .= " AND month(fecha)='$mes' ";
         }
         if (isset($_POST['inputWeek']) && $week != "") {
-            $sema = ($week{6} . $week{7}) - 1;
+            $sema = ($week[6] . $week[7]) - 1;
             $sqlGetInfoSale .= " AND week(fecha)='$sema' ";
         }
         if (isset($_POST['inputDay']) && $day != "") {
@@ -63,12 +63,12 @@ if ($resGetInfoSale->num_rows > 0) {
         //Si no hay pago ni cambio hubo donación
         if ($rowGetInfoSale['pago'] == "0.00" && $rowGetInfoSale['cambio'] == "0.00"){
             $optReport .= '<td>Si</td>';
-            $totalInfoSale = 0;
+            // $totalInfoSale = 0;
         }else{
             $optReport .= '<td>No</td>';
         }
         $optReport .= '<td>' . $rowGetInfoSale['user'] . '</td>';
-        $optReport .= '<td>' . $rowGetInfoSale['store'] . '</td>';
+        $optReport .= '<td>' . utf8_decode( $rowGetInfoSale['store'] ) . '</td>';
         $optReport .= '<td>' . $rowGetInfoSale['fecha'] . '</td>';
         $optReport .= '<td>' . $rowGetInfoSale['hora'] . '</td>';
         $optReport .= '</tr>';

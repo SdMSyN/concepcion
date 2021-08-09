@@ -16,7 +16,7 @@ else {
   $optStores = '<option></option>';
   if ($resGetStores->num_rows > 0) {
     while ($rowGetStores = $resGetStores->fetch_assoc()) {
-      $optStores.='<option value="' . $rowGetStores['id'] . '">' . $rowGetStores['nombre'] . '</option>';
+      $optStores.='<option value="' . $rowGetStores['id'] . '">' . utf8_decode( $rowGetStores['nombre'] ) . '</option>';
     }
   } else {
     $optStores = '<option>No existen tiendas aún</option>';

@@ -12,7 +12,7 @@
     $optSellers='<option></option>';
     if($resGetSellers->num_rows > 0){
         while($rowGetSeller = $resGetSellers->fetch_assoc()){
-            $optSellers.='<option value="'.$rowGetSeller['id'].'">'.$rowGetSeller['nombre'].'</option>';
+            $optSellers.='<option value="'.$rowGetSeller['id'].'">' . utf8_decode( $rowGetSeller['nombre'] ) . '</option>';
         }
     }else{
         $optSellers='<option>No existen vendedores.</option>';
@@ -23,7 +23,7 @@
     $resGetCategories=$con->query($sqlGetCategories);
     $optCategories='<option></option>';
     while($rowGetCategories = $resGetCategories->fetch_assoc()){
-        $optCategories.='<option value="'.$rowGetCategories['id'].'">'.$rowGetCategories['nombre'].'</option>';
+        $optCategories.='<option value="'.$rowGetCategories['id'].'">' . utf8_decode( $rowGetCategories['nombre'] ) . '</option>';
     }
     
     //Obtenemos los diferentes estatus del pedido

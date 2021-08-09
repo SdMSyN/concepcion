@@ -13,7 +13,9 @@
 
     <!-- Bootstrap -->
     <link href="assets/css/application.css" rel="stylesheet">
+    <!-- DataTables -->
     <link href="assets/css/datatables.min.css" rel="stylesheet"/>
+    <link href="assets/css/jquery.dataTables.min.css" rel="stylesheet"/>
     
     <!-- jQuery -->
     <script src="assets/js/jquery.min.js"></script>
