@@ -20,6 +20,12 @@ else {
   }
   ?>
 
+    <div class="row">
+        <div id="loading">
+            <img src="../assets/img/loading.gif" height="300" width="400">
+        </div>
+    </div>
+
   <!-- Cambio dinamico -->
   <div class="container">
     <div class="row">
@@ -57,7 +63,7 @@ else {
                 <label>Código de barras</label>
                 <input type="number" id="inputCB" name="inputCB" class="form-control">
               </div>
-              <div class="form-group">           
+              <!-- <div class="form-group">           
                 <label for="exampleInputFile">Imagen</label>
                 <input type="file" id="inputImg" name="inputImg" >
                 <p class="help-block">Tamaño Máximo 1Mb</p>
@@ -65,7 +71,7 @@ else {
               <div class="form-group">
                 <label>Descripción</label>
                 <input type="text" id="inputDesc" name="inputDesc" class="form-control">
-              </div>
+              </div> -->
               <div class="form-group">
                 <label>Categoría</label>
                 <select id="inputCategoria" name="inputCategoria" class="form-control">
@@ -132,6 +138,7 @@ else {
 
   <script type="text/javascript">
     var ordenar = '';
+    $('#loading').hide();
     $(document).ready(function () {
         filtrar();
         function filtrar(){
@@ -241,24 +248,23 @@ else {
           $("#inputPrecio").tooltip('show');
           return false;
         }
-        if ($("#inputImg").val() == "") {
-          //alert("No puede ser vacio");
-          $("#inputImg").tooltip({title: "Imagen obligatoria", trigger: "focus", placement: 'bottom'});
-          $("#inputImg").tooltip('show');
-          return false;
-        }
-        if (!$("#inputImg").val().match(/(?:gif|jpg|png|bmp)$/)) {
-          // inputted file path is not an image of one of the above types
-          $("#inputImg").tooltip({title: "Formato de imagen no admitido", trigger: "focus", placement: 'bottom'});
-          $("#inputImg").tooltip('show');
-          return false;
-        }
-        if ($("#inputDesc").val() == "") {
-          //alert("No puede ser vacio");
-          $("#inputDesc").tooltip({title: "Descripción obligatoria", trigger: "focus", placement: 'bottom'});
-          $("#inputDesc").tooltip('show');
-          return false;
-        }
+        // if ($("#inputImg").val() == "") {
+        //   //alert("No puede ser vacio");
+        //   $("#inputImg").tooltip({title: "Imagen obligatoria", trigger: "focus", placement: 'bottom'});
+        //   $("#inputImg").tooltip('show');
+        //   return false;
+        // }
+        // ? Se quita la imagen y la descripción obligatoria
+        // if (!$("#inputImg").val().match(/(?:gif|jpg|png|bmp)$/)) {
+        //   $("#inputImg").tooltip({title: "Formato de imagen no admitido", trigger: "focus", placement: 'bottom'});
+        //   $("#inputImg").tooltip('show');
+        //   return false;
+        // }
+        // if ($("#inputDesc").val() == "") {
+        //   $("#inputDesc").tooltip({title: "Descripción obligatoria", trigger: "focus", placement: 'bottom'});
+        //   $("#inputDesc").tooltip('show');
+        //   return false;
+        // }
         if ($("#inputCategoria").val() == "") {
           //alert("No puede ser vacio");
           $("#inputCategoria").tooltip({title: "Debes de seleccionar una categoría", trigger: "focus", placement: 'bottom'});
@@ -276,13 +282,20 @@ else {
             //$('#exampleModalLabel').append("Loading...");
           },
           success: function (resultado) {
-            //alert(resultado);
-            if (resultado == "true") {
-              $('#form-content').modal('hide');
-              location.reload();
-            } else {
-              $('.error').html(resultado);
-            }
+              var data = jQuery.parseJSON(resultado);
+              if( data.error == 0 ){
+                  $('#loading').empty();
+                  $('#loading').append('<h2>Se añadió el producto con éxito.</h2>');
+                  setTimeout(function () {
+                      location.reload();
+                  }, 1500);
+              }else{
+                  $('#loading').empty();
+                  $('#loading').append('<img src="../assets/img/error.png" height="300" width="400" ><p>'+data.msgErr+'</p>');
+                  setTimeout(function (){
+                      $('#loading').hide();
+                  }, 2000 );
+              }
           }
         });
         e.preventDefault(); //Evitamos que se mande del formulario de forma convencional
