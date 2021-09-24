@@ -81,8 +81,7 @@
                             productos.activo AS actProd,
                             productos.precio,
                             productos.codigo_barras
-                        FROM almacenes
-                        INNER JOIN productos ON almacenes.producto_id = productos.id 
+                        FROM productos
                         INNER JOIN categorias ON productos.categoria_id = categorias.id
                             AND categorias.activo = 1
                         INNER JOIN subcategorias ON productos.subcategoria_id = subcategorias.id
