@@ -101,38 +101,20 @@ else {
   </div>
 
   <br>
-  <div class="col-sm-12">
-       <form id="frm_filtro" method="post" action="" class="form-inline">
-           <div class="form-group">
-             <select id="estatus" name="estatus" class="form-control">
-               <option value="0"></option>
-               <option value="1">Desactivo</option>
-               <option value="2">Activo</option>
-             </select>
-           </div>
-           <button type="button" id="btnfiltrar" class="btn btn-success">Filtrar</button>
-           <a href="javascript:;" id="btncancel" class="btn btn-default">Todos</a>
-
-         </form>
-     </div>
-  <table class="table table-striped" id="data">
-    <thead>
-      <tr>
-          <th class="t-head-first"><span title="id">Id</span></th>
-        <th class="t-head">Imagen</th>
-        <th class="t-head"><span title="nombre">Nombre</span></th>
-        <th class="t-head"><span title="categoria_id">Categoría</span></th>
-        <th class="t-head"><span title="subcategoria_id">Subcategoría</span></th>
-        <th class="t-head"><span title="precio">Precio</span></th>
-        <th class="t-head"><span title="activo">Estatus</span></th>
-        <th class="t-head">Modificar</th>
-        <th class="t-head-last">Eliminar</th>
-      </tr>
-    </thead>
-    <tbody>
-      
-    </tbody>    
-  </table>
+    <!-- datatable -->
+    <table id="productos" class="display cell-border " style="width:100%">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Categoría</th>
+          <th>Subcategoría</th>
+          <th>Producto</th>
+          <th>Precio</th>
+          <th>Modificar</th>
+          <th>Alta/baja</th>
+        </tr>
+      </thead>
+    </table>
 
   </div><!-- fin container -->
 
@@ -140,46 +122,44 @@ else {
     var ordenar = '';
     $('#loading').hide();
     $(document).ready(function () {
-        filtrar();
-        function filtrar(){
-            $.ajax({
-                type: "POST",
-                data: $("#frm_filtro").serialize()+ordenar,
-                url: "controllers/select_product.php?action=listar",
-                success: function(msg){
-                    //$("#data tbody").empty();
-                    $("#data tbody").html(msg);
-                }
-            });
-        }
-        
-        //Ordenar ASC y DESC header tabla
-        $("#data th span").click(function(){
-            if($(this).hasClass("desc")){
-                $("#data th span").removeClass("desc").removeClass("asc");
-                $(this).addClass("asc");
-                ordenar = "&orderby="+$(this).attr("title")+" asc";
-            }else{
-                $("#data th span").removeClass("desc").removeClass("asc");
-                $(this).addClass("desc");
-                ordenar = "&orderby="+$(this).attr("title")+" desc";
+
+        //Funcion para llenar la DataTable haciendo solo una peticion a la base de datos
+        var dataTable = $('#productos').DataTable({
+            "language":	{
+                "sProcessing":     "Procesando...",
+                "sZeroRecords":    "No se encontraron resultados",
+                "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix":    "",
+                "sSearch":         "Buscar:",
+                "sUrl":            "",
+                "sInfoThousands":  ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst":    "Primero",
+                    "sLast":     "Último",
+                    "sNext":     "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+            },
+            "responsive" : true,
+            "processing" : true,
+            "serverSide" : true,
+            "ajax"       : {
+                url  : "controllers/select_product.php",
+                type : "post",
+            },
+            error : function() {
+                $("#ventas-error").html("");
+                $("#ventas").append('<tbody class="employee-grid-error"><tr><th colspan="3">No hay información en la baser</th></tr></tbody>');
+                $("#ventas_processing").css("display", "none");
             }
-            filtrar();
         });
+
         
-        //Ordenar por formulario
-        $("#btnfiltrar").click(function(){ 
-            filtrar();
-            //alert("y ahora?");
-        });
-        
-        // boton cancelar
-	$("#btncancel").click(function(){ 
-            $("#frm_filtro select").find("option[value='0']").attr("selected",true)
-            filtrar() 
-	});
-        
-      $("#data tbody").on("click", ".delete", function(){
+      $("#productos").on("click", ".delete", function(){
         var idProductDel = $(this).data('id');
         //alert("Eliminando..." + idUserDel);
         if (confirm("¿Está seguro(a) que desea dar de baja este registro?") == true) {
@@ -188,14 +168,12 @@ else {
             url: 'controllers/delete_product.php',
             data: {productDel: idProductDel, est: 1},
             success: function (msg) {
-              //alert(msg);
               if (msg == "true") {
                 $('.error').css({color: "#77DD77"});
                 alert("Se dio de baja el producto con éxito.");
-                /*setTimeout(function () {
+                setTimeout(function () {
                   location.href = 'form_select_product.php';
-                }, 3000);*/
-                filtrar();
+                }, 2000);
               } else {
                 $('.error').css({color: "#FF0000"});
                 $('.error').html(msg);
@@ -204,22 +182,20 @@ else {
           });
         }//end if confirm
       });
-      $("#data tbody").on("click", ".activate", function(){
+
+      $("#productos").on("click", ".activate", function(){
         var idProductDel = $(this).data('id');
-        //alert("Eliminando..." + idUserDel);
         if (confirm("¿Está seguro(a) que desea dar de alta el registro?") == true) {
           $.ajax({
             type: 'POST',
             url: 'controllers/delete_product.php',
             data: {productDel: idProductDel, est: 0},
             success: function (msg) {
-              //alert(msg);
               if (msg == "true") {
                 alert("Se activo el producto con éxito.");
-                /*setTimeout(function () {
+                setTimeout(function () {
                   location.href = 'form_select_product.php';
-                }, 3000);*/
-                filtrar();
+                }, 2000);
               } else {
                 $('.error').css({color: "#FF0000"});
                 $('.error').html(msg);
@@ -231,13 +207,11 @@ else {
 
       $('#formAddProduct').submit(function (e) {
         if ($("#inputNombre").val() == "") {
-          //alert("No puede ser vacio");
           $("#inputNombre").tooltip({title: "Nombre del producto obligatorio", trigger: "focus", placement: 'bottom'});
           $("#inputNombre").tooltip('show');
           return false;
         }
         if ($("#inputPrecio").val() == "") {
-          //alert("No puede ser vacio");
           $("#inputPrecio").tooltip({title: "Precio del producto obligatorio", trigger: "focus", placement: 'bottom'});
           $("#inputPrecio").tooltip('show');
           return false;
@@ -309,17 +283,11 @@ else {
              type: 'POST',
              data: {categoryId: category},
              success: function(res){
-                 //alert(res);
                  $("#inputSubCategoria").html("");
                  $("#inputSubCategoria").html(res);
              }
          })
       });
-      
-      /*$("#myModalAdd #inputSubCategoria").on("change", function(){
-          var subC=$("#inputSubCategoria option:selected").val();
-          alert(subC);
-      });*/
       
       $('#myModalAdd').on('shown.bs.modal', function () {
         $('#inputNombre').focus()

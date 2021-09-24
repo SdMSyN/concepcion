@@ -24,7 +24,9 @@
                             subcategorias.nombre AS nameSubcategoria,
                             productos.id AS idProducto, 
                             categorias.id AS idCategoria,
-                            subcategorias.id AS idSubcategoria
+                            subcategorias.id AS idSubcategoria,
+                            productos.precio,
+                            productos.codigo_barras
                         FROM almacenes
                         INNER JOIN productos ON almacenes.producto_id = productos.id 
                         INNER JOIN categorias ON productos.categoria_id = categorias.id
@@ -32,6 +34,7 @@
                         INNER JOIN subcategorias ON productos.subcategoria_id = subcategorias.id
                             AND subcategorias.activo = 1
                         WHERE productos.activo = 1 ";
+                        
     $resGetProductos = $con->query( $sqlGetProductos );
     $totalData       = $resGetProductos->num_rows;
     $totalFiltered   = $totalData;
@@ -39,13 +42,15 @@
     if( !empty( $requestData['search']['value'] ) ){
         $sqlGetProductos .= "   AND ( categorias.nombre LIKE '" . $requestData['search']['value'] . "%' ";
         $sqlGetProductos .= "   OR subcategorias.nombre LIKE '" . $requestData['search']['value'] . "%' ";
-        $sqlGetProductos .= "   OR productos.nombre LIKE '%" . $requestData['search']['value'] . "%' ) ";
+        $sqlGetProductos .= "   OR productos.nombre LIKE '%" . $requestData['search']['value'] . "%' ";
+        $sqlGetProductos .= "   OR productos.precio LIKE '%" . $requestData['search']['value'] . "%' ";
+        $sqlGetProductos .= "   OR productos.codigo_barras LIKE '%" . $requestData['search']['value'] . "%' ) ";
     }
-
+    
     $resGetProductos = $con->query( $sqlGetProductos );
     $totalFiltered   = $resGetProductos->num_rows;
     $sqlGetProductos .= " ORDER BY " . $columns[$requestData['order'][0]['column']] . "   " . $requestData['order'][0]['dir'] . "   LIMIT " . $requestData['start'] . " ," . $requestData['length'] . "   ";
-
+    
     $resGetProductos = $con->query( $sqlGetProductos );
     $data            = array();
 
@@ -53,7 +58,7 @@
         while( $rowGetProducto = $resGetProductos->fetch_assoc() ){
             $nestedData     = array();
             $nestedData[]   = $rowGetProducto["idProducto"];
-            $nestedData[]   = utf8_decode( $rowGetProducto["nameCategoria"] );
+            $nestedData[]   = $rowGetProducto["nameCategoria"] ;
             $nestedData[]   = $rowGetProducto["nameSubcategoria"] ;
             $nestedData[]   = $rowGetProducto["nameProducto"] ;
             $nestedData[]   = $rowGetProducto["precio"];
