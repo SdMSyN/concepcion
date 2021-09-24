@@ -136,6 +136,7 @@ $(document).ready(function (){
             "sUrl":            "",
             "sInfoThousands":  ",",
             "sLoadingRecords": "Cargando...",
+            "lengthMenu":      "Mostrando _MENU_ registros",
             "oPaginate": {
                 "sFirst":    "Primero",
                 "sLast":     "Último",
