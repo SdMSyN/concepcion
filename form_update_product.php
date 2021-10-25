@@ -69,7 +69,7 @@ else {
           <label>Código de Barras</label>
           <input type="number" id="inputCB" name="inputCB" class="form-control" value="<?= $rowGetProduct['codigo_barras']; ?>">
         </div>
-        <div class="form-group">           
+        <!-- <div class="form-group">           
           <label for="exampleInputFile">Imagen</label>
           <input type="file" id="inputImg" name="inputImg" >
           <p class="help-block">Tamaño Máximo 1Mb</p>
@@ -77,7 +77,7 @@ else {
         <div class="form-group">
           <label>Descripción</label>
           <input type="text" id="inputDesc" name="inputDesc" class="form-control" value="<?= $rowGetProduct['descripcion']; ?>">
-        </div>
+        </div> -->
         <div class="form-group">
           <label>Categoría</label>
           <select id="inputCategoria" name="inputCategoria" class="form-control" >
@@ -128,12 +128,12 @@ else {
           $("#inputPrecio").tooltip('show');
           return false;
         }
-        if ($("#inputDesc").val() == "") {
-          //alert("No puede ser vacio");
-          $("#inputDesc").tooltip({title: "Descripción obligatoria", trigger: "focus", placement: 'bottom'});
-          $("#inputDesc").tooltip('show');
-          return false;
-        }
+        // if ($("#inputDesc").val() == "") {
+        //   //alert("No puede ser vacio");
+        //   $("#inputDesc").tooltip({title: "Descripción obligatoria", trigger: "focus", placement: 'bottom'});
+        //   $("#inputDesc").tooltip('show');
+        //   return false;
+        // }
         if ($("#inputCategoria").val() == "") {
           //alert("No puede ser vacio");
           $("#inputCategoria").tooltip({title: "Debes de seleccionar una categoría", trigger: "focus", placement: 'bottom'});

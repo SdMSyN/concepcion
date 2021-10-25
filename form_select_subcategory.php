@@ -86,9 +86,9 @@ else {
     <table class="table table-striped" id="data">
       <thead>
         <tr>
-            <!--<th ><span title="id">Id</span></th>-->
+            <th ><span title="id">Id</span></th>
             <th ><span title="nombre">Nombre</span></th>
-            <!-- <th ><span title="imagen">Imagen</span></th> -->
+            <th ><span title="imagen">Imagen</span></th>
             <th ><span title="categoria_id">Categoría</span></th>
             <th ><span title="created">Fecha de creación</span></th>
             <th ><span title="create_by">Creado por</span></th>

@@ -11,11 +11,19 @@ else {
   $userId = $_SESSION['userId'];
 
   /* Obtenemos los productos disponibles */
-  $sqlGetStocks = "SELECT id, "
-          . "(SELECT nombre FROM $tProduct WHERE id=$tStock.producto_id) as producto, "
-          . "cantidad, "
-          . "( SELECT nombre FROM $tStore WHERE id=$tStock.tienda_id) as tienda "
-          . "FROM $tStock ";
+  // $sqlGetStocks = "SELECT id, "
+  //         . "(SELECT nombre FROM $tProduct WHERE id=$tStock.producto_id) as producto, "
+  //         . "cantidad, "
+  //         . "( SELECT nombre FROM $tStore WHERE id=$tStock.tienda_id) as tienda "
+  //         . "FROM $tStock ";
+  $sqlGetStocks = "  SELECT
+                      almacenes.id,
+                      productos.nombre AS producto,
+                      almacenes.cantidad,
+                      tiendas.nombre AS tienda
+                    FROM almacenes
+                    INNER JOIN productos ON almacenes.producto_id = productos.id 
+                    INNER JOIN tiendas ON almacenes.tienda_id = tiendas.id ";
   $resGetStocks = $con->query($sqlGetStocks);
   $optStocks = '';
   if ($resGetStocks && $resGetStocks->num_rows > 0) {
@@ -34,7 +42,14 @@ else {
   }
 
   /* Obtenemos los productos */
-  $sqlGetProducts = "SELECT id, nombre FROM $tProduct WHERE activo='1' ORDER BY nombre  ";
+  // $sqlGetProducts = "SELECT id, nombre FROM $tProduct WHERE activo='1' ORDER BY nombre  ";
+  $sqlGetProducts = "SELECT 
+                      productos.id, 
+                      productos.nombre 
+                    FROM productos 
+                    LEFT JOIN almacenes ON productos.id = almacenes.producto_id 
+                    WHERE almacenes.id IS NULL 
+                    ORDER BY productos.nombre";
   $resGetProducts = $con->query($sqlGetProducts);
   $optProducts = '<option></option>';
   if ($resGetProducts->num_rows > 0) {
@@ -46,7 +61,7 @@ else {
   }
 
   /* Obtenemos las tiendas */
-  $sqlGetStores = "SELECT id, nombre FROM $tStore";
+  $sqlGetStores = "SELECT id, nombre FROM tiendas";
   $resGetStores = $con->query($sqlGetStores);
   $optStores = '<option></option>';
   if ($resGetStores->num_rows > 0) {
@@ -195,14 +210,14 @@ else {
             data: $('form#formAddProductStock').serialize(),
             success: function (msg) {
               var selectStore = $('#inputCampo').val();
-              //alert(msg);
-              if (msg == "true") {
+              var data = jQuery.parseJSON( msg );
+              if( data.error == 0 ){
                 $('.error').css({color: "#009900"});
                 $('.error').html("Se añadio el producto con éxito.");
                 setTimeout(function () {
                   pintarTabla(selectStore)
                 }, 500);
-              } else {
+              }else{
                 $('.error').css({color: "#FF0000"});
                 $('.error').html(msg);
               }
@@ -263,24 +278,24 @@ else {
           url: "controllers/update_stock.php",
           data: $('form#formSave').serialize(),
           success: function (msg) {
-            //alert(msg);
-            if (msg == "true") {
-              $('.msg').css({color: "#009900"});
-              $('.msg').html("Se modifico el almacen con éxito");
-              pintarTabla2(selectStore);
-              alert("Se modifico el almacen con éxito");
-              setTimeout(function () {
-                  $('.msg').empty();
-              },timeM);              
-            } else {
-              $('.msg').css({color: "#FF0000"});
-              $('.msg').html(msg);
-              $('body').addClass('loaded');
-              alert("error al intentar modificar el almacen");
-              setTimeout(function () {
-                  $('.msg').empty();
-              },timeM);
-            }
+              var data = jQuery.parseJSON( msg );
+              if( data.error == 0 ){
+                $('.msg').css({color: "#009900"});
+                $('.msg').html("Se modifico el almacen con éxito");
+                pintarTabla2(selectStore);
+                alert("Se modifico el almacen con éxito");
+                setTimeout(function () {
+                    $('.msg').empty();
+                },timeM); 
+              }else{
+                $('.msg').css({color: "#FF0000"});
+                $('.msg').html(msg);
+                $('body').addClass('loaded');
+                alert("error al intentar modificar el almacen");
+                setTimeout(function () {
+                    $('.msg').empty();
+                },timeM);
+              }
           },
           error: function () {
             alert("Error al añadir producto ");

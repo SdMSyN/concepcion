@@ -5,24 +5,24 @@
     $store = $_POST['storeId'];
     
     //$sqlGetStockStore="SELECT id, cantidad, tienda_id, (SELECT nombre FROM $tProduct WHERE id=$tStock.producto_id ORDER BY categoria_id DESC) as producto, producto_id FROM $tStock WHERE tienda_id='$store' ORDER BY producto_id ASC";
-    $sqlGetStockStore="SELECT $tStock.id as stockId, "
-            . "$tStock.cantidad as stockCant, "
-            . "$tStock.tienda_id as stockStore, "
-            . "$tStock.producto_id as stockProductId, "
-            . "$tProduct.categoria_id as productCategory, "
-            . "$tProduct.nombre as productName, "
-            . "$tCategory.nombre as categoryName, "
-            . "$tCategory.id as categoryId "
-            . "FROM $tStock "
-            . "INNER JOIN $tProduct ON $tProduct.id=$tStock.producto_id "
-            . "INNER JOIN $tCategory ON $tCategory.id=$tProduct.categoria_id "
-            . "WHERE $tStock.tienda_id='$store' "
-            . "AND $tProduct.activo='1' "
-            . "AND $tCategory.activo='1' "
-            . "ORDER BY categoryId, productName ";
+    $sqlGetStockStore = "SELECT almacenes.id AS stockId, 
+                            almacenes.cantidad AS stockCant, 
+                            almacenes.tienda_id AS stockStore, 
+                            almacenes.producto_id AS stockProductId, 
+                            productos.categoria_id AS productCategory, 
+                            productos.nombre AS productName, 
+                            categorias.nombre AS categoryName, 
+                            categorias.id AS categoryId 
+                        FROM almacenes 
+                        INNER JOIN productos ON productos.id=almacenes.producto_id 
+                        INNER JOIN categorias ON categorias.id=productos.categoria_id 
+                        WHERE almacenes.tienda_id = '$store' 
+                        AND productos.activo = '1' 
+                        AND categorias.activo = '1' 
+                        ORDER BY categoryId, productName ";
     $resGetStockStore=$con->query($sqlGetStockStore);
     $optStockStore='';
-    echo $sqlGetStockStore;
+    // echo $sqlGetStockStore;
     if($resGetStockStore->num_rows > 0){
         while($rowGetStockStore = $resGetStockStore->fetch_assoc()){
             /*$productId=$rowGetStockStore['producto_id'];

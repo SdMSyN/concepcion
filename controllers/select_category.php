@@ -19,8 +19,9 @@
         $datos = '';
         while($rowGetCategories = $resGetCategories->fetch_assoc()){
             $datos .= '<tr>';
+            $datos .= '<td>'.$rowGetCategories['id'].'</td>';
             $datos .= '<td>'.$rowGetCategories['nombre'].'</td>';
-            // $datos .= '<td><img src="./'.$rutaImgCat.$rowGetCategories['img'].'" width="20%"></td>';
+            $datos .= '<td><img src="./'.$rutaImgCat.$rowGetCategories['img'].'" width="20%"></td>';
             $datos .= '<td>'.$rowGetCategories['created'].'</td>';
             $datos .= '<td>'.$rowGetCategories['created_by'].'</td>';
             $datos .= '<td>'.$rowGetCategories['activoN'].'</td>';

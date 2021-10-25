@@ -4,6 +4,7 @@
     include ('../config/variables.php');
 
     $requestData = $_REQUEST;
+    $idSubCat = $_GET['idSucCat'];
     $columns = array(
         0 => 'idProducto',
         1 => 'idCategoria',
