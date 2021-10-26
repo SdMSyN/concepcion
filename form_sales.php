@@ -417,7 +417,7 @@ else {
     //$(".ticket #dataTicket tbody").on("keyup change blur keypress keydown", ".cant", actCant);
     $(".ticket #dataTicket tbody").on("keyup change blur keypress keydown click mouseup", ".cant", actCant);
 
-    $("#formTicket").on("change blur click", ".calcChange", calcChange);
+    $("#formTicket").on("change blur click focusout", ".calcChange", calcChange);
 
     function calcChange() {
       let total = parseFloat($(this).parent().parent().find("#inputTotal").val());
@@ -432,7 +432,7 @@ else {
       $(this).parent().parent().find("#inputCambio").val(cambio);
       $("#mdlTotal").html( total );
       $("#mdlCambio").html( cambio );
-      $("#inpMdlTotal").html( total );
+      $("#inpMdlTotal").html( total.toFixed(2) );
       $("#inpMdlEfec").html( dinero );
       $("#inpMdlCambio").html( cambio );
     }
@@ -584,6 +584,21 @@ else {
 
     $(".teclado #teclado_numerico_2").on("click", function () {
         actTodo();
+        let total = parseFloat($(this).parent().parent().find("#inputTotal").val());
+        let dinero = parseFloat($(this).parent().parent().find("#inputRecibido").val()) || 0;
+        dinero = dinero.toFixed(2);
+        if (dinero < total || isNaN(dinero) || dinero == 0) {
+          $(this).parent().parent().find(".enviarTicket").attr("disabled", true);
+        } else
+          $(this).parent().parent().find(".enviarTicket").removeAttr("disabled");
+        let cambio = (dinero != 0) ? dinero - total : 0;
+        cambio = cambio.toFixed(2);
+        $(this).parent().parent().find("#inputCambio").val(cambio);
+        $("#mdlTotal").html( total );
+        $("#mdlCambio").html( cambio );
+        $("#inpMdlTotal").html( total.toFixed(2) );
+        $("#inpMdlEfec").html( dinero );
+        $("#inpMdlCambio").html( cambio );
       });
 
   });
