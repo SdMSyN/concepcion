@@ -16,6 +16,7 @@
     <!-- DataTables -->
     <link href="assets/css/datatables.min.css" rel="stylesheet"/>
     <link href="assets/css/jquery.dataTables.min.css" rel="stylesheet"/>
+    <link href="assets/css/estilo_impresion.css" rel="stylesheet" type="text/css" media="print" />
     
     <!-- jQuery -->
     <script src="assets/js/jquery.min.js"></script>

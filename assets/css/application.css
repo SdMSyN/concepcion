@@ -364,3 +364,8 @@ thead > tr > td:last-of-type,th:last-of-type{
 #myPrintArea .ticket, #myPrintArea table{
     font-size: 10px;
 }
+
+#myPrintArea2{
+  display: none;
+  visibility: hidden;
+}

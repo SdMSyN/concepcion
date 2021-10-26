@@ -6,6 +6,7 @@
     $ban = false;
     $msg = "";
     $productos = array();
+    $idSubCat = $_GET["idSubCat"];
 
     $sqlGetProductos = "SELECT 
                             productos.img AS imgProducto, 
@@ -24,7 +25,9 @@
                             AND categorias.activo = 1
                         INNER JOIN subcategorias ON productos.subcategoria_id = subcategorias.id
                             AND subcategorias.activo = 1
-                        WHERE productos.activo = 1 ";
+                        WHERE productos.activo = 1
+                            AND subcategorias.id = $idSubCat 
+                        ORDER BY productos.nombre DESC ";
                         
     $resGetProductos = $con->query( $sqlGetProductos );
 

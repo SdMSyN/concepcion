@@ -12,13 +12,13 @@ else {
   $idUser = $_SESSION['userId'];
 	include('config/variables.php');
 
-    $sqlGetCategories = "SELECT * FROM categorias WHERE activo = 1 ";
+    $sqlGetCategories = "SELECT * FROM categorias WHERE activo = 1 AND categorias.id != 5 ";
     $resGetCategories = $con->query($sqlGetCategories);
     $optCategories='';
     if($resGetCategories->num_rows > 0){
         while($rowGetCategories = $resGetCategories->fetch_assoc()){
             //$optCategories .= '<button type="button" class="clickCategory" title="'.$rowGetCategories['id'].'">'.$rowGetCategories['nombre'].'</button> ';
-            $optCategories .= '<div class="col-xs-4"><img src="uploads/'.$rowGetCategories['img'].'" class="clickCategory" title="'.$rowGetCategories['id'].'" width="20%">'.$rowGetCategories['nombre'].'</div>';
+            $optCategories .= '<div class="col-xs-3"><img src="uploads/categories/'.$rowGetCategories['img'].'" class="clickCategory" title="'.$rowGetCategories['id'].'" width="50%">'.$rowGetCategories['nombre'].'</div>';
         }
     }else{
         $optCategories .= 'No hay categorias disponibles';
@@ -69,8 +69,11 @@ else {
             <label>Cobrar:</label></br>
             <!-- <button type="submit" class="enviarTicket btn btn-success"><i class="fa fa-money"
                 style="font-size: 2.2rem;"></i></button> -->
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalPay">
+            <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalPay">
               <i class="fa fa-money" style="font-size: 2.2rem;"></i>
+            </button> -->
+            <button type="button" class="btn btn-primary" id="print" >
+                <i class="fa fa-print" style="font-size: 2.2rem;"></i>
             </button>
           </div>
         </div>
@@ -79,7 +82,7 @@ else {
             <label>¿Donar?</label>
             <input type="checkbox" id="inputDonacion" name="inputDonacion" class="checkbox form-control">
           </div>
-          <div class="form-group col-xs-9">
+          <div class="form-group col-xs-6">
             <label>Administrador</label>
             <input type="password" id="inputAdmin" name="inputAdmin" class="form-control" readonly>
           </div>
@@ -115,12 +118,39 @@ else {
           </table>
         </div>
       </form>
+      <div class="row teclado">
+                <!-- <form id="formTeclado">
+                    <div class="row">
+                        <input type="text" id="inputCod" name="inputCod">
+                        <button type="submit" class="">Enviar</button>
+                    </div>
+                </form> -->
+                <div id="teclado_numerico_2" class="text-center">
+                  <div class="numeric-form-sales">
+                    <span class="btn btn-info btn-numeric-form" onclick="teclado(7)">7</span>
+                    <span class="btn btn-info btn-numeric-form" onclick="teclado(8)">8</span>
+                    <span class="btn btn-info btn-numeric-form" onclick="teclado(9)">9</span>
+                    <br>
+                    <span class="btn btn-info btn-numeric-form" onclick="teclado(4)">4</span>
+                    <span class="btn btn-info btn-numeric-form" onclick="teclado(5)">5</span>
+                    <span class="btn btn-info btn-numeric-form" onclick="teclado(6)">6</span>
+                    <br>
+                    <span class="btn btn-info btn-numeric-form" onclick="teclado(1)">1</span>
+                    <span class="btn btn-info btn-numeric-form" onclick="teclado(2)">2</span>
+                    <span class="btn btn-info btn-numeric-form" onclick="teclado(3)">3</span>
+                    <br>
+                    <span class="btn btn-default btn-numeric-form erase"><i class="fa fa-arrow-left"></i></span>
+                    <span class="btn btn-info btn-numeric-form" onclick="teclado(0)">0</span>
+                    <span class="btn btn-default btn-numeric-form" onClick="borrarTeclado()" >C</span>
+                  </div>
+                </div>
+            </div>
     </div>
   </div> <!--  fin IZQUIERDA-->
   <div class="col-xs-6 ">
-    <div class="titulo-crud2">
+    <!-- <div class="titulo-crud2">
       Ventas
-    </div>
+    </div> -->
     <div class="row productCategory div-sales">
       <?= $optCategories; ?>
     </div>
@@ -143,72 +173,41 @@ else {
   </div><!--  fin DERECHA-->
 </div>
 
-<!-- modal cobro -->
-<div class="modal fade" id="modalPay" tabindex="-1" role="dialog" aria-labellebdy="myModal" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span>
-        </button>
-        <h4 class="modal-title" id="exampleModalLabel">Cobrar</h4>
-        <p class="msgModal"></p>
-      </div>
-      <form id="formPay" name="formPay">
-        <div class="modal-body">
-          <div class="form-group">
-            <h2>Costo Total = <span id="mdlTotal"></span></h2>
-          </div>
-          <div class="form-group">
-            <h2>Cambio = <span id="mdlCambio"></span></h2>
-          </div>
-        </div>
-        <div class="form-group">
-          <div id="myPrintArea">
-            <!-- <div class="col-sm-2 ticket" style="display: none"> -->
-            <!-- <div class="col-sm-2 ticket" id="mdlTicket" style="opacity : 1"> -->
-              <p class="text-center">"La concepción Apizaco"
-                <br>Sucursal: <?= $rowGetStore['nombre'] ?>
-                <br>Dirección: <?= $rowGetStore['direccion'] ?>
-                <br>CP: <?= $rowGetStore['cp'] ?>
-                <br>RFC: <?= $rowGetStore['rfc'] ?>
-                <br>Tel: <?= $rowGetStore['tel'] ?>
-              </p>
-              <p class="text-center">Le atendio: <?= $rowGetUser['nombre'] ?>
-                </br>Fecha: <?= $dateNow ?>
-                <br>Hora: <?= $timeNow ?>
-              </p>
-              <table id="tblMdlTicket">
-                <thead>
-                  <tr>
-                    <th>Producto</th>
-                    <th>C.U.</th>
-                    <th>Cant.</th>
-                    <th>C.T.</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-              <p class="text-right">Total: <span id="inpMdlTotal"></span>
-                <br>Efectivo: <span id="inpMdlEfec"></span>
-                <br>Cambio: <span id="inpMdlCambio"></span>
-              </p>
-              <p class="text-center">Gracias por su preferencia.</p>
-            <!-- </div> -->
-            <!-- <div class="col-sm-10"></div> -->
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-          <a href="javascript:void(0)" id="imprime" class="btn btn-success">
-                Imprime 
-                <span class="glyphicon glyphicon-print"></span>
-          </a>
-        </div>
-      </form>
-    </div>
-  </div>
+
+<!-- div oculto ticket -->
+<div id="myPrintArea2" >
+  <!-- <div class="col-sm-2 ticket" style="display: none"> -->
+  <!-- <div class="col-sm-2 ticket" id="mdlTicket" style="opacity : 1"> -->
+    <p class="text-center">"La concepción Apizaco"
+      <br>Sucursal: <?= utf8_decode( $rowGetStore['nombre'] ) ?>
+      <br>Dirección: <?= $rowGetStore['direccion'] ?>
+      <br>CP: <?= $rowGetStore['cp'] ?>
+      <br>RFC: <?= $rowGetStore['rfc'] ?>
+      <br>Tel: <?= $rowGetStore['tel'] ?>
+    </p>
+    <p class="text-center">Le atendio: <?= $rowGetUser['nombre'] ?>
+      </br>Fecha: <?= $dateNow ?>
+      <br>Hora: <?= $timeNow ?>
+    </p>
+    <table id="tblMdlTicket">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>C.U.</th>
+          <th>Cant.</th>
+          <th>C.T.</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <p class="text-right">Total: <span id="inpMdlTotal"></span>
+      <br>Efectivo: <span id="inpMdlEfec"></span>
+      <br>Cambio: <span id="inpMdlCambio"></span>
+    </p>
+    <p class="text-center">Gracias por su preferencia.</p>
+  <!-- </div> -->
+  <!-- <div class="col-sm-10"></div> -->
 </div>
 
 <script type="text/javascript">
@@ -239,7 +238,16 @@ else {
       },
       "responsive": true,
       data: dataSet,
-      columns: [{
+      "order": [[ 1, "asc" ]],
+      "columnDefs": [
+            {
+                "targets": [ 0 ],
+                "visible": false,
+                "searchable": true
+            }
+        ],
+      columns: [
+        {
           title: "ID"
         },
         {
@@ -252,18 +260,29 @@ else {
           title: "Código"
         }
       ]
-      // "processing" : true,
-      // "serverSide" : true,
-      // "ajax"       : {
-      //     url  : "controllers/select_sales_products_json.php",
-      //     type : "post",
-      // },
-      // error : function() {
-      //     $("#ventas-error").html("");
-      //     $("#ventas").append('<tbody class="employee-grid-error"><tr><th colspan="3">No hay información en la baser</th></tr></tbody>');
-      //     $("#ventas_processing").css("display", "none");
-      // }
     });
+    
+    $("#print").click(function(){
+        $.ajax({
+          type : "POST",
+          url: "controllers/set_sale_2.php",
+          data: $('form#formTicket').serialize(),
+          success: function(data){
+            var dataRes = jQuery.parseJSON(data);
+            if(dataRes.error == 0){
+              window.print();
+            }else{
+              alert( dataRes.msgErr )
+            }
+          }
+        })
+    })
+
+    // Recargar la página después de imprimir
+    window.onafterprint = function(){
+      window.location.reload(true);
+    }
+    
     $(".clickCategory").click(function () {
       var category = $(this).attr("title");
       //alert(category);
@@ -565,6 +584,32 @@ else {
 
   });
 </script>
+
+<script type="text/javascript">
+    var input;
+    // var banFocusInput=false;
+        $("input").on("focus", function () {
+         input = $(this);
+        //  banFocusInput = false;
+         //alert(input.val());
+        });
+        
+        function teclado(numero) {
+            if (input != null){
+                //alert(input);
+                // if(banFocusInput)input.val(numero);
+                // else 
+                input.val(input.val()+numero);
+                //input.val(input.val()+numero);
+                
+            }
+        }
+
+    function borrarTeclado() {
+      input.val("");
+    }
+        
+ </script>
 
 <?php
 }//fin else sesión

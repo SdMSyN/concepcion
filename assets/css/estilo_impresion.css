@@ -1,0 +1,8 @@
+.div-sales, .teclado, .sales-izquierda, .footer {
+    display: none;
+}
+
+#myPrintArea2{
+    display: block;
+    visibility: visible;
+}

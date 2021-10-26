@@ -19,7 +19,7 @@
     $optProducts='';
     if($resGetProducts->num_rows > 0){
         while($rowGetProducts = $resGetProducts->fetch_assoc()){
-            $optProducts .= '<div class="col-md-2 div-img-sales"><img src="./uploads/'.$rowGetProducts['img'].'" class="clickProduct img-sales" title="'.$rowGetProducts['id'].'" width="100%">'.$rowGetProducts['nombre'].'</div>';
+            $optProducts .= '<div class="col-xs-3 div-img-sales"><img src="./uploads/'.$rowGetProducts['img'].'" class="clickProduct img-sales" title="'.$rowGetProducts['id'].'" width="50%">'.$rowGetProducts['nombre'].'</div>';
         }
     }else{
         $optProducts .= '<h3>No hay productos en el alamacén para esta categoría o subcategoria.</h3>';
