@@ -369,3 +369,7 @@ thead > tr > td:last-of-type,th:last-of-type{
   display: none;
   visibility: hidden;
 }
+
+.form-control{
+  font-size: 18px !important;
+}

@@ -54,16 +54,16 @@ else {
         <div class="cobrar row">
           <div class="form-group col-xs-3">
             <label>Total:</label></br>
-            <input type="text" id="inputTotal" name="inputTotal" readonly step=0.01 class="form-control col-xs-12">
+            <input type="text" id="inputTotal" name="inputTotal" readonly step=0.01 class="form-control form-control-lg">
           </div>
           <div class="form-group col-xs-3">
             <label>Recibido:</label></br>
-            <input type="text" id="inputRecibido" name="inputRecibido" step=0.01 class="form-control calcChange"
+            <input type="text" id="inputRecibido" name="inputRecibido" step=0.01 class="form-control calcChange form-control-lg"
               required title="Pago del cliente, obligatorio">
           </div>
           <div class="form-group col-xs-3">
             <label>Cambio:</label></br>
-            <input type="text" id="inputCambio" name="inputCambio" readonly step=0.01 class="form-control">
+            <input type="text" id="inputCambio" name="inputCambio" readonly step=0.01 class="form-control form-control-lg">
           </div>
           <div class="form-group col-xs-3">
             <label>Cobrar:</label></br>
@@ -581,6 +581,10 @@ else {
     $('#imprime').click(function() {
         $("div#myPrintArea").printArea();
     });
+
+    $(".teclado #teclado_numerico_2").on("click", function () {
+        actTodo();
+      });
 
   });
 </script>
