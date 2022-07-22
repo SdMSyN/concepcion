@@ -25,6 +25,12 @@ else {
   }
   ?>
 
+  <div class="row">
+    <div id="loading">
+      <img src="../assets/img/loading.gif" height="300" width="400">
+    </div>
+  </div>
+
   <!-- Cambio dinamico -->
   <div class="row">
     <div class="col-xs-5 sales sales-izquierda">
@@ -58,6 +64,22 @@ else {
               <div class="form-group col-xs-9">
                   <label>Administrador</label>
                       <input type="password" id="inputAdmin" name="inputAdmin" class="form-control" readonly >
+              </div>
+          </div>
+          <div class="efectivo row form-inline">
+              <div class="form-group col-xs-3">
+                  <label>Efectivo</label>
+                  <input type="checkbox" id="inputEfectivo" name="inputEfectivo" class="checkbox from-control">
+              </div>
+              <div class="form-group col-xs-6">
+                  <label>Cantidad</label>
+                  <input type="text" id="inpCantEfectivo" name="inpCantEfectivo" class="form-control" readonly>
+              </div>
+              <div class="form-group col-xs-3">
+                  <label>Pagar</label><br>
+                  <button class="enviarEfectivo btn btn-success">
+                      <i class="fa fa-money" style="font-size: 2.2rem;"></i>
+                  </button>
               </div>
           </div>
           <div class="line"></div>
@@ -125,6 +147,7 @@ else {
 
   <script type="text/javascript">
     $(document).ready(function () {
+      $('#loading').hide();
       $(".clickCategory").click(function () {
         var category = $(this).attr("title");
         //alert(category);
@@ -381,26 +404,70 @@ else {
        });*/
 
 
-       // Función para añadir bolsa por defecto
-    addBolsa();
+      // Función para añadir bolsa por defecto
+      addBolsa();
 
-    function addBolsa() {
-      $.ajax({
-        type: "POST",
-        url: "controllers/select_sales_product.php",
-        data: {
-          idProduct: 172,
-          idStore: <?= $idStore; ?>
-        }, // FIXME: Cambiar id del producto bolsa si cambia la base
-        success: function (msg) {
-          $(".ticket #dataTicket tbody").append(msg);
-          $(".ticket #dataTicket tbody #inputCant").focus();
-          $(".ticket #dataTicket tbody #inputCant").select();
-          calcTotal();
+      function addBolsa() {
+        $.ajax({
+          type: "POST",
+          url: "controllers/select_sales_product.php",
+          data: {
+            idProduct: 172,
+            idStore: <?= $idStore; ?>
+          }, // FIXME: Cambiar id del producto bolsa si cambia la base
+          success: function (msg) {
+            $(".ticket #dataTicket tbody").append(msg);
+            $(".ticket #dataTicket tbody #inputCant").focus();
+            $(".ticket #dataTicket tbody #inputCant").select();
+            calcTotal();
+          }
+        });
+        $('.enviarEfectivo').attr("disabled", true);
+      }
+
+      $("#inputEfectivo").click(function () {
+        if ($('#inputEfectivo').is(':checked')) {
+          $('#inpCantEfectivo').attr("readonly", false);
+          $(".enviarEfectivo").removeAttr("disabled");
+          $('.enviarTicket').attr("disabled", true);
+        } else {
+          $("#inpCantEfectivo").attr("readonly", true);
+          $('.enviarEfectivo').attr("disabled", true);
+          $(".enviarTicket").removeAttr("disabled");
         }
+      })
+
+      $(".enviarEfectivo").click(function () {
+        console.log("efectivo");
+        let cantEfectivo = $("#inpCantEfectivo").val();
+        console.log(cantEfectivo);
+        $.ajax({
+          type: "POST",
+          url: "controllers/create_efectivo.php",
+          data: {
+            cant: cantEfectivo,
+            idStore: <?= $idStore; ?> ,
+            idUser : <?= $idUser; ?>
+          }, // FIXME: Cambiar id del producto bolsa si cambia la base
+          success: function (msg) {
+            var msg = jQuery.parseJSON(msg);
+            if (msg.error == 0) {
+              $('#loading').empty();
+              $('#loading').append('<h2>Se dio efectivo con éxito.</h2>');
+              setTimeout(function () {
+                location.href = 'form_sales.php';
+              }, 1500);
+            } else {
+              $('#loading').empty();
+              $('#loading').append('<img src="../assets/img/error.png" height="300" width="400" ><p>' + msg
+                .msgErr + '</p>');
+              setTimeout(function () {
+                $('#loading').hide();
+              }, 2000);
+            }
+          }
+        })
       });
-      // $('.enviarEfectivo').attr("disabled", true);
-    }
 
     });
     //var input;
