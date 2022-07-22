@@ -3,7 +3,7 @@
 	date_default_timezone_set('America/Mexico_City');
 	$host="localhost";
 	$user="root";
-	$pass="";
+	$pass="root";
 	$db="concepcion";
 //	$db="laconcepcionproduccion";
 	$con=mysqli_connect($host, $user, $pass, $db);

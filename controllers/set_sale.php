@@ -163,7 +163,7 @@
                 $cad .= '<p class="text-center">Le atendio: ' . $rowGetUser['nombre'] . '</br>Fecha: ' . $dateNow . '<br>Hora: ' . $timeNow . '</p>';
 
 
-                $sqlCreateInfoSale = "INSERT INTO $tSaleInfo (usuario_id, tienda_id, fecha, hora, pago, total, cambio, total_desc) "
+                $sqlCreateInfoSale = "INSERT INTO ventas_info (usuario_id, tienda_id, fecha, hora, pago, total, cambio, total_desc) "
                         . "VALUES ('$idUser', '$idStore', '$dateNow', '$timeNow', '$recibido', '$total', '$cambio', '$total' )";
                 if ($con->query($sqlCreateInfoSale) === TRUE) {
                     $idInfoSale = $con->insert_id;
