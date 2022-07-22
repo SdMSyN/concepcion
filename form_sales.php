@@ -284,7 +284,7 @@ else {
         var dinero = parseFloat($("#inputRecibido").val());
         dinero = dinero.toFixed(2);
         var cambio = dinero-total;
-        cambio = toFixed(2);
+        cambio = cambio.toFixed(2);
         //console.log(total);
         $("#inputCambio").val(cambio);
       }
@@ -380,6 +380,27 @@ else {
        local: ['Sunday', 'Monday', 'Tuesday','Wednesday','Thursday','Friday','Saturday']
        });*/
 
+
+       // Función para añadir bolsa por defecto
+    addBolsa();
+
+    function addBolsa() {
+      $.ajax({
+        type: "POST",
+        url: "controllers/select_sales_product.php",
+        data: {
+          idProduct: 172,
+          idStore: <?= $idStore; ?>
+        }, // FIXME: Cambiar id del producto bolsa si cambia la base
+        success: function (msg) {
+          $(".ticket #dataTicket tbody").append(msg);
+          $(".ticket #dataTicket tbody #inputCant").focus();
+          $(".ticket #dataTicket tbody #inputCant").select();
+          calcTotal();
+        }
+      });
+      // $('.enviarEfectivo').attr("disabled", true);
+    }
 
     });
     //var input;
