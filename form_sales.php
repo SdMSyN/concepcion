@@ -100,6 +100,9 @@ else {
           </div>
         </form>
       </div>
+      <div class="text-center">
+        <h3>Total de piezas: <span id="totalPiezas">0</span></h3>
+      </div>
       <div class="teclado text-center">
         <form id="formTeclado" method="POST" class="form-inline">
           <div class="form-group">
@@ -295,6 +298,7 @@ else {
       }
 
       function calcTotal() {
+        calcPiezas();
         var total = 0;
         $(".ticket #dataTicket tbody #inputPrecioF").each(function () {
           total += parseFloat($(this).val());
@@ -468,6 +472,19 @@ else {
           }
         })
       });
+
+      function calcPiezas(){
+        let totalPiezas = $("#totalPiezas");
+        let total = 0;
+        let countCiclo = 0;
+        let ban = false;
+        $(".ticket #dataTicket tbody #inputCant").each(function () {
+          total += parseInt( $(this).val() );
+        });
+        // Resta el primer input que es el de la bolsa, para dar la cantidad correcta
+        console.log( total );
+        $("#totalPiezas").html(total);
+      }
 
     });
     //var input;
