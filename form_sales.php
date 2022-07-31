@@ -133,6 +133,9 @@ else {
             <span class="btn btn-default btn-numeric-form erase"><i class="fa fa-arrow-left"></i></span>
             <span class="btn btn-info btn-numeric-form" onclick="teclado(0)">0</span>
             <span class="btn btn-default btn-numeric-form" onClick="borrarTeclado()" >C</span>
+            <br>
+            <span class="btn btn-info btn-numeric-form" onclick="decimal('.')">.</span>
+            <span class="btn btn-info btn-numeric-form" onclick="decimal('.50')">.50</span>
           </div>
         </div>
       </div>
@@ -446,9 +449,7 @@ else {
       })
 
       $(".enviarEfectivo").click(function () {
-        console.log("efectivo");
         let cantEfectivo = $("#inpCantEfectivo").val();
-        console.log(cantEfectivo);
         $.ajax({
           type: "POST",
           url: "controllers/create_efectivo.php",
@@ -456,7 +457,7 @@ else {
             cant: cantEfectivo,
             idStore: <?= $idStore; ?> ,
             idUser : <?= $idUser; ?>
-          }, // FIXME: Cambiar id del producto bolsa si cambia la base
+          }, // FIXME: Cambiar id del producto efectivo si cambia la base
           success: function (msg) {
             var msg = jQuery.parseJSON(msg);
             if (msg.error == 0) {
@@ -486,7 +487,6 @@ else {
           total += parseInt( $(this).val() );
         });
         // Resta el primer input que es el de la bolsa, para dar la cantidad correcta
-        console.log( total );
         $("#totalPiezas").html(total);
       }
 
@@ -515,35 +515,17 @@ else {
       }
     }
 
+    function decimal( valor ){
+      if( valor == '.50' )
+        input.val( input.val() + "." + 50 );
+      if( valor == '.' )
+        input.val( input.val() + "." );
+    }
+
     function borrarTeclado() {
       input.val("");
     }
-    /*function actCant(){
-     var precioU = parseFloat($(this).parent().parent().find("#inputPrecioU").val());
-     var cantidad = parseInt($(this).parent().parent().find("#inputCant").val());
-     var cantidadMax = parseInt($(this).parent().parent().find("#inputCantMax").val());
-     //alert(cantidadMax);
-     if(cantidad < 0){
-     //cantidad = 0;
-     $(this).parent().parent().find("#inputCant").val("0");
-     }
-     if(cantidad > cantidadMax){
-     //cantidad = cantidadMax;
-     $(this).parent().parent().find("#inputCant").val(cantidadMax);
-     }
-     var precioF = precioU * cantidad;
-     $(this).parent().parent().find("#inputPrecioF").val(precioF);
-     calcTotal();
-     }
-       
-     function calcTotal(){
-     var total=0;
-     $(".ticket #dataTicket tbody #inputPrecioF").each(function(){
-     total += parseFloat($(this).val());
-     });
-     total=total.toFixed(2);
-     $("#inputTotal").val(total);
-     }*/
+
   </script>
   <?php
 }//fin else sesión
