@@ -240,18 +240,13 @@ else {
       //$(".ticket #dataTicket tbody").on("keyup change blur keypress keydown", ".cant", actCant);
       $(".ticket #dataTicket tbody").on("keyup change blur keypress keydown click mouseup", ".cant", actCant);
 
-      /*$("#formTicket").on("change blur click", ".calcChange", function(){
-          var total = parseFloat($(this).parent().parent().find("#inputTotal").val());
-          var dinero = parseFloat($(this).val());
-          var cambio = dinero-total;
-          //alert(cambio);
-          $("#inputCambio").val(cambio);
-          calcChange();
-      });*/
       $("#formTicket").on("change blur click", ".calcChange", calcChange);
+
       function calcChange(){
-          var total = parseFloat($(this).parent().parent().find("#inputTotal").val());
-          var dinero = $(this).parent().parent().find("#inputRecibido").val();
+          let total = parseFloat($(this).parent().parent().find("#inputTotal").val());
+          let dinero = $(this).parent().parent().find("#inputRecibido").val();
+          if( isNaN( dinero ) )
+            dinero = 0;
           dinero = parseFloat(dinero);
           dinero = dinero.toFixed(2);
           //$(this).parent().parent().find("#inputRecibido").val(dinero);
@@ -261,7 +256,7 @@ else {
             $(this).parent().parent().find(".enviarTicket").attr("disabled", true);
         }else
             $(this).parent().parent().find(".enviarTicket").removeAttr("disabled");
-        var cambio = dinero-total;
+        let cambio = dinero-total;
           //alert(cambio);
           cambio = cambio.toFixed(2);
           $(this).parent().parent().find("#inputCambio").val(cambio);
@@ -306,7 +301,7 @@ else {
 
       function calcTotal() {
         calcPiezas();
-        var total = 0;
+        let total = 0;
         $(".ticket #dataTicket tbody #inputPrecioF").each(function () {
           total += parseFloat($(this).val());
         });
@@ -314,12 +309,13 @@ else {
         $("#inputTotal").val(total);
         
         //calculamos cambio
-        var total = parseFloat($("#inputTotal").val());
-        var dinero = parseFloat($("#inputRecibido").val());
+        // let total = parseFloat($("#inputTotal").val());
+        let dinero = parseFloat($("#inputRecibido").val());
+        if( isNaN( dinero ) )
+          dinero = 0;
         dinero = dinero.toFixed(2);
-        var cambio = dinero-total;
+        let cambio = dinero-total;
         cambio = cambio.toFixed(2);
-        //console.log(total);
         $("#inputCambio").val(cambio);
       }
 
