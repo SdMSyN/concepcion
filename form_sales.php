@@ -226,6 +226,7 @@ else {
         input = $(this);
         //banFocusInput = true;
         actTodo();
+        calcChange();
       });
 
       $(".ticket #dataTicket tbody").on("focusout blur change", "#inputCant", function () {
@@ -251,12 +252,12 @@ else {
           dinero = dinero.toFixed(2);
           //$(this).parent().parent().find("#inputRecibido").val(dinero);
           //var dinero = parseFloat($(this).parent().parent().find("#inputRecibido").val());
-        if(dinero < total || isNaN(dinero)){
-            //alert("El dinero recibido no puede ser menor al total de la venta.");
-            $(this).parent().parent().find(".enviarTicket").attr("disabled", true);
-        }else
-            $(this).parent().parent().find(".enviarTicket").removeAttr("disabled");
-        let cambio = dinero-total;
+          // FIXME: se comenta por que no se logra solucionar, mejor que vaya por defecto 
+          // if(dinero < total || isNaN(dinero)){
+          //     $(this).parent().parent().find(".enviarTicket").attr("disabled", true);
+          // }else
+          //     $(this).parent().parent().find(".enviarTicket").removeAttr("disabled");
+          let cambio = dinero-total;
           //alert(cambio);
           cambio = cambio.toFixed(2);
           $(this).parent().parent().find("#inputCambio").val(cambio);
