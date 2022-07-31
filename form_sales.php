@@ -58,10 +58,14 @@ else {
           </div>
           <div class="cobrar row form-inline">
               <div class="form-group col-xs-3">
+                <label>¿Tarjeta?</label>
+                <input type="checkbox" id="inputTarjeta" name="inputTarjeta" class="checkbox form-control">
+              </div>
+              <div class="form-group col-xs-3">
                 <label>¿Donar?</label>
                 <input type="checkbox" id="inputDonacion" name="inputDonacion" class="checkbox form-control">
               </div>
-              <div class="form-group col-xs-9">
+              <div class="form-group col-xs-6">
                   <label>Administrador</label>
                       <input type="password" id="inputAdmin" name="inputAdmin" class="form-control" readonly >
               </div>

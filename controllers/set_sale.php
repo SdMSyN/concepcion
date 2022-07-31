@@ -122,10 +122,12 @@
             $idUser = $_POST['idUser'];
 
             (isset($_POST['inputDonacion'])) ? $dona = $_POST['inputDonacion'] : $dona = "false";
-            ($dona != "on") ? $recibido = $_POST['inputRecibido'].".00" : $recibido = "0.00";
+            ($dona != "on") ? $recibido = $_POST['inputRecibido'] : $recibido = "0.00";
             $total = $_POST['inputTotal'];
             ($dona != "on") ? $cambio = $_POST['inputCambio'] : $cambio = "0.00";
             ($dona == "on") ? $idAdmin = $_POST['inputAdmin'] : $idAdmin = "";
+            $inpTarjeta = $_POST[ 'inputTarjeta' ];
+            $tipoPago = ( $inpTarjeta == "on" ) ? 2 : 1; // 2=tarjeta, 1=efectivo
             $cad = '';
             //Obtenemos datos de la tienda
             //echo '<h2>'.$dona.'</h2>';
@@ -163,8 +165,8 @@
                 $cad .= '<p class="text-center">Le atendio: ' . $rowGetUser['nombre'] . '</br>Fecha: ' . $dateNow . '<br>Hora: ' . $timeNow . '</p>';
 
 
-                $sqlCreateInfoSale = "INSERT INTO ventas_info (usuario_id, tienda_id, fecha, hora, pago, total, cambio, total_desc) "
-                        . "VALUES ('$idUser', '$idStore', '$dateNow', '$timeNow', '$recibido', '$total', '$cambio', '$total' )";
+                $sqlCreateInfoSale = "INSERT INTO ventas_info (usuario_id, tienda_id, fecha, hora, pago, total, cambio, total_desc, id_tipo_pago)
+                        VALUES ('$idUser', '$idStore', '$dateNow', '$timeNow', '$recibido', '$total', '$cambio', '$total', $tipoPago )";
                 if ($con->query($sqlCreateInfoSale) === TRUE) {
                     $idInfoSale = $con->insert_id;
                     

@@ -31,10 +31,13 @@ $sqlGetInfoSale = "
         ventas_info.descuento, 
         ventas_info.total_desc, 
         ventas_info.cant_desc, 
-        ventas_info.cambio_desc
+        ventas_info.cambio_desc,
+        tipo_pago.id_tipo_pago,
+        tipo_pago.tipo_pago
     FROM ventas_info
         INNER JOIN usuarios ON ventas_info.usuario_id = usuarios.id
         INNER JOIN tiendas  ON ventas_info.tienda_id = tiendas.id
+        INNER JOIN tipo_pago ON ventas_info.id_tipo_pago = tipo_pago.id_tipo_pago
     WHERE ventas_info.tienda_id = $store
 ";
 
@@ -67,14 +70,17 @@ if ($action == "day") {
 $resGetInfoSale = $con->query($sqlGetInfoSale);
 $optReport = '';
 if ($resGetInfoSale->num_rows > 0) {
-    $i = 1;
-    $costoFT = 0;
+    $i             = 1;
+    $costoFT       = 0;
+    $totalEfectivo = 0;
+    $totalTarjeta  = 0;
     while ($rowGetInfoSale = $resGetInfoSale->fetch_assoc()) {
         $idInfoSale    = $rowGetInfoSale['id'];
         $totalInfoSale = $rowGetInfoSale['total_desc'];
         $total         = $rowGetInfoSale['total'];
         $descuento     = $rowGetInfoSale['descuento'];
-        $tota_desc     = $rowGetInfoSale['total_desc'];
+        $total_desc    = $rowGetInfoSale['total_desc'];
+        $tipoPago      = $rowGetInfoSale['tipo_pago'];
 
         // $optReport .= '<tr>';
         // $optReport .= '<td>' . $i . '</td>';
@@ -97,6 +103,7 @@ if ($resGetInfoSale->num_rows > 0) {
             <td>$total</td>
             <td>$descuento</td>
             <td>$total_desc</td>
+            <td>$tipoPago</td>
         ";
         //Si no hay pago ni cambio hubo donación
         if ($rowGetInfoSale['pago'] == "0.00" && $rowGetInfoSale['cambio'] == "0.00"){
@@ -110,14 +117,30 @@ if ($resGetInfoSale->num_rows > 0) {
         $optReport .= '<td>' . $rowGetInfoSale['fecha'] . '</td>';
         $optReport .= '<td>' . $rowGetInfoSale['hora'] . '</td>';
         $optReport .= '</tr>';
-        $i++;
-            
+        
+        // Sumamos los pagos de diferentes tipos
+        if( $rowGetInfoSale['id_tipo_pago'] == 1 )
+            $totalEfectivo += $totalInfoSale;
+        else
+            $totalTarjeta += $totalInfoSale;
+
         $costoFT += $totalInfoSale;
+        $i++;
     }
     if( $typeUser != 3 )
-        $optReport .= '<tr>
-            <td></td><td><b>Totales</b></td><td></td><td></td><td><b>'.$costoFT.'</b></td><td colspan="5"></td>
-        </tr>';
+        $optReport .= "<tr>
+            <td></td>
+            <td><b>Totales</b></td>
+            <td></td>
+            <td></td>
+            <td><b>$costoFT</b></td>
+            <td>Total efectivo: </td>
+            <td><b>$totalEfectivo</b></td>
+            <td>Total tarjeta:</td>
+            <td><b>$totalTarjeta</b></td>
+
+            <td></td>
+        </tr>";
 }else {
     $optReport = '<tr><td colspan="9">No hay ventas.</td></tr>';
 }

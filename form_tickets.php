@@ -35,7 +35,7 @@ else {
                         typeUser   : 3
                     },
                     success : function ( data ) {
-                        $('.report #tableReport thead').html('<tr><th>#</th><th>Ticket</th><th>SubTotal</th><th>Descuento</th><th>Total</th><th>Donación</th><th>Vendedor</th><th>Tienda</th><th>Fecha</th><th>Hora</th></tr>');
+                        $('.report #tableReport thead').html('<tr><th>#</th><th>Ticket</th><th>SubTotal</th><th>Descuento</th><th>Total</th><th>Tipo pago</th><th>Donación</th><th>Vendedor</th><th>Tienda</th><th>Fecha</th><th>Hora</th></tr>');
                         $('.report #tableReport tbody').html( data );
                     }
                 });//end ajax
