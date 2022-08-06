@@ -106,7 +106,7 @@ if ($resGetInfoSale->num_rows > 0) {
             <td>$tipoPago</td>
         ";
         //Si no hay pago ni cambio hubo donación
-        if ($rowGetInfoSale['pago'] == "0.00" && $rowGetInfoSale['cambio'] == "0.00"){
+        if ($rowGetInfoSale['pago'] == "0.00" && $rowGetInfoSale['cambio'] == "0.00" && $rowGetInfoSale['id_tipo_pago'] != 1 ){
             $optReport .= '<td>Si</td>';
             $totalInfoSale = 0;
         }else{

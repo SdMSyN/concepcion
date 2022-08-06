@@ -53,6 +53,7 @@
           ?>
           <li><a href="form_orders.php">Pedidos</a></li>
           <li><a href="form_orders_est.php">Seguimiento de pedidos</a></li>
+          <li><a class="navbar-brand" href="form_tickets.php">Tickets</a></li>
           <?php
         }
         ?>

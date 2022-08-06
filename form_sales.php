@@ -134,7 +134,6 @@ else {
             <span class="btn btn-info btn-numeric-form" onclick="teclado(0)">0</span>
             <span class="btn btn-default btn-numeric-form" onClick="borrarTeclado()" >C</span>
             <br>
-            <span class="btn btn-info btn-numeric-form" onclick="decimal('.')">.</span>
             <span class="btn btn-info btn-numeric-form" onclick="decimal('.50')">.50</span>
           </div>
         </div>
@@ -476,15 +475,19 @@ else {
       });
 
       function calcPiezas(){
-        let totalPiezas = $("#totalPiezas");
-        let total = 0;
-        let countCiclo = 0;
-        let ban = false;
-        $(".ticket #dataTicket tbody #inputCant").each(function () {
-          total += parseInt( $(this).val() );
-        });
-        // Resta el primer input que es el de la bolsa, para dar la cantidad correcta
-        $("#totalPiezas").html(total);
+          let totalPiezas = $("#totalPiezas");
+          let total = 0;
+          let countCiclo = 0;
+          let ban = false;
+          $(".ticket #dataTicket tbody #inputCant").each(function () {
+            let idProd = parseInt( $(this).parent().parent().find("#inpId").val() );
+            let cant   = parseFloat( $(this).parent().parent().find("#inputCant").val() );
+            console.log( idProd );
+            if( idProd != 172 ){ // FIXME: Cambiar por ID de bolsa
+              total += cant;
+            }
+          });
+          $("#totalPiezas").html(total);
       }
 
     });
@@ -515,8 +518,6 @@ else {
     function decimal( valor ){
       if( valor == '.50' )
         input.val( input.val() + "." + 50 );
-      if( valor == '.' )
-        input.val( input.val() + "." );
     }
 
     function borrarTeclado() {

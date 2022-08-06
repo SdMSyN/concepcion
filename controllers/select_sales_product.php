@@ -14,7 +14,8 @@
             $optProduct .= '<tr>';
             $optProduct .= '<td><input type="hidden" id="inpId" name="id[]" value="'.$rowGetProduct['id'].'">'.$rowGetProduct['nombre'].'</td>';
             $optProduct .= '<td><input type="hidden" value="'.$rowGetProduct['precio'].'"  id="inputPrecioU" name="inputPrecioU[]">'.$rowGetProduct['precio'].'</td>';
-            $optProduct .= '<td><input type="number" id="inputCant" name="inputCant[]" class="form-control cant" min="1" max=""'.$rowGetProduct['cantidad'].'" value="1"><input type="hidden" value="'.$rowGetProduct['cantidad'].'"  id="inputCantMax" ></td>';
+            $optProduct .= ( $rowGetProduct['id'] == 172 ) ? '<td><input type="number" id="inputCant" name="inputCant[]" class="form-control cant" min="1" max="'.$rowGetProduct['cantidad'].'" value="1">' : '<td><input type="number" id="inputCant" name="inputCant[]" class="form-control cant" min="1" max="'.$rowGetProduct['cantidad'].'" >';
+                $optProduct .= '<input type="hidden" value="'.$rowGetProduct['cantidad'].'"  id="inputCantMax" ></td>';
             $optProduct .= '<td><input type="text" id="inputPrecioF" name="inputPrecioF[]" value="'.$rowGetProduct['precio'].'" readonly class="form-control"></td>';
             $optProduct .= '<td><a class="deleteItem"><i class="fa fa-times"></i></td>';
             $optProduct .= '</tr>';

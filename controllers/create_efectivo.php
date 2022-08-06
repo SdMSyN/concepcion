@@ -7,8 +7,8 @@
     $ban     = true;
 
     // insertamos la información de la venta
-    $sqlCreateInfoSale = "INSERT INTO ventas_info ( usuario_id, tienda_id, fecha, hora, pago, total, cambio, total_desc ) 
-                            VALUES ( '$idUser', '$idStore', '$dateNow', '$timeNow', 0, $cant, 0, $cant  ) ";
+    $sqlCreateInfoSale = "INSERT INTO ventas_info ( usuario_id, tienda_id, fecha, hora, pago, total, cambio, total_desc, id_tipo_pago ) 
+                            VALUES ( '$idUser', '$idStore', '$dateNow', '$timeNow', 0, $cant, 0, $cant, 1 ) ";
     if( $con->query( $sqlCreateInfoSale ) === TRUE ) {
         $idInfoSale = $con->insert_id;
         // insertamos el detallado de la venta
