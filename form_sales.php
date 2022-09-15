@@ -88,19 +88,19 @@ else {
           </div>
           <div class="line"></div>
           <div class="mygrid-wrapper-div">
-          <table id="dataTicket" class="table table-striped">
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Precio U.</th>
-                <th>Cantidad</th>
-                <th>Precio F.</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
+            <table id="dataTicket" class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Precio U.</th>
+                  <th>Cantidad</th>
+                  <th>Precio F.</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
           </div>
         </form>
       </div>
